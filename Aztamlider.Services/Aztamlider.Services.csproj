@@ -6,4 +6,27 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Dtos\Area\" />
+    <Folder Include="Dtos\User\" />
+    <Folder Include="Profiles\" />
+    <Folder Include="Resources\" />
+    <Folder Include="Services\Implementations\User\" />
+    <Folder Include="Services\Implementations\Area\" />
+    <Folder Include="Services\Interfaces\Area\" />
+    <Folder Include="Services\Interfaces\User\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
+    <PackageReference Include="MailKit" Version="4.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.20" />
+    <PackageReference Include="MimeKit" Version="4.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Aztamlider.Data\Aztamlider.Data.csproj" />
+  </ItemGroup>
+
 </Project>
