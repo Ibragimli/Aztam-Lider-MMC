@@ -15,6 +15,7 @@ namespace Aztamlider.Data.Configuration
         {
             builder.Property(x => x.Name).HasMaxLength(150).IsRequired(true);
             builder.Property(x => x.Image).IsRequired();
+            builder.Property(x => x.PDF).IsRequired();
 
         }
     }

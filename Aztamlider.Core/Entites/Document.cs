@@ -8,11 +8,14 @@ using System.Threading.Tasks;
 
 namespace Aztamlider.Core.Entites
 {
-    public class Document:BaseEntity
+    public class Document : BaseEntity
     {
         public string Name { get; set; }
         public string Image { get; set; }
         [NotMapped]
         public IFormFile ImageFile { get; set; }
+        public string PDF { get; set; }
+        [NotMapped]
+        public IFormFile PDFFile { get; set; }
     }
 }

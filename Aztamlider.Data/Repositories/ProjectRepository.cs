@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Aztamlider.Data.Repositories
 {
-    public class ProjectRepository : Repository<AppUser>, IProjectRepository
+    public class ProjectRepository : Repository<Project>, IProjectRepository
     {
         private readonly DataContext _context;
 

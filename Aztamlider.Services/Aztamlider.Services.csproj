@@ -7,10 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Dtos\Area\" />
-    <Folder Include="Dtos\User\" />
-    <Folder Include="Profiles\" />
-    <Folder Include="Resources\" />
     <Folder Include="Services\Implementations\User\" />
     <Folder Include="Services\Implementations\Area\" />
     <Folder Include="Services\Interfaces\Area\" />

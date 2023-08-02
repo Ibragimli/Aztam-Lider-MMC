@@ -1,0 +1,21 @@
+﻿
+using AutoMapper;
+using Aztamlider.Core.Entites;
+using Aztamlider.Services.Dtos.User;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Aztamlider.Services.Profiles
+{
+    public class AppProfile : Profile
+    {
+        public AppProfile()
+        {
+            CreateMap<ContactUsCreateDto, ContactUs>();
+
+        }
+    }
+}
