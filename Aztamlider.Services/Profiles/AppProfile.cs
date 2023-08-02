@@ -1,6 +1,7 @@
 ﻿
 using AutoMapper;
 using Aztamlider.Core.Entites;
+using Aztamlider.Services.Dtos.Area;
 using Aztamlider.Services.Dtos.User;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,7 @@ namespace Aztamlider.Services.Profiles
         public AppProfile()
         {
             CreateMap<ContactUsCreateDto, ContactUs>();
+            CreateMap<DocumentCreateDto, Document>();
 
         }
     }

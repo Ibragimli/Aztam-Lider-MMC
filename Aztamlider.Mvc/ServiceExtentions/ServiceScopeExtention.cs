@@ -46,7 +46,7 @@ namespace Aztamlider.Mvc.ServiceExtentions
 
             services.AddScoped<IAdminDocumentIndexServices, AdminDocumentIndexServices>();
             services.AddScoped<IAdminDocumentEditServices, AdminDocumentEditServices>();
-            //services.AddScoped<IAdminDocumentCreateServices, AdminDocumentCreateServices>();
+            services.AddScoped<IAdminDocumentCreateServices, AdminDocumentCreateServices>();
             services.AddScoped<IAdminDocumentDeleteServices, AdminDocumentDeleteServices>();
 
 

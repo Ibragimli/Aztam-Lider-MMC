@@ -31,8 +31,7 @@ namespace Aztamlider.Services.Services.Implementations.Area
             if (oldDocument == null)
                 throw new ItemNullException("Layihə tapılmadı!");
 
-
-            Check(Document);
+            await Check(Document);
 
             if (ImageChange(Document, oldDocument) == 1)
                 checkBool = true;
@@ -54,7 +53,7 @@ namespace Aztamlider.Services.Services.Implementations.Area
 
         public async Task<Document> GetDocument(int id)
         {
-            var Document = await _unitOfWork.DocumentRepository.GetAsync(x => x.Id == id, "DocumentImages");
+            var Document = await _unitOfWork.DocumentRepository.GetAsync(x => x.Id == id);
             return Document;
         }
 
@@ -95,15 +94,28 @@ namespace Aztamlider.Services.Services.Implementations.Area
             return 0;
         }
 
-        private void Check(Document Document)
+        private async Task Check(Document Document)
         {
-            if (Document.Name.Length < 3)
+
+            if (Document.Name == null)
+            {
+                throw new ItemNullException("Sənəd adını qeyd edin!");
+            }
+            if (Document.Name?.Length < 3)
             {
                 throw new ValueFormatExpception("Layihə adının uzunluğu minimum 3 ola bilər");
             }
-            if (Document.Name.Length > 100)
+            if (Document.Name?.Length > 100)
             {
                 throw new ValueFormatExpception("Layihə adının uzunluğu maksimum 100 ola bilər");
+            }
+            if (Document.ImageFile == null)
+            {
+                throw new ItemNullException("Şəkil əlavə edin!");
+            }
+            if (Document.PDFFile == null)
+            {
+                throw new ItemNullException("PDF əlavə edin!");
             }
             if (Document.PDFFile != null)
             {
@@ -116,6 +128,5 @@ namespace Aztamlider.Services.Services.Implementations.Area
                 _manageImageHelper.PosterCheck(Document.ImageFile);
 
         }
-
     }
 }

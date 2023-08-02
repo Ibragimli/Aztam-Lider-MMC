@@ -11,10 +11,7 @@ namespace Aztamlider.Services.Services.Interfaces.Area
 {
     public interface IAdminDocumentCreateServices
     {
-        Task<Document> CreateProject(DocumentCreateDto DocumentCreateDto);
-        Task DtoCheck(DocumentCreateDto DocumentCreateDto);
-        public Task CreateImage(IFormFile imageFile);
-        public Task CreatePdf(IFormFile pdfFile);
+        Task<Document> CreateDocument(DocumentCreateDto DocumentCreateDto);
 
     }
 }

@@ -67,12 +67,7 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
 
             try
             {
-
-                await _adminDocumentCreateServices.DtoCheck(DocumentCreateDto);
-                // CheckImage
-                _manageImageHelper.PosterCheck(DocumentCreateDto.ImageFile);
-                var Document = await _adminDocumentCreateServices.CreateProject(DocumentCreateDto);
-                await _adminDocumentCreateServices.CreateImage(DocumentCreateDto.ImageFile);
+                var Document = await _adminDocumentCreateServices.CreateDocument(DocumentCreateDto);
             }
             catch (ItemNullException ex)
             {
