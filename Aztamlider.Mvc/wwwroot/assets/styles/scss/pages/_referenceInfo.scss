@@ -1,0 +1,63 @@
+#referenceInfo {
+    margin: 50px 0px;
+
+    .container-web {
+        .row {
+            justify-content: center;
+
+            p {
+                font-size: 22px;
+                margin-bottom: 0px;
+            }
+
+            i {
+                font-size: 22px;
+            }
+
+            .refInfoImageBox {
+                img {
+                    width: 100%;
+                    height: 420px;
+                    border-radius: 4px;
+                }
+
+                margin-bottom: 30px;
+            }
+
+            .refInfoTextBox {
+                display: flex;
+border: 1px dashed black;
+padding: 15px;
+                ul {
+
+                    li {
+                        display: flex;
+                        align-items: center;
+                        margin-bottom: 10px;
+
+                        p {
+                            font-size: 17px;
+                        }
+
+                        .titleBox {
+                            display: flex;
+                            align-items: center;
+
+                            i {
+                                margin-right: 8px;
+                            }
+
+                            p {
+                                width: 140px;
+                                max-width: 140px;
+                                font-size: 20px;
+                                margin-right: 8px;
+                            }
+                        }
+
+                    }
+                }
+            }
+        }
+    }
+}

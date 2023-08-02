@@ -1,4 +1,414 @@
-﻿@RenderBody()
+﻿
 
-@await RenderSectionAsync("Scripts", required: false)
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/assets/styles/scss/style.css">
+    <!-- small logo -->
+    <link rel="shortcut icon" href="~/assets/Images/Emblem.png" type="image/x-icon" />
+
+    <!-- @*Bootstrap  *@ -->
+    <link href="~/plugins/bootstrap-5.3.0-alpha3-dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./plugins/bootstrap-5.3.0-alpha3-dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="./plugins/bootstrap-5.3.0-alpha3-dist/css/bootstrap-utilities.min.css" />
+    <link rel="stylesheet" href="./plugins/bootstrap-5.3.0-alpha3-dist/css/bootstrap-grid.min.css" />
+    <link rel="stylesheet" href="./plugins/bootstrap-5.3.0-alpha3-dist/css/bootstrap-reboot.min.css" />
+    <link rel="stylesheet" href="./plugins/bootstrap-5.3.0-alpha3-dist/css/bootstrap.min.css" />
+    <!-- @*Bootstrap  *@ -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+          integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>aztamLİDER</title>
+
+    <!-- owlCarousel -->
+    <link rel="stylesheet" href="~/assets/styles/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/assets/styles/css/owl.theme.default.min.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    @*    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@200;300;400;500;700&family=Bitter:ital,wght@0,300;0,400;0,500;0,700;1,300&display=swap');
+    </style>*@
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+</head>
+
+<body>
+
+    <header>
+        <section id="header">
+            <div class="container-web">
+                <div class="row">
+                    <div class=" col-lg-3 col-6   webLogo">
+                        <a href="./index.html">
+                            <img src="~/assets/Images/AZTAM Lider.png" alt="">
+
+                        </a>
+                    </div>
+
+                    <!-- nav Web -->
+                    <div class="navWeb  col-lg-8 col-md-7   navbarBox">
+                        <nav class=" webNavbar">
+                            <ul class="mainNavbar">
+                                <li class="nav-item dropdown dropdown-hover">
+                                    <a class="nav-link " role="button" data-bs-toggle="dropdown"
+                                       aria-expanded="false">
+                                        <h1>LAYİHƏLƏNDİRMƏ</h1>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a class="dropdown-item" href="./project.html">
+                                                <h1>
+                                                    MEP DİZAYN
+                                                </h1>
+                                            </a>
+                                        </li>
+                                        <!-- <li><a class="dropdown-item" href="#">
+                                                <h1>
+                                                    BİM7D HAQQINDA
+                                                </h1>
+                                            </a></li> -->
+                                    </ul>
+                                </li>
+
+                                <li class="nav-item ">
+                                    <a class="nav-link " href="./services.html" role="button" aria-expanded="false">
+                                        <h1>
+                                            XİDMƏTLƏR
+                                        </h1>
+                                    </a>
+                                    <!-- <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="#"><i class="fa-solid fa-wind"></i>
+                                                <h1>
+                                                    İsitmə Soyutma və Havalandırma
+                                                </h1>
+                                            </a></li>
+                                        <li><a class="dropdown-item" href="#"><i class="fa-solid fa-cloud-bolt"></i>
+                                                <h1>
+                                                    Alçaq Gərilim və Orta Gərilim Elektrik İşləri
+                                                </h1>
+                                            </a></li>
+                                        <li><a class="dropdown-item" href="#"><i class="fa-solid fa-plug"></i>
+                                                <h1>
+                                                    Zəif Axın Sistemləri
+                                                </h1>
+                                            </a></li>
+                                    </ul> -->
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link " aria-current="page" href="./reference.html">
+                                        <h1>
+                                            REFERANSLAR
+                                        </h1>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link " aria-current="page" href="./documents.html">
+                                        <h1>
+                                            SƏNƏDLƏR
+                                        </h1>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link " aria-current="page" href="./aboutus.html">
+                                        <h1>
+                                            HAQQIMIZDA
+                                        </h1>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link " aria-current="page" href="./contactus.html">
+                                        <h1>ƏLAQƏ</h1>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link " aria-current="page" href="./career.html">
+                                        <h1>KARYERA</h1>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+
+                    <div class=" col-lg-1 col-6  langSearch">
+                        <!-- language -->
+                        <div class="  languageBox">
+                            <div class="headRight ">
+                                <div class="headLanguage ">
+                                    <div class="langDropdown">
+                                        <a href="#" onclick="toggleDropdown()">
+
+                                            @Html.Raw(_localization.Getkey("Language").Value)
+
+                                        </a>
+                                        <div class="dropdown-content">
+                                            <ul>
+                                                <li>
+                                                    <a asp-controller="Home"
+                                                       asp-action="ChangeLanguage"
+                                                       asp-route-culture="az-Latn-AZ">Az</a>
+                                                </li>
+                                                <li>
+                                                    <a asp-controller="Home"
+                                                       asp-action="ChangeLanguage"
+                                                       asp-route-culture="en-US">En</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="arrow-down"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- searchBox -->
+                        <div class="ms-1 me-2 searchBox">
+                            <a href="#" class="searchDeskBtn">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                            </a>
+                            <form class=" mt-3 searchFormDeskBox" role="search">
+                                <div class="d-flex">
+                                    <input class="form-control me-2" type="search" placeholder="Search"
+                                           aria-label="Search">
+                                    <button class="btn btn-dark" type="submit">Search</button>
+                                </div>
+                            </form>
+                        </div>
+                        <!-- mobile navbar -->
+                        <nav class="navbar navbar-mobile">
+                            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
+                                    data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar"
+                                    aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar"
+                                 aria-labelledby="offcanvasNavbarLabel">
+                                <div class="offcanvas-header">
+                                    <h1 class="offcanvas-title" id="offcanvasNavbarLabel">
+                                        <img src="~/assets/Images/AZTAM Lider.png" alt="">
+                                    </h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
+                                            aria-label="Close"></button>
+                                </div>
+                                <div class="offcanvas-body">
+                                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                                        <li class="nav-item dropdown">
+                                            <a class="nav-link dropdown-toggle" href="#" role="button"
+                                               data-bs-toggle="dropdown" aria-expanded="false">
+                                                <h1>
+                                                    LAYİHƏLƏNDİRMƏ
+                                                </h1>
+                                            </a>
+                                            <ul class="dropdown-menu">
+                                                <li>
+                                                    <a class="dropdown-item" href="#">
+                                                        <h1>MEP DİZAYN</h1>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item" href="#">
+                                                        <h1>BİM7D HAQQINDA</h1>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li>
+
+                                        <ul class="dropdown-menu">
+
+                                            <li>
+                                                <a class="dropdown-item" href="#">
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item" href="#">
+                                                </a>
+                                            </li>
+                                        </ul>
+                                        <li class="nav-item dropdown">
+                                            <a class="nav-link dropdown-toggle" href="#" role="button"
+                                               data-bs-toggle="dropdown" aria-expanded="false">
+                                                <h1>XİDMƏTLƏR</h1>
+                                            </a>
+                                            <ul class="dropdown-menu">
+                                                <li>
+                                                    <a class="dropdown-item" href="#">
+                                                        <i class="fas fa-wind"></i>
+                                                        <h1>İsitmə Soyutma və Havalandırma</h1>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item" href="#">
+                                                        <i class="fas fa-cloud-bolt"></i>
+                                                        <h1>
+                                                            Alçaq Gərilim və Orta
+                                                            Gərilim <br>Elektrik İşləri
+                                                        </h1>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item" href="#">
+                                                        <i class="fas fa-plug"></i>
+                                                        <h1>Zəif Axın Sistemləri</h1>
+                                                        </h1>
+                                                    </a>
+                                                </li>
+
+                                            </ul>
+                                        </li>
+
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#">
+                                                <h1>REFERANSLAR</h1>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#">
+                                                <h1>SƏNƏDLƏR</h1>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#">
+                                                <h1>HAQQIMIZDA</h1>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#">
+                                                <h1>ƏLAQƏ</h1>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#">
+                                                <h1>KARYERA</h1>
+                                            </a>
+                                        </li>
+
+                                    </ul>
+                                    <form class="d-flex mt-3" role="search">
+                                        <input class="form-control me-2" type="search" placeholder="Search"
+                                               aria-label="Search">
+                                        <button class="btn btn-dark" type="submit">Search</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </nav>
+
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </header>
+
+    <main>
+        @RenderBody()
+
+
+    </main>
+
+
+
+    <footer>
+        <section id="copyRight">
+            <div class="container-web">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <p>Copyright© 2023 AZTAMLİDER. Bütün hüquqlar qorunur.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </footer>
+
+    <!-- @*Bootstrap  *@ -->
+    <script src="./plugins/bootstrap-5.3.0-alpha3-dist/js/bootstrap.bundle.min.js"></script>
+    <!-- @*Bootstrap  *@ -->
+    <!-- @*jquery cdn  *@ -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+            integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+            crossorigin="anonymous" referrerpolicy="no-referrer">
+    </script>
+    <!-- @*jquery cdn  *@ -->
+    <!-- owlCarousel -->
+    <script src="~/assets/js/owl.carousel.min.js"></script>
+    <script src="~/assets/js/owlCarousel.js"></script>
+
+
+    <script src="~/assets/js/localitaztion.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.hamburger-icon').click(function () {
+                $('.mobileNavbar').toggle();
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $("header").addClass("headerAddFixed");
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $('.searchDeskBtn').click(function () {
+                $('.searchFormDeskBox').toggle();
+            });
+        });
+    </script>
+
+    <!-- headerJquery -->
+    <script>
+        $(document).ready(function () {
+            $(window).scroll(function () {
+                var headerHeight = $('header').outerHeight();
+
+                var tempValue = headerHeight / 2.5;
+                const currentScrollHeight = window.scrollY;
+
+
+                if (currentScrollHeight > tempValue) {
+                    $('header').addClass('headerFixed');
+                } else {
+                    $('header').removeClass('headerFixed');
+                }
+            });
+        });
+    </script>
+
+
+    <!-- mainSlider -->
+    <script>
+        // JavaScript kodu
+        window.addEventListener("DOMContentLoaded", function () {
+            // Sliderı seçin
+            var slider = document.getElementById("mainSlider");
+
+            // Sliderdaki tüm görüntüleri seçin
+            var images = slider.querySelectorAll(".backGroundImage");
+
+            // Başlangıçta görüntüleri saklamak için bir sayaç tanımlayın
+            var currentImageIndex = 0;
+
+            // Sliderı otomatik olarak döndürmek için bir fonksiyon oluşturun
+            function rotateSlider() {
+                // Mevcut görüntünün aktif sınıfını kaldırın
+                images[currentImageIndex].classList.remove("activeMainSlider");
+
+                // Bir sonraki görüntünün indeksini belirleyin
+                currentImageIndex = (currentImageIndex + 1) % images.length;
+
+                // Yeni görüntüye aktif sınıfını ekleyin
+                images[currentImageIndex].classList.add("activeMainSlider");
+            }
+
+            setInterval(rotateSlider, 5000);
+        });
+
+    </script>
+    @await RenderSectionAsync("Scripts", required: false)
+
+</body>
+
+</html>

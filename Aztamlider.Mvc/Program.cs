@@ -6,6 +6,7 @@ using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.CodeAnalysis.Host;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using System.Globalization;
 using System.Reflection;
 
@@ -39,18 +40,18 @@ builder.Services.Configure<RequestLocalizationOptions>(options =>
 });
 #endregion
 
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddControllers().AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<CareerPostDto>());
 
-
-//builder.Services.AddControllers().AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<PosterCreateDto>());
-
 builder.Services.AddDbContext<DataContext>(opt => opt.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
 
 builder.Services.AddIdentityServiceExtention();
 builder.Services.AddServiceScopeExtention();
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -66,7 +67,7 @@ app.UseStaticFiles();
 
 app.AddExceptionHandlerService();
 
-
+app.UseRequestLocalization(app.Services.GetRequiredService<IOptions<RequestLocalizationOptions>>().Value);
 app.UseRouting();
 
 app.UseAuthentication();

@@ -1,0 +1,115 @@
+﻿@{
+    ViewData["Title"] = "Create";
+}
+@model DocumentEditViewModel
+
+@{
+    DateTime now = DateTime.UtcNow;
+}
+
+<div class="content-wrapper">
+    <!-- Content -->
+    <div class="container-xxl flex-grow-1 container-p-y">
+        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Layihə /</span> Yaratmaq</h4>
+        <div class="card">
+            <div class="card-body">
+                <!-- Admin Project  Create Start -->
+                <section style="margin-top: 10px;" id="createPoster">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class=" formBox  col-lg-8 col-md-12 col-sm-12 ">
+
+                                <form class="form-control" asp-action="edit" asp-controller="Document" method="post" enctype="multipart/form-data">
+                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                    <input type="hidden" value="@Model.Document.Id" asp-for="Document.Id" />
+                                    <!-- Project Name  Start -->
+                                    <div class="mb-3 posterName">
+                                        <label asp-for="Document.Name" class="form-label">Layihə adı*</label>
+                                        <input asp-for="Document.Name" maxlength="100" type="text" class="form-control">
+                                        <span asp-validation-for="Document.Name" class="text-danger"></span>
+                                    </div>
+                                    <!-- Layihə Name   End -->
+                               
+
+                                     <div id="posterimage-box" class="posterimage-box row mb-3">
+                                        <label asp-for="Document.ImageFile" class="form-label">Layihənin Poster şəkli*</label>
+                                        <!-- Şəkil əlavə et -->
+                                        <input asp-for="Document.ImageFile" id="imagePosterInput" type="file" accept="image/png,  image/jpeg"
+                                               class="form-control" >
+                                                    <div class="col-3">
+                                                        <div style="position:relative;" class="image-box">
+                                                            <input type="hidden" value="@Model.Document.Id" />
+                                                            <img style="width:200px; height:160px;" src="~/uploads/Documents/@Model.Document.Image" />
+                                                        </div>
+                                                    </div>
+                                      </div>
+                                 
+                                    <!-- Button  Start -->
+                                    <div class="row d-flex justify-content-end mb-3">
+                                        <div class="col mb-1">
+                                            <a style=" height: 100%; width: 100%; display: flex; justify-content: center; align-items: center; " asp-action="index" asp-controller="Document" class="btn  btn-dark">Geri dön</a>
+                                        </div>
+                                        <div class="col mb-1 posterButton ms-2 ">
+                                            <button style=" height: 100%; width: 100%; display: flex; justify-content: center; align-items: center; " type="submit" class="btn  btn-primary">Redaktə et</button>
+                                        </div>
+                                    </div>
+                                    <!-- Button  Start -->
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!--  Admin Project  Create  End -->
+
+            </div>
+        </div>
+    </div>
+    <!-- / Content -->
+</div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    ﻿$(function () {
+
+    $(document).ready(function () {
+        $(document).on("click", ".deleteImage", function () {
+            $(this).parent().remove();
+        })
+    })
+
+    })
+
+    let posterInput = document.getElementById("posterInput")
+    let posterBox = document.getElementById("poster-image-box")
+</script>
+
+<script>
+
+    const imagePosterInput = document.getElementById('imagePosterInput');
+const posterImageBox = document.getElementById('posterimage-box');
+
+imagePosterInput.addEventListener('change', function (e) {
+  const file = e.target.files[0];
+  const reader = new FileReader();
+
+  reader.onload = function (e) {
+    const imageBox = posterImageBox.querySelector('.image-box');
+    const image = imageBox.querySelector('img');
+
+    image.src = e.target.result;
+  };
+
+  if (file) {
+    reader.readAsDataURL(file);
+  }
+});
+
+
+</script>
+
+
+@section Scripts{
+
+}
+

@@ -1,0 +1,60 @@
+#contactUs {
+    margin: 60px 0px;
+    position: relative;
+
+    .container-web {
+        .row {
+
+            .imgBox-2 {
+
+                img {
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    width: calc((100vw - 100vw * 0.78));
+                    height: calc((100vh - 100vh * 0.54));
+                    z-index: -1;
+
+                }
+            }
+
+            .contactInfo {
+                margin-bottom: 30px;
+                h1 {
+                    margin-bottom: 10px;
+                }
+
+                ul {
+                    margin-left: 10px;
+
+                    li {
+                        margin-bottom: 5px;
+
+                        a {
+                            color: black;
+                            font-size: 22px;
+
+                            i {
+                                margin-right: 5px;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .contactUsForm {
+                h1 {}
+
+                form {
+                    label {}
+
+                    input {}
+
+                    button {}
+
+                    textarea {}
+                }
+            }
+        }
+    }
+}

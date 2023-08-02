@@ -17,7 +17,7 @@ namespace Aztamlider.Data.Configuration
             builder.Property(x => x.SquareMetr).IsRequired();
             builder.Property(x => x.Date).HasMaxLength(40).IsRequired();
             builder.Property(x => x.Location).HasMaxLength(120).IsRequired();
-            builder.Property(x => x.BuildingType).HasMaxLength(120).IsRequired();
+            builder.Property(x => x.BuildingType).HasMaxLength(150).IsRequired();
             builder.Property(x => x.Status).IsRequired();
             builder.Property(x => x.ServiceTypeId).IsRequired();
 

@@ -10,6 +10,6 @@ namespace Aztamlider.Core.Entites
     {
         public string NameAz { get; set; }
         public string NameEn { get; set; }
-        public ICollection<ServiceType> ServiceTypes { get; set; }
+        public ICollection<Reference> References { get; set; }
     }
 }

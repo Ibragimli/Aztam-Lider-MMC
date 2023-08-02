@@ -8,9 +8,6 @@
 
   <ItemGroup>
     <Folder Include="Services\Implementations\User\" />
-    <Folder Include="Services\Implementations\Area\" />
-    <Folder Include="Services\Interfaces\Area\" />
-    <Folder Include="Services\Interfaces\User\" />
   </ItemGroup>
 
   <ItemGroup>

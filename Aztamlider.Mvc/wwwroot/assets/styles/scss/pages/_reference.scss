@@ -1,0 +1,92 @@
+#reference {
+    margin: 40px 0px;
+
+    .container-web {
+        .row {
+            .referenceButtons {
+                ul {
+                    display: flex;
+                    align-items: center;
+                    li {
+
+                        a {
+                            h1 {
+                                text-align: center;
+                                font-size: 25px;
+                                color: black;
+                                transition: all 0.4s;
+                                border: 1px solid black;
+                                padding: 4px 0px;
+                            }
+
+                            h1:hover {
+                                color: rgba(0, 0, 0, 0.623);
+
+                            }
+
+                            .activeReference {
+                                background-color: rgba(0, 0, 0, 0.815);
+                                color: white;
+                                border: 1px solid white;
+                                span{
+                                    color: white;
+                                }
+
+                            }
+
+                        }
+                    }
+                }
+            }
+
+            .referenceBoxs {
+                padding: 00px 10px 10px 10px;
+
+                .row {
+                    .referenceBox {
+                        display: flex;
+                        flex-direction: column;
+                        margin-right: 20px;
+                        margin-bottom: 20px;
+
+                        .referenceImage {
+                            overflow: hidden;
+
+                            a {
+
+                                img {
+                                    width: 100%;
+
+                                }
+
+                                img:hover {
+                                    transform: scale(1.1);
+                                }
+                            }
+                        }
+
+                        .referenceName {
+                            border: 1px dashed black;
+                            border-top: 0px;
+
+                            a {
+                                h1 {
+                                    text-align: end;
+                                    color: black;
+                                    font-size: 25px;
+                                    padding: 10px 10px 0px 0px;
+                                    transition: all 0.4s;
+                                }
+
+                                h1:hover {
+                                    color: gray;
+                                }
+                            }
+
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

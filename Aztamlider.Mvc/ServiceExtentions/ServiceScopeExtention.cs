@@ -5,6 +5,11 @@ using Aztamlider.Data.UnitOfWork;
 using Aztamlider.Services.HelperService.Implementations;
 using Aztamlider.Services.HelperService.Interfaces;
 using Aztamlider.Services.Profiles;
+using Aztamlider.Services.Services.Implementations;
+using Aztamlider.Services.Services.Implementations.Area;
+using Aztamlider.Services.Services.Interfaces;
+using Aztamlider.Services.Services.Interfaces.Area;
+using Aztamlider.Services.Services.Interfaces.User;
 using MailKit;
 
 namespace Aztamlider.Mvc.ServiceExtentions
@@ -23,20 +28,30 @@ namespace Aztamlider.Mvc.ServiceExtentions
             services.AddScoped<IContactUsRepository, ContactUsRepository>();
 
 
-            //services.AddScoped<IEmailSettingEditServices, EmailSettingEditServices>();
-            //services.AddScoped<IEmailSettingIndexServices, EmailSettingIndexServices>();
+            services.AddScoped<IEmailSettingEditServices, EmailSettingEditServices>();
+            services.AddScoped<IEmailSettingIndexServices, EmailSettingIndexServices>();
 
-            //services.AddScoped<IImageSettingIndexServices, ImageSettingIndexServices>();
-            //services.AddScoped<IImageSettingEditServices, ImageSettingEditServices>();
+            services.AddScoped<IImageSettingIndexServices, ImageSettingIndexServices>();
+            services.AddScoped<IImageSettingEditServices, ImageSettingEditServices>();
 
-            //services.AddScoped<IContactUsCreateServices, ContactUsCreateServices>();
+            services.AddScoped<ISettingEditServices, SettingEditServices>();
+            services.AddScoped<ISettingIndexServices, SettingIndexServices>();
 
-            //services.AddScoped<IHomeIndexServices, HomeIndexServices>();
+            services.AddScoped<IContactUsCreateServices, ContactUsCreateServices>();
 
-            //services.AddScoped<IAdminContactUsIndexServices, AdminContactUsIndexServices>();
+            services.AddScoped<IHomeIndexServices, HomeIndexServices>();
+            services.AddScoped<IEmailServices, EmailServices>();
+
+            services.AddScoped<IAdminContactUsIndexServices, AdminContactUsIndexServices>();
+
+            services.AddScoped<IAdminDocumentIndexServices, AdminDocumentIndexServices>();
+            services.AddScoped<IAdminDocumentEditServices, AdminDocumentEditServices>();
+            //services.AddScoped<IAdminDocumentCreateServices, AdminDocumentCreateServices>();
+            services.AddScoped<IAdminDocumentDeleteServices, AdminDocumentDeleteServices>();
 
 
-            //services.AddScoped<IAdminLoginServices, AdminLoginServices>();
+
+            services.AddScoped<IAdminLoginServices, AdminLoginServices>();
 
             //services.AddScoped<ILayoutServices, LayoutServices>();
             //services.AddScoped<ICareerServices, CareerServices>();

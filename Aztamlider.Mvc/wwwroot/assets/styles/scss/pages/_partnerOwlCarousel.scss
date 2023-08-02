@@ -1,0 +1,42 @@
+#partnerLogos {
+
+  // background-image: url('/assets/Images/salam.jpg');
+  // background-size: cover;
+  // background-position: center;
+  // background-repeat: no-repeat;
+ width: 100%;
+  padding: 80px 0px;
+  // background-color: #e8e7e542;
+  background-color: #00000021;
+  
+  .partnerTitleBox {
+    h1 {
+      text-align: center;
+      margin-bottom: 25px;
+
+    }
+
+    p {
+      text-align: center;
+      font-size: 24px;
+      margin-bottom: 25px;
+    }
+  }
+
+  .partnerOwlCarouselBox {
+    .mobile-owl {
+      .item {
+        display: flex;
+        align-items: center;
+        height: 140px;
+        a {
+          img {
+            object-fit: scale-down;
+            width: 200px;
+            max-height: 140px;
+          }
+        }
+      }
+    }
+  }
+}

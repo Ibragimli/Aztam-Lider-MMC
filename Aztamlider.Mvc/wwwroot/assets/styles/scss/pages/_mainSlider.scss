@@ -1,0 +1,100 @@
+#mainSlider {
+  .backGroundImages {
+    overflow: hidden;
+    background-color: #E8E7E5;
+    width: 100%;
+
+    height: 100vh;
+
+    .backGroundImage {
+      width: 100%;
+      height: 100vh;
+      position: relative;
+      top: 0;
+      left: 0;
+      display: none;
+
+      img {
+        width: 100%;
+        height: 100vh;
+        object-fit: fill;
+      }
+
+      .mainSliderTextBox {
+        position: absolute;
+        top: 32%;
+        left: 15%;
+
+        .mainSliderTitle {
+          font-size: 50px;
+          font-weight: 700;
+          color: black;
+          transform: translateX(-200%);
+          animation: slideInFromLeft 0.6s ease 0.1s forwards;
+        }
+
+        .mainSliderDesc {
+          font-size: 22px;
+          font-weight: 600;
+          color: rgba(0, 0, 0, 0.836);
+          animation: slideInFromLeft 0.6s ease 0.1s forwards;
+          transform: translateX(-200%);
+        }
+      }
+    }
+
+    .activeMainSlider {
+      display: block !important;
+      opacity: 1;
+      animation: slideIn 0.5s ease-in-out forwards;
+    }
+  }
+}
+
+@keyframes slideIn {
+  0% {
+    opacity: 0;
+    transform: translateX(-2%);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideOut {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateX(20%);
+  }
+}
+
+@keyframes slideInFromLeft {
+  0% {
+    opacity: 0;
+
+    transform: translateX(-100%);
+  }
+
+  50% {
+    opacity: 0.6;
+
+  }
+
+  50% {
+    opacity: 0.8;
+
+  }
+
+  100% {
+    opacity: 1;
+
+    transform: translateX(0);
+  }
+}

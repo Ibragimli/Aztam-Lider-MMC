@@ -1,0 +1,22 @@
+#pagenation {
+    .row {
+        nav {
+            .pagination {
+                .page-item {
+                    a {
+                        span {}
+                    }
+
+                    .pageActive {
+                        background-color: black;
+                        color: white;
+                    }
+                }
+
+
+            }
+        }
+
+
+    }
+}

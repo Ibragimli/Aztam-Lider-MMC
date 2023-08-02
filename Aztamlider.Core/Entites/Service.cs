@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Aztamlider.Core.Entites
 {
-    public class Service
+    public class Service:BaseEntity
     {
         public string TitleAz { get; set; }
         public string TitleEn { get; set; }
