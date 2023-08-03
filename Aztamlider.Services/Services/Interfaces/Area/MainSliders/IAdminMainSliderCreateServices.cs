@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Aztamlider.Services.Services.Interfaces.Area.MainSliders
 {
-    public interface IAdminProjectsCreateServices
+    public interface IAdminMainSliderCreateServices
     {
         Task<MainSlider> CreateMainSlider(MainSliderCreateDto MainSliderCreateDto);
 

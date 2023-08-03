@@ -19,11 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\manage\Views\Partner\" />
-    <Folder Include="Areas\manage\Views\Project\" />
     <Folder Include="Areas\manage\Views\Reference\" />
-    <Folder Include="Areas\manage\Views\Service\" />
-    <Folder Include="Areas\manage\Views\ServiceType\" />
     <Folder Include="wwwroot\assets\fonts\" />
     <Folder Include="wwwroot\assets\styles\scss\fonts\" />
     <Folder Include="wwwroot\manage\assets\img\elements\" />

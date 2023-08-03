@@ -12,12 +12,12 @@ using System.Threading.Tasks;
 
 namespace Aztamlider.Services.Services.Implementations.Area.Partners
 {
-    public class AdminMainSliderEditServices : IAdminPartnerEditServices
+    public class AdminPartnerEditServices : IAdminPartnerEditServices
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IManageImageHelper _manageImageHelper;
 
-        public AdminMainSliderEditServices(IUnitOfWork unitOfWork, IManageImageHelper manageImageHelper)
+        public AdminPartnerEditServices(IUnitOfWork unitOfWork, IManageImageHelper manageImageHelper)
         {
             _unitOfWork = unitOfWork;
             _manageImageHelper = manageImageHelper;

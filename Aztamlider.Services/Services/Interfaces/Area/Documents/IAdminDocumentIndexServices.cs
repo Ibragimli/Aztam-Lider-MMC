@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Aztamlider.Services.Services.Interfaces.Area.Documents
 {
-    public interface IAdminServiceTypeIndexServices
+    public interface IAdminDocumentIndexServices
     {
         public IQueryable<Document> GetDocument(string name);
     }

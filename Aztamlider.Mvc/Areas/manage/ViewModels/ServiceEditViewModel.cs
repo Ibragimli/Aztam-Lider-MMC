@@ -8,7 +8,7 @@ namespace Aztamlider.Mvc.Areas.manage.ViewModels
     public class ServiceEditViewModel
     {
         public Service Service { get; set; }
-        public ICollection<ServiceImage> ServiceImages { get; set; }
+        public IEnumerable<ServiceImage> ServiceImages { get; set; }
 
     }
 }

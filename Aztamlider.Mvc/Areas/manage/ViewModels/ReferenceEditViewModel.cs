@@ -8,7 +8,7 @@ namespace Aztamlider.Mvc.Areas.manage.ViewModels
     public class ReferenceEditViewModel
     {
         public Reference Reference { get; set; }
-        public ICollection<ReferenceImage> ReferenceImages { get; set; }
+        public IEnumerable<ReferenceImage> ReferenceImages { get; set; }
         public ICollection<ServiceType> ServiceTypes { get; set; }
 
     }

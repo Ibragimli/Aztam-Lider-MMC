@@ -14,13 +14,13 @@ using System.Threading.Tasks;
 
 namespace Aztamlider.Services.Services.Implementations.Area.Partners
 {
-    public class AdminMainSliderCreateServices : IAdminPartnerCreateServices
+    public class AdminPartnerCreateServices : IAdminPartnerCreateServices
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
         private readonly IManageImageHelper _manageImageHelper;
 
-        public AdminMainSliderCreateServices(IUnitOfWork unitOfWork, IMapper mapper, IManageImageHelper manageImageHelper)
+        public AdminPartnerCreateServices(IUnitOfWork unitOfWork, IMapper mapper, IManageImageHelper manageImageHelper)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;

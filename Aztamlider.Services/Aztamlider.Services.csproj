@@ -18,17 +18,4 @@
     <ProjectReference Include="..\Aztamlider.Data\Aztamlider.Data.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Services\Implementations\Area\ServiceTypes\" />
-    <Folder Include="Services\Implementations\Area\References\" />
-    <Folder Include="Services\Implementations\Area\Services\" />
-    <Folder Include="Services\Implementations\Area\Projects\" />
-    <Folder Include="Services\Implementations\Area\Partners\" />
-    <Folder Include="Services\Interfaces\Area\Partners\" />
-    <Folder Include="Services\Interfaces\Area\Projects\" />
-    <Folder Include="Services\Interfaces\Area\References\" />
-    <Folder Include="Services\Interfaces\Area\Services\" />
-    <Folder Include="Services\Interfaces\Area\ServiceTypes\" />
-  </ItemGroup>
-
 </Project>

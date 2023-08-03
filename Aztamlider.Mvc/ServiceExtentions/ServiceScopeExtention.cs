@@ -11,6 +11,12 @@ using Aztamlider.Services.Services.Implementations.Area.ContactUs;
 using Aztamlider.Services.Services.Implementations.Area.Documents;
 using Aztamlider.Services.Services.Implementations.Area.ImageSettings;
 using Aztamlider.Services.Services.Implementations.Area.Login;
+using Aztamlider.Services.Services.Implementations.Area.MainSliders;
+using Aztamlider.Services.Services.Implementations.Area.Partners;
+using Aztamlider.Services.Services.Implementations.Area.Projects;
+using Aztamlider.Services.Services.Implementations.Area.References;
+using Aztamlider.Services.Services.Implementations.Area.Services;
+using Aztamlider.Services.Services.Implementations.Area.ServiceTypes;
 using Aztamlider.Services.Services.Implementations.Area.Settings;
 using Aztamlider.Services.Services.Implementations.User;
 using Aztamlider.Services.Services.Interfaces;
@@ -19,6 +25,12 @@ using Aztamlider.Services.Services.Interfaces.Area.Documents;
 using Aztamlider.Services.Services.Interfaces.Area.EmailSettings;
 using Aztamlider.Services.Services.Interfaces.Area.ImageSettings;
 using Aztamlider.Services.Services.Interfaces.Area.Login;
+using Aztamlider.Services.Services.Interfaces.Area.MainSliders;
+using Aztamlider.Services.Services.Interfaces.Area.Partners;
+using Aztamlider.Services.Services.Interfaces.Area.Projects;
+using Aztamlider.Services.Services.Interfaces.Area.References;
+using Aztamlider.Services.Services.Interfaces.Area.Services;
+using Aztamlider.Services.Services.Interfaces.Area.ServiceTypes;
 using Aztamlider.Services.Services.Interfaces.Area.Settings;
 using Aztamlider.Services.Services.Interfaces.User;
 using MailKit;
@@ -55,11 +67,40 @@ namespace Aztamlider.Mvc.ServiceExtentions
 
             services.AddScoped<IAdminContactUsIndexServices, AdminContactUsIndexServices>();
 
-            services.AddScoped<IAdminServiceTypeIndexServices, AdminMainSliderIndexServices>();
-            services.AddScoped<IAdminServiceTypeEditServices, AdminMainSliderEditServices>();
-            services.AddScoped<IAdminServiceTypeCreateServices, AdminMainSliderCreateServices>();
-            services.AddScoped<IAdminServiceTypeDeleteServices, AdminMainSliderDeleteServices>();
+            services.AddScoped<IAdminServiceTypeIndexServices, AdminServiceTypeIndexServices>();
+            services.AddScoped<IAdminServiceTypeEditServices, AdminServiceTypeEditServices>();
+            services.AddScoped<IAdminServiceTypeCreateServices, AdminServiceTypeCreateServices>();
+            services.AddScoped<IAdminServiceTypeDeleteServices, AdminServiceTypeDeleteServices>();
 
+            services.AddScoped<IAdminDocumentIndexServices, AdminDocumentIndexServices>();
+            services.AddScoped<IAdminDocumentEditServices, AdminDocumentEditServices>();
+            services.AddScoped<IAdminDocumentCreateServices, AdminDocumentCreateServices>();
+            services.AddScoped<IAdminDocumentDeleteServices, AdminDocumentDeleteServices>();
+
+            services.AddScoped<IAdminMainSliderIndexServices, AdminMainSliderIndexServices>();
+            services.AddScoped<IAdminMainSliderEditServices, AdminMainSliderEditServices>();
+            services.AddScoped<IAdminMainSliderCreateServices, AdminMainSliderCreateServices>();
+            services.AddScoped<IAdminMainSliderDeleteServices, AdminMainSliderDeleteServices>();
+
+            services.AddScoped<IAdminPartnerIndexServices, AdminPartnerIndexServices>();
+            services.AddScoped<IAdminPartnerEditServices, AdminPartnerEditServices>();
+            services.AddScoped<IAdminPartnerCreateServices, AdminPartnerCreateServices>();
+            services.AddScoped<IAdminPartnerDeleteServices, AdminPartnerDeleteServices>();
+
+            services.AddScoped<IAdminProjectIndexServices, AdminProjectIndexServices>();
+            services.AddScoped<IAdminProjectEditServices, AdminProjectEditServices>();
+            services.AddScoped<IAdminProjectCreateServices, AdminProjectCreateServices>();
+            services.AddScoped<IAdminProjectDeleteServices, AdminProjectDeleteServices>();
+
+            services.AddScoped<IAdminReferenceIndexServices, AdminReferenceIndexServices>();
+            services.AddScoped<IAdminReferenceEditServices, AdminReferenceEditServices>();
+            services.AddScoped<IAdminReferenceCreateServices, AdminReferenceCreateServices>();
+            services.AddScoped<IAdminReferenceDeleteServices, AdminReferenceDeleteServices>();
+
+            services.AddScoped<IAdminServiceIndexServices, AdminServiceIndexServices>();
+            services.AddScoped<IAdminServiceEditServices, AdminServiceEditServices>();
+            services.AddScoped<IAdminServiceCreateServices, AdminServiceCreateServices>();
+            services.AddScoped<IAdminServiceDeleteServices, AdminServiceDeleteServices>();
 
 
             services.AddScoped<IAdminLoginServices, AdminLoginServices>();

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Aztamlider.Services.Services.Interfaces.Area.Documents
 {
-    public interface IAdminServiceTypeDeleteServices
+    public interface IAdminDocumentDeleteServices
     {
         public Task DeleteDocument(int id);
     }

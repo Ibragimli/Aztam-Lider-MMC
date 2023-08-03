@@ -20,9 +20,9 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
         private readonly IManageImageHelper _manageImageHelper;
         private readonly IAdminMainSliderDeleteServices _adminMainSliderDeleteServices;
         private readonly IAdminMainSliderEditServices _adminMainSliderEditServices;
-        private readonly IAdminProjectsCreateServices _adminMainSliderCreateServices;
+        private readonly IAdminMainSliderCreateServices _adminMainSliderCreateServices;
 
-        public MainSliderController(IAdminMainSliderIndexServices adminMainSliderIndexServices, IManageImageHelper manageImageHelper, IAdminMainSliderDeleteServices adminMainSliderDeleteServices, IAdminMainSliderEditServices adminMainSliderEditServices, IAdminProjectsCreateServices adminMainSliderCreateServices)
+        public MainSliderController(IAdminMainSliderIndexServices adminMainSliderIndexServices, IManageImageHelper manageImageHelper, IAdminMainSliderDeleteServices adminMainSliderDeleteServices, IAdminMainSliderEditServices adminMainSliderEditServices, IAdminMainSliderCreateServices adminMainSliderCreateServices)
         {
             _adminMainSliderIndexServices = adminMainSliderIndexServices;
             _manageImageHelper = manageImageHelper;

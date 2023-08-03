@@ -9,7 +9,8 @@ namespace Aztamlider.Core.Entites
     public class ServiceImage : BaseEntity
     {
         public string Image { get; set; }
-        public int ReferenceId { get; set; }
-        public Reference Reference { get; set; }
+        public bool IsPoster { get; set; }
+        public int ServiceId { get; set; }
+        public Service Service { get; set; }
     }
 }
