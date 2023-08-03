@@ -4,7 +4,7 @@ using Aztamlider.Services.CustomExceptions;
 using Aztamlider.Services.Dtos.Area;
 using Aztamlider.Services.Helper;
 using Aztamlider.Services.HelperService.Interfaces;
-using Aztamlider.Services.Services.Interfaces.Area.Documents;
+using Aztamlider.Services.Services.Interfaces.Area.MainSliders;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,31 +14,31 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
     [Area("manage")]
     //[Authorize(Roles = "SuperAdmin,Admin,Editor,Viewer")]
 
-    public class DocumentController : Controller
+    public class MainSliderController : Controller
     {
-        private readonly IAdminDocumentIndexServices _adminDocumentIndexServices;
+        private readonly IAdminMainSliderIndexServices _adminMainSliderIndexServices;
         private readonly IManageImageHelper _manageImageHelper;
-        private readonly IAdminDocumentDeleteServices _adminDocumentDeleteServices;
-        private readonly IAdminDocumentEditServices _adminDocumentEditServices;
-        private readonly IAdminDocumentCreateServices _adminDocumentCreateServices;
+        private readonly IAdminMainSliderDeleteServices _adminMainSliderDeleteServices;
+        private readonly IAdminMainSliderEditServices _adminMainSliderEditServices;
+        private readonly IAdminMainSliderCreateServices _adminMainSliderCreateServices;
 
-        public DocumentController(IAdminDocumentIndexServices adminDocumentIndexServices, IManageImageHelper manageImageHelper, IAdminDocumentDeleteServices adminDocumentDeleteServices, IAdminDocumentEditServices adminDocumentEditServices, IAdminDocumentCreateServices adminDocumentCreateServices)
+        public MainSliderController(IAdminMainSliderIndexServices adminMainSliderIndexServices, IManageImageHelper manageImageHelper, IAdminMainSliderDeleteServices adminMainSliderDeleteServices, IAdminMainSliderEditServices adminMainSliderEditServices, IAdminMainSliderCreateServices adminMainSliderCreateServices)
         {
-            _adminDocumentIndexServices = adminDocumentIndexServices;
+            _adminMainSliderIndexServices = adminMainSliderIndexServices;
             _manageImageHelper = manageImageHelper;
-            _adminDocumentDeleteServices = adminDocumentDeleteServices;
-            _adminDocumentEditServices = adminDocumentEditServices;
-            _adminDocumentCreateServices = adminDocumentCreateServices;
+            _adminMainSliderDeleteServices = adminMainSliderDeleteServices;
+            _adminMainSliderEditServices = adminMainSliderEditServices;
+            _adminMainSliderCreateServices = adminMainSliderCreateServices;
         }
         public async Task<IActionResult> Index(int page = 1, string name = null)
         {
-            DocumentIndexViewModel DocumentIndexVM = new DocumentIndexViewModel();
+            MainSliderIndexViewModel MainSliderIndexVM = new MainSliderIndexViewModel();
             try
             {
-                var Document = _adminDocumentIndexServices.GetDocument(name);
-                DocumentIndexVM = new DocumentIndexViewModel
+                var MainSlider = _adminMainSliderIndexServices.GetMainSlider(name);
+                MainSliderIndexVM = new MainSliderIndexViewModel
                 {
-                    Documents = PagenetedList<Document>.Create(Document, page, 5),
+                    MainSliders = PagenetedList<MainSlider>.Create(MainSlider, page, 5),
                 };
             }
             catch (NotFoundException)
@@ -50,72 +50,72 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
             {
                 return RedirectToAction("index", "notfound");
             }
-            return View(DocumentIndexVM);
+            return View(MainSliderIndexVM);
         }
         public async Task<IActionResult> Create()
         {
-            DocumentCreateDto DocumentCreateDto = new DocumentCreateDto();
+            MainSliderCreateDto MainSliderCreateDto = new MainSliderCreateDto();
 
-            return View(DocumentCreateDto);
+            return View(MainSliderCreateDto);
         }
         [ValidateAntiForgeryToken]
         [HttpPost]
-        public async Task<IActionResult> Create(DocumentCreateDto DocumentCreateDto)
+        public async Task<IActionResult> Create(MainSliderCreateDto MainSliderCreateDto)
         {
-            DocumentCreateDto DocumentDto = new DocumentCreateDto();
+            MainSliderCreateDto MainSliderDto = new MainSliderCreateDto();
 
 
             try
             {
-                var Document = await _adminDocumentCreateServices.CreateDocument(DocumentCreateDto);
+                var MainSlider = await _adminMainSliderCreateServices.CreateMainSlider(MainSliderCreateDto);
             }
             catch (ItemNullException ex)
             {
                 ModelState.AddModelError("", ex.Message);
-                return View(DocumentDto);
+                return View(MainSliderDto);
             }
             catch (ItemNotFoundException ex)
             {
                 ModelState.AddModelError("", ex.Message);
-                return View(DocumentDto);
+                return View(MainSliderDto);
             }
             catch (ValueFormatExpception ex)
             {
                 ModelState.AddModelError("", ex.Message);
-                return View(DocumentDto);
+                return View(MainSliderDto);
             }
             catch (ImageFormatException ex)
             {
-                ModelState.AddModelError("DocumentCreateDto.ImageFiles", ex.Message);
-                return View(DocumentDto);
+                ModelState.AddModelError("MainSliderCreateDto.ImageFiles", ex.Message);
+                return View(MainSliderDto);
             }
             catch (ImageNullException ex)
             {
-                ModelState.AddModelError("DocumentCreateDto.ImageFiles", ex.Message);
-                return View(DocumentDto);
+                ModelState.AddModelError("MainSliderCreateDto.ImageFiles", ex.Message);
+                return View(MainSliderDto);
             }
 
             catch (Exception ex)
             {
                 ModelState.AddModelError("", ex.Message);
                 //TempData["Error"] = ("Proses uğursuz oldu!");
-                return View(DocumentDto);
+                return View(MainSliderDto);
             }
 
-            return RedirectToAction("index", "Document");
+            return RedirectToAction("index", "MainSlider");
 
         }
 
 
         public async Task<IActionResult> Edit(int id)
         {
-            DocumentEditViewModel DocumentEditVM = new DocumentEditViewModel();
+            MainSliderEditViewModel MainSliderEditVM = new MainSliderEditViewModel();
 
             try
             {
-                DocumentEditVM = new DocumentEditViewModel()
+                MainSliderEditVM = new MainSliderEditViewModel()
                 {
-                    Document = await _adminDocumentEditServices.GetDocument(id),
+                    MainSlider = await _adminMainSliderEditServices.GetMainSlider(id),
                 };
 
             }
@@ -126,35 +126,35 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
             catch (ItemNullException ex)
             {
                 ModelState.AddModelError("", ex.Message);
-                return View("Index", DocumentEditVM);
+                return View("Index", MainSliderEditVM);
             }
             catch (ItemNotFoundException ex)
             {
                 ModelState.AddModelError("", ex.Message);
-                return View("Index", DocumentEditVM);
+                return View("Index", MainSliderEditVM);
             }
             catch (Exception)
             {
                 return RedirectToAction("Index", "notfound");
             }
-            return View(DocumentEditVM);
+            return View(MainSliderEditVM);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Document Document)
+        public async Task<IActionResult> Edit(MainSlider MainSlider)
         {
-            DocumentEditViewModel DocumentEditVM = new DocumentEditViewModel();
+            MainSliderEditViewModel MainSliderEditVM = new MainSliderEditViewModel();
 
             try
             {
-                DocumentEditVM = new DocumentEditViewModel()
+                MainSliderEditVM = new MainSliderEditViewModel()
                 {
-                    Document = await _adminDocumentEditServices.GetDocument(Document.Id),
+                    MainSlider = await _adminMainSliderEditServices.GetMainSlider(MainSlider.Id),
                 };
 
 
-                await _adminDocumentEditServices.EditDocument(Document);
+                await _adminMainSliderEditServices.EditMainSlider(MainSlider);
             }
 
             catch (NotFoundException)
@@ -165,41 +165,41 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
             catch (ItemNullException ex)
             {
                 ModelState.AddModelError("", ex.Message);
-                return View("Edit", DocumentEditVM);
+                return View("Edit", MainSliderEditVM);
             }
             catch (ValueFormatExpception ex)
             {
                 ModelState.AddModelError("", ex.Message);
-                return View("Edit", DocumentEditVM);
+                return View("Edit", MainSliderEditVM);
             }
             catch (ItemNotFoundException ex)
             {
                 ModelState.AddModelError("", ex.Message);
-                return View("Edit", DocumentEditVM);
+                return View("Edit", MainSliderEditVM);
 
             }
             catch (ImageNullException ex)
             {
                 ModelState.AddModelError("", ex.Message);
-                return View("Edit", DocumentEditVM);
+                return View("Edit", MainSliderEditVM);
 
             }
             catch (ImageFormatException ex)
             {
                 ModelState.AddModelError("", ex.Message);
-                return View("Edit", DocumentEditVM);
+                return View("Edit", MainSliderEditVM);
 
             }
             catch (ImageCountException ex)
             {
                 ModelState.AddModelError("", ex.Message);
-                return View("Edit", DocumentEditVM);
+                return View("Edit", MainSliderEditVM);
 
             }
             catch (ValueAlreadyExpception ex)
             {
                 ModelState.AddModelError("", ex.Message);
-                return View("Edit", DocumentEditVM);
+                return View("Edit", MainSliderEditVM);
 
             }
             catch (Exception)
@@ -207,14 +207,14 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
                 return RedirectToAction("Index", "notfound");
             }
             TempData["Success"] = ("Proses uğurlu oldu");
-            return RedirectToAction("Index", "Document");
+            return RedirectToAction("Index", "MainSlider");
         }
 
         public async Task<IActionResult> Delete(int id)
         {
             try
             {
-                await _adminDocumentDeleteServices.DeleteDocument(id);
+                await _adminMainSliderDeleteServices.DeleteMainSlider(id);
             }
             catch (ItemNotFoundException ex)
             {

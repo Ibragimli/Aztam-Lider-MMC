@@ -4,8 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using Aztamlider.Core.Entites;
 using Aztamlider.Services.CustomExceptions;
 using System.Data;
-using Aztamlider.Services.Services.Interfaces.Area;
 using Aztamlider.Services.Dtos.Area;
+using Aztamlider.Services.Services.Interfaces.Area.Login;
 
 namespace Aztamlider.Mvc.Areas.manage.Controllers
 {

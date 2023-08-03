@@ -6,8 +6,8 @@ using Aztamlider.Mvc.Areas.manage.ViewModels;
 using Aztamlider.Services.Helper;
 using System.Data;
 using Aztamlider.Services.Dtos.Area;
-using Aztamlider.Services.Services.Interfaces.Area;
 using Aztamlider.Services.CustomExceptions;
+using Aztamlider.Services.Services.Interfaces.Area.Settings;
 
 namespace Aztamlider.Mvc.Areas.manage.Controllers
 {

@@ -3,19 +3,19 @@
     DateTime now = DateTime.UtcNow;
 
 }
-@model DocumentIndexViewModel
+@model MainSliderIndexViewModel
 <div class="content-wrapper">
     <!-- Content -->
 
     <div class="container-xxl flex-grow-1 container-p-y">
-        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Documents </span> </h4>
+        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">MainSlider </span> </h4>
 
         <!-- Bordered Table -->
         <div class="card">
             <div class="card-body">
                 @* Pagination *@
                 <div class="row">
-                    <form asp-action="index" asp-controller="Document" asp-route-page="@ViewBag.Page" class="row d-flex">
+                    <form asp-action="index" asp-controller="MainSlider" asp-route-page="@ViewBag.Page" class="row d-flex">
 
                         <div class="d-flex align-items-center col-lg-3 col-md-4 col-sm-6 mb-2">
                             <input name="name" class="form-control " type="search" placeholder="Ad" aria-label="Ad">
@@ -24,32 +24,32 @@
                             <button class="btn btn-outline-primary" type="submit">Axtarış</button>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6 mb-2 text-end">
-                            <a class="btn btn-danger" asp-action="create" asp-controller="Document">Yeni Layihə</a>
+                            <a class="btn btn-danger" asp-action="create" asp-controller="MainSlider">Yeni Layihə</a>
                         </div>
                     </form>
 
                     <div class="d-flex align-items-center col-11 mt-2" style="display:flex; justify-content:flex-end;">
                         <nav aria-label="Page navigation example">
                             <ul class="pagination">
-                                @if (Model.Documents.HasPrev)
+                                @if (Model.MainSliders.HasPrev)
                                 {
 
                                     <li class="page-item">
-                                        <a asp-action="index" asp-controller="Document" asp-route-page="@(Model.Documents.PageIndex-1)" asp-route-name="@(ViewBag.Name)" class="page-link" aria-label="Previous">
+                                        <a asp-action="index" asp-controller="MainSlider" asp-route-page="@(Model.MainSliders.PageIndex-1)" asp-route-name="@(ViewBag.Name)" class="page-link" aria-label="Previous">
                                             <span aria-hidden="true">&laquo;</span>
                                         </a>
                                     </li>
                                 }
-                                @for (int i = 1; i <= Model.Documents.TotalPages; i++)
+                                @for (int i = 1; i <= Model.MainSliders.TotalPages; i++)
                                 {
-                                    <li aria-current="page" class="page-item" @(Model.Documents.PageIndex == i ? "active" : "")>
-                                        <a asp-action="index" asp-controller="Document" asp-route-page="@i" asp-route-name="@(ViewBag.Name)" class="page-link">@i</a>
+                                    <li aria-current="page" class="page-item" @(Model.MainSliders.PageIndex == i ? "active" : "")>
+                                        <a asp-action="index" asp-controller="MainSlider" asp-route-page="@i" asp-route-name="@(ViewBag.Name)" class="page-link">@i</a>
                                     </li>
                                 }
-                                @if (Model.Documents.HasNext)
+                                @if (Model.MainSliders.HasNext)
                                 {
                                     <li class="page-item">
-                                        <a asp-action="index" asp-controller="Document" asp-route-page="@(Model.Documents.PageIndex+1)" asp-route-name="@(ViewBag.Name)" class="page-link" aria-label="Next">
+                                        <a asp-action="index" asp-controller="MainSlider" asp-route-page="@(Model.MainSliders.PageIndex+1)" asp-route-name="@(ViewBag.Name)" class="page-link" aria-label="Next">
                                             <span aria-hidden="true">&raquo;</span>
                                         </a>
                                     </li>
@@ -70,28 +70,26 @@
                             <tr>
                                 <th>Şəkil</th>
                                 <th>Sənədin adı</th>
-                                <th>PDF</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var Document in Model.Documents)
+                            @foreach (var MainSlider in Model.MainSliders)
                             {
                                 @*Delete Modal*@
-                                @*@await Html.PartialAsync("_deleteItemModalPartiral", new DocumentDeleteModal { Action = "delete", Controller = "Document", Text = "Elanı silmək istəyirsinizmi?", Id = Document.Id })*@
+                                @*@await Html.PartialAsync("_deleteItemModalPartiral", new MainSliderDeleteModal { Action = "delete", Controller = "MainSlider", Text = "Elanı silmək istəyirsinizmi?", Id = MainSlider.Id })*@
                                 @*Delete Modal*@
                                 <tr>
                                     <td class="text-center">
-                                        <img src="~/uploads/documents/@Document?.Image" width="100" height="100" />
+                                        <img src="~/uploads/MainSliders/@MainSlider?.Image" width="100" height="100" />
                                     </td>
-                                    <td class="text-center"><a target="_blank">@Document.Name</a></td>
-                                    <td class="text-center"><a target="_blank" href="~/uploads/documents/@Document.PDF"><i style="font-size:25px; color:red;" class="fa-solid fa-file-pdf"></i></a></td>
+                                    <td class="text-center"><a target="_blank">@MainSlider.TitleAz</a></td>
 
                                     <td class="text-center">
                                         <div class="d-flex justify-content-sm-around">
-                                            <a asp-route-id="@Document.Id" asp-action="edit" asp-controller="Document"><i style="font-size: 26px !important; color:orange" class="fa-regular fa-pen-to-square"></i></a>
-                                            @*<a style="display:flex; align-items:center;" asp-route-id="@Document.Id" asp-action="detail" asp-controller="poster"><i style="font-size:26px !important;" class="bx bx-info-circle me-1"></i> </a>*@
-                                            <a class="delete-btn" asp-controller="Document" asp-action="delete" asp-route-id="@Document.Id"><i style="font-size:26px !important; color:red;" class="bx bx-trash me-1 "></i> </a>
+                                            <a asp-route-id="@MainSlider.Id" asp-action="edit" asp-controller="MainSlider"><i style="font-size: 26px !important; color:orange" class="fa-regular fa-pen-to-square"></i></a>
+                                            @*<a style="display:flex; align-items:center;" asp-route-id="@MainSlider.Id" asp-action="detail" asp-controller="poster"><i style="font-size:26px !important;" class="bx bx-info-circle me-1"></i> </a>*@
+                                            <a class="delete-btn" asp-controller="MainSlider" asp-action="delete" asp-route-id="@MainSlider.Id"><i style="font-size:26px !important; color:red;" class="bx bx-trash me-1 "></i> </a>
 
                                             @*<button style="color:red;" type="button" class="btn " data-bs-toggle="modal" data-bs-target="#deleteModal">
                                         <i style="font-size:26px !important;" class="bx bx-trash me-1 "></i>

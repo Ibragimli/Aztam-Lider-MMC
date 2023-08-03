@@ -7,8 +7,19 @@ using Aztamlider.Services.HelperService.Interfaces;
 using Aztamlider.Services.Profiles;
 using Aztamlider.Services.Services.Implementations;
 using Aztamlider.Services.Services.Implementations.Area;
+using Aztamlider.Services.Services.Implementations.Area.ContactUs;
+using Aztamlider.Services.Services.Implementations.Area.Documents;
+using Aztamlider.Services.Services.Implementations.Area.ImageSettings;
+using Aztamlider.Services.Services.Implementations.Area.Login;
+using Aztamlider.Services.Services.Implementations.Area.Settings;
+using Aztamlider.Services.Services.Implementations.User;
 using Aztamlider.Services.Services.Interfaces;
-using Aztamlider.Services.Services.Interfaces.Area;
+using Aztamlider.Services.Services.Interfaces.Area.ContactUs;
+using Aztamlider.Services.Services.Interfaces.Area.Documents;
+using Aztamlider.Services.Services.Interfaces.Area.EmailSettings;
+using Aztamlider.Services.Services.Interfaces.Area.ImageSettings;
+using Aztamlider.Services.Services.Interfaces.Area.Login;
+using Aztamlider.Services.Services.Interfaces.Area.Settings;
 using Aztamlider.Services.Services.Interfaces.User;
 using MailKit;
 
@@ -44,10 +55,10 @@ namespace Aztamlider.Mvc.ServiceExtentions
 
             services.AddScoped<IAdminContactUsIndexServices, AdminContactUsIndexServices>();
 
-            services.AddScoped<IAdminDocumentIndexServices, AdminDocumentIndexServices>();
-            services.AddScoped<IAdminDocumentEditServices, AdminDocumentEditServices>();
-            services.AddScoped<IAdminDocumentCreateServices, AdminDocumentCreateServices>();
-            services.AddScoped<IAdminDocumentDeleteServices, AdminDocumentDeleteServices>();
+            services.AddScoped<IAdminDocumentIndexServices, AdminMainSliderIndexServices>();
+            services.AddScoped<IAdminDocumentEditServices, AdminMainSliderEditServices>();
+            services.AddScoped<IAdminDocumentCreateServices, AdminMainSliderCreateServices>();
+            services.AddScoped<IAdminDocumentDeleteServices, AdminMainSliderDeleteServices>();
 
 
 

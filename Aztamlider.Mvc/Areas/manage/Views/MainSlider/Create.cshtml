@@ -1,7 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Create";
 }
-@model DocumentCreateDto
+@model MainSliderCreateDto
 
 @{
     DateTime now = DateTime.UtcNow;
@@ -10,7 +10,7 @@
 <div class="content-wrapper">
     <!-- Content -->
     <div class="container-xxl flex-grow-1 container-p-y">
-        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Document /</span> Yaratmaq</h4>
+        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">MainSlider /</span> Yaratmaq</h4>
         <div class="card">
             <div class="card-body">
                 <!-- Admin Layihə   Create Start -->
@@ -19,15 +19,39 @@
                         <div class="row justify-content-center">
                             <div class=" formBox  col-lg-8 col-md-12 col-sm-12 ">
 
-                                <form class="form-control" asp-action="create" asp-controller="Document" method="post" enctype="multipart/form-data">
+                                <form class="form-control" asp-action="create" asp-controller="MainSlider" method="post" enctype="multipart/form-data">
                                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                                     <!-- Layihə  Name  Start -->
                                     <div class="mb-3 posterName">
-                                        <label asp-for="Name" class="form-label">Sənəd adı*</label>
-                                        <input asp-for="Name" maxlength="100" type="text" class="form-control">
-                                        <span asp-validation-for="Name" class="text-danger"></span>
+                                        <label asp-for="TitleAz" class="form-label">Slider adı (Az)*</label>
+                                        <input asp-for="TitleAz" maxlength="100" type="text" class="form-control">
+                                        <span asp-validation-for="TitleAz" class="text-danger"></span>
                                     </div>
                                     <!-- Layihə Name   End -->
+                                           <!-- Layihə  Name  Start -->
+                                    <div class="mb-3 posterName">
+                                        <label asp-for="TitleEn" class="form-label">Slider adı (En)*</label>
+                                        <input asp-for="TitleEn" maxlength="100" type="text" class="form-control">
+                                        <span asp-validation-for="TitleEn" class="text-danger"></span>
+                                    </div>
+                                    <!-- Layihə Name   End -->
+                                
+                                           <!-- Layihə  Name  Start -->
+                                    <div class="mb-3 posterName">
+                                        <label asp-for="DescriptionAz" class="form-label">Slider təsvir (Az)*</label>
+                                        <input asp-for="DescriptionAz" maxlength="100" type="text" class="form-control">
+                                        <span asp-validation-for="DescriptionAz" class="text-danger"></span>
+                                    </div>
+                                    <!-- Layihə Name   End -->
+                                
+                                           <!-- Layihə  Name  Start -->
+                                    <div class="mb-3 posterName">
+                                        <label asp-for="DescriptionEn" class="form-label">Slider təsvir (En)*</label>
+                                        <input asp-for="DescriptionEn" maxlength="100" type="text" class="form-control">
+                                        <span asp-validation-for="DescriptionEn" class="text-danger"></span>
+                                    </div>
+                                    <!-- Layihə Name   End -->
+                                
                                 
                                      <div id="posterimage-box" class="posterimage-box row mb-3">
                                         <label asp-for="ImageFile" class="form-label">Layihənin Poster şəkli*</label>
@@ -42,20 +66,11 @@
                                       </div>
                                  
                                     <!--  Image End -->
-                                    <!--  Image  Start -->
-                                    <div class="mb-3 posterImages">
-                                        <label asp-for="PDFFile" class="form-label">PDF *</label>
-                                        <!-- Şəkil əlavə et -->
-                                        <input asp-for="PDFFile" type="file" accept="application/pdf" class="form-control">
-                                        <div>
-                                            <span asp-validation-for="PDFFile" class="text-danger"></span>
-                                        </div>
-                                    </div>
-                                    <!--  Image End -->
+                             
                                     <!-- Button  Start -->
                                     <div class="row d-flex justify-content-end mb-3">
                                         <div class="col mb-1">
-                                            <a style=" height: 100%; width: 100%; display: flex; justify-content: center; align-items: center; " asp-action="index" asp-controller="Document" class="btn  btn-dark">Geri dön</a>
+                                            <a style=" height: 100%; width: 100%; display: flex; justify-content: center; align-items: center; " asp-action="index" asp-controller="MainSlider" class="btn  btn-dark">Geri dön</a>
                                         </div>
                                         <div class="col mb-1 posterButton ms-2 ">
                                             <button style=" height: 100%; width: 100%; display: flex; justify-content: center; align-items: center; " type="submit" class="btn  btn-primary">Yaratmaq</button>
@@ -85,22 +100,22 @@
 <script>
     ﻿$(function () {
 
-    $(document).ready(function () {
-        $(document).on("click", ".deleteImage", function () {
+    $(MainSlider).ready(function () {
+        $(MainSlider).on("click", ".deleteImage", function () {
             $(this).parent().remove();
         })
     })
 
     })
 
-    let posterInput = document.getElementById("posterInput")
-    let posterBox = document.getElementById("poster-image-box")
+    let posterInput = MainSlider.getElementById("posterInput")
+    let posterBox = MainSlider.getElementById("poster-image-box")
 </script>
 
 <script>
 
-    const imagePosterInput = document.getElementById('imagePosterInput');
-const posterImageBox = document.getElementById('posterimage-box');
+    const imagePosterInput = MainSlider.getElementById('imagePosterInput');
+const posterImageBox = MainSlider.getElementById('posterimage-box');
 
 imagePosterInput.addEventListener('change', function (e) {
   const file = e.target.files[0];

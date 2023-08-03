@@ -7,7 +7,7 @@ using Aztamlider.Mvc.Areas.manage.ViewModels;
 using Aztamlider.Services.CustomExceptions;
 using Aztamlider.Services.Helper;
 using Aztamlider.Services.Dtos.Area;
-using Aztamlider.Services.Services.Interfaces.Area;
+using Aztamlider.Services.Services.Interfaces.Area.EmailSettings;
 
 namespace Aztamlider.Mvc.Areas.manage.Controllers
 {

@@ -4,7 +4,7 @@ using Aztamlider.Core.Entites;
 using Aztamlider.Mvc.Areas.manage.ViewModels;
 using Aztamlider.Services.CustomExceptions;
 using Aztamlider.Services.Helper;
-using Aztamlider.Services.Services.Interfaces.Area;
+using Aztamlider.Services.Services.Interfaces.Area.ContactUs;
 
 namespace Aztamlider.Mvc.Areas.manage.Controllers
 {

@@ -24,7 +24,8 @@
     <Folder Include="wwwroot\manage\assets\img\elements\" />
     <Folder Include="wwwroot\manage\assets\img\layouts\" />
     <Folder Include="wwwroot\uploads\documents\" />
-    <Folder Include="wwwroot\uploads\service\" />
+    <Folder Include="wwwroot\uploads\mainsliders\" />
+    <Folder Include="wwwroot\uploads\services\" />
     <Folder Include="wwwroot\uploads\settings\" />
   </ItemGroup>
 
