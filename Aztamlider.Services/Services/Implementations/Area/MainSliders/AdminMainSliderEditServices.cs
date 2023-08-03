@@ -94,27 +94,15 @@ namespace Aztamlider.Services.Services.Implementations.Area.MainSliders
 
         private async Task Check(MainSlider MainSlider)
         {
-            if (MainSlider.TitleAz == null && MainSlider.TitleEn == null)
-            {
-                throw new ItemNullException("Slider adını qeyd edin!");
-            }
-            if (MainSlider.DescriptionEn == null && MainSlider.DescriptionAz == null)
-            {
-                throw new ItemNullException("Slider təsvirini qeyd edin!");
-            }
-            if (MainSlider.TitleAz?.Length < 3)
+            if (MainSlider.TitleAz?.Length < 3 || MainSlider.TitleEn?.Length < 3)
             {
                 throw new ValueFormatExpception("Slider adının uzunluğu minimum 3 ola bilər");
             }
-            if (MainSlider.TitleEn?.Length > 100)
+            if (MainSlider.TitleEn?.Length > 100 || MainSlider.TitleAz?.Length > 100)
             {
                 throw new ValueFormatExpception("Slider adının uzunluğu maksimum 100 ola bilər");
             }
-            if (MainSlider.DescriptionEn?.Length > 200)
-            {
-                throw new ValueFormatExpception("Slider təsvir uzunluğu maksimum 200 ola bilər");
-            }
-            if (MainSlider.DescriptionAz?.Length > 200)
+            if (MainSlider.DescriptionEn?.Length > 200 || MainSlider.DescriptionAz?.Length > 200)
             {
                 throw new ValueFormatExpception("Slider təsvir uzunluğu maksimum 200 ola bilər");
             }

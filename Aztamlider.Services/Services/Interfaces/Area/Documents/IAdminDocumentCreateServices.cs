@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Aztamlider.Services.Services.Interfaces.Area.Documents
 {
-    public interface IAdminDocumentCreateServices
+    public interface IAdminServiceTypeCreateServices
     {
         Task<Document> CreateDocument(DocumentCreateDto DocumentCreateDto);
 

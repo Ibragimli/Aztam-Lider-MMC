@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Aztamlider.Services.Services.Interfaces.Area.Documents
 {
-    public interface IAdminDocumentEditServices
+    public interface IAdminServiceTypeEditServices
     {
         public Task<Document> GetDocument(int id);
         public Task EditDocument(Document Document);

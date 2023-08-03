@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Aztamlider.Services.Services
+namespace Aztamlider.Services.Resources
 {
     public class SharedResource
     {

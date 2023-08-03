@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 
 namespace Aztamlider.Services.Services.Implementations.Area.MainSliders
 {
-    public class AdminMainSliderIndexServices : IAdminMainSliderIndexServices
+    public class AdminProjectIndexServices : IAdminMainSliderIndexServices
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        public AdminMainSliderIndexServices(IUnitOfWork unitOfWork)
+        public AdminProjectIndexServices(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }

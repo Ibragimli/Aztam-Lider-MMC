@@ -2,7 +2,7 @@
 using Aztamlider.Mvc.ViewModels;
 using Aztamlider.Services.CustomExceptions;
 using Aztamlider.Services.Dtos.User;
-using Aztamlider.Services.Services;
+using Aztamlider.Services.Resources;
 using Aztamlider.Services.Services.Interfaces;
 using Aztamlider.Services.Services.Interfaces.User;
 using MailKit;

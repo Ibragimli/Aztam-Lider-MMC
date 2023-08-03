@@ -1,7 +1,7 @@
 using Aztamlider.Data.Datacontext;
 using Aztamlider.Mvc.ServiceExtentions;
 using Aztamlider.Services.Dtos.User;
-using Aztamlider.Services.Services;
+using Aztamlider.Services.Resources;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.CodeAnalysis.Host;

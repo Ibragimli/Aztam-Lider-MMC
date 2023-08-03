@@ -55,10 +55,10 @@ namespace Aztamlider.Mvc.ServiceExtentions
 
             services.AddScoped<IAdminContactUsIndexServices, AdminContactUsIndexServices>();
 
-            services.AddScoped<IAdminDocumentIndexServices, AdminMainSliderIndexServices>();
-            services.AddScoped<IAdminDocumentEditServices, AdminMainSliderEditServices>();
-            services.AddScoped<IAdminDocumentCreateServices, AdminMainSliderCreateServices>();
-            services.AddScoped<IAdminDocumentDeleteServices, AdminMainSliderDeleteServices>();
+            services.AddScoped<IAdminServiceTypeIndexServices, AdminMainSliderIndexServices>();
+            services.AddScoped<IAdminServiceTypeEditServices, AdminMainSliderEditServices>();
+            services.AddScoped<IAdminServiceTypeCreateServices, AdminMainSliderCreateServices>();
+            services.AddScoped<IAdminServiceTypeDeleteServices, AdminMainSliderDeleteServices>();
 
 
 

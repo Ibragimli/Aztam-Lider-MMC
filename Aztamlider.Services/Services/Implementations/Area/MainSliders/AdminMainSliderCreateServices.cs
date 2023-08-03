@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace Aztamlider.Services.Services.Implementations.Area.MainSliders
 {
-    public class AdminMainSliderCreateServices : IAdminMainSliderCreateServices
+    public class AdminMainSliderCreateServices : IAdminProjectsCreateServices
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
@@ -41,19 +41,15 @@ namespace Aztamlider.Services.Services.Implementations.Area.MainSliders
 
         private async Task DtoCheck(MainSliderCreateDto MainSliderCreateDto)
         {
-            if (MainSliderCreateDto.TitleAz?.Length < 3)
+            if (MainSliderCreateDto.TitleAz?.Length < 3 || MainSliderCreateDto.TitleEn?.Length < 3)
             {
                 throw new ValueFormatExpception("Slider adının uzunluğu minimum 3 ola bilər");
             }
-            if (MainSliderCreateDto.TitleEn?.Length > 100)
+            if (MainSliderCreateDto.TitleEn?.Length > 100 || MainSliderCreateDto.TitleAz?.Length > 100)
             {
                 throw new ValueFormatExpception("Slider adının uzunluğu maksimum 100 ola bilər");
             }
-            if (MainSliderCreateDto.DescriptionEn?.Length > 200)
-            {
-                throw new ValueFormatExpception("Slider təsvir uzunluğu maksimum 200 ola bilər");
-            }
-            if (MainSliderCreateDto.DescriptionAz?.Length > 200)
+            if (MainSliderCreateDto.DescriptionEn?.Length > 200 || MainSliderCreateDto.DescriptionAz?.Length > 200)
             {
                 throw new ValueFormatExpception("Slider təsvir uzunluğu maksimum 200 ola bilər");
             }

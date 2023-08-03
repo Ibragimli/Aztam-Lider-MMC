@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Aztamlider.Services.Services.Implementations.Area.Documents
 {
-    public class AdminMainSliderIndexServices : IAdminDocumentIndexServices
+    public class AdminMainSliderIndexServices : IAdminServiceTypeIndexServices
     {
         private readonly IUnitOfWork _unitOfWork;
 

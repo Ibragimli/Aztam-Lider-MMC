@@ -16,13 +16,13 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
 
     public class DocumentController : Controller
     {
-        private readonly IAdminDocumentIndexServices _adminDocumentIndexServices;
+        private readonly IAdminServiceTypeIndexServices _adminDocumentIndexServices;
         private readonly IManageImageHelper _manageImageHelper;
-        private readonly IAdminDocumentDeleteServices _adminDocumentDeleteServices;
-        private readonly IAdminDocumentEditServices _adminDocumentEditServices;
-        private readonly IAdminDocumentCreateServices _adminDocumentCreateServices;
+        private readonly IAdminServiceTypeDeleteServices _adminDocumentDeleteServices;
+        private readonly IAdminServiceTypeEditServices _adminDocumentEditServices;
+        private readonly IAdminServiceTypeCreateServices _adminDocumentCreateServices;
 
-        public DocumentController(IAdminDocumentIndexServices adminDocumentIndexServices, IManageImageHelper manageImageHelper, IAdminDocumentDeleteServices adminDocumentDeleteServices, IAdminDocumentEditServices adminDocumentEditServices, IAdminDocumentCreateServices adminDocumentCreateServices)
+        public DocumentController(IAdminServiceTypeIndexServices adminDocumentIndexServices, IManageImageHelper manageImageHelper, IAdminServiceTypeDeleteServices adminDocumentDeleteServices, IAdminServiceTypeEditServices adminDocumentEditServices, IAdminServiceTypeCreateServices adminDocumentCreateServices)
         {
             _adminDocumentIndexServices = adminDocumentIndexServices;
             _manageImageHelper = manageImageHelper;

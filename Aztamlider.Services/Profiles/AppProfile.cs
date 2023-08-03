@@ -17,6 +17,10 @@ namespace Aztamlider.Services.Profiles
         {
             CreateMap<ContactUsCreateDto, ContactUs>();
             CreateMap<DocumentCreateDto, Document>();
+            CreateMap<MainSliderCreateDto, MainSlider>();
+            CreateMap<PartnerCreateDto, Partner>();
+            CreateMap<ProjectCreateDto, Project>();
+            CreateMap<ReferenceCreateDto, Reference>();
 
         }
     }

@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace Aztamlider.Services.Services.Implementations.Area.Documents
 {
-    public class AdminMainSliderCreateServices : IAdminDocumentCreateServices
+    public class AdminMainSliderCreateServices : IAdminServiceTypeCreateServices
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
