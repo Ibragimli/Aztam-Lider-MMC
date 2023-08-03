@@ -109,14 +109,8 @@ namespace Aztamlider.Services.Services.Implementations.Area.Documents
             {
                 throw new ValueFormatExpception("Layihə adının uzunluğu maksimum 100 ola bilər");
             }
-            if (Document.ImageFile == null)
-            {
-                throw new ItemNullException("Şəkil əlavə edin!");
-            }
-            if (Document.PDFFile == null)
-            {
-                throw new ItemNullException("PDF əlavə edin!");
-            }
+          
+            
             if (Document.PDFFile != null)
             {
                 if (Document.PDFFile.Length > 3 * 1048576)
