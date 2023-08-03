@@ -106,11 +106,7 @@ namespace Aztamlider.Services.Services.Implementations.Area.MainSliders
             {
                 throw new ValueFormatExpception("Slider təsvir uzunluğu maksimum 200 ola bilər");
             }
-            if (MainSlider.ImageFile == null)
-            {
-                throw new ItemNullException("Şəkil əlavə edin!");
-            }
-
+       
             if (MainSlider.ImageFile != null)
                 _manageImageHelper.PosterCheck(MainSlider.ImageFile);
 

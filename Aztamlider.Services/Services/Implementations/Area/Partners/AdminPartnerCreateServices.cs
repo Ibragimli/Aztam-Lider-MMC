@@ -41,8 +41,10 @@ namespace Aztamlider.Services.Services.Implementations.Area.Partners
 
         private async Task DtoCheck(PartnerCreateDto PartnerCreateDto)
         {
+            if (PartnerCreateDto.ImageFile == null)
+                throw new ItemNullException("Şəkil əlavə edin!");
 
-            if (PartnerCreateDto.ImageFile != null)
+                if (PartnerCreateDto.ImageFile != null)
                 _manageImageHelper.PosterCheck(PartnerCreateDto.ImageFile);
         }
     }

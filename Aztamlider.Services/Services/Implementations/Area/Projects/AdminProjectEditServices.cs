@@ -114,10 +114,7 @@ namespace Aztamlider.Services.Services.Implementations.Area.Projects
             {
                 throw new ValueFormatExpception("Layihə təsvir uzunluğu maksimum 3000 ola bilər");
             }
-            if (Project.ImageFile == null)
-            {
-                throw new ItemNullException("Şəkil əlavə edin!");
-            }
+           
 
             if (Project.ImageFile != null)
                 _manageImageHelper.PosterCheck(Project.ImageFile);
