@@ -50,19 +50,19 @@ namespace Aztamlider.Services.Services.Implementations.Area.Services
             {
                 throw new ImageNullException("Şəkil əlavə edin");
             }
-            if (ServiceCreateDto.TitleAz.Length < 3 || ServiceCreateDto.TitleEn.Length < 3)
+            if (ServiceCreateDto.TitleAz?.Length < 3 || ServiceCreateDto.TitleEn?.Length < 3)
             {
                 throw new ValueFormatExpception("Xidmət adının uzunluğu minimum 3 ola bilər");
             }
-            if (ServiceCreateDto.TitleAz.Length > 150 || ServiceCreateDto.TitleEn.Length > 150)
+            if (ServiceCreateDto.TitleAz?.Length > 150 || ServiceCreateDto.TitleEn?.Length > 150)
             {
                 throw new ValueFormatExpception("Xidmət adının uzunluğu maksimum 150 ola bilər");
             }
-            if (ServiceCreateDto.DescriptionAz.Length > 3500 || ServiceCreateDto.DescriptionEn.Length > 3500)
+            if (ServiceCreateDto.DescriptionAz?.Length > 3500 || ServiceCreateDto.DescriptionEn?.Length > 3500)
             {
                 throw new ValueFormatExpception("Xidmət təsvirinin uzunluğu maksimum 3500 ola bilər");
             }
-            if (ServiceCreateDto.DescriptionAz.Length < 3 || ServiceCreateDto.DescriptionEn.Length < 3)
+            if (ServiceCreateDto.DescriptionAz?.Length < 3 || ServiceCreateDto.DescriptionEn?.Length < 3)
             {
                 throw new ValueFormatExpception("Xidmət təsvirinin uzunluğu minimum 3 ola bilər");
             }

@@ -94,10 +94,10 @@ namespace Aztamlider.Services.Services.Implementations.Area.References
             await _unitOfWork.CommitAsync();
         }
 
-        public async Task<IEnumerable<Reference>> GetAllReferences()
+        public async Task<IEnumerable<ServiceType>> GetAllServiceTypes()
         {
-            var References = await _unitOfWork.ReferenceRepository.GetAllAsync(x => !x.IsDelete);
-            return References;
+            var serviceTypes = await _unitOfWork.ServiceTypeRepository.GetAllAsync(x => !x.IsDelete);
+            return serviceTypes;
         }
 
        

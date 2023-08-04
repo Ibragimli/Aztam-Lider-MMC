@@ -39,7 +39,8 @@
                                            <!-- Layihə  Name  Start -->
                                     <div class="mb-3 posterName">
                                         <label asp-for="DescriptionAz" class="form-label">Slider təsvir (Az)*</label>
-                                        <input asp-for="DescriptionAz" maxlength="200" type="text" class="form-control">
+                                        <textarea asp-for="DescriptionAz" maxlength="200" style="max-height:300px" rows="8" type="text" class="form-control"></textarea>
+
                                         <span asp-validation-for="DescriptionAz" class="text-danger"></span>
                                     </div>
                                     <!-- Layihə Name   End -->
@@ -47,7 +48,7 @@
                                            <!-- Layihə  Name  Start -->
                                     <div class="mb-3 posterName">
                                         <label asp-for="DescriptionEn" class="form-label">Slider təsvir (En)*</label>
-                                        <input asp-for="DescriptionEn" maxlength="200" type="text" class="form-control">
+                                        <textarea asp-for="DescriptionEn" maxlength="200" style="max-height:300px" rows="8" type="text" class="form-control"></textarea>
                                         <span asp-validation-for="DescriptionEn" class="text-danger"></span>
                                     </div>
                                     <!-- Layihə Name   End -->

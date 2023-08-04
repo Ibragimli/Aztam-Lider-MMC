@@ -23,6 +23,8 @@ namespace Aztamlider.Core.IUnitOfWork
         IServiceRepository ServiceRepository { get; }
         IServiceImageRepository ServiceImageRepository { get; }
         IServiceTypeRepository ServiceTypeRepository { get; }
+        ILanguageBaseRepository LanguageBaseRepository { get; }
+        ILoggerRepository LoggerRepository { get; }
         Task<int> CommitAsync();
 
     }

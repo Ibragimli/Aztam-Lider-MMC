@@ -12,6 +12,7 @@ namespace Aztamlider.Services.Services.Interfaces.Area.References
         public Task<Reference> GetReference(int id);
         public Task EditReference(Reference Reference);
         public Task<IEnumerable<ReferenceImage>> GetImages(int id);
+        public Task<IEnumerable<ServiceType>> GetAllServiceTypes();
 
     }
 }

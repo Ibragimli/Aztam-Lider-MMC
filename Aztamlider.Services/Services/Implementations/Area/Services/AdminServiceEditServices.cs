@@ -185,19 +185,19 @@ namespace Aztamlider.Services.Services.Implementations.Area.Services
         private void Check(Service Service)
         {
            
-            if (Service.TitleAz.Length < 3 || Service.TitleEn.Length < 3)
+            if (Service.TitleAz?.Length < 3 || Service.TitleEn?.Length < 3)
             {
                 throw new ValueFormatExpception("Xidmət adının uzunluğu minimum 3 ola bilər");
             }
-            if (Service.TitleAz.Length > 150 || Service.TitleEn.Length > 150)
+            if (Service.TitleAz?.Length > 150 || Service.TitleEn?.Length > 150)
             {
                 throw new ValueFormatExpception("Xidmət adının uzunluğu maksimum 150 ola bilər");
             }
-            if (Service.DescriptionAz.Length > 3500 || Service.DescriptionEn.Length > 3500)
+            if (Service.DescriptionAz?.Length > 3500 || Service.DescriptionEn?.Length > 3500)
             {
                 throw new ValueFormatExpception("Xidmət təsvirinin uzunluğu maksimum 3500 ola bilər");
             }
-            if (Service.DescriptionAz.Length < 3 || Service.DescriptionEn.Length < 3)
+            if (Service.DescriptionAz?.Length < 3 || Service.DescriptionEn?.Length < 3)
             {
                 throw new ValueFormatExpception("Xidmət təsvirinin uzunluğu minimum 3 ola bilər");
             }

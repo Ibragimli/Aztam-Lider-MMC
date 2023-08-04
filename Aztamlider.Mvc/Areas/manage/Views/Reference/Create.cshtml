@@ -1,7 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Create";
 }
-@model ReferenceCreateDto
+@model ReferenceCreateViewModel
 
 @{
     DateTime now = DateTime.UtcNow;
@@ -23,54 +23,70 @@
 
                                     <!-- Project Name  Start -->
                                     <div class="mb-3 posterName">
-                                        <label asp-for="Name" class="form-label">Layihə adı*</label>
-                                        <input asp-for="Name" maxlength="150" type="text" class="form-control">
-                                        <span asp-validation-for="Name" class="text-danger"></span>
+                                        <label asp-for="ReferenceCreateDto.Name" class="form-label">Referans adı*</label>
+                                        <input asp-for="ReferenceCreateDto.Name" maxlength="150" type="text" class="form-control">
+                                        <span asp-validation-for="ReferenceCreateDto.Name" class="text-danger"></span>
                                     </div>
                                     <!-- Layihə Name   End -->
+                                    <!-- Layihələr  Start -->
+                                    <div class="mb-3 highProjects">
+                                        <label class="form-label">Xidmət növü</label>
+                                        <span asp-validation-for="ReferenceCreateDto.ServiceTypeId" class="text-danger"></span>
+
+                                        <select asp-for="ReferenceCreateDto.ServiceTypeId" class="form-select">
+                                            <option selected="selected" disabled>Layihə seçin...</option>
+
+                                            @foreach (var highProject in Model.ServiceTypes)
+                                            {
+                                                <option value="@highProject.Id">@highProject.NameAz</option>
+                                            }
+                                        </select>
+                                    </div>
+                                    <!-- Layihələr   End -->
                                     <!-- Project Name  Start -->
                                     <div class="mb-3 posterName">
-                                        <label asp-for="SquareMetr" class="form-label">Tikinti sahəsi*</label>
-                                        <input asp-for="SquareMetr"  type="int" class="form-control">
-                                        <span asp-validation-for="SquareMetr " class="text-danger"></span>
+                                        <label asp-for="ReferenceCreateDto.SquareMetr" class="form-label">Tikinti sahəsi*</label>
+                                        <input asp-for="ReferenceCreateDto.SquareMetr" type="int" class="form-control">
+                                        <span asp-validation-for="ReferenceCreateDto.SquareMetr " class="text-danger"></span>
                                     </div>
                                     <!-- Layihə Name   End -->
                                     <!-- InstagramUrl  Start -->
                                     <div class="mb-3 posterTitle">
-                                        <label asp-for="BuildingType" class="form-label">Bina növü*</label>
-                                        <input asp-for="BuildingType" maxlength="200" type="text" class="form-control">
-                                        <span asp-validation-for="BuildingType" class="text-danger"></span>
+                                        <label asp-for="ReferenceCreateDto.BuildingType" class="form-label">Bina növü*</label>
+                                        <input asp-for="ReferenceCreateDto.BuildingType" maxlength="200" type="text" class="form-control">
+                                        <span asp-validation-for="ReferenceCreateDto.BuildingType" class="text-danger"></span>
                                     </div>
                                     <!-- Layihə ContactInfo  Start -->
                                     <div class="mb-3 posterTitle">
-                                        <label asp-for="Date" class="form-label">Vaxt*</label>
-                                        <input asp-for="Date" maxlength="50" type="text" class="form-control">
-                                        <span asp-validation-for="Date" class="text-danger"></span>
+                                        <label asp-for="ReferenceCreateDto.Date" class="form-label">Vaxt*</label>
+                                        <input asp-for="ReferenceCreateDto.Date" maxlength="50" type="text" class="form-control">
+                                        <span asp-validation-for="ReferenceCreateDto.Date" class="text-danger"></span>
                                     </div>
                                     <!-- Layihə DescribeAz  Start -->
                                     <div class="mb-3 posterName">
-                                        <label asp-for="Location" class="form-label">Location *</label>
-                                        <textarea asp-for="Location" maxlength="120" style="max-height:300px" rows="8" type="text" class="form-control"></textarea>
-                                        <span asp-validation-for="Location" class="text-danger"></span>
+                                        <label asp-for="ReferenceCreateDto.Location" class="form-label">Location *</label>
+                                        <input asp-for="ReferenceCreateDto.Location" maxlength="120" type="text" class="form-control">
+                                        @*<textarea asp-for="ReferenceCreateDto.Location" maxlength="120" style="max-height:300px" rows="8" type="text" class="form-control"></textarea>*@
+                                        <span asp-validation-for="ReferenceCreateDto.Location" class="text-danger"></span>
                                     </div>
                                     <!-- Layihə DescribeAz   End -->
                                     <!-- Layihə DescribeEn  Start -->
                                     <div class="mb-3 posterName">
-                                        <label asp-for="Status" class="form-label">Layihə Təsviri (İngilis) *</label>
-                                        <input class="form-check-input" asp-for="Status" placeholder="...." /> @Html.DisplayNameFor(model => model.Status)
-                                        <span asp-validation-for="Status" class="text-danger"></span>
+                                        <label asp-for="ReferenceCreateDto.Status" class="form-label">Tammamlandı *</label>
+                                        <input class="form-check-input" asp-for="ReferenceCreateDto.Status" placeholder="...." /> @Html.DisplayNameFor(model => model.ReferenceCreateDto.Status)
+                                        <span asp-validation-for="ReferenceCreateDto.Status" class="text-danger"></span>
                                     </div>
                                     <!-- Layihə DescribeEn   End -->
 
                                     <!-- Poster Image  Start -->
                                     <div class="mb-3 posterImages">
-                                        <label asp-for="ImageFiles" class="form-label">Layihənin Şəkilləri*</label>
+                                        <label asp-for="ReferenceCreateDto.ImageFiles" class="form-label">Referans Şəkilləri*</label>
                                         <!-- Şəkil əlavə et -->
-                                        <input asp-for="ImageFiles" id="imageInput" type="file" accept="image/png,  image/jpeg, video/mp4"
+                                        <input asp-for="ReferenceCreateDto.ImageFiles" id="imageInput" type="file" accept="image/png,  image/jpeg, video/mp4"
                                                class="form-control" multiple="">
                                         <div>
                                             <p id="imageErrorMessage" class="fw-bold "></p>
-                                            <span asp-validation-for="ImageFiles" class="text-danger"></span>
+                                            <span asp-validation-for="ReferenceCreateDto.ImageFiles" class="text-danger"></span>
                                         </div>
                                         <div class="row" id="temperoryImages"></div>
                                     </div>

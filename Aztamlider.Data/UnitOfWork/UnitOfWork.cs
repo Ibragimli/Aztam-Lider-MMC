@@ -27,6 +27,8 @@ namespace Aztamlider.Data.UnitOfWork
         private IProjectRepository projectRepository;
         private IPartnerRepository partnerRepository;
         private IMainSliderRepository mainSliderRepository;
+        private ILoggerRepository _loggerRepository;
+        private ILanguageBaseRepository _languageBaseRepository;
 
 
         public UnitOfWork(DataContext context)
@@ -58,6 +60,10 @@ namespace Aztamlider.Data.UnitOfWork
         public IServiceImageRepository ServiceImageRepository => serviceImageRepository = serviceImageRepository ?? new ServiceImageRepository(_context);
 
         public IServiceTypeRepository ServiceTypeRepository => serviceTypeRepository = serviceTypeRepository ?? new ServiceTypeRepository(_context);
+
+        public ILanguageBaseRepository LanguageBaseRepository => _languageBaseRepository = _languageBaseRepository ?? new LanguageBaseRepository(_context);
+
+        public ILoggerRepository LoggerRepository => _loggerRepository = _loggerRepository ?? new LoggerRepository(_context);
 
         public async Task<int> CommitAsync()
         {

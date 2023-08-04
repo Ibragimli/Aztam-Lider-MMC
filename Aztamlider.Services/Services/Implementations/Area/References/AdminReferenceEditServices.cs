@@ -124,7 +124,6 @@ namespace Aztamlider.Services.Services.Implementations.Area.References
                 return 1;
             }
             return 0;
-
         }
         private async Task<int> CreateImageFormFile(List<IFormFile> imageFiles, int posterId, int deleteCount)
         {
@@ -237,6 +236,11 @@ namespace Aztamlider.Services.Services.Implementations.Area.References
             {
                 throw new ValueFormatExpception("Referans bina növünün uzunluğu maksimum 150 ola bilər");
             }
+        }
+        public async Task<IEnumerable<ServiceType>> GetAllServiceTypes()
+        {
+            var serviceType = await _unitOfWork.ServiceTypeRepository.GetAllAsync(x => !x.IsDelete);
+            return serviceType;
         }
     }
 }

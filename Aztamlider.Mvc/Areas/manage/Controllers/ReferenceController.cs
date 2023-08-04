@@ -21,7 +21,6 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
         private readonly IAdminReferenceDeleteServices _adminReferenceDeleteServices;
         private readonly IAdminReferenceEditServices _adminReferenceEditServices;
         private readonly IAdminReferenceCreateServices _adminReferenceCreateServices;
-
         public ReferenceController(IAdminReferenceIndexServices adminReferenceIndexServices, IManageImageHelper manageImageHelper, IAdminReferenceDeleteServices adminReferenceDeleteServices, IAdminReferenceEditServices adminReferenceEditServices, IAdminReferenceCreateServices adminReferenceCreateServices)
         {
             _adminReferenceIndexServices = adminReferenceIndexServices;
@@ -52,18 +51,49 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
             }
             return View(ReferenceIndexVM);
         }
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
 
             ReferenceCreateDto referenceCreateDto = new ReferenceCreateDto();
-            return View(referenceCreateDto);
+            ReferenceCreateViewModel referenceCreateVM = new ReferenceCreateViewModel();
+
+            try
+            {
+                 referenceCreateVM = new ReferenceCreateViewModel()
+                {
+                    ReferenceCreateDto = referenceCreateDto,
+                    ServiceTypes = await _adminReferenceCreateServices.GetAllServiceTypes(),
+                };
+            }
+            catch (ItemNullException ex)
+            {
+                ModelState.AddModelError("", ex.Message);
+                return View(referenceCreateVM);
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", ex.Message);
+                //TempData["Error"] = ("Proses uğursuz oldu!");
+                return View(referenceCreateVM);
+            }
+
+            return View(referenceCreateVM);
         }
         [ValidateAntiForgeryToken]
         [HttpPost]
         public async Task<IActionResult> Create(ReferenceCreateDto ReferenceCreateDto)
         {
+
+            ReferenceCreateDto referenceCreateDto = new ReferenceCreateDto();
+            ReferenceCreateViewModel referenceCreateVM = new ReferenceCreateViewModel();
+
             try
             {
+                referenceCreateVM = new ReferenceCreateViewModel()
+                {
+                    ReferenceCreateDto = referenceCreateDto,
+                    ServiceTypes = await _adminReferenceCreateServices.GetAllServiceTypes(),
+                };
                 await _adminReferenceCreateServices.DtoCheck(ReferenceCreateDto);
                 // CheckImage
                 _manageImageHelper.ImagesCheck(ReferenceCreateDto.ImageFiles);
@@ -73,37 +103,35 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
             catch (ItemNullException ex)
             {
                 ModelState.AddModelError("", ex.Message);
-                return View();
+                return View(referenceCreateVM);
             }
 
             catch (ValueFormatExpception ex)
             {
                 ModelState.AddModelError("", ex.Message);
-                return View();
+                return View(referenceCreateVM);
             }
             catch (ImageFormatException ex)
             {
                 ModelState.AddModelError("ReferenceCreateDto.ImageFiles", ex.Message);
-                return View();
+                return View(referenceCreateVM);
             }
             catch (ImageNullException ex)
             {
                 ModelState.AddModelError("ReferenceCreateDto.ImageFiles", ex.Message);
-                return View();
+                return View(referenceCreateVM);
             }
 
             catch (Exception ex)
             {
                 ModelState.AddModelError("", ex.Message);
                 //TempData["Error"] = ("Proses uğursuz oldu!");
-                return View();
+                return View(referenceCreateVM);
             }
-
+            TempData["Success"] = ("Proses uğursuz oldu!");
             return RedirectToAction("index", "Reference");
 
         }
-
-
         public async Task<IActionResult> Edit(int id)
         {
             ReferenceEditViewModel ReferenceEditVM = new ReferenceEditViewModel();
@@ -114,6 +142,7 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
                 {
                     Reference = await _adminReferenceEditServices.GetReference(id),
                     ReferenceImages = await _adminReferenceEditServices.GetImages(id),
+                    ServiceTypes = await _adminReferenceEditServices.GetAllServiceTypes(),
                 };
 
             }
@@ -134,9 +163,8 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
             }
             return View(ReferenceEditVM);
         }
-
-        [HttpPost]
         [ValidateAntiForgeryToken]
+        [HttpPost]
         public async Task<IActionResult> Edit(Reference Reference)
         {
             ReferenceEditViewModel ReferenceEditVM = new ReferenceEditViewModel();
@@ -147,46 +175,39 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
                 {
                     Reference = await _adminReferenceEditServices.GetReference(Reference.Id),
                     ReferenceImages = await _adminReferenceEditServices.GetImages(Reference.Id),
+                    ServiceTypes = await _adminReferenceEditServices.GetAllServiceTypes(),
                 };
-
-
                 await _adminReferenceEditServices.EditReference(Reference);
             }
 
             catch (NotFoundException)
             {
-
                 return RedirectToAction("Index", "notfound");
             }
             catch (ItemNullException ex)
             {
                 ModelState.AddModelError("", ex.Message);
                 return View("Edit", ReferenceEditVM);
-
             }
             catch (ImageNullException ex)
             {
                 ModelState.AddModelError("", ex.Message);
                 return View("Edit", ReferenceEditVM);
-
             }
             catch (ImageFormatException ex)
             {
                 ModelState.AddModelError("", ex.Message);
                 return View("Edit", ReferenceEditVM);
-
             }
             catch (ImageCountException ex)
             {
                 ModelState.AddModelError("", ex.Message);
                 return View("Edit", ReferenceEditVM);
-
             }
             catch (ValueAlreadyExpception ex)
             {
                 ModelState.AddModelError("", ex.Message);
                 return View("Edit", ReferenceEditVM);
-
             }
             catch (Exception)
             {
@@ -197,7 +218,6 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
 
 
         }
-
         public async Task<IActionResult> Delete(int id)
         {
             try

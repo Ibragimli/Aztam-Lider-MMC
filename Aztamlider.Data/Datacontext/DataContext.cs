@@ -28,6 +28,8 @@ namespace Aztamlider.Data.Datacontext
         public DbSet<ServiceImage> ServiceImages { get; set; }
         public DbSet<ReferenceImage> ReferenceImages { get; set; }
         public DbSet<ServiceType> ServiceTypes { get; set; }
+        public DbSet<LanguageBase> LanguageBases { get; set; }
+        public DbSet<Logger> Loggers { get; set; }
 
 
 
