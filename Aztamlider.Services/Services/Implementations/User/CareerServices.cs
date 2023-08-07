@@ -48,6 +48,8 @@ namespace Aztamlider.Services.Services.Implementations.User
             {
                 throw new ItemFormatException("CV-nizi sadəcə Pdf və Word formatında əlavə edə bilərsiniz!");
             }
+            if (!(careerPostDto.PhoneNumber.StartsWith("050") || careerPostDto.PhoneNumber.StartsWith("099") || careerPostDto.PhoneNumber.StartsWith("051") || careerPostDto.PhoneNumber.StartsWith("055") || careerPostDto.PhoneNumber.StartsWith("070") || careerPostDto.PhoneNumber.StartsWith("077") || careerPostDto.PhoneNumber.StartsWith("010")))
+                throw new ItemFormatException("Nömrənin prefiksi yanlışdır!");
         }
 
         public async Task SendCV(CareerPostDto careerPostDto)
@@ -82,11 +84,11 @@ namespace Aztamlider.Services.Services.Implementations.User
         }
         private void PhoneNumberPrefixValidation(string phoneNumber)
         {
-            string phoneRegex = @"^(050|051|055|070|077|010)(\d{7})$";
+            string phoneRegex = @"^(050|051|055|070|077|010|099)(\d{7})$";
             if (phoneNumber != null)
             {
                 if (!Regex.IsMatch(phoneNumber, phoneRegex))
-                    throw new ItemFormatException("Nömrənin prefiksi yanlışdır!");
+                    throw new ItemFormatException("Nömrə yanlışdır!");
             }
         }
     }

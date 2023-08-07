@@ -1,0 +1,110 @@
+﻿@{
+    ViewData["Title"] = "Referans";
+    var language = _localization.Getkey("Language").Value;
+
+}
+@model ReferenceViewModel
+<section id="breadCrumb">
+    <div class="container-web">
+        <div class="row">
+            <div class="col-lg-12 breadCrumbBox">
+                <ul>
+                    <li>
+                        <h1>
+                            @Model.LanguageBases.FirstOrDefault(x=>x.Key == "NavReference"+language)?.Value
+                        </h1>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="referenceInfo">
+    <div class="container-web">
+        <div class="row">
+            <div class="col-lg-9">
+                <div class="refInfoImageBox">
+                    <img src="~/uploads/references/@Model.ReferenceImage.FirstOrDefault(x=>x.ReferenceId == Model.Reference.Id)?.Image" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-9">
+                <div class="refInfoTextBox">
+                    <div class="col-lg-6">
+                        <ul>
+                            <li>
+                                <div class="titleBox">
+                                    <i class="fa-regular fa-user"></i>
+                                    <p>SİFARİŞÇİ:</p>
+                                </div>
+                                <p>@Model.Reference.Orderer</p>
+                            </li>
+                            <li>
+                                <div class="titleBox">
+                                    <i class="fa-regular fa-user"></i>
+                                    <p>YER:</p>
+                                </div>
+                                <p>
+                                    @Model.Reference.Location
+                                </p>
+                            </li>
+                            <li>
+                                <div class="titleBox">
+                                    <i class="fa-regular fa-user"></i>
+                                    <p>XİDMƏT SAHƏSİ:</p>
+                                </div>
+                                <p>
+                                    @if (language == "Az")
+                                    {
+                                        @Model.Reference.ServiceType.NameAz
+
+                                    }
+                                    else
+                                    {
+                                        @Model.Reference.ServiceType.NameEn
+
+                                    }
+                                </p>
+                            </li>
+                            <li>
+                                <div class="titleBox">
+                                    <i class="fa-regular fa-user"></i>
+                                    <p>BİNA TİPİ:</p>
+                                </div>
+                                <p>@Model.Reference.BuildingType</p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-6">
+                        <ul>
+                            <li>
+                                <div class="titleBox">
+                                    <i class="fa-regular fa-user"></i>
+                                    <p>TİKİNTİ SAHƏSİ M2:</p>
+                                </div>
+                                <p>@Model.Reference.SquareMetr</p>
+                            </li>
+                            <li>
+                                <div class="titleBox">
+                                    <i class="fa-regular fa-user"></i>
+                                    <p>TARİX:</p>
+                                </div>
+                                <p>@Model.Reference.Date</p>
+                            </li>
+                            <li>
+                                <div class="titleBox">
+                                    <i class="fa-regular fa-user"></i>
+                                    <p>STATUS</p>
+                                </div>
+                                <p> Tamamlandı: <i class="ms-1 fa-solid fa-@(Model.Reference.Status?"check":"xmark")"></i></p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

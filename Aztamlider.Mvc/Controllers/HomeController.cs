@@ -30,50 +30,25 @@ namespace Aztamlider.Mvc.Controllers
             _homeIndexServices = homeIndexServices;
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ContactUs(ContactUsCreateDto contactUsCreateDto, int newItemId = 2)
+        public async Task<IActionResult> Index()
         {
             HomeViewModel homeViewModel = new HomeViewModel();
-
             try
             {
                 homeViewModel = new HomeViewModel
                 {
+                    LanguageBases = await _homeIndexServices.GetLanguageBase(),
+                    MainSliders = await _homeIndexServices.MainSliders(),
+                    Partners = await _homeIndexServices.Partners(),
 
                 };
-
-                //await _contactUsCreateServices.ValuesCheck(contactUsCreateDto);
-
-                //Email
-                string body = string.Empty;
-
-                using (StreamReader reader = new StreamReader("wwwroot/templates/contactEmail.html"))
-                {
-                    body = reader.ReadToEnd();
-                }
-
-                //await _contactUsCreateServices.PhoneNumberCheck(contactUsCreateDto.PhoneNumber);
-                //await _contactUsCreateServices.EmailCheck(contactUsCreateDto.Email);
-                //await _contactUsCreateServices.ContactUsCreate(contactUsCreateDto);
-
-                //body = body.Replace("{{phonenumber}}", contactUsCreateDto.PhoneNumber);
-                //body = body.Replace("{{fullname}}", contactUsCreateDto.Fullname);
-                //body = body.Replace("{{email}}", contactUsCreateDto.Email);
-                //body = body.Replace("{{message}}", contactUsCreateDto.Message);
-                //await _emailServices.Send("info@Aztamlider.az", "Xarıbulbul elaqe mesaji", body);
             }
             catch (ItemNotFoundException ex)
             {
                 TempData["Error"] = (ex.Message);
                 return RedirectToAction("index", "home", homeViewModel);
             }
-            catch (ItemFormatException ex)
+            catch (ItemNullException ex)
             {
                 TempData["Error"] = (ex.Message);
                 return RedirectToAction("index", "home", homeViewModel);
@@ -82,8 +57,7 @@ namespace Aztamlider.Mvc.Controllers
             {
                 return RedirectToAction("index", "notfound");
             }
-            TempData["Success"] = ("Məktub göndərildi");
-            return View("index", homeViewModel);
+            return View(homeViewModel);
         }
 
         public IActionResult ChangeLanguage(string culture)

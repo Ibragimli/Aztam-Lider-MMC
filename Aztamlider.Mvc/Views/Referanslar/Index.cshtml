@@ -1,0 +1,145 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    var language = _localization.Getkey("Language").Value;
+    int i = 0;
+}
+
+@model ReferenceViewModel
+<section id="breadCrumb">
+    <div class="container-web">
+        <div class="row">
+            <div class="col-lg-12 breadCrumbBox">
+                <ul>
+                    <li>
+                        <h1>
+                            @Model.LanguageBases.FirstOrDefault(x=>x.Key == "NavReference"+language)?.Value
+                        </h1>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="reference">
+    <div class="container-web">
+        <div class="row">
+            <div class="col-lg-3 referenceButtons">
+                <ul class="row ">
+                    <li class="col-lg-11 col-md-6 col-sm-6 col-6">
+                        <a href="#">
+                            <h1 class="activeReference">
+                                Hamısı
+                                <span>(10)</span>
+                            </h1>
+                        </a>
+                    </li>
+                    <li class="col-lg-11 col-md-6 col-sm-6 col-6">
+                        <a href="#">
+                            <h1>
+                                MEP Layihələndirmə (BIM7D) <span>(10)</span>
+                            </h1>
+                        </a>
+                    </li>
+
+                    <li class="col-lg-11 col-md-6 col-sm-6 col-6">
+                        <a href="#">
+                            <h1>
+                                Zəif Axın Sistemləri <span>(10)</span>
+                            </h1>
+                        </a>
+                    </li>
+                    <li class="col-lg-11 col-md-6 col-sm-6 col-6">
+                        <a href="#">
+                            <h1>
+                                Su-Kanalizasiya <span>(10)</span>
+                            </h1>
+                        </a>
+                    </li>
+                    <li class="col-lg-11 col-md-6 col-sm-6 col-6">
+                        <a href="#">
+                            <h1>
+                                Elektrik (Alçaq və Orta Voltaj) <span>(10)</span>
+                            </h1>
+                        </a>
+                    </li>
+
+                    <li class="col-lg-11 col-md-6 col-sm-6 col-6">
+                        <a href="#">
+                            <h1>
+                                İsitmə, Soyutma və Havalandırma (HVAC) <span>(10)</span>
+                            </h1>
+                        </a>
+                    </li>
+                    <li class="col-lg-11 col-md-6 col-sm-6 col-6">
+                        <a href="#">
+                            <h1>
+                                Yanğından Mübarizə Sistemləri <span>(10)</span>
+                            </h1>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-lg-9 referenceBoxs">
+                <div class="row">
+                    @foreach (var reference in Model.References)
+                    {
+                        <div class="col-lg-4 col-md-6 col-sm-6 col-6 colReference">
+                            <div class="referenceBox">
+                                <div class="referenceImage">
+                                    <a asp-action="referans" asp-controller="referanslar" asp-route-id="@reference.Id">
+                                        <img src="~/uploads/references/@reference.ReferenceImages.FirstOrDefault(x=>x.ReferenceId == reference.Id && x.IsPoster)?.Image" alt="">
+                                    </a>
+                                </div>
+                                <div class="referenceName">
+                                    <a asp-action="referans" asp-controller="referanslar" asp-route-id="@reference.Id">
+                                        <h1>@reference.Name</h1>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+                <!--  Pagination  -->
+                <section id="pagenation">
+                    <div class="row">
+                        <div class="d-flex align-items-center col-11 mt-2"
+                             style="display:flex; justify-content:flex-end;">
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination">
+                                    <li class="page-item">
+                                        <a asp-action="index" asp-controller="highproject"
+                                           asp-route-page="@(Model.References.PageIndex-1)"
+                                           asp-route-name="@(ViewBag.Name)" class="page-link"
+                                           aria-label="Previous">
+                                            <span aria-hidden="true">&laquo;</span>
+                                        </a>
+                                    </li>
+
+                                    <li aria-current="page" class="page-item ">
+                                        <a class="page-link pageActive">1</a>
+                                    </li>
+                                    <li aria-current="page" class="page-item">
+                                        <a asp-action="index" asp-controller="highproject" asp-route-page="@i"
+                                           asp-route-name="@(ViewBag.Name)" class="page-link">2</a>
+                                    </li>
+
+
+                                    <li class="page-item">
+                                        <a asp-action="index" asp-controller="highproject"
+                                           asp-route-page="@(Model.References.PageIndex+1)"
+                                           asp-route-name="@(ViewBag.Name)" class="page-link"
+                                           aria-label="Next">
+                                            <span aria-hidden="true">&raquo;</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </div>
+    </div>
+</section>

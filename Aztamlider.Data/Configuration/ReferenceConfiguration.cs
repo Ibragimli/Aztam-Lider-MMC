@@ -14,6 +14,7 @@ namespace Aztamlider.Data.Configuration
         public void Configure(EntityTypeBuilder<Reference> builder)
         {
             builder.Property(x => x.Name).HasMaxLength(150).IsRequired();
+            builder.Property(x => x.Orderer).HasMaxLength(100).IsRequired();
             builder.Property(x => x.SquareMetr).IsRequired();
             builder.Property(x => x.Date).HasMaxLength(50).IsRequired();
             builder.Property(x => x.Location).HasMaxLength(120).IsRequired();

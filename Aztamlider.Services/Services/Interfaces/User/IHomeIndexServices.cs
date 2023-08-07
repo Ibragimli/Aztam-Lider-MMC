@@ -11,5 +11,7 @@ namespace Aztamlider.Services.Services.Interfaces.User
     {
          public Task<IEnumerable<Setting>> GetSettings();
          public Task<IEnumerable<LanguageBase>> GetLanguageBase();
+         public Task<IEnumerable<Partner>> Partners();
+         public Task<IEnumerable<MainSlider>> MainSliders();
     }
 }

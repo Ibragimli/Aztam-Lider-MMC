@@ -114,6 +114,17 @@ namespace Aztamlider.Mvc.ServiceExtentions
 
             services.AddScoped<IAdminLoginServices, AdminLoginServices>();
 
+            services.AddScoped<IServiceIndexServices, ServiceIndexServices>();
+            services.AddScoped<IReferenceIndexServices, ReferenceIndexServices>();
+            services.AddScoped<IAboutUsIndexServices, AboutUsIndexServices>();
+            services.AddScoped<IDocumentServices, DocumentServices>();
+
+            services.AddScoped<IContactUsIndexServices, ContactUsIndexServices>();
+            services.AddScoped<ICareerIndexServices, CareerIndexServices>();
+            services.AddScoped<IProjectIndexServices, ProjectIndexServices>();
+
+
+
             services.AddScoped<ILayoutServices, LayoutServices>();
             services.AddScoped<ICareerServices, CareerServices>();
         }

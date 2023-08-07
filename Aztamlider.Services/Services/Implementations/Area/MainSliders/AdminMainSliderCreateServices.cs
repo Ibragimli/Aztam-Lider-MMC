@@ -45,13 +45,13 @@ namespace Aztamlider.Services.Services.Implementations.Area.MainSliders
             {
                 throw new ValueFormatExpception("Slider adının uzunluğu minimum 3 ola bilər");
             }
-            if (MainSliderCreateDto.TitleEn?.Length > 100 || MainSliderCreateDto.TitleAz?.Length > 100)
+            if (MainSliderCreateDto.TitleEn?.Length > 300 || MainSliderCreateDto.TitleAz?.Length > 300)
             {
-                throw new ValueFormatExpception("Slider adının uzunluğu maksimum 100 ola bilər");
+                throw new ValueFormatExpception("Slider adının uzunluğu maksimum 300 ola bilər");
             }
-            if (MainSliderCreateDto.DescriptionEn?.Length > 200 || MainSliderCreateDto.DescriptionAz?.Length > 200)
+            if (MainSliderCreateDto.DescriptionEn?.Length > 500 || MainSliderCreateDto.DescriptionAz?.Length > 500)
             {
-                throw new ValueFormatExpception("Slider təsvir uzunluğu maksimum 200 ola bilər");
+                throw new ValueFormatExpception("Slider təsvir uzunluğu maksimum 500 ola bilər");
             }
 
             if (MainSliderCreateDto.ImageFile == null)

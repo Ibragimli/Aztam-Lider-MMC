@@ -1,0 +1,133 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    var language = _localization.Getkey("Language").Value;
+
+}
+@model AboutUsViewModel
+<section id="breadCrumb">
+    <div class="container-web">
+        <div class="row">
+            <div class="col-lg-12 breadCrumbBox">
+                <ul>
+                    <li>
+                        <h1>
+                            @Model.LanguageBases.FirstOrDefault(x=>x.Key == "NavAboutUs"+language)?.Value
+                        </h1>
+
+                    </li>
+                    <!-- <li>
+                        <p class="mobileTextAbout mb-1 pe-5">2014-cü ildən bəri Sizin Etibarlı MEP Tərəfdaşınız.</p>
+
+                    </li> -->
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="aboutUs">
+    <div class="container-web">
+        <div class="row">
+            <div class="col-lg-5 aboutImageBox">
+                <div class="mb-5  aboutImage">
+                    <img src="./assets/Images/cover-image.jpg" alt="">
+                </div>
+                <div class=" mb-5 mobileAboutImage aboutImage">
+                    <img src="./assets/Images/IMG_5294 (1).jpg" style="height: 450px;" alt="">
+                </div>
+
+
+            </div>
+            <div class="col-lg-7 aboutTextBox">
+                <p>
+                    @Model.LanguageBases.FirstOrDefault(x=>x.Key == "AboutDesc1"+language)?.Value
+
+                </p>
+                <br>
+                <h1>
+                    @Model.LanguageBases.FirstOrDefault(x=>x.Key == "AboutTitle1"+language)?.Value
+
+                </h1>
+                <p>
+                    @Model.LanguageBases.FirstOrDefault(x=>x.Key == "AboutDesc2"+language)?.Value
+                </p>
+                <h1>
+                    @Model.LanguageBases.FirstOrDefault(x=>x.Key == "AboutTitle2"+language)?.Value
+                </h1>
+                <ul>
+                    @foreach (var service in Model.Services)
+                    {
+                        <li>
+                            @if (language == "Az")
+                            {
+                                <p>@service.TitleAz;</p>
+
+                            }
+                            else
+                            {
+                                <p>@service.TitleEn;</p>
+
+                            }
+                        </li>
+                    }
+                </ul>
+
+                <h1>
+                    @Model.LanguageBases.FirstOrDefault(x=>x.Key == "AboutTitle3"+language)?.Value
+                </h1>
+                <ul>
+                    @Html.Raw(Model.LanguageBases.FirstOrDefault(x=>x.Key == "AboutDesc3"+language)?.Value)
+                </ul>
+                <h1>
+                    @Model.LanguageBases.FirstOrDefault(x=>x.Key == "AboutTitle4"+language)?.Value
+                </h1>
+                <ul>
+                    <li>
+                        <h1>
+                            @Model.LanguageBases.FirstOrDefault(x=>x.Key == "AboutTitle5"+language)?.Value
+                        </h1>
+                        <p>
+                            @Model.LanguageBases.FirstOrDefault(x=>x.Key == "AboutDesc4"+language)?.Value
+                        </p>
+                    </li>
+                    <li>
+                        <h1>
+                            @Model.LanguageBases.FirstOrDefault(x=>x.Key == "AboutTitle6"+language)?.Value
+                        </h1>
+                        <p>
+                            @Model.LanguageBases.FirstOrDefault(x=>x.Key == "AboutDesc5"+language)?.Value
+                        </p>
+                    </li>
+                    <li>
+                        <h1>
+                            @Model.LanguageBases.FirstOrDefault(x=>x.Key == "AboutTitle7"+language)?.Value
+                        </h1>
+                        <p>
+                            @Model.LanguageBases.FirstOrDefault(x=>x.Key == "AboutDesc6"+language)?.Value
+                        </p>
+                    </li>
+                    <li>
+                        <h1>
+                            @Model.LanguageBases.FirstOrDefault(x=>x.Key == "AboutTitle8"+language)?.Value
+
+                        </h1>
+                        <p>
+                            @Model.LanguageBases.FirstOrDefault(x=>x.Key == "AboutDesc7"+language)?.Value
+                        </p>
+                    </li>
+                    <li>
+                        <h1>
+                            @Model.LanguageBases.FirstOrDefault(x=>x.Key == "AboutTitle9"+language)?.Value
+                        </h1>
+                        <p>
+                            @Model.LanguageBases.FirstOrDefault(x=>x.Key == "AboutDesc8"+language)?.Value
+                        </p>
+                    </li>
+
+                </ul>
+            </div>
+
+        </div>
+    </div>
+</section>
+

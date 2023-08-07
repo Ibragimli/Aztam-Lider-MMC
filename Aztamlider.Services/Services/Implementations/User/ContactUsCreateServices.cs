@@ -67,15 +67,18 @@ namespace Aztamlider.Services.Services.Implementations.User
 
                 if (phoneNumber.Length > 15)
                     throw new ItemFormatException("Nömrə yanlışdır");
+
+                if (!(phoneNumber.StartsWith("050") || phoneNumber.StartsWith("099") || phoneNumber.StartsWith("051") || phoneNumber.StartsWith("055") || phoneNumber.StartsWith("070") || phoneNumber.StartsWith("077") || phoneNumber.StartsWith("010")))
+                    throw new ItemFormatException("Nömrənin prefiksi yanlışdır!");
             }
         }
         private void PhoneNumberPrefixValidation(string phoneNumber)
         {
-            string phoneRegex = @"^(050|051|055|070|077|010)(\d{7})$";
+            string phoneRegex = @"^(050|051|055|070|077|010|099)(\d{7})$";
             if (phoneNumber != null)
             {
                 if (!Regex.IsMatch(phoneNumber, phoneRegex))
-                    throw new ItemFormatException("Nömrənin prefiksi yanlışdır!");
+                    throw new ItemFormatException("Nömrə yanlışdır!");
             }
         }
         private string PhoneNumberFilter(string phoneNumber)

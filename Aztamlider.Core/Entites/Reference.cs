@@ -11,6 +11,7 @@ namespace Aztamlider.Core.Entites
     public class Reference : BaseEntity
     {
         public string Name { get; set; }
+        public string Orderer { get; set; }
         public string Location { get; set; }
         public string BuildingType { get; set; }
         public int SquareMetr { get; set; }

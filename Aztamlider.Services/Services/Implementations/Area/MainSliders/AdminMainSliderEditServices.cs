@@ -98,13 +98,13 @@ namespace Aztamlider.Services.Services.Implementations.Area.MainSliders
             {
                 throw new ValueFormatExpception("Slider adının uzunluğu minimum 3 ola bilər");
             }
-            if (MainSlider.TitleEn?.Length > 100 || MainSlider.TitleAz?.Length > 100)
+            if (MainSlider.TitleEn?.Length > 300 || MainSlider.TitleAz?.Length > 300)
             {
-                throw new ValueFormatExpception("Slider adının uzunluğu maksimum 100 ola bilər");
+                throw new ValueFormatExpception("Slider adının uzunluğu maksimum 300 ola bilər");
             }
-            if (MainSlider.DescriptionEn?.Length > 200 || MainSlider.DescriptionAz?.Length > 200)
+            if (MainSlider.DescriptionEn?.Length > 500 || MainSlider.DescriptionAz?.Length > 500)
             {
-                throw new ValueFormatExpception("Slider təsvir uzunluğu maksimum 200 ola bilər");
+                throw new ValueFormatExpception("Slider təsvir uzunluğu maksimum 500 ola bilər");
             }
        
             if (MainSlider.ImageFile != null)

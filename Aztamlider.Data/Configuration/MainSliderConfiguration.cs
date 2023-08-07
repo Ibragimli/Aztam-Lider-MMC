@@ -13,10 +13,10 @@ namespace Aztamlider.Data.Configuration
     {
         public void Configure(EntityTypeBuilder<MainSlider> builder)
         {
-            builder.Property(x => x.DescriptionAz).HasMaxLength(200).IsRequired();
-            builder.Property(x => x.DescriptionEn).HasMaxLength(200).IsRequired();
-            builder.Property(x => x.TitleEn).HasMaxLength(100).IsRequired();
-            builder.Property(x => x.TitleAz).HasMaxLength(100).IsRequired();
+            builder.Property(x => x.DescriptionAz).HasMaxLength(500).IsRequired();
+            builder.Property(x => x.DescriptionEn).HasMaxLength(500).IsRequired();
+            builder.Property(x => x.TitleEn).HasMaxLength(300).IsRequired();
+            builder.Property(x => x.TitleAz).HasMaxLength(300).IsRequired();
             builder.Property(x => x.Image).IsRequired();
         }
     }

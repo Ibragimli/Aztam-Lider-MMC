@@ -1,65 +1,50 @@
 ﻿@{
     ViewData["Title"] = "Index";
+    var language = _localization.Getkey("Language").Value;
+    int count = 0;
 }
-
+@model HomeViewModel
 <!-- Main Slider -->
 <section id="mainSlider">
     <div class="backGroundImages">
+        @foreach (var slider in Model.MainSliders)
+        {
+            <div class="backGroundImage @(count==0?"activeMainSlider":"")">
+                <div class="mainSliderTextBox">
+                    <h1 class="text-uppercase mainSliderTitle" style="animation-delay: 0.6s;"
+                        data-animation="fadeInDown" data-delay="0.6s">
+                        @if (language == "Az")
+                        {
 
-        <div class="backGroundImage activeMainSlider">
-            <div class="mainSliderTextBox">
-                <h1 class="text-uppercase mainSliderTitle" style="animation-delay: 0.6s;"
-                    data-animation="fadeInDown" data-delay="0.6s">
+                            @Html.Raw(slider.TitleAz)
+                        }
+                        else if (language == "En")
+                        {
+                            @Html.Raw(slider.TitleEn)
 
-                    "Aztam LİDER" MMC MEP Layihələndirmə
-                    <br>
-                    və Quraşdırma şirkətidir.
-                </h1>
-              
+                        }
+                    </h1>
+                    <p class=" mainSliderDesc" data-animation="fadeInDown" data-delay="0.8s"
+                       style="animation-delay: 0.8s;">
 
-                <p class=" mainSliderDesc" data-animation="fadeInDown" data-delay="0.8s"
-                   style="animation-delay: 0.8s;">
-                    ASHRAE, SMACNA, NFPA, İPC və İEEE başda olmaqla dünyanın əhəmiyyətli <br> MEP
-                    standardlarına hakim mühəndis və texnik komandasından ibarətdir.
-                </p>
+                        @if (language == "Az")
+                        {
+                            @Html.Raw(slider.DescriptionAz)
+                        }
+                        else if (language == "En")
+                        {
+                            @Html.Raw(@slider.DescriptionEn)
+                        }
+
+                    </p>
+                </div>
+                <img src="~/uploads/mainsliders/@slider.Image" alt="">
             </div>
-            <img src="~/assets/Images/slider-2.jpg" alt="">
-        </div>
+            <p style="display:none;"> @(count++)</p>
 
-        <div class="backGroundImage">
-            <div class="mainSliderTextBox">
-                <h1 class="text-uppercase mainSliderTitle" style="animation-delay: 0.6s;"
-                    data-animation="fadeInDown" data-delay="0.6s">
-                    "AzTam Lİder" MMC MEP Layihələndirmə
-                    <br>
-                    və Quraşdırma şirkətidir.
-                </h1>
 
-                <p class=" mainSliderDesc" data-animation="fadeInDown" data-delay="0.8s"
-                   style="animation-delay: 0.8s;">
-                    ASHRAE, SMACNA, NFPA, İPC və İEEE başda olmaqla dünyanın əhəmiyyətli <br> MEP
-                    standardlarına hakim mühəndis və texnik komandasından ibarətdir.
-                </p>
-            </div>
-            <img src="~/assets/Images/slider-5.jpg" alt="">
-        </div>
-        <div class="backGroundImage">
-            <div class="mainSliderTextBox">
-                <h1 class="text-uppercase mainSliderTitle" style="animation-delay: 0.6s;"
-                    data-animation="fadeInDown" data-delay="0.6s">
-                    "AzTam Lİder" MMC MEP Layihələndirmə
-                    <br>
-                    və Quraşdırma şirkətidir.
-                </h1>
+        }
 
-                <p class=" mainSliderDesc" data-animation="fadeInDown" data-delay="0.8s"
-                   style="animation-delay: 0.8s;">
-                    ASHRAE, SMACNA, NFPA, İPC və İEEE başda olmaqla dünyanın əhəmiyyətli <br> MEP
-                    standardlarına hakim mühəndis və texnik komandasından ibarətdir.
-                </p>
-            </div>
-            <img src="~/assets/Images/slider-6.jpg" alt="">
-        </div>
     </div>
 </section>
 
@@ -69,98 +54,36 @@
         <div class="row">
             <div class="col-lg-12 col-md-11 partnerTitleBox">
                 <h1>
-                    AZTAM LiDER MMC ŞİRKƏTİNİN ELEKTRİK VƏ MEXANİK AVADANLIQLAR SEKTORUNDA BİR ÇOX PARTNYORLARI
-                    MÖVCUDDUR
+                    @Html.Raw(Model.LanguageBases.FirstOrDefault(x => x.Key == "PartnerTitle" + language)?.Value)
+
                 </h1>
                 <p>
-                    Şirkətimiz dünyanın bir çox ölkəsində yerləşən elektro - mexanik istehsalçı firmalar ilə bir
-                    başa əməkdaşlıq edir :
+                    @Html.Raw(Model.LanguageBases.FirstOrDefault(x => x.Key == "PartnerDesc" + language)?.Value)
                 </p>
             </div>
             <div class="col-lg-12 partnerOwlCarouselBox">
                 <!-- Mobile Slider -->
                 <div class="owl-carousel owl-carousel-slider owl-theme mobile-owl  p-0 m-0">
-                    <div class="item me-2">
-                        <a href="#" class="projectBoxTitle d-block  text-decoration-none mt-3">
-                            <img style=" border-radius: 5px;" src="~/assets/Images/LogosPartner/abb-logo.png"
-                                 alt="" width="100% ">
-                        </a>
-                    </div>
-                    <div class="item me-2">
-                        <a href="#" class="projectBoxTitle d-block  text-decoration-none mt-3">
-                            <img style=" border-radius: 5px;" src="~/assets/Images/LogosPartner/AZERTEXNOLAYN.jpg"
-                                 alt="" width="100% ">
-                        </a>
-                    </div>
-                    <div class="item me-2">
-                        <a href="#" class="projectBoxTitle d-block  text-decoration-none mt-3">
-                            <img style=" border-radius: 5px;" src="~/assets/Images/LogosPartner/carrier-logo.png"
-                                 alt="" width="100% ">
-                        </a>
-                    </div>
-                    <div class="item me-2">
-                        <a href="#" class="projectBoxTitle d-block  text-decoration-none mt-3">
-                            <img style=" border-radius: 5px;" src="~/assets/Images/LogosPartner/danfoss-seeklogo.com.jpg"
-                                 alt="" width="100% ">
-                        </a>
-                    </div>
-                    <div class="item me-2">
-                        <a href="#" class="projectBoxTitle d-block  text-decoration-none mt-3">
-                            <img style=" border-radius: 5px;" src="~/assets/Images/LogosPartner/EAE-fifth-year-logo.png"
-                                 alt="" width="100% ">
-                        </a>
-                    </div>
-                    <div class="item me-2">
-                        <a href="#" class="projectBoxTitle d-block  text-decoration-none mt-3">
-                            <img style=" border-radius: 5px;" src="~/assets/Images/LogosPartner/Goknur.png"
-                                 alt="" width="100% ">
-                        </a>
-                    </div>
-                    <div class="item me-2">
-                        <a href="#" class="projectBoxTitle d-block  text-decoration-none mt-3">
-                            <img style=" border-radius: 5px;" src="~/assets/Images/LogosPartner/GRUN.png"
-                                 alt="" width="100% ">
-                        </a>
-                    </div>
-                    <div class="item me-2">
-                        <a href="#" class="projectBoxTitle d-block  text-decoration-none mt-3">
-                            <img style=" border-radius: 5px;" src="~/assets/Images/LogosPartner/logo.png"
-                                 alt="" width="100% ">
-                        </a>
-                    </div>
-                    <div class="item me-2">
-                        <a href="#" class="projectBoxTitle d-block  text-decoration-none mt-3">
-                            <img style=" border-radius: 5px;" src="~/assets/Images/LogosPartner/METAK.png"
-                                 alt="" width="100% ">
-                        </a>
-                    </div>
-                    <div class="item me-2">
-                        <a href="#" class="projectBoxTitle d-block  text-decoration-none mt-3">
-                            <img style=" border-radius: 5px;" src="~/assets/Images/LogosPartner/schneider-electric-seeklogo.com.jpg"
-                                 alt="" width="100% ">
-                        </a>
-                    </div>
-                    <div class="item me-2">
-                        <a href="#" class="projectBoxTitle d-block  text-decoration-none mt-3">
-                            <img style=" border-radius: 5px;" src="~/assets/Images/LogosPartner/siemens-logo.jpg"
-                                 alt="" width="100% ">
-                        </a>
-                    </div>
-                    <div class="item me-2">
-                        <a href="#" class="projectBoxTitle d-block  text-decoration-none mt-3">
-                            <img style=" border-radius: 5px;" src="~/assets/Images/LogosPartner/Wilo.png"
-                                 alt="" width="100% ">
-                        </a>
-                    </div>
-                    <div class="item me-2">
-                        <a href="#" class="projectBoxTitle d-block  text-decoration-none mt-3">
-                            <img style=" border-radius: 5px;" src="~/assets/Images/LogosPartner/York.png"
-                                 alt="" width="100% ">
-                        </a>
-                    </div>
+
+                    @foreach (var partner in Model.Partners)
+                    {
+                        <div class="item me-2">
+                            <a href="#" class="projectBoxTitle d-block  text-decoration-none mt-3">
+                                <img style=" border-radius: 5px;" src="~/uploads/partners/@partner.Image"
+                                     alt="" width="100% ">
+                            </a>
+                        </div>
+                    }
                 </div>
             </div>
         </div>
     </div>
 </section>
 
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $("header").addClass("headerAddFixed");
+        });
+    </script>
+}

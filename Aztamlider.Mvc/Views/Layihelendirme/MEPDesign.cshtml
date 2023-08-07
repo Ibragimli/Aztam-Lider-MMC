@@ -1,0 +1,79 @@
+﻿@{
+    ViewData["Title"] = "MEPDesign";
+    var language = _localization.Getkey("Language").Value;
+    int count = 1;
+}
+@model ProjectViewModel
+<section id="breadCrumb">
+    <div class="container-web">
+        <div class="row">
+            <div class="col-lg-12 breadCrumbBox">
+                <ul>
+                    <li>
+                        <h1>
+                            @Model.LanguageBases.FirstOrDefault(x=>x.Key == "NavProject1"+language)?.Value
+
+                        </h1>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="project">
+    <div class="container-web">
+        <div class="row">
+            <h1>
+                @Model.LanguageBases.FirstOrDefault(x=>x.Key == "NavProjectTitle1"+language)?.Value
+            </h1>
+            <p>
+                @Model.LanguageBases.FirstOrDefault(x=>x.Key == "NavProjectDesc1"+language)?.Value
+            </p>
+            <h1>
+                @Model.LanguageBases.FirstOrDefault(x=>x.Key == "NavProjectTitle2"+language)?.Value
+            </h1>
+            <p>
+                @Model.LanguageBases.FirstOrDefault(x=>x.Key == "NavProjectDesc2"+language)?.Value
+            </p>
+            <ul>
+                @foreach (var project in Model.Projects)
+                {
+                    <li>
+                        <h1>
+                            @count.
+                            @if (language == "Az")
+                            {
+                                @project.TitleAz
+                            }
+                            else
+                            {
+                                @project.TitleEn
+
+                            }
+                        </h1>
+                        <div class="servicesBoxs row">
+                            <div class="col-lg-6 servicesBox">
+                                <img src="~/uploads/projects/@project.Image" alt="">
+
+                            </div>
+                            <div class="col-lg-6 servicesBox">
+                                <p>
+                                    @if (language == "Az")
+                                    {
+                                        @project.DescriptionAz
+                                    }
+                                    else
+                                    {
+                                        @project.DescriptionEn
+                                    }
+                                </p>
+                            </div>
+                        </div>
+                    </li>
+                    <li style="display:none;">@(count++)</li>
+                }
+            </ul>
+        </div>
+    </div>
+</section>

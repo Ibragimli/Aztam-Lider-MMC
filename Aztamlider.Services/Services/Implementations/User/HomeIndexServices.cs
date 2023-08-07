@@ -9,16 +9,16 @@ using System.Threading.Tasks;
 
 namespace Aztamlider.Services.Services.Implementations.User
 {
-    public class HomeIndexServices : IHomeIndexServices
+    public class ContactUsIndexServices : IContactUsIndexServices
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        public HomeIndexServices(IUnitOfWork unitOfWork)
+        public ContactUsIndexServices(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
 
-        public async  Task<IEnumerable<LanguageBase>> GetLanguageBase()
+        public async Task<IEnumerable<LanguageBase>> GetLanguageBase()
         {
             return await _unitOfWork.LanguageBaseRepository.GetAllAsync(x => !x.IsDelete);
 

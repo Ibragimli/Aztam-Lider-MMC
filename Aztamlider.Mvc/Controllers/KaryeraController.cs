@@ -6,14 +6,14 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Aztamlider.Mvc.Controllers
 {
-    public class CareerController : Controller
+    public class KaryeraController : Controller
     {
-        private readonly IHomeIndexServices _homeIndexServices;
+        private readonly ICareerIndexServices _careerIndexServices;
         private readonly ICareerServices _careerServices;
 
-        public CareerController(IHomeIndexServices homeIndexServices, ICareerServices careerServices)
+        public KaryeraController(ICareerIndexServices careerIndexServices, ICareerServices careerServices)
         {
-            _homeIndexServices = homeIndexServices;
+            _careerIndexServices = careerIndexServices;
             _careerServices = careerServices;
         }
         public async Task<IActionResult> Index()
@@ -21,29 +21,30 @@ namespace Aztamlider.Mvc.Controllers
             CareerViewModel careerVM = new CareerViewModel();
             try
             {
-              
+
                 careerVM = new CareerViewModel()
                 {
                     CareerPostDto = new CareerPostDto(),
-                    Settings = await _homeIndexServices.GetSettings(),
-                
+                    Settings = await _careerIndexServices.GetSettings(),
+                    LanguageBases = await _careerIndexServices.GetLanguageBase(),
+
                 };
 
             }
             catch (ItemNotFoundException ex)
             {
                 ModelState.AddModelError("", ex.Message);
-                return RedirectToAction("index", "career", careerVM);
+                return View("index", careerVM);
             }
             catch (ItemFormatException ex)
             {
                 ModelState.AddModelError("", ex.Message);
-                return RedirectToAction("index", "career", careerVM);
+                return View("index", careerVM);
             }
             catch (ItemNullException ex)
             {
                 ModelState.AddModelError("", ex.Message);
-                return RedirectToAction("index", "career", careerVM);
+                return View("index", careerVM);
             }
             catch (Exception ex)
             {
@@ -59,16 +60,15 @@ namespace Aztamlider.Mvc.Controllers
             CareerViewModel careerVM = new CareerViewModel();
             try
             {
-               
+
                 careerVM = new CareerViewModel()
                 {
                     CareerPostDto = new CareerPostDto(),
-                    Settings = await _homeIndexServices.GetSettings(),
-                   
+                    Settings = await _careerIndexServices.GetSettings(),
+                    LanguageBases = await _careerIndexServices.GetLanguageBase(),
                 };
                 _careerServices.CheckValue(CareerPostDto);
                 await _careerServices.SendCV(CareerPostDto);
-
             }
             catch (ItemNotFoundException ex)
             {
@@ -91,7 +91,7 @@ namespace Aztamlider.Mvc.Controllers
                 return RedirectToAction("index", "notfound");
             }
             TempData["Success"] = "Sorğunuz göndərildi";
-            return RedirectToAction("index", "career");
+            return RedirectToAction("index", "karyera");
 
         }
 

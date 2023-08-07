@@ -1,0 +1,82 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    var language = _localization.Getkey("Language").Value;
+    int count = 1;
+}
+@model ServicesIndexViewModel
+<section id="breadCrumb">
+    <div class="container-web">
+        <div class="row">
+            <div class="col-lg-12 breadCrumbBox">
+                <ul>
+                    <li>
+                        <h1>
+                            @Model.LanguageBases.FirstOrDefault(x=>x.Key == "NavService"+language)?.Value
+
+                        </h1>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Partner Logos -->
+<section id="services">
+    <div class="container-web">
+        <div class="row">
+            <p>
+                @Model.LanguageBases.FirstOrDefault(x=>x.Key == "NavServiceDesc"+language)?.Value
+            </p>
+            <h1>
+                @Model.LanguageBases.FirstOrDefault(x=>x.Key == "NavServiceTitle"+language)?.Value
+            </h1>
+            <ul>
+                @foreach (var service in Model.Services)
+                {
+                    <li class="row">
+                        <h1>
+                            @count.@if (language == "Az")
+                            {
+                                @service.TitleAz
+                            }
+                            else
+                            {
+                                @service.TitleEn
+                            }
+                        </h1>
+                        @if (Model.ServiceImages.Where(x => x.ServiceId == service.Id).Count() > 1)
+                        {
+                            <div class=" col-lg-5 col-md-5 col-sm-5">
+                                <img class="objectCover" src="~/uploads/services/@Model.ServiceImages.FirstOrDefault(x=>x.ServiceId == service.Id && x.IsPoster)?.Image" alt="">
+                            </div>
+                            <div class="marginLeft col-lg-4 col-md-5 col-sm-5">
+                                <img src="~/uploads/services/@Model.ServiceImages.FirstOrDefault(x=>x.ServiceId == service.Id && !x.IsPoster)?.Image" alt="">
+                            </div>
+                        }
+                        else
+                        {
+                            <div class=" col-lg-5 col-md-5 col-sm-5">
+                                <img style=" object-fit: cover; " class="" src="~/uploads/services/@Model.ServiceImages.FirstOrDefault(x=>x.ServiceId == service.Id && x.IsPoster)?.Image" alt="">
+                            </div>
+                        }
+
+                        <p>
+                            @if (language == "Az")
+                            {
+                                @service.DescriptionAz
+                            }
+                            else
+                            {
+                                @service.DescriptionEn
+                            }
+
+                        </p>
+                    </li>
+                    <li style="display:none;">@(count++)</li>
+                }
+
+            </ul>
+        </div>
+    </div>
+</section>

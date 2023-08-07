@@ -28,6 +28,13 @@
                                         <span asp-validation-for="ReferenceCreateDto.Name" class="text-danger"></span>
                                     </div>
                                     <!-- Layihə Name   End -->
+                                    <!-- Project Name  Start -->
+                                    <div class="mb-3 posterName">
+                                        <label asp-for="ReferenceCreateDto.Orderer" class="form-label">Sifarişçi adı*</label>
+                                        <input asp-for="ReferenceCreateDto.Orderer" maxlength="100" type="text" class="form-control">
+                                        <span asp-validation-for="ReferenceCreateDto.Orderer" class="text-danger"></span>
+                                    </div>
+                                    <!-- Layihə Name   End -->
                                     <!-- Layihələr  Start -->
                                     <div class="mb-3 highProjects">
                                         <label class="form-label">Xidmət növü</label>
