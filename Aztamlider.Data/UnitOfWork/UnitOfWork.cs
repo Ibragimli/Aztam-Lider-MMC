@@ -29,6 +29,7 @@ namespace Aztamlider.Data.UnitOfWork
         private IMainSliderRepository mainSliderRepository;
         private ILoggerRepository _loggerRepository;
         private ILanguageBaseRepository _languageBaseRepository;
+        private IServiceNameRepository _serviceNameRepository;
 
 
         public UnitOfWork(DataContext context)
@@ -65,6 +66,8 @@ namespace Aztamlider.Data.UnitOfWork
 
         public ILoggerRepository LoggerRepository => _loggerRepository = _loggerRepository ?? new LoggerRepository(_context);
 
+        public IServiceNameRepository ServiceNameRepository => _serviceNameRepository = _serviceNameRepository ?? new ServiceNameRepository(_context);
+        
         public async Task<int> CommitAsync()
         {
             return await _context.SaveChangesAsync();

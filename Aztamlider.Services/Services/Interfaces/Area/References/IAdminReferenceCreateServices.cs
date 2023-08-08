@@ -15,6 +15,7 @@ namespace Aztamlider.Services.Services.Interfaces.Area.References
         Task DtoCheck(ReferenceCreateDto ReferenceCreateDto);
         public Task CreateImageFormFile(List<IFormFile> imageFiles, int Id);
         public Task<IEnumerable<ServiceType>> GetAllServiceTypes();
+        public Task<IEnumerable<ServiceName>> GetAllServiceNames();
 
     }
 }

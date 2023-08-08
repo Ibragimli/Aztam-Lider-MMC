@@ -1,0 +1,13 @@
+﻿using Aztamlider.Core.Entites;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Aztamlider.Core.Repositories
+{
+    public interface IServiceNameRepository : IRepository<ServiceName>
+    {
+    }
+}

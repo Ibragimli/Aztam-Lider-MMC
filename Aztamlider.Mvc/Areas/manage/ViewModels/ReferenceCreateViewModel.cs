@@ -10,6 +10,7 @@ namespace Aztamlider.Mvc.Areas.manage.ViewModels
     {
         public ReferenceCreateDto ReferenceCreateDto { get; set; }
         public IEnumerable<ServiceType> ServiceTypes { get; set; }
+        public IEnumerable<ServiceName> ServiceNames { get; set; }
 
     }
 }

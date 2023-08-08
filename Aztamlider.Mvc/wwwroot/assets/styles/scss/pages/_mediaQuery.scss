@@ -25,14 +25,16 @@
 
                 ul {
                     li {
-                        .marginLeft{
+                        .marginLeft {
                             margin-left: 3rem !important;
                         }
-                        .marginRight{
+
+                        .marginRight {
                             margin-right: 3rem !important;
                         }
+
                         img {
-                            object-fit: fill ;
+                            object-fit: fill;
                         }
                     }
                 }
@@ -120,17 +122,18 @@
 
                 ul {
                     li {
-                        .objectCover{
+                        .objectCover {
                             object-fit: cover !important;
                         }
-                        .objectContain{
+
+                        .objectContain {
                             object-fit: contain !important;
                         }
-                     
+
                         img {
                             width: 100%;
                             max-height: 300px !important;
-                            object-fit: fill ;
+                            object-fit: fill;
                             padding: 15px 0px !important;
                         }
                     }
@@ -339,7 +342,8 @@
                         margin-bottom: 22px !important;
 
                     }
-                    .mobileAboutImage{
+
+                    .mobileAboutImage {
                         display: none !important;
                     }
 
@@ -349,9 +353,10 @@
 
 
                 .aboutTextBox {
-                    p{
+                    p {
                         font-size: 18px !important;
                     }
+
                     padding: 0px 10px 0px 10px !important;
                 }
             }
@@ -381,6 +386,63 @@
             }
         }
     }
+
+
+    #referenceInfo {
+        padding: 0px 32px;
+
+        .container-web {
+            .row {
+
+                p {
+                    font-size: 22px;
+                }
+
+
+                .refInfoImageBoxs {
+
+                    .refInfoImageBox {
+                        height: 280px !important;
+
+
+                        .image-container {
+
+                            img {
+                                height: 280px !important;
+                            }
+                        }
+                    }
+
+
+                }
+
+                .refInfoTextBox {
+                    ul {
+
+                        li {
+
+                            p {
+                                font-size: 18px !important;
+                            }
+
+
+
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .prev-btn {
+        left: 4px !important;
+    }
+
+    .next-btn {
+        right: 4px !important;
+    }
+
+
 }
 
 @media only screen and (max-width: 800px) {
@@ -566,6 +628,23 @@
             }
         }
     }
+    #partnerLogos {
+
+        .partnerOwlCarouselBox {
+          .mobile-owl {
+            .item {
+              height: 140px;
+              a {
+                img {
+                  object-fit: scale-down;
+                  width: 160px !important;
+                  max-height: 140px;
+                }
+              }
+            }
+          }
+        }
+      }
 
 }
 

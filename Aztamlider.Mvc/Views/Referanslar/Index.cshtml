@@ -2,6 +2,8 @@
     ViewData["Title"] = "Index";
     var language = _localization.Getkey("Language").Value;
     int i = 0;
+    int c = 0;
+    int u = 1;
 }
 
 @model ReferenceViewModel
@@ -27,57 +29,34 @@
             <div class="col-lg-3 referenceButtons">
                 <ul class="row ">
                     <li class="col-lg-11 col-md-6 col-sm-6 col-6">
-                        <a href="#">
-                            <h1 class="activeReference">
-                                Hamısı
-                                <span>(10)</span>
+                        <a asp-action="index" asp-controller="referanslar" asp-route-serviceId="0" asp-route-page="@ViewBag.Page">
+                            <h1 class="@(c == 0 ?"activeReference":"")">
+                                @Model.LanguageBases.FirstOrDefault(x=>x.Key =="ReferenceFilterText"+language)?.Value
+                                <span>(@Model.ReferencesCount.Count())</span>
                             </h1>
                         </a>
                     </li>
-                    <li class="col-lg-11 col-md-6 col-sm-6 col-6">
-                        <a href="#">
-                            <h1>
-                                MEP Layihələndirmə (BIM7D) <span>(10)</span>
-                            </h1>
-                        </a>
-                    </li>
+                    @foreach (var serviceName in Model.ServiceNames)
+                    {
+                        <li class="col-lg-11 col-md-6 col-sm-6 col-6">
 
-                    <li class="col-lg-11 col-md-6 col-sm-6 col-6">
-                        <a href="#">
-                            <h1>
-                                Zəif Axın Sistemləri <span>(10)</span>
-                            </h1>
-                        </a>
-                    </li>
-                    <li class="col-lg-11 col-md-6 col-sm-6 col-6">
-                        <a href="#">
-                            <h1>
-                                Su-Kanalizasiya <span>(10)</span>
-                            </h1>
-                        </a>
-                    </li>
-                    <li class="col-lg-11 col-md-6 col-sm-6 col-6">
-                        <a href="#">
-                            <h1>
-                                Elektrik (Alçaq və Orta Voltaj) <span>(10)</span>
-                            </h1>
-                        </a>
-                    </li>
+                            <a asp-action="index" asp-controller="referanslar" asp-route-serviceId="@serviceName.Id" asp-route-page="@ViewBag.Page">
+                                <h1 class="">
+                                    @if (language == "Az")
+                                    {
+                                        @serviceName.NameAz
+                                    }
+                                    else
+                                    {
+                                        @serviceName.NameEn
 
-                    <li class="col-lg-11 col-md-6 col-sm-6 col-6">
-                        <a href="#">
-                            <h1>
-                                İsitmə, Soyutma və Havalandırma (HVAC) <span>(10)</span>
-                            </h1>
-                        </a>
-                    </li>
-                    <li class="col-lg-11 col-md-6 col-sm-6 col-6">
-                        <a href="#">
-                            <h1>
-                                Yanğından Mübarizə Sistemləri <span>(10)</span>
-                            </h1>
-                        </a>
-                    </li>
+                                    }
+                                    <span>(@Model.ReferencesCount.Where(x=>x.ServiceNameId == serviceName.Id ).Count())</span>
+                                </h1>
+                            </a>
+                        </li>
+                        <li style="display:none;">@(c++)</li>
+                    }
                 </ul>
             </div>
             <div class="col-lg-9 referenceBoxs">
@@ -107,32 +86,44 @@
                              style="display:flex; justify-content:flex-end;">
                             <nav aria-label="Page navigation example">
                                 <ul class="pagination">
-                                    <li class="page-item">
-                                        <a asp-action="index" asp-controller="highproject"
-                                           asp-route-page="@(Model.References.PageIndex-1)"
-                                           asp-route-name="@(ViewBag.Name)" class="page-link"
-                                           aria-label="Previous">
-                                            <span aria-hidden="true">&laquo;</span>
-                                        </a>
-                                    </li>
+                                    @if (Model.References.TotalPages > 1)
+                                    {
+                                        @if (Model.References.HasPrev)
+                                        {
+                                            <li class="page-item">
+                                                <a asp-action="index" asp-controller="referanslar"
+                                                   asp-route-serviceId="@ViewBag.ServiceId" class="page-link"
+                                                   asp-route-page="@(Model.References.PageIndex-1)"
+                                                   aria-label="Previous">
+                                                    <span aria-hidden="true">&laquo;</span>
+                                                </a>
+                                            </li>
+                                        }
+                                        @for (int a = 1; a <= Model.References.TotalPages; a++)
+                                        {
+                                            <li aria-current="page" class="page-item" @(Model.References.PageIndex == a ? "active" : "")>
+                                                <a asp-action="index" asp-controller="referanslar" asp-route-serviceId="@ViewBag.ServiceId" asp-route-page="@a" class="page-link">@a</a>
+                                            </li>
+                                        }
 
-                                    <li aria-current="page" class="page-item ">
-                                        <a class="page-link pageActive">1</a>
-                                    </li>
-                                    <li aria-current="page" class="page-item">
-                                        <a asp-action="index" asp-controller="highproject" asp-route-page="@i"
-                                           asp-route-name="@(ViewBag.Name)" class="page-link">2</a>
-                                    </li>
+                                        @*    <li aria-current="page" class="page-item ">
+                                    <a class="page-link pageActive">1</a>
+                                    </li>*@
 
+                                        @if (Model.References.HasNext)
+                                        {
+                                            <li class="page-item">
+                                                <a asp-action="index" asp-controller="referanslar"
+                                                   asp-route-serviceId="@ViewBag.ServiceId"
+                                                   asp-route-page="@(Model.References.PageIndex+1)"
+                                                   class="page-link"
+                                                   aria-label="Next">
+                                                    <span aria-hidden="true">&raquo;</span>
+                                                </a>
+                                            </li>
+                                        }
+                                    }
 
-                                    <li class="page-item">
-                                        <a asp-action="index" asp-controller="highproject"
-                                           asp-route-page="@(Model.References.PageIndex+1)"
-                                           asp-route-name="@(ViewBag.Name)" class="page-link"
-                                           aria-label="Next">
-                                            <span aria-hidden="true">&raquo;</span>
-                                        </a>
-                                    </li>
                                 </ul>
                             </nav>
                         </div>
@@ -143,3 +134,4 @@
         </div>
     </div>
 </section>
+

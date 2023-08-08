@@ -28,32 +28,45 @@
                                         <span asp-validation-for="Reference.Name" class="text-danger"></span>
                                     </div>
                                     <!-- Layihə Name   End -->
-                                               <!-- Project Name  Start -->
+                                    <!-- Project Name  Start -->
                                     <div class="mb-3 posterName">
                                         <label asp-for="Reference.Orderer" class="form-label">Sifarişçi adı*</label>
                                         <input asp-for="Reference.Orderer" maxlength="150" type="text" class="form-control">
                                         <span asp-validation-for="Reference.Orderer" class="text-danger"></span>
                                     </div>
                                     <!-- Layihə Name   End -->
-
-                                         <!-- Layihələr  Start -->
+                                    <!-- Layihələr  Start -->
                                     <div class="mb-3 highProjects">
-                                        <label class="form-label">Xidmət növü</label>
-                                        <span asp-validation-for="Reference.ServiceTypeId" class="text-danger"></span>
-                                        <select asp-for="Reference.ServiceTypeId" class="form-select">
-                                            <option hidden value="@Model.Reference.ServiceTypeId" selected disabled  >@Model.Reference.ServiceType.NameAz</option>
-                                           
-                                            @foreach (var highProject in Model.ServiceTypes)
+                                        <label class="form-label">Servis növü</label>
+                                        <span asp-validation-for="Reference.ServiceNameId" class="text-danger"></span>
+                                        <select asp-for="Reference.ServiceNameId" class="form-select">
+                                            <option hidden value="@Model.Reference.ServiceNameId" selected disabled>@Model.Reference.ServiceName.NameAz</option>
+
+                                            @foreach (var highProject in Model.ServiceNames)
                                             {
-                                                <option value="@highProject.Id"  >@highProject.NameAz</option>
+                                                <option value="@highProject.Id">@highProject.NameAz</option>
                                             }
                                         </select>
                                     </div>
                                     <!-- Layihələr   End -->
-                                     <!-- Project Name  Start -->
+                                    <!-- Layihələr  Start -->
+                                    <div class="mb-3 highProjects">
+                                        <label class="form-label">Xidmət növü</label>
+                                        <span asp-validation-for="Reference.ServiceTypeId" class="text-danger"></span>
+                                        <select asp-for="Reference.ServiceTypeId" class="form-select">
+                                            <option hidden value="@Model.Reference.ServiceTypeId" selected disabled>@Model.Reference.ServiceType.NameAz</option>
+
+                                            @foreach (var highProject in Model.ServiceTypes)
+                                            {
+                                                <option value="@highProject.Id">@highProject.NameAz</option>
+                                            }
+                                        </select>
+                                    </div>
+                                    <!-- Layihələr   End -->
+                                    <!-- Project Name  Start -->
                                     <div class="mb-3 posterName">
                                         <label asp-for="Reference.SquareMetr" class="form-label">Tikinti sahəsi*</label>
-                                        <input asp-for="Reference.SquareMetr"  type="int" class="form-control">
+                                        <input asp-for="Reference.SquareMetr" type="int" class="form-control">
                                         <span asp-validation-for="Reference.SquareMetr " class="text-danger"></span>
                                     </div>
                                     <!-- Layihə Name   End -->
@@ -63,7 +76,7 @@
                                         <input asp-for="Reference.BuildingType" maxlength="150" type="text" class="form-control">
                                         <span asp-validation-for="Reference.BuildingType" class="text-danger"></span>
                                     </div>
-                                      <!-- Layihə ContactInfo  Start -->
+                                    <!-- Layihə ContactInfo  Start -->
                                     <div class="mb-3 posterTitle">
                                         <label asp-for="Reference.Date" class="form-label">Vaxt*</label>
                                         <input asp-for="Reference.Date" maxlength="50" type="text" class="form-control">
@@ -79,33 +92,33 @@
                                     <!-- Layihə DescribeEn  Start -->
                                     <div class="mb-3 posterName">
                                         <label asp-for="Reference.Status" class="form-label">Tamamlandı *</label>
-                                    <input class="form-check-input" asp-for="Reference.Status" placeholder="...." /> @Html.DisplayNameFor(model => model.Reference.Status)
+                                        <input class="form-check-input" asp-for="Reference.Status" placeholder="...." /> @Html.DisplayNameFor(model => model.Reference.Status)
                                         <span asp-validation-for="Reference.Status" class="text-danger"></span>
                                     </div>
                                     <!-- Layihə DescribeEn   End -->
-                              
 
-                                     <div id="posterimage-box" class="posterimage-box row mb-3">
+
+                                    <div id="posterimage-box" class="posterimage-box row mb-3">
                                         <label asp-for="Reference.ReferenceImageFile" class="form-label">Referans şəkli*</label>
                                         <!-- Şəkil əlavə et -->
                                         <input asp-for="Reference.ReferenceImageFile" id="imagePosterInput" type="file" accept="image/png,  image/jpeg, video/mp4"
-                                               class="form-control" multiple="">
-                                            @foreach (var image in Model.ReferenceImages.Where(x => !x.IsDelete && x.IsPoster))
+                                               class="form-control">
+                                        @foreach (var image in Model.ReferenceImages.Where(x => !x.IsDelete && x.IsPoster))
+                                        {
+
+                                            @if (Model.ReferenceImages.FirstOrDefault(x => !x.IsDelete) != null)
+
                                             {
-
-                                                @if (Model.ReferenceImages.FirstOrDefault(x => !x.IsDelete) != null)
-
-                                                {
-                                                    <div class="col-3">
-                                                        <div style="position:relative;" class="image-box">
-                                                            <input type="hidden" value="@image.Id" />
-                                                            <img style="width:200px; height:160px;" src="~/uploads/References/@image.Image" />
-                                                        </div>
+                                                <div class="col-3">
+                                                    <div style="position:relative;" class="image-box">
+                                                        <input type="hidden" value="@image.Id" />
+                                                        <img style="width:200px; height:160px;" src="~/uploads/References/@image.Image" />
                                                     </div>
-                                                }
+                                                </div>
                                             }
-                                      </div>
-                                 
+                                        }
+                                    </div>
+
                                     <!-- Poster Image  Start -->
                                     <div class="mb-3 posterImages">
                                         <label asp-for="Reference.ImageFiles" class="form-label">Layihənin Şəkilləri*</label>
@@ -119,20 +132,20 @@
                                         <div class="row" id="temperoryImages"></div>
                                     </div>
                                     <!-- Poster Image End -->
-                                     <div id="poster-image-box" class="poster-image-box row mb-3">
-                                        @foreach (var image in Model.ReferenceImages.Where(x => !x.IsDelete && !x.IsPoster ))
+                                    <div id="poster-image-box" class="poster-image-box row mb-3">
+                                        @foreach (var image in Model.ReferenceImages.Where(x => !x.IsDelete && !x.IsPoster))
                                         {
 
                                             @if (Model.ReferenceImages.FirstOrDefault(x => !x.IsDelete) != null)
 
                                             {
-                                               <div class="col-lg-4 col-md-4 col-sm-5">
+                                                <div class="col-lg-4 col-md-4 col-sm-5">
                                                     <div style="position:relative; border: 1px dotted #80808078;" class="image-box">
-                                                        <input type="hidden" name="Reference.ProjectImagesIds[]" value="@image.Id" />
+                                                        <input type="hidden" name="Reference.ReferenceImagesIds[]" value="@image.Id" />
                                                         <img style="width:200px; height:160px;     " src="~/uploads/References/@image.Image" />
                                                         <i id="${i}" style="   cursor: pointer; color: red; font-size: 20px; position:absolute; top:10px; right:20px;" onclick="removeFile(${i})" class="fa-solid fa-trash deleteImage"></i>
                                                     </div>
-                                               </div>
+                                                </div>
                                             }
                                         }
                                     </div>
@@ -203,9 +216,9 @@
         selectedFiles.forEach((file, i) => {
             if (i < 8) {
                 html += `<div class="imageBox">
-                                          <p id="${i}" onclick="removeFile(${i})"><i class="fa-solid fa-trash"></i></p>
-                                          <img data-image-id="${i}" class="temperorayImage" src="${file.src}" alt="">
-                                      </div>`;
+                                              <p id="${i}" onclick="removeFile(${i})"><i class="fa-solid fa-trash"></i></p>
+                                              <img data-image-id="${i}" class="temperorayImage" src="${file.src}" alt="">
+                                          </div>`;
             }
         });
 
@@ -229,44 +242,8 @@
 
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script>
-    ﻿$(function () {
 
-    $(document).ready(function () {
-        $(document).on("click", ".deleteImage", function () {
-            $(this).parent().remove();
-        })
-    })
-
-    })
-
-    let posterInput = document.getElementById("posterInput")
-    let posterBox = document.getElementById("poster-image-box")
-</script>
-
-<script>
-
-    const imagePosterInput = document.getElementById('imagePosterInput');
-const posterImageBox = document.getElementById('posterimage-box');
-
-imagePosterInput.addEventListener('change', function (e) {
-  const file = e.target.files[0];
-  const reader = new FileReader();
-
-  reader.onload = function (e) {
-    const imageBox = posterImageBox.querySelector('.image-box');
-    const image = imageBox.querySelector('img');
-
-    image.src = e.target.result;
-  };
-
-  if (file) {
-    reader.readAsDataURL(file);
-  }
-});
-
-
-</script>
+<script src="~/manage/js/posterImageEdit.js"></script>
 
 
 @section Scripts{

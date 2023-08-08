@@ -10,5 +10,9 @@ namespace Aztamlider.Mvc.ViewModels
         public IEnumerable<ReferenceImage> ReferenceImage { get; set; }
         public IEnumerable<LanguageBase> LanguageBases { get; set; }
         public IEnumerable<Setting> Settings { get; set; }
+        public IEnumerable<ServiceType> ServiceTypes { get; set; }
+        public IEnumerable<ServiceName> ServiceNames { get; set; }
+        public IEnumerable<Service> Services { get; set; }
+        public IEnumerable<Reference> ReferencesCount { get; set; }
     }
 }

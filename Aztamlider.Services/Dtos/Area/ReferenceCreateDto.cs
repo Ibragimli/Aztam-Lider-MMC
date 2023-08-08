@@ -21,6 +21,7 @@ namespace Aztamlider.Services.Dtos.Area
         public string Date { get; set; }
         public bool Status { get; set; }
         public int ServiceTypeId { get; set; }
+        public int ServiceNameId { get; set; }
         public List<IFormFile> ImageFiles { get; set; }
 
     }

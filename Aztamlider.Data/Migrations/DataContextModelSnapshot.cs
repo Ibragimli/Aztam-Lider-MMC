@@ -395,6 +395,9 @@ namespace Aztamlider.Data.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<int>("ServiceNameId")
+                        .HasColumnType("int");
+
                     b.Property<int>("ServiceTypeId")
                         .HasColumnType("int");
 
@@ -405,6 +408,8 @@ namespace Aztamlider.Data.Migrations
                         .HasColumnType("bit");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ServiceNameId");
 
                     b.HasIndex("ServiceTypeId");
 
@@ -521,6 +526,38 @@ namespace Aztamlider.Data.Migrations
                     b.ToTable("ServiceImages");
                 });
 
+            modelBuilder.Entity("Aztamlider.Core.Entites.ServiceName", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("NameAz")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.Property<string>("NameEn")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ServiceName");
+                });
+
             modelBuilder.Entity("Aztamlider.Core.Entites.ServiceType", b =>
                 {
                     b.Property<int>("Id")
@@ -545,7 +582,8 @@ namespace Aztamlider.Data.Migrations
 
                     b.Property<string>("NameEn")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
 
                     b.HasKey("Id");
 
@@ -804,11 +842,19 @@ namespace Aztamlider.Data.Migrations
 
             modelBuilder.Entity("Aztamlider.Core.Entites.Reference", b =>
                 {
+                    b.HasOne("Aztamlider.Core.Entites.ServiceName", "ServiceName")
+                        .WithMany()
+                        .HasForeignKey("ServiceNameId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Aztamlider.Core.Entites.ServiceType", "ServiceType")
                         .WithMany("References")
                         .HasForeignKey("ServiceTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("ServiceName");
 
                     b.Navigation("ServiceType");
                 });

@@ -30,10 +30,10 @@
         <div class="row">
             <div class="col-lg-5 aboutImageBox">
                 <div class="mb-5  aboutImage">
-                    <img src="./assets/Images/cover-image.jpg" alt="">
+                    <img src="~/uploads/setting/@Model.Settings.FirstOrDefault(x=>x.Key=="About1Image")?.Value" alt="@Model.Settings.FirstOrDefault(x=>x.Key=="About1Image")?.Value">
                 </div>
                 <div class=" mb-5 mobileAboutImage aboutImage">
-                    <img src="./assets/Images/IMG_5294 (1).jpg" style="height: 450px;" alt="">
+                    <img src="~/uploads/setting/@Model.Settings.FirstOrDefault(x=>x.Key=="About2Image")?.Value" style="height: 450px;" alt="@Model.Settings.FirstOrDefault(x=>x.Key=="About1Image")?.Value">
                 </div>
 
 

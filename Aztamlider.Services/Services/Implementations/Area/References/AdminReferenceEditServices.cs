@@ -60,6 +60,12 @@ namespace Aztamlider.Services.Services.Implementations.Area.References
                 oldReference.ServiceTypeId = Reference.ServiceTypeId;
                 checkBool = true;
             }
+
+            if (oldReference.ServiceNameId != Reference.ServiceNameId)
+            {
+                oldReference.ServiceNameId = Reference.ServiceNameId;
+                checkBool = true;
+            }
             if (oldReference.Location != Reference.Location)
             {
                 oldReference.Location = Reference.Location;
@@ -209,6 +215,11 @@ namespace Aztamlider.Services.Services.Implementations.Area.References
             {
                 throw new ValueFormatExpception("Referans servis növü qeyd edin!");
             }
+
+            if (Reference.ServiceNameId == 0)
+            {
+                throw new ValueFormatExpception("Referans servis adını qeyd edin!");
+            }
             if (Reference.SquareMetr <= 0)
             {
                 throw new ValueFormatExpception("Tikinti sahəni düzgün qeyd edin!");
@@ -241,6 +252,12 @@ namespace Aztamlider.Services.Services.Implementations.Area.References
         {
             var serviceType = await _unitOfWork.ServiceTypeRepository.GetAllAsync(x => !x.IsDelete);
             return serviceType;
+        }
+
+        public async Task<IEnumerable<ServiceName>> GetAllServiceNames()
+        {
+            var serviceName = await _unitOfWork.ServiceNameRepository.GetAllAsync(x => !x.IsDelete);
+            return serviceName;
         }
     }
 }

@@ -46,7 +46,7 @@
                                  
                                       
                                      <div id="posterimage-box" class="posterimage-box row mb-5">
-                                        <label asp-for="Document.PDFFile" class="form-label">Layihənin Poster şəkli*</label>
+                                        <label asp-for="Document.PDFFile" class="form-label">PDF*</label>
                                         <!-- Şəkil əlavə et -->
                                         <input asp-for="Document.PDFFile"  type="file" accept="application/pdf"
                                                class="form-control" >
@@ -77,45 +77,8 @@
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script>
-    ﻿$(function () {
 
-    $(document).ready(function () {
-        $(document).on("click", ".deleteImage", function () {
-            $(this).parent().remove();
-        })
-    })
-
-    })
-
-    let posterInput = document.getElementById("posterInput")
-    let posterBox = document.getElementById("poster-image-box")
-</script>
-
-<script>
-
-    const imagePosterInput = document.getElementById('imagePosterInput');
-const posterImageBox = document.getElementById('posterimage-box');
-
-imagePosterInput.addEventListener('change', function (e) {
-  const file = e.target.files[0];
-  const reader = new FileReader();
-
-  reader.onload = function (e) {
-    const imageBox = posterImageBox.querySelector('.image-box');
-    const image = imageBox.querySelector('img');
-
-    image.src = e.target.result;
-  };
-
-  if (file) {
-    reader.readAsDataURL(file);
-  }
-});
-
-
-</script>
-
+<script src="~/manage/js/posterImageEdit.js"></script>
 
 @section Scripts{
 

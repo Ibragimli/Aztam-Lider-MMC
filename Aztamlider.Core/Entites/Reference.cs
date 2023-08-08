@@ -19,6 +19,8 @@ namespace Aztamlider.Core.Entites
         public bool Status { get; set; }
         public int ServiceTypeId { get; set; }
         public ServiceType ServiceType { get; set; }
+        public int ServiceNameId { get; set; }
+        public ServiceName ServiceName { get; set; }
         public ICollection<ReferenceImage> ReferenceImages { get; set; }
         [NotMapped]
         public List<IFormFile> ImageFiles { get; set; }

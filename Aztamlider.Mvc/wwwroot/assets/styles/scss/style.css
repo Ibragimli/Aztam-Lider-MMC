@@ -335,7 +335,7 @@ table {
     font-family: 'Barlow Condensed', sans-serif;
     color: #111111; }
 
-body .Aztamlider-mobile {
+body .xbinsaat-mobile {
   display: none; }
 body .row {
   --bs-gutter-x: 0rem; }
@@ -500,7 +500,24 @@ body a {
       top: 20px !important;
       right: 0px;
       width: calc((100vw - 100vw * 0.48)) !important;
-      height: calc((100vh - 100vh * 0.44)) !important; } }
+      height: calc((100vh - 100vh * 0.44)) !important; }
+
+  #referenceInfo {
+    padding: 0px 32px; }
+    #referenceInfo .container-web .row p {
+      font-size: 22px; }
+    #referenceInfo .container-web .row .refInfoImageBoxs .refInfoImageBox {
+      height: 280px !important; }
+      #referenceInfo .container-web .row .refInfoImageBoxs .refInfoImageBox .image-container img {
+        height: 280px !important; }
+    #referenceInfo .container-web .row .refInfoTextBox ul li p {
+      font-size: 18px !important; }
+
+  .prev-btn {
+    left: 4px !important; }
+
+  .next-btn {
+    right: 4px !important; } }
 @media only screen and (max-width: 800px) {
   .navbar-mobile .offcanvas {
     width: calc(100vw - 100vw*0.45) !important; }
@@ -556,7 +573,14 @@ body a {
     #reference .container-web .row .referenceButtons ul li a h1 {
       font-size: 18px !important; }
   #reference .container-web .row .referenceBoxs .row .referenceBox .referenceName a h1 {
-    font-size: 18px !important; } }
+    font-size: 18px !important; }
+
+  #partnerLogos .partnerOwlCarouselBox .mobile-owl .item {
+    height: 140px; }
+    #partnerLogos .partnerOwlCarouselBox .mobile-owl .item a img {
+      object-fit: scale-down;
+      width: 160px !important;
+      max-height: 140px; } }
 @media only screen and (max-width: 450px) {
   #mainSlider .backGroundImages .backGroundImage .mainSliderTextBox {
     top: 34% !important;
@@ -624,7 +648,7 @@ body a {
     font-family: 'Barlow Condensed', sans-serif;
     color: #111111; }
 
-body .Aztamlider-mobile {
+body .xbinsaat-mobile {
   display: none; }
 body .row {
   --bs-gutter-x: 0rem; }
@@ -776,13 +800,11 @@ body a {
   padding: 0px 25px; }
   #aboutUs .container-web .row .aboutTextBox p {
     text-align: justify;
-    font-size: 18px; }
+    font-size: 22px; }
   #aboutUs .container-web .row .aboutTextBox h1 {
     font-size: 36px; }
   #aboutUs .container-web .row .aboutTextBox ul li {
     list-style: square; }
-    #aboutUs .container-web .row .aboutTextBox ul li p {
-      font-size: 22px; }
 
 #breadCrumb {
   width: 100%;
@@ -992,12 +1014,31 @@ body a {
       margin-bottom: 0px; }
     #referenceInfo .container-web .row i {
       font-size: 22px; }
-    #referenceInfo .container-web .row .refInfoImageBox {
-      margin-bottom: 30px; }
-      #referenceInfo .container-web .row .refInfoImageBox img {
+    #referenceInfo .container-web .row .refInfoImageBoxs {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden; }
+      #referenceInfo .container-web .row .refInfoImageBoxs .refInfoImageBox {
         width: 100%;
         height: 420px;
-        border-radius: 4px; }
+        display: none;
+        margin-bottom: 30px; }
+        #referenceInfo .container-web .row .refInfoImageBoxs .refInfoImageBox .image-container {
+          width: 100%;
+          height: 100%;
+          height: 0;
+          /* Ya da resmin oranına göre ayarlayın */
+          position: relative; }
+          #referenceInfo .container-web .row .refInfoImageBoxs .refInfoImageBox .image-container img {
+            width: 100%;
+            height: 420px;
+            border-radius: 4px;
+            object-fit: cover;
+            object-position: center;
+            position: absolute;
+            top: 0;
+            left: 0; }
     #referenceInfo .container-web .row .refInfoTextBox {
       display: flex;
       border: 1px dashed black;
@@ -1018,6 +1059,34 @@ body a {
             max-width: 140px;
             font-size: 20px;
             margin-right: 8px; }
+
+.prev-btn,
+.next-btn {
+  cursor: pointer;
+  background-color: transparent;
+  color: black;
+  font-size: 48px;
+  text-decoration: none;
+  padding: 10px 20px;
+  /* Kalınlığı buradan ayarlayabilirsiniz */
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: opacity 0.3s;
+  /* Geçiş süresini buradan ayarlayabilirsiniz */ }
+
+.prev-btn {
+  left: 6px; }
+
+.next-btn {
+  right: 6px; }
+
+.prev-btn:hover,
+.next-btn:hover {
+  transition: opacity 0.3s;
+  opacity: 0.7;
+  color: black;
+  /* İstenilen opaklık değerini buradan ayarlayabilirsiniz */ }
 
 #career {
   margin-top: calc((100vh - 100vh * 0.930));

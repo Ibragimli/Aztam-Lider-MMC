@@ -37,11 +37,25 @@
                                     <!-- Layihə Name   End -->
                                     <!-- Layihələr  Start -->
                                     <div class="mb-3 highProjects">
+                                        <label class="form-label">Servis növü</label>
+                                        <span asp-validation-for="ReferenceCreateDto.ServiceNameId" class="text-danger"></span>
+                                        <select asp-for="ReferenceCreateDto.ServiceNameId" class="form-select">
+                                            <option selected="selected" disabled>Servis seçin...</option>
+
+                                            @foreach (var highProject in Model.ServiceNames)
+                                            {
+                                                <option value="@highProject.Id">@highProject.NameAz</option>
+                                            }
+                                        </select>
+                                    </div>
+                                    <!-- Layihələr   End -->
+                                    <!-- Layihələr  Start -->
+                                    <div class="mb-3 highProjects">
                                         <label class="form-label">Xidmət növü</label>
                                         <span asp-validation-for="ReferenceCreateDto.ServiceTypeId" class="text-danger"></span>
 
                                         <select asp-for="ReferenceCreateDto.ServiceTypeId" class="form-select">
-                                            <option selected="selected" disabled>Layihə seçin...</option>
+                                            <option selected="selected" disabled>Xidmət seçin...</option>
 
                                             @foreach (var highProject in Model.ServiceTypes)
                                             {
@@ -84,7 +98,6 @@
                                         <span asp-validation-for="ReferenceCreateDto.Status" class="text-danger"></span>
                                     </div>
                                     <!-- Layihə DescribeEn   End -->
-
                                     <!-- Poster Image  Start -->
                                     <div class="mb-3 posterImages">
                                         <label asp-for="ReferenceCreateDto.ImageFiles" class="form-label">Referans Şəkilləri*</label>
@@ -165,9 +178,9 @@
         selectedFiles.forEach((file, i) => {
             if (i < 8) {
                 html += `<div class="imageBox">
-                                      <p id="${i}" onclick="removeFile(${i})"><i class="fa-solid fa-trash"></i></p>
-                                      <img data-image-id="${i}" class="temperorayImage" src="${file.src}" alt="">
-                                  </div>`;
+                                                  <p id="${i}" onclick="removeFile(${i})"><i class="fa-solid fa-trash"></i></p>
+                                                  <img data-image-id="${i}" class="temperorayImage" src="${file.src}" alt="">
+                                              </div>`;
             }
         });
 

@@ -14,7 +14,7 @@ namespace Aztamlider.Data.Configuration
         public void Configure(EntityTypeBuilder<ServiceType> builder)
         {
             builder.Property(x => x.NameAz).HasMaxLength(150).IsRequired();
-            builder.Property(x => x.NameAz).HasMaxLength(150).IsRequired();
+            builder.Property(x => x.NameEn).HasMaxLength(150).IsRequired();
 
         }
     }

@@ -63,6 +63,7 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
                 {
                     ReferenceCreateDto = referenceCreateDto,
                     ServiceTypes = await _adminReferenceCreateServices.GetAllServiceTypes(),
+                    ServiceNames = await _adminReferenceCreateServices.GetAllServiceNames(),
                 };
             }
             catch (ItemNullException ex)
@@ -93,6 +94,8 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
                 {
                     ReferenceCreateDto = referenceCreateDto,
                     ServiceTypes = await _adminReferenceCreateServices.GetAllServiceTypes(),
+                    ServiceNames = await _adminReferenceCreateServices.GetAllServiceNames(),
+
                 };
                 await _adminReferenceCreateServices.DtoCheck(ReferenceCreateDto);
                 // CheckImage
@@ -143,6 +146,8 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
                     Reference = await _adminReferenceEditServices.GetReference(id),
                     ReferenceImages = await _adminReferenceEditServices.GetImages(id),
                     ServiceTypes = await _adminReferenceEditServices.GetAllServiceTypes(),
+                    ServiceNames = await _adminReferenceCreateServices.GetAllServiceNames(),
+
                 };
 
             }
@@ -176,6 +181,8 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
                     Reference = await _adminReferenceEditServices.GetReference(Reference.Id),
                     ReferenceImages = await _adminReferenceEditServices.GetImages(Reference.Id),
                     ServiceTypes = await _adminReferenceEditServices.GetAllServiceTypes(),
+                    ServiceNames = await _adminReferenceCreateServices.GetAllServiceNames(),
+
                 };
                 await _adminReferenceEditServices.EditReference(Reference);
             }

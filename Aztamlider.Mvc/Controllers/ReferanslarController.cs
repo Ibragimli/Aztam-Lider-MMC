@@ -16,18 +16,26 @@ namespace Aztamlider.Mvc.Controllers
         {
             _referenceIndexServices = referenceIndexServices;
         }
-        public async Task<IActionResult> Index(int page = 1)
+        public async Task<IActionResult> Index(int page = 1, int serviceId = 0)
         {
 
             ReferenceViewModel referenceIndexVM = new ReferenceViewModel();
             try
             {
+                ViewBag.Page = page;
+                if (serviceId != 0)
+                    ViewBag.ServiceId = serviceId;
+                
                 referenceIndexVM = new ReferenceViewModel
                 {
                     LanguageBases = await _referenceIndexServices.GetLanguageBase(),
                     ReferenceImage = await _referenceIndexServices.GetReferenceImages(),
-                    References = PagenetedList<Reference>.Create(_referenceIndexServices.GetReferences(), page, 5),
+                    References = PagenetedList<Reference>.Create(_referenceIndexServices.GetReferences(serviceId), page, 5),
                     Settings = await _referenceIndexServices.GetSettings(),
+                    ServiceTypes = await _referenceIndexServices.GetServiceTypes(),
+                    Services = await _referenceIndexServices.GetServices(),
+                    ServiceNames = await _referenceIndexServices.GetServiceNames(),
+                    ReferencesCount = await _referenceIndexServices.GetReferencesCount()
                 };
             }
             catch (ItemNotFoundException ex)
@@ -39,7 +47,7 @@ namespace Aztamlider.Mvc.Controllers
             catch (ItemNullException ex)
             {
                 TempData["Error"] = (ex.Message);
-                return View("index",  referenceIndexVM);
+                return View("index", referenceIndexVM);
             }
             catch (Exception)
             {
@@ -59,6 +67,8 @@ namespace Aztamlider.Mvc.Controllers
                     ReferenceImage = await _referenceIndexServices.GetReferenceImages(),
                     Reference = await _referenceIndexServices.GetReference(id),
                     Settings = await _referenceIndexServices.GetSettings(),
+                    ServiceTypes = await _referenceIndexServices.GetServiceTypes(),
+                    ServiceNames = await _referenceIndexServices.GetServiceNames(),
                 };
             }
             catch (ItemNotFoundException ex)

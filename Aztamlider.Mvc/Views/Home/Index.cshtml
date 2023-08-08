@@ -86,4 +86,33 @@
             $("header").addClass("headerAddFixed");
         });
     </script>
+    <!-- mainSlider -->
+    <script>
+        // JavaScript kodu
+        window.addEventListener("DOMContentLoaded", function () {
+            // Sliderı seçin
+            var slider = document.getElementById("mainSlider");
+
+            // Sliderdaki tüm görüntüleri seçin
+            var images = slider.querySelectorAll(".backGroundImage");
+
+            // Başlangıçta görüntüleri saklamak için bir sayaç tanımlayın
+            var currentImageIndex = 0;
+
+            // Sliderı otomatik olarak döndürmek için bir fonksiyon oluşturun
+            function rotateSlider() {
+                // Mevcut görüntünün aktif sınıfını kaldırın
+                images[currentImageIndex].classList.remove("activeMainSlider");
+
+                // Bir sonraki görüntünün indeksini belirleyin
+                currentImageIndex = (currentImageIndex + 1) % images.length;
+
+                // Yeni görüntüye aktif sınıfını ekleyin
+                images[currentImageIndex].classList.add("activeMainSlider");
+            }
+
+            setInterval(rotateSlider, 5000);
+        });
+
+    </script>
 }

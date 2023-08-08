@@ -31,29 +31,54 @@ namespace Aztamlider.Services.Services.Implementations.User
             return await _unitOfWork.SettingRepository.GetAllAsync(x => !x.IsDelete);
         }
 
-        public IQueryable<Reference> GetReferences()
+        public IQueryable<Reference> GetReferences(int serviceId)
         {
             var name = "";
             var reference = _unitOfWork.ReferenceRepository.asQueryable();
             reference = reference.Where(x => !x.IsDelete);
-
+            if (serviceId != 0)
+                reference = reference.Where(x => x.ServiceNameId == serviceId);
+            else
+            {
+                reference = reference.Where(x => !x.IsDelete);
+            }
             if (name != null)
                 reference = reference.Where(i => EF.Functions.Like(i.Name, $"%{name}%"));
             return reference;
         }
         public async Task<IEnumerable<ReferenceImage>> GetReferenceImages()
         {
-            return await _unitOfWork.ReferenceImageRepository.GetAllAsync(x => !x.IsDelete);
+            return await _unitOfWork.ReferenceImageRepository.GetAllAsync(x => !x.IsDelete, "Reference");
 
         }
 
         public async Task<Reference> GetReference(int id)
         {
-            var reference = await _unitOfWork.ReferenceRepository.GetAsync(x => !x.IsDelete && x.Id == id, "ReferenceImages","ServiceTypes");
+            var reference = await _unitOfWork.ReferenceRepository.GetAsync(x => !x.IsDelete && x.Id == id, "ReferenceImages");
             if (reference == null)
-                throw new ItemNotFoundException("Referans tapıslmadı");
+                throw new ItemNotFoundException("Referans tapılmadı");
             return reference;
+        }
 
+        public async Task<IEnumerable<ServiceType>> GetServiceTypes()
+        {
+            return await _unitOfWork.ServiceTypeRepository.GetAllAsync(x => !x.IsDelete);
+
+        }
+        public async Task<IEnumerable<Reference>> GetReferencesCount()
+        {
+            return await _unitOfWork.ReferenceRepository.GetAllAsync(x => !x.IsDelete);
+
+        }
+        public async Task<IEnumerable<ServiceName>> GetServiceNames()
+        {
+            return await _unitOfWork.ServiceNameRepository.GetAllAsync(x => !x.IsDelete);
+
+        }
+
+        public async Task<IEnumerable<Service>> GetServices()
+        {
+            return await _unitOfWork.ServiceRepository.GetAllAsync(x => !x.IsDelete);
         }
     }
 }

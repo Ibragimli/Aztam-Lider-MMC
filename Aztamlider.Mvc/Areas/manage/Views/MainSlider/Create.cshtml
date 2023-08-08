@@ -96,44 +96,7 @@
 
 @section Scripts{
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
+    <script src="~/manage/js/posterImageEdit.js"></script>
 }
 
-<script>
-    ﻿$(function () {
 
-    $(MainSlider).ready(function () {
-        $(MainSlider).on("click", ".deleteImage", function () {
-            $(this).parent().remove();
-        })
-    })
-
-    })
-
-    let posterInput = MainSlider.getElementById("posterInput")
-    let posterBox = MainSlider.getElementById("poster-image-box")
-</script>
-
-<script>
-
-    const imagePosterInput = MainSlider.getElementById('imagePosterInput');
-const posterImageBox = MainSlider.getElementById('posterimage-box');
-
-imagePosterInput.addEventListener('change', function (e) {
-  const file = e.target.files[0];
-  const reader = new FileReader();
-
-  reader.onload = function (e) {
-    const imageBox = posterImageBox.querySelector('.image-box');
-    const image = imageBox.querySelector('img');
-
-    image.src = e.target.result;
-  };
-
-  if (file) {
-    reader.readAsDataURL(file);
-  }
-});
-
-
-</script>

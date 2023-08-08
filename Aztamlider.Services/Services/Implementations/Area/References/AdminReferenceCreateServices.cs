@@ -69,7 +69,12 @@ namespace Aztamlider.Services.Services.Implementations.Area.References
             }
             if (ReferenceCreateDto.ServiceTypeId == 0)
             {
-                throw new ItemFormatException("Təsvir əlavə edin!");
+                
+                throw new ItemFormatException("Servis növü əlavə edin!");
+            }
+            if (ReferenceCreateDto.ServiceNameId == 0)
+            {
+                throw new ItemFormatException("Servis adı əlavə edin!");
             }
         }
 
@@ -99,7 +104,12 @@ namespace Aztamlider.Services.Services.Implementations.Area.References
             var serviceTypes = await _unitOfWork.ServiceTypeRepository.GetAllAsync(x => !x.IsDelete);
             return serviceTypes;
         }
+        public async Task<IEnumerable<ServiceName>> GetAllServiceNames()
+        {
+            var serviceNames = await _unitOfWork.ServiceNameRepository.GetAllAsync(x => !x.IsDelete);
+            return serviceNames;
+        }
 
-       
+
     }
 }
