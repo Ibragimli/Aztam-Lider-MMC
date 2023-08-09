@@ -12,7 +12,7 @@ namespace Aztamlider.Services.Services.Interfaces.Area.RoleManagers
 {
     public interface IAdminRoleManagerCreateServices
     {
-        Task<RoleManager<IdentityRole>> CreateRoleManager(RoleManagerCreateDto RoleManagerCreateDto);
+        Task CreateRoleManager(RoleManagerCreateDto RoleManagerCreateDto);
 
     }
 }

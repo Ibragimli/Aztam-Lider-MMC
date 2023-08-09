@@ -30,7 +30,6 @@ namespace Aztamlider.Data.UnitOfWork
         private ILoggerRepository _loggerRepository;
         private ILanguageBaseRepository _languageBaseRepository;
         private IServiceNameRepository _serviceNameRepository;
-        private IRoleManagerRepository _roleManagerRepository;
 
 
         public UnitOfWork(DataContext context)
@@ -69,7 +68,6 @@ namespace Aztamlider.Data.UnitOfWork
 
         public IServiceNameRepository ServiceNameRepository => _serviceNameRepository = _serviceNameRepository ?? new ServiceNameRepository(_context);
 
-        public IRoleManagerRepository RoleManagerRepository => _roleManagerRepository = _roleManagerRepository ?? new RoleManagerRepository(_context);
 
         public async Task<int> CommitAsync()
         {

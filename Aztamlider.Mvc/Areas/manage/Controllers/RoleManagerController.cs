@@ -2,228 +2,224 @@
 using Aztamlider.Services.CustomExceptions;
 using Aztamlider.Services.Dtos.Area;
 using Aztamlider.Services.Helper;
+using Aztamlider.Services.Services.Interfaces.Area.RoleManagers;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Aztamlider.Mvc.Areas.manage.Controllers
 {
+    [Area("manage")]
     public class RoleManagerController : Controller
     {
-        //private readonly IAdminRoleManagerIndexServices _adminRoleManagerIndexServices;
-        //private readonly IAdminRoleManagerDeleteServices _adminRoleManagerDeleteServices;
-        //private readonly IAdminRoleManagerEditServices _adminRoleManagerEditServices;
-        //private readonly IAdminRoleManagerCreateServices _adminRoleManagerCreateServices;
+        private readonly IAdminRoleManagerIndexServices _adminRoleManagerIndexServices;
+        private readonly IAdminRoleManagerDeleteServices _adminRoleManagerDeleteServices;
+        private readonly IAdminRoleManagerEditServices _adminRoleManagerEditServices;
+        private readonly IAdminRoleManagerCreateServices _adminRoleManagerCreateServices;
 
-        //public RoleManagerController(IAdminRoleManagerIndexServices adminRoleManagerIndexServices, IAdminRoleManagerDeleteServices adminRoleManagerDeleteServices, IAdminRoleManagerEditServices adminRoleManagerEditServices, IAdminRoleManagerCreateServices adminRoleManagerCreateServices)
-        //{
-        //    _adminRoleManagerIndexServices = adminRoleManagerIndexServices;
-        //    _adminRoleManagerDeleteServices = adminRoleManagerDeleteServices;
-        //    _adminRoleManagerEditServices = adminRoleManagerEditServices;
-        //    _adminRoleManagerCreateServices = adminRoleManagerCreateServices;
-        //}
-        //public async Task<IActionResult> Index(int page = 1, string name = null)
-        //{
-        //    RoleManagerIndexViewModel RoleManagerIndexVM = new RoleManagerIndexViewModel();
-        //    try
-        //    {
-        //        var RoleManager = _adminRoleManagerIndexServices.GetRoleManager(name);
-        //        RoleManagerIndexVM = new RoleManagerIndexViewModel
-        //        {
-        //            RoleManagers = PagenetedList<RoleManager<IdentityRole>>.Create(RoleManager, page, 5),
-        //        };
-        //    }
-        //    catch (NotFoundException)
-        //    {
-        //        return RedirectToAction("index", "notfound");
-        //    }
+        public RoleManagerController(IAdminRoleManagerIndexServices adminRoleManagerIndexServices, IAdminRoleManagerDeleteServices adminRoleManagerDeleteServices, IAdminRoleManagerEditServices adminRoleManagerEditServices, IAdminRoleManagerCreateServices adminRoleManagerCreateServices)
+        {
+            _adminRoleManagerIndexServices = adminRoleManagerIndexServices;
+            _adminRoleManagerDeleteServices = adminRoleManagerDeleteServices;
+            _adminRoleManagerEditServices = adminRoleManagerEditServices;
+            _adminRoleManagerCreateServices = adminRoleManagerCreateServices;
+        }
+        public async Task<IActionResult> Index(int page = 1, string name = null)
+        {
+            RoleManagerIndexViewModel RoleManagerIndexVM = new RoleManagerIndexViewModel();
+            try
+            {
+                var roleManager = _adminRoleManagerIndexServices.GetRoleManager(name);
+                RoleManagerIndexVM = new RoleManagerIndexViewModel
+                {
+                    RoleManagers = PagenetedList<IdentityRole>.Create(roleManager, page, 5),
+                };
+            }
+            catch (NotFoundException)
+            {
+                return RedirectToAction("index", "notfound");
+            }
 
-        //    catch (Exception)
-        //    {
-        //        return RedirectToAction("index", "notfound");
-        //    }
-        //    return View(RoleManagerIndexVM);
-        //}
-        //public async Task<IActionResult> Create()
-        //{
-        //    RoleManagerCreateDto roleManagerCreateDto = new RoleManagerCreateDto();
+            catch (Exception)
+            {
+                return RedirectToAction("index", "notfound");
+            }
+            return View(RoleManagerIndexVM);
+        }
+        public async Task<IActionResult> Create()
+        {
+            RoleManagerCreateDto roleManagerCreateDto = new RoleManagerCreateDto();
 
-        //    return View(roleManagerCreateDto);
-        //}
-        //[ValidateAntiForgeryToken]
-        //[HttpPost]
-        //public async Task<IActionResult> Create(RoleManagerCreateDto roleManagerCreateDto)
-        //{
-        //    RoleManagerCreateDto roleManagerDto = new RoleManagerCreateDto();
+            return View(roleManagerCreateDto);
+        }
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public async Task<IActionResult> Create(RoleManagerCreateDto roleManagerCreateDto)
+        {
 
-        //    try
-        //    {
-        //        var RoleManager = await _adminRoleManagerCreateServices.CreateRoleManager(roleManagerDto);
-        //    }
-        //    catch (ItemNullException ex)
-        //    {
-        //        ModelState.AddModelError("", ex.Message);
-        //        return View(roleManagerCreateDto);
-        //    }
-        //    catch (ItemNotFoundException ex)
-        //    {
-        //        ModelState.AddModelError("", ex.Message);
-        //        return View(roleManagerCreateDto);
-        //    }
-        //    catch (ValueFormatExpception ex)
-        //    {
-        //        ModelState.AddModelError("", ex.Message);
-        //        return View(roleManagerCreateDto);
-        //    }
-        //    catch (ImageFormatException ex)
-        //    {
-        //        ModelState.AddModelError("RoleManagerCreateDto.ImageFiles", ex.Message);
-        //        return View(roleManagerCreateDto);
-        //    }
-        //    catch (ImageNullException ex)
-        //    {
-        //        ModelState.AddModelError("RoleManagerCreateDto.ImageFiles", ex.Message);
-        //        return View(roleManagerCreateDto);
-        //    }
-
-        //    catch (Exception ex)
-        //    {
-        //        ModelState.AddModelError("", ex.Message);
-        //        //TempData["Error"] = ("Proses uğursuz oldu!");
-        //        return View(roleManagerCreateDto);
-        //    }
-
-        //    return RedirectToAction("index", "RoleManager");
-
-        //}
+            try
+            {
+                await _adminRoleManagerCreateServices.CreateRoleManager(roleManagerCreateDto);
+            }
+            catch (ItemNullException ex)
+            {
+                ModelState.AddModelError("", ex.Message);
+                return View(roleManagerCreateDto);
+            }
+            catch (ItemNotFoundException ex)
+            {
+                ModelState.AddModelError("", ex.Message);
+                return View(roleManagerCreateDto);
+            }
+            catch (ValueFormatExpception ex)
+            {
+                ModelState.AddModelError("", ex.Message);
+                return View(roleManagerCreateDto);
+            }
+            catch (ItemAlreadyException ex)
+            {
+                ModelState.AddModelError("", ex.Message);
+                return View(roleManagerCreateDto);
+            }
 
 
-        //public async Task<IActionResult> Edit(int id)
-        //{
-        //    RoleManagerEditViewModel roleManagerEditVM = new RoleManagerEditViewModel();
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", ex.Message);
+                //TempData["Error"] = ("Proses uğursuz oldu!");
+                return View(roleManagerCreateDto);
+            }
 
-        //    try
-        //    {
-        //        roleManagerEditVM = new RoleManagerEditViewModel()
-        //        {
-        //            RoleManager = await _adminRoleManagerEditServices.GetRoleManager(id),
-        //        };
+            return RedirectToAction("index", "RoleManager");
 
-        //    }
-        //    catch (NotFoundException)
-        //    {
-        //        return RedirectToAction("Index", "notfound");
-        //    }
-        //    catch (ItemNullException ex)
-        //    {
-        //        ModelState.AddModelError("", ex.Message);
-        //        return View("Index", roleManagerEditVM);
-        //    }
-        //    catch (ItemNotFoundException ex)
-        //    {
-        //        ModelState.AddModelError("", ex.Message);
-        //        return View("Index", roleManagerEditVM);
-        //    }
-        //    catch (Exception)
-        //    {
-        //        return RedirectToAction("Index", "notfound");
-        //    }
-        //    return View(roleManagerEditVM);
-        //}
-
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Edit(RoleManager<IdentityRole> roleManager)
-        //{
-        //    RoleManagerEditViewModel roleManagerEditVM = new RoleManagerEditViewModel();
-
-        //    try
-        //    {
-        //        roleManagerEditVM = new RoleManagerEditViewModel()
-        //        {
-        //            RoleManager = await _adminRoleManagerEditServices.GetRoleManager(roleManager),
-        //        };
+        }
 
 
-        //        await _adminRoleManagerEditServices.EditRoleManager(roleManager);
-        //    }
+        public async Task<IActionResult> Edit(string Id)
+        {
+            var roleManagerExist = new RoleManagerEditDto();
+            try
+            {
+                var role = await _adminRoleManagerEditServices.GetRoleManager(Id);
+                roleManagerExist = new RoleManagerEditDto
+                {
+                    Id = role.Id,
+                    RoleName = role.Name
+                };
+            }
+            catch (NotFoundException)
+            {
+                return RedirectToAction("Index", "notfound");
+            }
+            catch (ItemNullException ex)
+            {
+                ModelState.AddModelError("", ex.Message);
+                return View("Index", roleManagerExist);
+            }
+            catch (ItemNotFoundException ex)
+            {
+                ModelState.AddModelError("", ex.Message);
+                return View("Index", roleManagerExist);
+            }
+            catch (ItemAlreadyException ex)
+            {
+                ModelState.AddModelError("", ex.Message);
+                return View("Index", roleManagerExist);
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("Index", "notfound");
+            }
+            return View(roleManagerExist);
+        }
 
-        //    catch (NotFoundException)
-        //    {
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(RoleManagerEditDto roleManagerEditDto)
+        {
+            var roleManagerExist = new RoleManagerEditDto();
+          
+            try
+            {
+                var role = await _adminRoleManagerEditServices.GetRoleManager(roleManagerEditDto.Id);
+                roleManagerExist = new RoleManagerEditDto
+                {
+                    Id = role.Id,
+                    RoleName = role.Name
+                };
+                await _adminRoleManagerEditServices.EditRoleManager(roleManagerEditDto);
+            }
 
-        //        return RedirectToAction("Index", "notfound");
-        //    }
-        //    catch (ItemNullException ex)
-        //    {
-        //        ModelState.AddModelError("", ex.Message);
-        //        return View("Edit", roleManagerEditVM);
-        //    }
-        //    catch (ValueFormatExpception ex)
-        //    {
-        //        ModelState.AddModelError("", ex.Message);
-        //        return View("Edit", roleManagerEditVM);
-        //    }
-        //    catch (ItemNotFoundException ex)
-        //    {
-        //        ModelState.AddModelError("", ex.Message);
-        //        return View("Edit", roleManagerEditVM);
+            catch (NotFoundException)
+            {
 
-        //    }
-        //    catch (ImageNullException ex)
-        //    {
-        //        ModelState.AddModelError("", ex.Message);
-        //        return View("Edit", roleManagerEditVM);
+                return RedirectToAction("Index", "notfound");
+            }
+            catch (ItemNullException ex)
+            {
+                ModelState.AddModelError("", ex.Message);
+                return View("Edit", roleManagerEditDto);
+            }
+            catch (ValueFormatExpception ex)
+            {
+                ModelState.AddModelError("", ex.Message);
+                return View("Edit", roleManagerEditDto);
+            }
+            catch (ItemNotFoundException ex)
+            {
+                ModelState.AddModelError("", ex.Message);
+                return View("Edit", roleManagerEditDto);
 
-        //    }
-        //    catch (ImageFormatException ex)
-        //    {
-        //        ModelState.AddModelError("", ex.Message);
-        //        return View("Edit", roleManagerEditVM);
+            }
+            catch (ItemAlreadyException ex)
+            {
+                ModelState.AddModelError("", ex.Message);
+                return View("Index", roleManagerEditDto);
+            }
+            catch (ItemUseException ex)
+            {
+                ModelState.AddModelError("", ex.Message);
+                return View("Index", roleManagerEditDto);
+            }
 
-        //    }
-        //    catch (ImageCountException ex)
-        //    {
-        //        ModelState.AddModelError("", ex.Message);
-        //        return View("Edit", roleManagerEditVM);
 
-        //    }
-        //    catch (ValueAlreadyExpception ex)
-        //    {
-        //        ModelState.AddModelError("", ex.Message);
-        //        return View("Edit", roleManagerEditVM);
+            catch (ValueAlreadyExpception ex)
+            {
+                ModelState.AddModelError("", ex.Message);
+                return View("Edit", roleManagerEditDto);
 
-        //    }
-        //    catch (Exception)
-        //    {
-        //        return RedirectToAction("Index", "notfound");
-        //    }
-        //    TempData["Success"] = ("Proses uğurlu oldu");
-        //    return RedirectToAction("Index", "RoleManager");
-        //}
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("Index", "notfound");
+            }
+            TempData["Success"] = ("Proses uğurlu oldu");
+            return RedirectToAction("Index", "RoleManager");
+        }
 
-        //public async Task<IActionResult> Delete(int id)
-        //{
-        //    try
-        //    {
-        //        await _adminRoleManagerDeleteServices.DeleteRoleManager(id);
-        //    }
-        //    catch (ItemNotFoundException ex)
-        //    {
-        //        TempData["Error"] = (ex.Message);
-        //        return Ok();
-        //    }
-        //    catch (ItemUseException ex)
-        //    {
-        //        TempData["Error"] = (ex.Message);
-        //        return Ok();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return Ok(ex.Message);
-        //        //return RedirectToAction("index", "notfound");
-        //    }
-        //    TempData["Success"] = ("Sənəd silindi!");
-        //    return Ok();
-        //}
+        public async Task<IActionResult> Delete(string id)
+        {
+            try
+            {
+                await _adminRoleManagerDeleteServices.DeleteRoleManager(id);
+            }
+            catch (ItemNotFoundException ex)
+            {
+                TempData["Error"] = (ex.Message);
+                return Ok();
+            }
+            catch (ItemUseException ex)
+            {
+                TempData["Error"] = (ex.Message);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return Ok(ex.Message);
+                //return RedirectToAction("index", "notfound");
+            }
+            TempData["Success"] = ("Sənəd silindi!");
+            return Ok();
+        }
     }
 
 }

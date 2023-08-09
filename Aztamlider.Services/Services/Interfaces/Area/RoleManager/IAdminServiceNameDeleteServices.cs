@@ -8,6 +8,6 @@ namespace Aztamlider.Services.Services.Interfaces.Area.RoleManagers
 {
     public interface IAdminRoleManagerDeleteServices
     {
-        public Task DeleteRoleManager(int id);
+        public Task DeleteRoleManager(string id);
     }
 }

@@ -25,7 +25,6 @@ namespace Aztamlider.Core.IUnitOfWork
         IServiceTypeRepository ServiceTypeRepository { get; }
         ILanguageBaseRepository LanguageBaseRepository { get; }
         ILoggerRepository LoggerRepository { get; }
-        IRoleManagerRepository RoleManagerRepository { get; }
         IServiceNameRepository ServiceNameRepository { get; }
         Task<int> CommitAsync();
 

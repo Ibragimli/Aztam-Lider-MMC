@@ -8,6 +8,6 @@ namespace Aztamlider.Mvc.Areas.manage.ViewModels
 {
     public class RoleManagerIndexViewModel
     {
-        public PagenetedList<RoleManager<IdentityRole>> RoleManagers { get; set; }
+        public PagenetedList<IdentityRole> RoleManagers { get; set; }
     }
 }

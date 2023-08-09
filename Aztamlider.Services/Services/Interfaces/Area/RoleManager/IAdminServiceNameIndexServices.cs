@@ -10,6 +10,6 @@ namespace Aztamlider.Services.Services.Interfaces.Area.RoleManagers
 {
     public interface IAdminRoleManagerIndexServices
     {
-        public IQueryable<RoleManager<IdentityRole>> GetRoleManager(string name);
+        public IQueryable<IdentityRole> GetRoleManager(string name);
     }
 }

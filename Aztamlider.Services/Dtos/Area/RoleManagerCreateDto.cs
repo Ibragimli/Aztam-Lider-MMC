@@ -13,17 +13,15 @@ namespace Aztamlider.Services.Dtos.Area
 {
     public class RoleManagerCreateDto
     {
-        public string NameAz { get; set; }
-        public string NameEn { get; set; }
+        public string Role { get; set; }
 
     }
-    //public class RoleManagerCreateDtoValidator : AbstractValidator<RoleManagerCreateDto>
-    //{
-    //    public RoleManagerCreateDtoValidator()
-    //    {
-    //        RuleFor(x => x.NameAz).NotEmpty().WithMessage("Ad hissəsi boş olmamalıdır.").MinimumLength(3).WithMessage("Ad hissəsinin uzunluğu 3-dən az ola bilməz!").MaximumLength(150).WithMessage("Ad hissəsinin uzunluğu 150-dən böyük ola bilməz!");
-    //        RuleFor(x => x.NameEn).NotEmpty().WithMessage("Ad  hissəsi boş olmamalıdır.").MinimumLength(3).WithMessage("Ad hissəsinin uzunluğu 3-dən az ola bilməz!").MaximumLength(150).WithMessage("Ad hissəsinin uzunluğu 150-dən böyük ola bilməz!");
+    public class RoleManagerCreateDtoValidator : AbstractValidator<RoleManagerCreateDto>
+    {
+        public RoleManagerCreateDtoValidator()
+        {
+            RuleFor(x => x.Role).NotEmpty().WithMessage("Role hissəsi boş olmamalıdır.").MinimumLength(1).WithMessage("Role hissəsinin uzunluğu 1-dən az ola bilməz!").MaximumLength(150).WithMessage("Role hissəsinin uzunluğu 150-dən böyük ola bilməz!");
 
-    //    }
-    //}
+        }
+    }
 }

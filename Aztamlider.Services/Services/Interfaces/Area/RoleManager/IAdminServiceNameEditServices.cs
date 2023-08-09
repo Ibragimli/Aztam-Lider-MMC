@@ -1,4 +1,5 @@
 ﻿using Aztamlider.Core.Entites;
+using Aztamlider.Services.Dtos.Area;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
@@ -10,8 +11,8 @@ namespace Aztamlider.Services.Services.Interfaces.Area.RoleManagers
 {
     public interface IAdminRoleManagerEditServices
     {
-        public Task<RoleManager<IdentityRole>> GetRoleManager(int id);
-        public Task EditRoleManager(RoleManager<IdentityRole> RoleManager);
+        public Task<IdentityRole> GetRoleManager(string Id);
+        public Task EditRoleManager(RoleManagerEditDto roleManagerEditDto);
 
     }
 }
