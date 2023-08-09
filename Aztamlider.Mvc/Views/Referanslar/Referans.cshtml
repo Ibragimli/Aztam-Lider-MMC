@@ -23,13 +23,9 @@
 <section id="referenceInfo">
     <div class="container-web">
         <div class="row">
-            <div class="col-lg-9">
-                <div class="refInfoImageBox">
-                </div>
-            </div>
             <div class="col-md-9  col-sm-12 mb-2 ">
                 <div class="refInfoImageBoxs">
-                    @foreach (var refImage in Model.ReferenceImage)
+                    @foreach (var refImage in Model.ReferenceImage.Where(x => x.ReferenceId == Model.Reference.Id))
                     {
                         <div class="refInfoImageBox" style="display: @(count==0?"block":"none");">
                             <div class="image-container">
@@ -70,7 +66,14 @@
                                     </p>
                                 </div>
                                 <p>
-                                    @Model.Reference.Location
+                                    @if (language == "Az")
+                                    {
+                                        @Model.Reference.LocationAz
+                                    }
+                                    else
+                                    {
+                                        @Model.Reference.LocationEn
+                                    }
                                 </p>
                             </li>
                             <li>
@@ -99,7 +102,16 @@
                                         @Model.LanguageBases.FirstOrDefault(x=>x.Key == "RefBuilding"+language)?.Value:
                                     </p>
                                 </div>
-                                <p>@Model.Reference.BuildingType</p>
+                                <p>
+                                    @if (language == "Az")
+                                    {
+                                        @Model.Reference.BuildingTypeAz
+                                    }
+                                    else
+                                    {
+                                        @Model.Reference.BuildingTypeEn
+                                    }
+                                </p>
                             </li>
                         </ul>
                     </div>
@@ -132,9 +144,9 @@
                                         @Model.LanguageBases.FirstOrDefault(x=>x.Key == "RefStatus"+language)?.Value:
                                     </p>
                                 </div>
-                                <p> 
-                                        @Model.LanguageBases.FirstOrDefault(x=>x.Key == "RefStatusText"+language)?.Value:
-                                    
+                                <p>
+                                    @Model.LanguageBases.FirstOrDefault(x=>x.Key == "RefStatusText"+language)?.Value:
+
                                     <i class="ms-1 fa-solid fa-@(Model.Reference.Status?"check":"xmark")"></i>
                                 </p>
                             </li>

@@ -28,7 +28,9 @@
                 <img src="~/assets/Images/1690297956553.png" alt="">
             </div>
             <div class="col-lg-5 contactInfo">
-                <h1>ƏLAQƏ VASİTƏLƏRİ</h1>
+                <h1>
+                    @Model.LanguageBases.FirstOrDefault(x=>x.Key == "ContactPageTitleLeft"+language)?.Value:
+                </h1>
                 <ul>
                     <li>
                         <a href="tel:">
@@ -53,7 +55,9 @@
                 </ul>
             </div>
             <div class="col-lg-5 contactUsForm">
-                <h1>ƏLAQƏ</h1>
+                <h1>
+                    @Model.LanguageBases.FirstOrDefault(x=>x.Key == "ContactPageTitleRight"+language)?.Value:
+                </h1>
                 <form class="row " asp-action="ContactUs" asp-controller="elaqe">
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">

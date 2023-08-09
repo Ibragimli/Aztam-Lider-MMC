@@ -73,9 +73,16 @@
                                     <!-- Layihə Name   End -->
                                     <!-- InstagramUrl  Start -->
                                     <div class="mb-3 posterTitle">
-                                        <label asp-for="ReferenceCreateDto.BuildingType" class="form-label">Bina növü*</label>
-                                        <input asp-for="ReferenceCreateDto.BuildingType" maxlength="200" type="text" class="form-control">
-                                        <span asp-validation-for="ReferenceCreateDto.BuildingType" class="text-danger"></span>
+                                        <label asp-for="ReferenceCreateDto.BuildingTypeAz" class="form-label">Bina növü (Az)*</label>
+                                        <input asp-for="ReferenceCreateDto.BuildingTypeAz" maxlength="200" type="text" class="form-control">
+                                        <span asp-validation-for="ReferenceCreateDto.BuildingTypeAz" class="text-danger"></span>
+                                    </div>
+                                    <!-- Layihə ContactInfo  Start -->
+                                    <!-- InstagramUrl  Start -->
+                                    <div class="mb-3 posterTitle">
+                                        <label asp-for="ReferenceCreateDto.BuildingTypeEn" class="form-label">Bina növü (En)*</label>
+                                        <input asp-for="ReferenceCreateDto.BuildingTypeEn" maxlength="200" type="text" class="form-control">
+                                        <span asp-validation-for="ReferenceCreateDto.BuildingTypeEn" class="text-danger"></span>
                                     </div>
                                     <!-- Layihə ContactInfo  Start -->
                                     <div class="mb-3 posterTitle">
@@ -85,10 +92,16 @@
                                     </div>
                                     <!-- Layihə DescribeAz  Start -->
                                     <div class="mb-3 posterName">
-                                        <label asp-for="ReferenceCreateDto.Location" class="form-label">Location *</label>
-                                        <input asp-for="ReferenceCreateDto.Location" maxlength="120" type="text" class="form-control">
-                                        @*<textarea asp-for="ReferenceCreateDto.Location" maxlength="120" style="max-height:300px" rows="8" type="text" class="form-control"></textarea>*@
-                                        <span asp-validation-for="ReferenceCreateDto.Location" class="text-danger"></span>
+                                        <label asp-for="ReferenceCreateDto.LocationAz" class="form-label">Location (Az)*</label>
+                                        <input asp-for="ReferenceCreateDto.LocationAz" maxlength="120" type="text" class="form-control">
+                                        <span asp-validation-for="ReferenceCreateDto.LocationAz" class="text-danger"></span>
+                                    </div>
+                                    <!-- Layihə DescribeAz   End -->
+                                    <!-- Layihə DescribeAz  Start -->
+                                    <div class="mb-3 posterName">
+                                        <label asp-for="ReferenceCreateDto.LocationEn" class="form-label">Location (En) *</label>
+                                        <input asp-for="ReferenceCreateDto.LocationEn" maxlength="120" type="text" class="form-control">
+                                        <span asp-validation-for="ReferenceCreateDto.LocationEn" class="text-danger"></span>
                                     </div>
                                     <!-- Layihə DescribeAz   End -->
                                     <!-- Layihə DescribeEn  Start -->

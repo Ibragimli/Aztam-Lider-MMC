@@ -12,8 +12,10 @@ namespace Aztamlider.Core.Entites
     {
         public string Name { get; set; }
         public string Orderer { get; set; }
-        public string Location { get; set; }
-        public string BuildingType { get; set; }
+        public string LocationAz { get; set; }
+        public string LocationEn { get; set; }
+        public string BuildingTypeAz { get; set; }
+        public string BuildingTypeEn { get; set; }
         public int SquareMetr { get; set; }
         public string Date { get; set; }
         public bool Status { get; set; }

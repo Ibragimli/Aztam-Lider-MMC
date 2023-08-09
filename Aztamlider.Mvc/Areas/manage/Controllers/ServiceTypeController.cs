@@ -17,15 +17,13 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
     public class ServiceTypeController : Controller
     {
         private readonly IAdminServiceTypeIndexServices _adminServiceTypeIndexServices;
-        private readonly IManageImageHelper _manageImageHelper;
         private readonly IAdminServiceTypeDeleteServices _adminServiceTypeDeleteServices;
         private readonly IAdminServiceTypeEditServices _adminServiceTypeEditServices;
         private readonly IAdminServiceTypeCreateServices _adminServiceTypeCreateServices;
 
-        public ServiceTypeController(IAdminServiceTypeIndexServices adminServiceTypeIndexServices, IManageImageHelper manageImageHelper, IAdminServiceTypeDeleteServices adminServiceTypeDeleteServices, IAdminServiceTypeEditServices adminServiceTypeEditServices, IAdminServiceTypeCreateServices adminServiceTypeCreateServices)
+        public ServiceTypeController(IAdminServiceTypeIndexServices adminServiceTypeIndexServices, IAdminServiceTypeDeleteServices adminServiceTypeDeleteServices, IAdminServiceTypeEditServices adminServiceTypeEditServices, IAdminServiceTypeCreateServices adminServiceTypeCreateServices)
         {
             _adminServiceTypeIndexServices = adminServiceTypeIndexServices;
-            _manageImageHelper = manageImageHelper;
             _adminServiceTypeDeleteServices = adminServiceTypeDeleteServices;
             _adminServiceTypeEditServices = adminServiceTypeEditServices;
             _adminServiceTypeCreateServices = adminServiceTypeCreateServices;

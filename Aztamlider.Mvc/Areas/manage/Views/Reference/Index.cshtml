@@ -88,10 +88,10 @@
                                         <img src="~/uploads/References/@Reference.ReferenceImages.FirstOrDefault(x => x.IsPoster == true)?.Image" width="100" height="100" />
                                     </td>
                                     <td class="text-center"><a target="_blank">@Reference.Name</a></td>
-                                    <td class="text-center"><a target="_blank">@Reference.Location</a></td>
+                                    <td class="text-center"><a target="_blank">@Reference.LocationAz</a></td>
                                     <td class="text-center"><a target="_blank">@(Reference.ServiceType.NameAz.Length < 30 ? (Reference.ServiceType.NameAz) : (Reference.ServiceType.NameAz.Substring(0, 30) + "...."))</a></td>
                                     <td class="text-center"><a target="_blank">@Reference.SquareMetr</a></td>
-                                    <td class="text-center"><a target="_blank">@Reference.BuildingType</a></td>
+                                    <td class="text-center"><a target="_blank">@Reference.BuildingTypeAz</a></td>
                                     <td class="text-center">
                                         <div class="d-flex justify-content-sm-around">
                                             <a asp-route-id="@Reference.Id" asp-action="edit" asp-controller="Reference"><i style="font-size: 26px !important; color:orange" class="fa-regular fa-pen-to-square"></i></a>

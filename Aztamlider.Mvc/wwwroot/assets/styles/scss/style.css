@@ -833,7 +833,7 @@ body a {
       color: black;
       transition: all 0.4s;
       border: 1px solid black;
-      padding: 4px 0px; }
+      padding: 4px 4px; }
     #reference .container-web .row .referenceButtons ul li a h1:hover {
       color: rgba(0, 0, 0, 0.623); }
     #reference .container-web .row .referenceButtons ul li a .activeReference {
@@ -848,11 +848,15 @@ body a {
       display: flex;
       flex-direction: column;
       margin-right: 20px;
-      margin-bottom: 20px; }
+      margin-bottom: 20px;
+      height: 315px;
+      max-height: 310px; }
       #reference .container-web .row .referenceBoxs .row .referenceBox .referenceImage {
         overflow: hidden; }
         #reference .container-web .row .referenceBoxs .row .referenceBox .referenceImage a img {
-          width: 100%; }
+          width: 100%;
+          height: 235px;
+          max-height: 235px; }
         #reference .container-web .row .referenceBoxs .row .referenceBox .referenceImage a img:hover {
           transform: scale(1.1); }
       #reference .container-web .row .referenceBoxs .row .referenceBox .referenceName {

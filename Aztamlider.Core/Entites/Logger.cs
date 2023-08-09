@@ -12,6 +12,6 @@ namespace Aztamlider.Core.Entites
         public string Role { get; set; }
         public string Controller { get; set; }
         public string Action { get; set; }
-        public string Time { get; set; }
+        public string? Product { get; set; }
     }
 }

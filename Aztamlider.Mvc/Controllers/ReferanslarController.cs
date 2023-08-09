@@ -30,7 +30,7 @@ namespace Aztamlider.Mvc.Controllers
                 {
                     LanguageBases = await _referenceIndexServices.GetLanguageBase(),
                     ReferenceImage = await _referenceIndexServices.GetReferenceImages(),
-                    References = PagenetedList<Reference>.Create(_referenceIndexServices.GetReferences(serviceId), page, 5),
+                    References = PagenetedList<Reference>.Create(_referenceIndexServices.GetReferences(serviceId), page, 9),
                     Settings = await _referenceIndexServices.GetSettings(),
                     ServiceTypes = await _referenceIndexServices.GetServiceTypes(),
                     Services = await _referenceIndexServices.GetServices(),

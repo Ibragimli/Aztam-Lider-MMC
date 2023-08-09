@@ -25,6 +25,7 @@ namespace Aztamlider.Services.Profiles
             CreateMap<ServiceCreateDto, Service>();
             CreateMap<LanguageBaseCreateDto, LanguageBase>();
             CreateMap<ServiceNameCreateDto, ServiceName>();
+            CreateMap<LoggerPostDto, Logger>();
 
 
         }

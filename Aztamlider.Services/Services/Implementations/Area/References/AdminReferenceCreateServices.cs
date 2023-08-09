@@ -55,18 +55,27 @@ namespace Aztamlider.Services.Services.Implementations.Area.References
             {
                 throw new ItemFormatException("Vaxt əlavə edin!");
             }
-            if (ReferenceCreateDto.Location == null)
+            if (ReferenceCreateDto.LocationAz == null)
             {
                 throw new ItemFormatException("Location əlavə edin!");
+            }
+            if (ReferenceCreateDto.BuildingTypeAz == null)
+            {
+                throw new ItemFormatException("Bina növü əlavə edin!");
+            }
+            if (ReferenceCreateDto.LocationEn == null)
+            {
+                throw new ItemFormatException("Location əlavə edin!");
+            }
+            if (ReferenceCreateDto.BuildingTypeEn == null)
+            {
+                throw new ItemFormatException("Bina növü əlavə edin!");
             }
             if (ReferenceCreateDto.SquareMetr == 0)
             {
                 throw new ItemFormatException("Tikinti sahəsi əlavə edin!");
             }
-            if (ReferenceCreateDto.BuildingType == null)
-            {
-                throw new ItemFormatException("Bina növü əlavə edin!");
-            }
+         
             if (ReferenceCreateDto.ServiceTypeId == 0)
             {
                 

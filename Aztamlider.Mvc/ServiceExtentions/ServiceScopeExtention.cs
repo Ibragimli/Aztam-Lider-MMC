@@ -11,6 +11,7 @@ using Aztamlider.Services.Services.Implementations.Area.ContactUs;
 using Aztamlider.Services.Services.Implementations.Area.Documents;
 using Aztamlider.Services.Services.Implementations.Area.ImageSettings;
 using Aztamlider.Services.Services.Implementations.Area.LanguageBases;
+using Aztamlider.Services.Services.Implementations.Area.Loggers;
 using Aztamlider.Services.Services.Implementations.Area.Login;
 using Aztamlider.Services.Services.Implementations.Area.MainSliders;
 using Aztamlider.Services.Services.Implementations.Area.Partners;
@@ -27,6 +28,7 @@ using Aztamlider.Services.Services.Interfaces.Area.Documents;
 using Aztamlider.Services.Services.Interfaces.Area.EmailSettings;
 using Aztamlider.Services.Services.Interfaces.Area.ImageSettings;
 using Aztamlider.Services.Services.Interfaces.Area.LanguageBases;
+using Aztamlider.Services.Services.Interfaces.Area.Loggers;
 using Aztamlider.Services.Services.Interfaces.Area.Login;
 using Aztamlider.Services.Services.Interfaces.Area.MainSliders;
 using Aztamlider.Services.Services.Interfaces.Area.Partners;
@@ -130,6 +132,10 @@ namespace Aztamlider.Mvc.ServiceExtentions
             services.AddScoped<IAdminServiceNameDeleteServices, AdminServiceNameDeleteServices>();
             services.AddScoped<IAdminServiceNameEditServices, AdminServiceNameEditServices>();
             services.AddScoped<IAdminServiceNameIndexServices, AdminServiceNameIndexServices>();
+
+            services.AddScoped<IAdminLoggerIndexServices, AdminLoggerIndexServices>();
+            services.AddScoped<ILoggerServices, LoggerServices>();
+
 
             services.AddScoped<ILayoutServices, LayoutServices>();
             services.AddScoped<ICareerServices, CareerServices>();

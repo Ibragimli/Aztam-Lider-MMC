@@ -6,7 +6,10 @@ using Aztamlider.Services.Helper;
 using Aztamlider.Services.HelperService.Interfaces;
 using Aztamlider.Services.Services.Interfaces.Area.Documents;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.Editing;
+using Microsoft.EntityFrameworkCore;
 
 namespace Aztamlider.Mvc.Areas.manage.Controllers
 {
@@ -16,14 +19,18 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
 
     public class DocumentController : Controller
     {
+        private readonly UserManager<AppUser> _userManager;
+        private readonly ILoggerServices _loggerServices;
         private readonly IAdminDocumentIndexServices _adminDocumentIndexServices;
         private readonly IManageImageHelper _manageImageHelper;
         private readonly IAdminDocumentDeleteServices _adminDocumentDeleteServices;
         private readonly IAdminDocumentEditServices _adminDocumentEditServices;
         private readonly IAdminDocumentCreateServices _adminDocumentCreateServices;
 
-        public DocumentController(IAdminDocumentIndexServices adminDocumentIndexServices, IManageImageHelper manageImageHelper, IAdminDocumentDeleteServices adminDocumentDeleteServices, IAdminDocumentEditServices adminDocumentEditServices, IAdminDocumentCreateServices adminDocumentCreateServices)
+        public DocumentController(UserManager<AppUser> userManager, ILoggerServices loggerServices, IAdminDocumentIndexServices adminDocumentIndexServices, IManageImageHelper manageImageHelper, IAdminDocumentDeleteServices adminDocumentDeleteServices, IAdminDocumentEditServices adminDocumentEditServices, IAdminDocumentCreateServices adminDocumentCreateServices)
         {
+            _userManager = userManager;
+            _loggerServices = loggerServices;
             _adminDocumentIndexServices = adminDocumentIndexServices;
             _manageImageHelper = manageImageHelper;
             _adminDocumentDeleteServices = adminDocumentDeleteServices;
@@ -64,10 +71,13 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
         {
             DocumentCreateDto DocumentDto = new DocumentCreateDto();
 
-
             try
             {
                 var Document = await _adminDocumentCreateServices.CreateDocument(DocumentCreateDto);
+
+                //Logger
+                AppUser user = await _userManager.Users.FirstOrDefaultAsync(x => x.UserName == User.Identity.Name && x.IsAdmin);
+                await _loggerServices.LoggerCreate("Document", "Create", user.FullName, user.UserName, Document.Name);
             }
             catch (ItemNullException ex)
             {
@@ -118,6 +128,7 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
                     Document = await _adminDocumentEditServices.GetDocument(id),
                 };
 
+
             }
             catch (NotFoundException)
             {
@@ -153,8 +164,12 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
                     Document = await _adminDocumentEditServices.GetDocument(Document.Id),
                 };
 
-
                 await _adminDocumentEditServices.EditDocument(Document);
+
+                //Logger
+                AppUser user = await _userManager.Users.FirstOrDefaultAsync(x => x.UserName == User.Identity.Name && x.IsAdmin);
+                await _loggerServices.LoggerCreate("Document", "Edit", user.FullName, user.UserName, DocumentEditVM.Document.Name);
+                //Logger
             }
 
             catch (NotFoundException)
@@ -215,6 +230,11 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
             try
             {
                 await _adminDocumentDeleteServices.DeleteDocument(id);
+                
+                //Logger
+                var product = await _adminDocumentEditServices.GetDocument(id);
+                AppUser user = await _userManager.Users.FirstOrDefaultAsync(x => x.UserName == User.Identity.Name && x.IsAdmin);
+                await _loggerServices.LoggerCreate("Document", "Edit", user.FullName, user.UserName, product.Name);
             }
             catch (ItemNotFoundException ex)
             {

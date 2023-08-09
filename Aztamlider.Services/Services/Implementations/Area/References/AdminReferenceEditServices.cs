@@ -66,14 +66,24 @@ namespace Aztamlider.Services.Services.Implementations.Area.References
                 oldReference.ServiceNameId = Reference.ServiceNameId;
                 checkBool = true;
             }
-            if (oldReference.Location != Reference.Location)
+            if (oldReference.LocationAz != Reference.LocationAz)
             {
-                oldReference.Location = Reference.Location;
+                oldReference.LocationAz = Reference.LocationAz;
                 checkBool = true;
             }
-            if (oldReference.BuildingType != Reference.BuildingType)
+            if (oldReference.LocationEn != Reference.LocationEn)
             {
-                oldReference.BuildingType = Reference.BuildingType;
+                oldReference.LocationEn = Reference.LocationEn;
+                checkBool = true;
+            }
+            if (oldReference.BuildingTypeAz != Reference.BuildingTypeAz)
+            {
+                oldReference.BuildingTypeAz = Reference.BuildingTypeAz;
+                checkBool = true;
+            }
+            if (oldReference.BuildingTypeEn != Reference.BuildingTypeEn)
+            {
+                oldReference.BuildingTypeEn = Reference.BuildingTypeEn;
                 checkBool = true;
             }
             if (oldReference.SquareMetr != Reference.SquareMetr)
@@ -239,11 +249,19 @@ namespace Aztamlider.Services.Services.Implementations.Area.References
                 throw new ValueFormatExpception("Referans tarixinin uzunluğu maksimum 50 ola bilər");
             }
 
-            if (Reference.Location.Length > 120)
+            if (Reference.LocationAz.Length > 120)
             {
                 throw new ValueFormatExpception("Referans location uzunluğu maksimum 120 ola bilər");
             }
-            if (Reference.BuildingType.Length > 150)
+            if (Reference.LocationEn.Length > 120)
+            {
+                throw new ValueFormatExpception("Referans location uzunluğu maksimum 120 ola bilər");
+            }
+            if (Reference.BuildingTypeEn.Length > 150)
+            {
+                throw new ValueFormatExpception("Referans bina növünün uzunluğu maksimum 150 ola bilər");
+            }
+            if (Reference.BuildingTypeAz.Length > 150)
             {
                 throw new ValueFormatExpception("Referans bina növünün uzunluğu maksimum 150 ola bilər");
             }

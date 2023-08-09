@@ -1,39 +1,37 @@
-const referenceSlide = document.querySelectorAll('.refInfoImageBox');
-const referencePrevBtn = document.querySelector('.prev-reference-btn');
-const referenceNextBtn = document.querySelector('.next-reference-btn');
-let referenceCurrentSlide = 0;
-let referencesSlideInterval;
+document.addEventListener("DOMContentLoaded", function () {
+    var count = 0;
+    var refImageBoxes = document.querySelectorAll(".refInfoImageBox");
+    var prevBtn = document.querySelector(".prev-reference-btn");
+    var nextBtn = document.querySelector(".next-reference-btn");
 
-//// İlk slaytı göster
-//referenceSlide[referenceCurrentSlide].style.display = 'block';
+    function showSlide(index) {
+        for (var i = 0; i < refImageBoxes.length; i++) {
+            refImageBoxes[i].style.display = "none";
+        }
+        refImageBoxes[index].style.display = "block";
 
+        if (refImageBoxes.length <= 1) {
+            prevBtn.style.display = "none";
+            nextBtn.style.display = "none";
+        } else {
+            prevBtn.style.display = "block";
+            nextBtn.style.display = "block";
+        }
+    }
 
-// Slaytı bir sonraki slayta geçiren fonksiyon
-function nextSlide() {
-    referenceSlide[referenceCurrentSlide].style.display = 'none';
-    referenceCurrentSlide = (referenceCurrentSlide + 1) % referenceSlide.length;
-    referenceSlide[referenceCurrentSlide].style.display = 'block';
-}
+    function nextSlide() {
+        count = (count + 1) % refImageBoxes.length;
+        showSlide(count);
+    }
 
-// Önceki slayta geç
-referencePrevBtn.addEventListener('click', function () {
-    referenceSlide[referenceCurrentSlide].style.display = 'none';
-    referenceCurrentSlide = (referenceCurrentSlide - 1 + referenceSlide.length) % referenceSlide.length;
-    referenceSlide[referenceCurrentSlide].style.display = 'block';
-    clearInterval(referencesSlideInterval); // Ok tuşlarına tıklandığında otomatik dönme işlemini durdur
+    function prevSlide() {
+        count = (count - 1 + refImageBoxes.length) % refImageBoxes.length;
+        showSlide(count);
+    }
+
+    prevBtn.addEventListener("click", prevSlide);
+    nextBtn.addEventListener("click", nextSlide);
+
+    // İlk slaydı göster
+    showSlide(count);
 });
-
-// Sonraki slayta geç
-referenceNextBtn.addEventListener('click', function () {
-    referenceSlide[referenceCurrentSlide].style.display = 'none';
-    referenceCurrentSlide = (referenceCurrentSlide + 1) % referenceSlide.length;
-    referenceSlide[referenceCurrentSlide].style.display = 'block';
-    clearInterval(referencesSlideInterval); // Ok tuşlarına tıklandığında otomatik dönme işlemini durdur
-});
-
-// Resimler varsa ok tuşlarını gizle
-if (referenceSlide.length <= 1) {
-    referencePrevBtn.style.display = 'none';
-    referenceNextBtn.style.display = 'none';
-}
-
