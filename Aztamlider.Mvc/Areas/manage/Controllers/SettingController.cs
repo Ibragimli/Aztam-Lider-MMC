@@ -8,20 +8,27 @@ using System.Data;
 using Aztamlider.Services.Dtos.Area;
 using Aztamlider.Services.CustomExceptions;
 using Aztamlider.Services.Services.Interfaces.Area.Settings;
+using Aztamlider.Services.HelperService.Interfaces;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace Aztamlider.Mvc.Areas.manage.Controllers
 {
     [Area("manage")]
-    //[Authorize(Roles = "SuperAdmin,Editor")]
+    [Authorize(Roles = "SuperAdmin")]
 
     public class SettingController : Controller
     {
+        private readonly ILoggerServices _loggerServices;
+        private readonly UserManager<AppUser> _userManager;
         private readonly DataContext _context;
         private readonly ISettingEditServices _SettingEditServices;
         private readonly ISettingIndexServices _SettingIndexServices;
 
-        public SettingController(DataContext context, ISettingEditServices SettingEditServices, ISettingIndexServices SettingIndexServices)
+        public SettingController(ILoggerServices loggerServices, UserManager<AppUser> userManager, DataContext context, ISettingEditServices SettingEditServices, ISettingIndexServices SettingIndexServices)
         {
+            _loggerServices = loggerServices;
+            _userManager = userManager;
             _context = context;
             _SettingEditServices = SettingEditServices;
             _SettingIndexServices = SettingIndexServices;
@@ -63,14 +70,26 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
             try
             {
                 await _SettingEditServices.SettingEdit(SettingEdit);
+
+                //Logger
+                var product = await _SettingEditServices.GetSearch(SettingEdit.Id);
+                AppUser user = User.Identity.IsAuthenticated ? _userManager.Users.FirstOrDefault(x => x.UserName == User.Identity.Name && x.IsAdmin) : null;
+                if (user == null)
+                    throw new UserNotFoundException("Error bas verdi!");
+                await _loggerServices.LoggerCreate("Setting", "Edit", user.FullName, user.UserName, product.Key);
             }
             catch (ValueFormatExpception ex)
+            {
+                ModelState.AddModelError("", ex.Message);
+                return View(SettingEdit);
+            }
+            catch (ItemNotFoundException ex)
             {
 
                 ModelState.AddModelError("", ex.Message);
                 return View(SettingEdit);
             }
-            catch (ItemNotFoundException ex)
+            catch (UserNotFoundException ex)
             {
 
                 ModelState.AddModelError("", ex.Message);

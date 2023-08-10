@@ -7,23 +7,29 @@ using Aztamlider.Services.CustomExceptions;
 using Aztamlider.Services.Helper;
 using Aztamlider.Services.Dtos.Area;
 using Aztamlider.Services.Services.Interfaces.Area.ImageSettings;
+using Aztamlider.Services.HelperService.Interfaces;
+using Microsoft.AspNetCore.Identity;
 
 namespace Aztamlider.Mvc.Areas.manage.Controllers
 {
 
     [Area("manage")]
-    //[Authorize(Roles = "SuperAdmin")]
+    [Authorize(Roles = "SuperAdmin")]
     public class ImageSettingController : Controller
     {
+        private readonly ILoggerServices _loggerServices;
+        private readonly UserManager<AppUser> _userManager;
         private readonly DataContext _context;
         private readonly IImageSettingEditServices _ImageSettingEditServices;
         private readonly IImageSettingIndexServices _ImageSettingIndexServices;
 
-        public ImageSettingController(DataContext context, IImageSettingEditServices ImageSettingEditServices, IImageSettingIndexServices ImageSettingIndexServices)
+        public ImageSettingController(ILoggerServices loggerServices, UserManager<AppUser> userManager, DataContext context, IImageSettingEditServices ImageSettingEditServices, IImageSettingIndexServices ImageSettingIndexServices)
         {
+            _loggerServices = loggerServices;
+            _userManager = userManager;
             _context = context;
-            _ImageSettingEditServices =ImageSettingEditServices;
-            _ImageSettingIndexServices =ImageSettingIndexServices;
+            _ImageSettingEditServices = ImageSettingEditServices;
+            _ImageSettingIndexServices = ImageSettingIndexServices;
         }
         public IActionResult Index(int page = 1, string search = null)
         {
@@ -62,6 +68,12 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
             try
             {
                 await _ImageSettingEditServices.ImageSettingEdit(ImageSettingEdit);
+
+                //Logger
+                AppUser user = User.Identity.IsAuthenticated ? _userManager.Users.FirstOrDefault(x => x.UserName == User.Identity.Name && x.IsAdmin) : null;
+                if (user == null)
+                    throw new UserNotFoundException("Error bas verdi!");
+                await _loggerServices.LoggerCreate("ImageSetting", "Edit", user.FullName, user.UserName, ImageSettingEdit.Key);
             }
             catch (ValueFormatExpception ex)
             {
@@ -75,6 +87,13 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
                 ModelState.AddModelError("", ex.Message);
                 return View(ImageSettingEdit);
             }
+            catch (UserNotFoundException ex)
+            {
+
+                ModelState.AddModelError("", ex.Message);
+                return View(ImageSettingEdit);
+            }
+          
             catch (Exception ex)
             {
 

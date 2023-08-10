@@ -1,23 +1,33 @@
-﻿using Aztamlider.Mvc.Areas.manage.ViewModels;
+﻿using Aztamlider.Core.Entites;
+using Aztamlider.Mvc.Areas.manage.ViewModels;
 using Aztamlider.Services.CustomExceptions;
 using Aztamlider.Services.Dtos.Area;
 using Aztamlider.Services.Helper;
+using Aztamlider.Services.HelperService.Interfaces;
 using Aztamlider.Services.Services.Interfaces.Area.RoleManagers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Data;
 
 namespace Aztamlider.Mvc.Areas.manage.Controllers
 {
     [Area("manage")]
+    [Authorize(Roles = "SuperAdmin")]
+
     public class RoleManagerController : Controller
     {
+        private readonly ILoggerServices _loggerServices;
+        private readonly UserManager<AppUser> _userManager;
         private readonly IAdminRoleManagerIndexServices _adminRoleManagerIndexServices;
         private readonly IAdminRoleManagerDeleteServices _adminRoleManagerDeleteServices;
         private readonly IAdminRoleManagerEditServices _adminRoleManagerEditServices;
         private readonly IAdminRoleManagerCreateServices _adminRoleManagerCreateServices;
 
-        public RoleManagerController(IAdminRoleManagerIndexServices adminRoleManagerIndexServices, IAdminRoleManagerDeleteServices adminRoleManagerDeleteServices, IAdminRoleManagerEditServices adminRoleManagerEditServices, IAdminRoleManagerCreateServices adminRoleManagerCreateServices)
+        public RoleManagerController(ILoggerServices loggerServices, UserManager<AppUser> userManager, IAdminRoleManagerIndexServices adminRoleManagerIndexServices, IAdminRoleManagerDeleteServices adminRoleManagerDeleteServices, IAdminRoleManagerEditServices adminRoleManagerEditServices, IAdminRoleManagerCreateServices adminRoleManagerCreateServices)
         {
+            _loggerServices = loggerServices;
+            _userManager = userManager;
             _adminRoleManagerIndexServices = adminRoleManagerIndexServices;
             _adminRoleManagerDeleteServices = adminRoleManagerDeleteServices;
             _adminRoleManagerEditServices = adminRoleManagerEditServices;
@@ -51,14 +61,20 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
 
             return View(roleManagerCreateDto);
         }
+
         [ValidateAntiForgeryToken]
         [HttpPost]
         public async Task<IActionResult> Create(RoleManagerCreateDto roleManagerCreateDto)
         {
-
             try
             {
                 await _adminRoleManagerCreateServices.CreateRoleManager(roleManagerCreateDto);
+
+                //Logger
+                AppUser user = User.Identity.IsAuthenticated ? _userManager.Users.FirstOrDefault(x => x.UserName == User.Identity.Name && x.IsAdmin) : null;
+                if (user == null)
+                    throw new UserNotFoundException("Error bas verdi!");
+                await _loggerServices.LoggerCreate("RoleManager", "Create", user.FullName, user.UserName, roleManagerCreateDto.Role);
             }
             catch (ItemNullException ex)
             {
@@ -66,6 +82,11 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
                 return View(roleManagerCreateDto);
             }
             catch (ItemNotFoundException ex)
+            {
+                ModelState.AddModelError("", ex.Message);
+                return View(roleManagerCreateDto);
+            }
+            catch (UserNotFoundException ex)
             {
                 ModelState.AddModelError("", ex.Message);
                 return View(roleManagerCreateDto);
@@ -137,7 +158,7 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
         public async Task<IActionResult> Edit(RoleManagerEditDto roleManagerEditDto)
         {
             var roleManagerExist = new RoleManagerEditDto();
-          
+
             try
             {
                 var role = await _adminRoleManagerEditServices.GetRoleManager(roleManagerEditDto.Id);
@@ -147,6 +168,13 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
                     RoleName = role.Name
                 };
                 await _adminRoleManagerEditServices.EditRoleManager(roleManagerEditDto);
+
+                //Logger
+                var product = await _adminRoleManagerEditServices.GetRoleManager(roleManagerEditDto.Id);
+                AppUser user = User.Identity.IsAuthenticated ? _userManager.Users.FirstOrDefault(x => x.UserName == User.Identity.Name && x.IsAdmin) : null;
+                if (user == null)
+                    throw new UserNotFoundException("Error bas verdi!");
+                await _loggerServices.LoggerCreate("RoleManager", "Edit", user.FullName, user.UserName, product.Name);
             }
 
             catch (NotFoundException)
@@ -155,6 +183,11 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
                 return RedirectToAction("Index", "notfound");
             }
             catch (ItemNullException ex)
+            {
+                ModelState.AddModelError("", ex.Message);
+                return View("Edit", roleManagerEditDto);
+            }
+            catch (UserNotFoundException ex)
             {
                 ModelState.AddModelError("", ex.Message);
                 return View("Edit", roleManagerEditDto);
@@ -199,8 +232,21 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
             try
             {
                 await _adminRoleManagerDeleteServices.DeleteRoleManager(id);
+
+                //Logger
+                var product = await _adminRoleManagerEditServices.GetRoleManager(id);
+                AppUser user = User.Identity.IsAuthenticated ? _userManager.Users.FirstOrDefault(x => x.UserName == User.Identity.Name && x.IsAdmin) : null;
+                if (user == null)
+                    throw new UserNotFoundException("Error bas verdi!");
+                await _loggerServices.LoggerCreate("RoleManager", "Delete", user.FullName, user.UserName, product.Name);
+
             }
             catch (ItemNotFoundException ex)
+            {
+                TempData["Error"] = (ex.Message);
+                return Ok();
+            }
+            catch (UserNotFoundException ex)
             {
                 TempData["Error"] = (ex.Message);
                 return Ok();

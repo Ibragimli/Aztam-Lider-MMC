@@ -6,26 +6,29 @@ using Aztamlider.Services.Helper;
 using Aztamlider.Services.HelperService.Interfaces;
 using Aztamlider.Services.Services.Interfaces.Area.Partners;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Aztamlider.Mvc.Areas.manage.Controllers
 {
 
     [Area("manage")]
-    //[Authorize(Roles = "SuperAdmin,Admin,Editor,Viewer")]
+    [Authorize(Roles = "SuperAdmin,Admin,Editor")]
 
     public class PartnerController : Controller
     {
+        private readonly ILoggerServices _loggerServices;
+        private readonly UserManager<AppUser> _userManager;
         private readonly IAdminPartnerIndexServices _adminPartnerIndexServices;
-        private readonly IManageImageHelper _manageImageHelper;
         private readonly IAdminPartnerDeleteServices _adminPartnerDeleteServices;
         private readonly IAdminPartnerEditServices _adminPartnerEditServices;
         private readonly IAdminPartnerCreateServices _adminPartnerCreateServices;
 
-        public PartnerController(IAdminPartnerIndexServices adminPartnerIndexServices, IManageImageHelper manageImageHelper, IAdminPartnerDeleteServices adminPartnerDeleteServices, IAdminPartnerEditServices adminPartnerEditServices, IAdminPartnerCreateServices adminPartnerCreateServices)
+        public PartnerController(ILoggerServices loggerServices, UserManager<AppUser> userManager, IAdminPartnerIndexServices adminPartnerIndexServices, IAdminPartnerDeleteServices adminPartnerDeleteServices, IAdminPartnerEditServices adminPartnerEditServices, IAdminPartnerCreateServices adminPartnerCreateServices)
         {
+            _loggerServices = loggerServices;
+            _userManager = userManager;
             _adminPartnerIndexServices = adminPartnerIndexServices;
-            _manageImageHelper = manageImageHelper;
             _adminPartnerDeleteServices = adminPartnerDeleteServices;
             _adminPartnerEditServices = adminPartnerEditServices;
             _adminPartnerCreateServices = adminPartnerCreateServices;
@@ -63,11 +66,14 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
         public async Task<IActionResult> Create(PartnerCreateDto PartnerCreateDto)
         {
             PartnerCreateDto PartnerDto = new PartnerCreateDto();
-
-
             try
             {
                 var Partner = await _adminPartnerCreateServices.CreatePartner(PartnerCreateDto);
+                //Logger
+                AppUser user = User.Identity.IsAuthenticated ? _userManager.Users.FirstOrDefault(x => x.UserName == User.Identity.Name && x.IsAdmin) : null;
+                if (user == null)
+                    throw new UserNotFoundException("Error bas verdi!");
+                await _loggerServices.LoggerCreate("Partner", "Create", user.FullName, user.UserName, PartnerCreateDto.ImageFile.FileName);
             }
             catch (ItemNullException ex)
             {
@@ -80,6 +86,11 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
                 return View(PartnerDto);
             }
             catch (ValueFormatExpception ex)
+            {
+                ModelState.AddModelError("", ex.Message);
+                return View(PartnerDto);
+            }
+            catch (UserNotFoundException ex)
             {
                 ModelState.AddModelError("", ex.Message);
                 return View(PartnerDto);
@@ -155,6 +166,13 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
 
 
                 await _adminPartnerEditServices.EditPartner(Partner);
+
+                //Logger
+                var product = await _adminPartnerEditServices.GetPartner(Partner.Id);
+                AppUser user = User.Identity.IsAuthenticated ? _userManager.Users.FirstOrDefault(x => x.UserName == User.Identity.Name && x.IsAdmin) : null;
+                if (user == null)
+                    throw new UserNotFoundException("Error bas verdi!");
+                await _loggerServices.LoggerCreate("Partner", "Edit", user.FullName, user.UserName, product.Image);
             }
 
             catch (NotFoundException)
@@ -168,6 +186,11 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
                 return View("Edit", PartnerEditVM);
             }
             catch (ValueFormatExpception ex)
+            {
+                ModelState.AddModelError("", ex.Message);
+                return View("Edit", PartnerEditVM);
+            }
+            catch (UserNotFoundException ex)
             {
                 ModelState.AddModelError("", ex.Message);
                 return View("Edit", PartnerEditVM);
@@ -215,6 +238,12 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
             try
             {
                 await _adminPartnerDeleteServices.DeletePartner(id);
+                //Logger
+                var product = await _adminPartnerEditServices.GetPartner(id);
+                AppUser user = User.Identity.IsAuthenticated ? _userManager.Users.FirstOrDefault(x => x.UserName == User.Identity.Name && x.IsAdmin) : null;
+                if (user == null)
+                    throw new UserNotFoundException("Error bas verdi!");
+                await _loggerServices.LoggerCreate("Partner", "Delete", user.FullName, user.UserName, product.Image);
             }
             catch (ItemNotFoundException ex)
             {
@@ -222,6 +251,11 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
                 return Ok();
             }
             catch (ItemUseException ex)
+            {
+                TempData["Error"] = (ex.Message);
+                return Ok();
+            }
+            catch (UserNotFoundException ex)
             {
                 TempData["Error"] = (ex.Message);
                 return Ok();

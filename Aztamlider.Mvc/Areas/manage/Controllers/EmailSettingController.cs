@@ -8,20 +8,27 @@ using Aztamlider.Services.CustomExceptions;
 using Aztamlider.Services.Helper;
 using Aztamlider.Services.Dtos.Area;
 using Aztamlider.Services.Services.Interfaces.Area.EmailSettings;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Aztamlider.Services.HelperService.Interfaces;
 
 namespace Aztamlider.Mvc.Areas.manage.Controllers
 {
     [Area("manage")]
-    //[Authorize(Roles = "SuperAdmin")]
+    [Authorize(Roles = "SuperAdmin")]
 
     public class EmailSettingController : Controller
     {
+        private readonly UserManager<AppUser> _userManager;
+        private readonly ILoggerServices _loggerServices;
         private readonly DataContext _context;
         private readonly IEmailSettingEditServices _emailSettingEditServices;
         private readonly IEmailSettingIndexServices _emailSettingIndexServices;
 
-        public EmailSettingController(DataContext context, IEmailSettingEditServices emailSettingEditServices, IEmailSettingIndexServices emailSettingIndexServices)
+        public EmailSettingController(UserManager<AppUser> userManager, ILoggerServices loggerServices, DataContext context, IEmailSettingEditServices emailSettingEditServices, IEmailSettingIndexServices emailSettingIndexServices)
         {
+            _userManager = userManager;
+            _loggerServices = loggerServices;
             _context = context;
             _emailSettingEditServices = emailSettingEditServices;
             _emailSettingIndexServices = emailSettingIndexServices;
@@ -63,6 +70,14 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
             try
             {
                 await _emailSettingEditServices.EmailSettingEdit(EmailSettingEdit);
+
+                //Logger
+                var emailSetting = await _emailSettingEditServices.GetSearch(EmailSettingEdit.Id);
+                AppUser user = User.Identity.IsAuthenticated ? _userManager.Users.FirstOrDefault(x => x.UserName == User.Identity.Name && x.IsAdmin) : null;
+                if (user == null)
+                    throw new UserNotFoundException("Error bas verdi!");
+                await _loggerServices.LoggerCreate("EmailSetting", "Edit", user.FullName, user.UserName, EmailSettingEdit.Key);
+
             }
             catch (ValueFormatExpception ex)
             {
@@ -76,12 +91,19 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
                 ModelState.AddModelError("", ex.Message);
                 return View(EmailSettingEdit);
             }
+            catch (UserNotFoundException ex)
+            {
+
+                ModelState.AddModelError("", ex.Message);
+                return View(EmailSettingEdit);
+            }
             catch (Exception ex)
             {
 
                 ModelState.AddModelError("", ex.Message);
                 return View(EmailSettingEdit);
             }
+
             TempData["Success"] = ("Proses uğurlu oldu!");
             return RedirectToAction("index", "EmailSetting");
         }

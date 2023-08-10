@@ -6,23 +6,28 @@ using Aztamlider.Services.Helper;
 using Aztamlider.Services.HelperService.Interfaces;
 using Aztamlider.Services.Services.Interfaces.Area.ServiceNames;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Aztamlider.Mvc.Areas.manage.Controllers
 {
 
     [Area("manage")]
-    //[Authorize(Roles = "SuperAdmin,Admin,Editor,Viewer")]
+    [Authorize(Roles = "SuperAdmin,Admin,Editor")]
 
     public class ServiceNameController : Controller
     {
+        private readonly ILoggerServices _loggerServices;
+        private readonly UserManager<AppUser> _userManager;
         private readonly IAdminServiceNameIndexServices _adminServiceNameIndexServices;
         private readonly IAdminServiceNameDeleteServices _adminServiceNameDeleteServices;
         private readonly IAdminServiceNameEditServices _adminServiceNameEditServices;
         private readonly IAdminServiceNameCreateServices _adminServiceNameCreateServices;
 
-        public ServiceNameController(IAdminServiceNameIndexServices adminServiceNameIndexServices, IAdminServiceNameDeleteServices adminServiceNameDeleteServices, IAdminServiceNameEditServices adminServiceNameEditServices, IAdminServiceNameCreateServices adminServiceNameCreateServices)
+        public ServiceNameController(ILoggerServices loggerServices, UserManager<AppUser> userManager, IAdminServiceNameIndexServices adminServiceNameIndexServices, IAdminServiceNameDeleteServices adminServiceNameDeleteServices, IAdminServiceNameEditServices adminServiceNameEditServices, IAdminServiceNameCreateServices adminServiceNameCreateServices)
         {
+            _loggerServices = loggerServices;
+            _userManager = userManager;
             _adminServiceNameIndexServices = adminServiceNameIndexServices;
             _adminServiceNameDeleteServices = adminServiceNameDeleteServices;
             _adminServiceNameEditServices = adminServiceNameEditServices;
@@ -66,6 +71,12 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
             try
             {
                 var ServiceName = await _adminServiceNameCreateServices.CreateServiceName(ServiceNameCreateDto);
+
+                //Logger
+                AppUser user = User.Identity.IsAuthenticated ? _userManager.Users.FirstOrDefault(x => x.UserName == User.Identity.Name && x.IsAdmin) : null;
+                if (user == null)
+                    throw new UserNotFoundException("Error bas verdi!");
+                await _loggerServices.LoggerCreate("ServiceName", "Create", user.FullName, user.UserName, ServiceNameCreateDto.NameAz);
             }
             catch (ItemNullException ex)
             {
@@ -77,11 +88,19 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
                 ModelState.AddModelError("", ex.Message);
                 return View(ServiceNameDto);
             }
+            catch (UserNotFoundException ex)
+            {
+                ModelState.AddModelError("", ex.Message);
+                return View(ServiceNameDto);
+            }
+
             catch (ValueFormatExpception ex)
             {
                 ModelState.AddModelError("", ex.Message);
                 return View(ServiceNameDto);
             }
+
+
             catch (ImageFormatException ex)
             {
                 ModelState.AddModelError("ServiceNameCreateDto.ImageFiles", ex.Message);
@@ -153,6 +172,13 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
 
 
                 await _adminServiceNameEditServices.EditServiceName(ServiceName);
+
+                //Logger
+                var product = await _adminServiceNameEditServices.GetServiceName(ServiceName.Id);
+                AppUser user = User.Identity.IsAuthenticated ? _userManager.Users.FirstOrDefault(x => x.UserName == User.Identity.Name && x.IsAdmin) : null;
+                if (user == null)
+                    throw new UserNotFoundException("Error bas verdi!");
+                await _loggerServices.LoggerCreate("ServiceName", "Edit", user.FullName, user.UserName, product.NameAz);
             }
 
             catch (NotFoundException)
@@ -161,6 +187,11 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
                 return RedirectToAction("Index", "notfound");
             }
             catch (ItemNullException ex)
+            {
+                ModelState.AddModelError("", ex.Message);
+                return View("Edit", ServiceNameEditVM);
+            }
+            catch (UserNotFoundException ex)
             {
                 ModelState.AddModelError("", ex.Message);
                 return View("Edit", ServiceNameEditVM);
@@ -200,6 +231,7 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
                 return View("Edit", ServiceNameEditVM);
 
             }
+
             catch (Exception)
             {
                 return RedirectToAction("Index", "notfound");
@@ -213,17 +245,30 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
             try
             {
                 await _adminServiceNameDeleteServices.DeleteServiceName(id);
+                //Logger
+                var product = await _adminServiceNameEditServices.GetServiceName(id);
+                AppUser user = User.Identity.IsAuthenticated ? _userManager.Users.FirstOrDefault(x => x.UserName == User.Identity.Name && x.IsAdmin) : null;
+                if (user == null)
+                    throw new UserNotFoundException("Error bas verdi!");
+                await _loggerServices.LoggerCreate("ServiceName", "Delete", user.FullName, user.UserName, product.NameAz);
             }
             catch (ItemNotFoundException ex)
             {
                 TempData["Error"] = (ex.Message);
                 return Ok();
             }
+            catch (UserNotFoundException ex)
+            {
+                TempData["Error"] = (ex.Message);
+                return Ok();
+            }
+
             catch (ItemUseException ex)
             {
                 TempData["Error"] = (ex.Message);
                 return Ok();
             }
+
             catch (Exception ex)
             {
                 return Ok(ex.Message);

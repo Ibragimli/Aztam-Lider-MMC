@@ -9,7 +9,7 @@ using Aztamlider.Services.Services.Interfaces.Area.ContactUs;
 namespace Aztamlider.Mvc.Areas.manage.Controllers
 {
     [Area("manage")]
-    //[Authorize(Roles = "SuperAdmin")]
+    [Authorize(Roles = "SuperAdmin,Admin,Viewer")]
 
     public class ContactUsController : Controller
     {

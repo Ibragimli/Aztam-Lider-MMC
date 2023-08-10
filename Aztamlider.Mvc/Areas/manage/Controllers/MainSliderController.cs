@@ -6,24 +6,29 @@ using Aztamlider.Services.Helper;
 using Aztamlider.Services.HelperService.Interfaces;
 using Aztamlider.Services.Services.Interfaces.Area.MainSliders;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Aztamlider.Mvc.Areas.manage.Controllers
 {
 
     [Area("manage")]
-    //[Authorize(Roles = "SuperAdmin,Admin,Editor,Viewer")]
+    [Authorize(Roles = "SuperAdmin,Admin,Editor")]
 
     public class MainSliderController : Controller
     {
+        private readonly ILoggerServices _loggerServices;
+        private readonly UserManager<AppUser> _userManager;
         private readonly IAdminMainSliderIndexServices _adminMainSliderIndexServices;
         private readonly IManageImageHelper _manageImageHelper;
         private readonly IAdminMainSliderDeleteServices _adminMainSliderDeleteServices;
         private readonly IAdminMainSliderEditServices _adminMainSliderEditServices;
         private readonly IAdminMainSliderCreateServices _adminMainSliderCreateServices;
 
-        public MainSliderController(IAdminMainSliderIndexServices adminMainSliderIndexServices, IManageImageHelper manageImageHelper, IAdminMainSliderDeleteServices adminMainSliderDeleteServices, IAdminMainSliderEditServices adminMainSliderEditServices, IAdminMainSliderCreateServices adminMainSliderCreateServices)
+        public MainSliderController(ILoggerServices loggerServices, UserManager<AppUser> userManager, IAdminMainSliderIndexServices adminMainSliderIndexServices, IManageImageHelper manageImageHelper, IAdminMainSliderDeleteServices adminMainSliderDeleteServices, IAdminMainSliderEditServices adminMainSliderEditServices, IAdminMainSliderCreateServices adminMainSliderCreateServices)
         {
+            _loggerServices = loggerServices;
+            _userManager = userManager;
             _adminMainSliderIndexServices = adminMainSliderIndexServices;
             _manageImageHelper = manageImageHelper;
             _adminMainSliderDeleteServices = adminMainSliderDeleteServices;
@@ -40,6 +45,7 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
                 {
                     MainSliders = PagenetedList<MainSlider>.Create(MainSlider, page, 5),
                 };
+
             }
             catch (NotFoundException)
             {
@@ -58,16 +64,21 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
 
             return View(MainSliderCreateDto);
         }
+
         [ValidateAntiForgeryToken]
         [HttpPost]
         public async Task<IActionResult> Create(MainSliderCreateDto MainSliderCreateDto)
         {
             MainSliderCreateDto MainSliderDto = new MainSliderCreateDto();
-
-
             try
             {
                 var MainSlider = await _adminMainSliderCreateServices.CreateMainSlider(MainSliderCreateDto);
+
+                //Logger
+                AppUser user = User.Identity.IsAuthenticated ? _userManager.Users.FirstOrDefault(x => x.UserName == User.Identity.Name && x.IsAdmin) : null;
+                if (user == null)
+                    throw new UserNotFoundException("Error bas verdi!");
+                await _loggerServices.LoggerCreate("MainSlider", "Create", user.FullName, user.UserName, MainSliderCreateDto.TitleAz);
             }
             catch (ItemNullException ex)
             {
@@ -75,6 +86,11 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
                 return View(MainSliderDto);
             }
             catch (ItemNotFoundException ex)
+            {
+                ModelState.AddModelError("", ex.Message);
+                return View(MainSliderDto);
+            }
+            catch (UserNotFoundException ex)
             {
                 ModelState.AddModelError("", ex.Message);
                 return View(MainSliderDto);
@@ -153,16 +169,26 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
                     MainSlider = await _adminMainSliderEditServices.GetMainSlider(MainSlider.Id),
                 };
 
-
                 await _adminMainSliderEditServices.EditMainSlider(MainSlider);
+
+                //Logger
+                var product = await _adminMainSliderEditServices.GetMainSlider(MainSlider.Id);
+                AppUser user = User.Identity.IsAuthenticated ? _userManager.Users.FirstOrDefault(x => x.UserName == User.Identity.Name && x.IsAdmin) : null;
+                if (user == null)
+                    throw new UserNotFoundException("Error bas verdi!");
+                await _loggerServices.LoggerCreate("MainSlider", "Edit", user.FullName, user.UserName, product.TitleAz);
             }
 
             catch (NotFoundException)
             {
-
                 return RedirectToAction("Index", "notfound");
             }
             catch (ItemNullException ex)
+            {
+                ModelState.AddModelError("", ex.Message);
+                return View("Edit", MainSliderEditVM);
+            }
+            catch (UserNotFoundException ex)
             {
                 ModelState.AddModelError("", ex.Message);
                 return View("Edit", MainSliderEditVM);
@@ -215,6 +241,13 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
             try
             {
                 await _adminMainSliderDeleteServices.DeleteMainSlider(id);
+
+                //Logger
+                var product = await _adminMainSliderEditServices.GetMainSlider(id);
+                AppUser user = User.Identity.IsAuthenticated ? _userManager.Users.FirstOrDefault(x => x.UserName == User.Identity.Name && x.IsAdmin) : null;
+                if (user == null)
+                    throw new UserNotFoundException("Error bas verdi!");
+                await _loggerServices.LoggerCreate("MainSlider", "Delete", user.FullName, user.UserName, product.TitleAz);
             }
             catch (ItemNotFoundException ex)
             {
@@ -222,6 +255,11 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
                 return Ok();
             }
             catch (ItemUseException ex)
+            {
+                TempData["Error"] = (ex.Message);
+                return Ok();
+            }
+            catch (UserNotFoundException ex)
             {
                 TempData["Error"] = (ex.Message);
                 return Ok();

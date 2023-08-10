@@ -6,23 +6,28 @@ using Aztamlider.Services.Helper;
 using Aztamlider.Services.HelperService.Interfaces;
 using Aztamlider.Services.Services.Interfaces.Area.References;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Data;
 
 namespace Aztamlider.Mvc.Areas.manage.Controllers
 {
     [Area("manage")]
-    //[Authorize(Roles = "SuperAdmin,Admin,Editor,Viewer")]
+    [Authorize(Roles = "SuperAdmin,Admin,Editor")]
 
     public class ReferenceController : Controller
     {
+        private readonly ILoggerServices _loggerServices;
+        private readonly UserManager<AppUser> _userManager;
         private readonly IAdminReferenceIndexServices _adminReferenceIndexServices;
         private readonly IManageImageHelper _manageImageHelper;
         private readonly IAdminReferenceDeleteServices _adminReferenceDeleteServices;
         private readonly IAdminReferenceEditServices _adminReferenceEditServices;
         private readonly IAdminReferenceCreateServices _adminReferenceCreateServices;
-        public ReferenceController(IAdminReferenceIndexServices adminReferenceIndexServices, IManageImageHelper manageImageHelper, IAdminReferenceDeleteServices adminReferenceDeleteServices, IAdminReferenceEditServices adminReferenceEditServices, IAdminReferenceCreateServices adminReferenceCreateServices)
+        public ReferenceController(ILoggerServices loggerServices, UserManager<AppUser> userManager, IAdminReferenceIndexServices adminReferenceIndexServices, IManageImageHelper manageImageHelper, IAdminReferenceDeleteServices adminReferenceDeleteServices, IAdminReferenceEditServices adminReferenceEditServices, IAdminReferenceCreateServices adminReferenceCreateServices)
         {
+            _loggerServices = loggerServices;
+            _userManager = userManager;
             _adminReferenceIndexServices = adminReferenceIndexServices;
             _manageImageHelper = manageImageHelper;
             _adminReferenceDeleteServices = adminReferenceDeleteServices;
@@ -59,7 +64,7 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
 
             try
             {
-                 referenceCreateVM = new ReferenceCreateViewModel()
+                referenceCreateVM = new ReferenceCreateViewModel()
                 {
                     ReferenceCreateDto = referenceCreateDto,
                     ServiceTypes = await _adminReferenceCreateServices.GetAllServiceTypes(),
@@ -102,6 +107,12 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
                 _manageImageHelper.ImagesCheck(ReferenceCreateDto.ImageFiles);
                 var Reference = await _adminReferenceCreateServices.CreateProject(ReferenceCreateDto);
                 await _adminReferenceCreateServices.CreateImageFormFile(ReferenceCreateDto.ImageFiles, Reference.Id);
+
+                //Logger
+                AppUser user = User.Identity.IsAuthenticated ? _userManager.Users.FirstOrDefault(x => x.UserName == User.Identity.Name && x.IsAdmin) : null;
+                if (user == null)
+                    throw new UserNotFoundException("Error bas verdi!");
+                await _loggerServices.LoggerCreate("Reference", "Create", user.FullName, user.UserName, ReferenceCreateDto.Name);
             }
             catch (ItemNullException ex)
             {
@@ -110,6 +121,11 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
             }
 
             catch (ValueFormatExpception ex)
+            {
+                ModelState.AddModelError("", ex.Message);
+                return View(referenceCreateVM);
+            }
+            catch (UserNotFoundException ex)
             {
                 ModelState.AddModelError("", ex.Message);
                 return View(referenceCreateVM);
@@ -185,6 +201,13 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
 
                 };
                 await _adminReferenceEditServices.EditReference(Reference);
+
+                //Logger
+                var product = await _adminReferenceEditServices.GetReference(Reference.Id);
+                AppUser user = User.Identity.IsAuthenticated ? _userManager.Users.FirstOrDefault(x => x.UserName == User.Identity.Name && x.IsAdmin) : null;
+                if (user == null)
+                    throw new UserNotFoundException("Error bas verdi!");
+                await _loggerServices.LoggerCreate("Reference", "Edit", user.FullName, user.UserName, product.Name);
             }
 
             catch (NotFoundException)
@@ -197,6 +220,11 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
                 return View("Edit", ReferenceEditVM);
             }
             catch (ImageNullException ex)
+            {
+                ModelState.AddModelError("", ex.Message);
+                return View("Edit", ReferenceEditVM);
+            }
+            catch (UserNotFoundException ex)
             {
                 ModelState.AddModelError("", ex.Message);
                 return View("Edit", ReferenceEditVM);
@@ -230,6 +258,13 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
             try
             {
                 await _adminReferenceDeleteServices.DeleteReference(id);
+
+                //Logger
+                var product = await _adminReferenceEditServices.GetReference(id);
+                AppUser user = User.Identity.IsAuthenticated ? _userManager.Users.FirstOrDefault(x => x.UserName == User.Identity.Name && x.IsAdmin) : null;
+                if (user == null)
+                    throw new UserNotFoundException("Error bas verdi!");
+                await _loggerServices.LoggerCreate("Reference", "Delete", user.FullName, user.UserName, product.Name);
             }
             catch (ItemNotFoundException ex)
             {
@@ -237,6 +272,11 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
                 return Ok();
             }
             catch (ItemUseException ex)
+            {
+                TempData["Error"] = (ex.Message);
+                return Ok();
+            }
+            catch (UserNotFoundException ex)
             {
                 TempData["Error"] = (ex.Message);
                 return Ok();

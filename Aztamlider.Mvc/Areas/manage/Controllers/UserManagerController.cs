@@ -3,7 +3,9 @@ using Aztamlider.Mvc.Areas.manage.ViewModels;
 using Aztamlider.Services.CustomExceptions;
 using Aztamlider.Services.Dtos.Area;
 using Aztamlider.Services.Helper;
+using Aztamlider.Services.HelperService.Interfaces;
 using Aztamlider.Services.Services.Interfaces.Area.UserManagers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -11,8 +13,10 @@ using Microsoft.EntityFrameworkCore;
 namespace Aztamlider.Mvc.Areas.manage.Controllers
 {
     [Area("manage")]
+    [Authorize(Roles = "SuperAdmin")]
     public class UserManagerController : Controller
     {
+        private readonly ILoggerServices _loggerServices;
         private readonly UserManager<AppUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IAdminUserManagerIndexServices _adminUserManagerIndexServices;
@@ -20,8 +24,9 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
         private readonly IAdminUserManagerEditServices _adminUserManagerEditServices;
         private readonly IAdminUserManagerCreateServices _adminUserManagerCreateServices;
 
-        public UserManagerController(UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager, IAdminUserManagerIndexServices adminUserManagerIndexServices, IAdminUserManagerDeleteServices adminUserManagerDeleteServices, IAdminUserManagerEditServices adminUserManagerEditServices, IAdminUserManagerCreateServices adminUserManagerCreateServices)
+        public UserManagerController(ILoggerServices loggerServices, UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager, IAdminUserManagerIndexServices adminUserManagerIndexServices, IAdminUserManagerDeleteServices adminUserManagerDeleteServices, IAdminUserManagerEditServices adminUserManagerEditServices, IAdminUserManagerCreateServices adminUserManagerCreateServices)
         {
+            _loggerServices = loggerServices;
             _userManager = userManager;
             _roleManager = roleManager;
             _adminUserManagerIndexServices = adminUserManagerIndexServices;
@@ -68,15 +73,19 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(UserManagerCreateDto userManagerCreateDto)
         {
-            UserManagerCreateViewModel userManagerCreateVM = new UserManagerCreateViewModel()
-            {
-                UserManagerCreateDto = new UserManagerCreateDto(),
-                Roles = await _adminUserManagerCreateServices.GetRoles()
-            };
-
+            UserManagerCreateViewModel userManagerCreateVM = new UserManagerCreateViewModel();
             try
             {
+                userManagerCreateVM = new UserManagerCreateViewModel()
+                {
+                    UserManagerCreateDto = new UserManagerCreateDto(),
+                    Roles = await _adminUserManagerCreateServices.GetRoles()
+                };
                 await _adminUserManagerCreateServices.CreateUserManager(userManagerCreateDto);
+
+                //Logger
+                AppUser user = await _userManager.Users.FirstOrDefaultAsync(x => x.UserName == User.Identity.Name && x.IsAdmin);
+                await _loggerServices.LoggerCreate("UserManager", "Create", user.FullName, user.UserName, userManagerCreateDto.Username);
             }
             catch (ItemNullException ex)
             {
@@ -84,6 +93,11 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
                 return View(userManagerCreateVM);
             }
             catch (ItemNotFoundException ex)
+            {
+                ModelState.AddModelError("", ex.Message);
+                return View(userManagerCreateVM);
+            }
+            catch (UserNotFoundException ex)
             {
                 ModelState.AddModelError("", ex.Message);
                 return View(userManagerCreateVM);
@@ -188,8 +202,12 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
                     Roles = await _adminUserManagerCreateServices.GetRoles(),
                     RoleName = await _adminUserManagerEditServices.RoleName(UserManagerEditDto.Id)
                 };
-            
+
                 await _adminUserManagerEditServices.EditUserManager(UserManagerEditDto);
+
+                //Logger
+                AppUser appUser = await _userManager.Users.FirstOrDefaultAsync(x => x.UserName == User.Identity.Name && x.IsAdmin);
+                await _loggerServices.LoggerCreate("UserManager", "Edit", appUser.FullName, appUser.UserName, UserManagerEditDto.Username);
             }
 
             catch (NotFoundException)
@@ -198,6 +216,11 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
                 return RedirectToAction("Index", "notfound");
             }
             catch (ItemNullException ex)
+            {
+                ModelState.AddModelError("", ex.Message);
+                return View("Edit", userManagerCreateVM);
+            }
+            catch (UserNotFoundException ex)
             {
                 ModelState.AddModelError("", ex.Message);
                 return View("Edit", userManagerCreateVM);
@@ -242,6 +265,11 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
             try
             {
                 await _adminUserManagerDeleteServices.DeleteUserManager(id);
+
+                //Logger
+                var product = await _adminUserManagerEditServices.GetUserManager(id);
+                AppUser user = await _userManager.Users.FirstOrDefaultAsync(x => x.UserName == User.Identity.Name && x.IsAdmin);
+                await _loggerServices.LoggerCreate("UserManager", "Delete", user.FullName, user.UserName, product.UserName);
             }
             catch (ItemNotFoundException ex)
             {
@@ -249,6 +277,11 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
                 return Ok();
             }
             catch (ItemUseException ex)
+            {
+                TempData["Error"] = (ex.Message);
+                return Ok();
+            }
+            catch (UserNotFoundException ex)
             {
                 TempData["Error"] = (ex.Message);
                 return Ok();

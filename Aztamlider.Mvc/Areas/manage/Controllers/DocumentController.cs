@@ -15,7 +15,7 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
 {
 
     [Area("manage")]
-    //[Authorize(Roles = "SuperAdmin,Admin,Editor,Viewer")]
+    [Authorize(Roles = "SuperAdmin,Admin,Editor")]
 
     public class DocumentController : Controller
     {
@@ -76,7 +76,9 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
                 var Document = await _adminDocumentCreateServices.CreateDocument(DocumentCreateDto);
 
                 //Logger
-                AppUser user = await _userManager.Users.FirstOrDefaultAsync(x => x.UserName == User.Identity.Name && x.IsAdmin);
+                AppUser user = User.Identity.IsAuthenticated ? _userManager.Users.FirstOrDefault(x => x.UserName == User.Identity.Name && x.IsAdmin) : null;
+                if (user == null)
+                    throw new UserNotFoundException("Error bas verdi!");
                 await _loggerServices.LoggerCreate("Document", "Create", user.FullName, user.UserName, Document.Name);
             }
             catch (ItemNullException ex)
@@ -85,6 +87,11 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
                 return View(DocumentDto);
             }
             catch (ItemNotFoundException ex)
+            {
+                ModelState.AddModelError("", ex.Message);
+                return View(DocumentDto);
+            }
+            catch (UserNotFoundException ex)
             {
                 ModelState.AddModelError("", ex.Message);
                 return View(DocumentDto);
@@ -129,6 +136,7 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
                 };
 
 
+
             }
             catch (NotFoundException)
             {
@@ -167,7 +175,9 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
                 await _adminDocumentEditServices.EditDocument(Document);
 
                 //Logger
-                AppUser user = await _userManager.Users.FirstOrDefaultAsync(x => x.UserName == User.Identity.Name && x.IsAdmin);
+                AppUser user = User.Identity.IsAuthenticated ? _userManager.Users.FirstOrDefault(x => x.UserName == User.Identity.Name && x.IsAdmin) : null;
+                if (user == null)
+                    throw new UserNotFoundException("Error bas verdi!");
                 await _loggerServices.LoggerCreate("Document", "Edit", user.FullName, user.UserName, DocumentEditVM.Document.Name);
                 //Logger
             }
@@ -178,6 +188,11 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
                 return RedirectToAction("Index", "notfound");
             }
             catch (ItemNullException ex)
+            {
+                ModelState.AddModelError("", ex.Message);
+                return View("Edit", DocumentEditVM);
+            }
+            catch (UserNotFoundException ex)
             {
                 ModelState.AddModelError("", ex.Message);
                 return View("Edit", DocumentEditVM);
@@ -230,10 +245,12 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
             try
             {
                 await _adminDocumentDeleteServices.DeleteDocument(id);
-                
+
                 //Logger
                 var product = await _adminDocumentEditServices.GetDocument(id);
-                AppUser user = await _userManager.Users.FirstOrDefaultAsync(x => x.UserName == User.Identity.Name && x.IsAdmin);
+                AppUser user = User.Identity.IsAuthenticated ? _userManager.Users.FirstOrDefault(x => x.UserName == User.Identity.Name && x.IsAdmin) : null;
+                if (user == null)
+                    throw new UserNotFoundException("Error bas verdi!");
                 await _loggerServices.LoggerCreate("Document", "Edit", user.FullName, user.UserName, product.Name);
             }
             catch (ItemNotFoundException ex)
@@ -242,6 +259,11 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
                 return Ok();
             }
             catch (ItemUseException ex)
+            {
+                TempData["Error"] = (ex.Message);
+                return Ok();
+            }
+            catch (UserNotFoundException ex)
             {
                 TempData["Error"] = (ex.Message);
                 return Ok();

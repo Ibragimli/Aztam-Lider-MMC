@@ -6,26 +6,29 @@ using Aztamlider.Services.Helper;
 using Aztamlider.Services.HelperService.Interfaces;
 using Aztamlider.Services.Services.Interfaces.Area.Projects;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Aztamlider.Mvc.Areas.manage.Controllers
 {
 
     [Area("manage")]
-    //[Authorize(Roles = "SuperAdmin,Admin,Editor,Viewer")]
+    [Authorize(Roles = "SuperAdmin,Admin,Editor")]
 
     public class ProjectController : Controller
     {
+        private readonly ILoggerServices _loggerServices;
+        private readonly UserManager<AppUser> _userManager;
         private readonly IAdminProjectIndexServices _adminProjectIndexServices;
-        private readonly IManageImageHelper _manageImageHelper;
         private readonly IAdminProjectDeleteServices _adminProjectDeleteServices;
         private readonly IAdminProjectEditServices _adminProjectEditServices;
         private readonly IAdminProjectCreateServices _adminProjectCreateServices;
 
-        public ProjectController(IAdminProjectIndexServices adminProjectIndexServices, IManageImageHelper manageImageHelper, IAdminProjectDeleteServices adminProjectDeleteServices, IAdminProjectEditServices adminProjectEditServices, IAdminProjectCreateServices adminProjectCreateServices)
+        public ProjectController(ILoggerServices loggerServices, UserManager<AppUser> userManager, IAdminProjectIndexServices adminProjectIndexServices, IAdminProjectDeleteServices adminProjectDeleteServices, IAdminProjectEditServices adminProjectEditServices, IAdminProjectCreateServices adminProjectCreateServices)
         {
+            _loggerServices = loggerServices;
+            _userManager = userManager;
             _adminProjectIndexServices = adminProjectIndexServices;
-            _manageImageHelper = manageImageHelper;
             _adminProjectDeleteServices = adminProjectDeleteServices;
             _adminProjectEditServices = adminProjectEditServices;
             _adminProjectCreateServices = adminProjectCreateServices;
@@ -68,6 +71,12 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
             try
             {
                 var Project = await _adminProjectCreateServices.CreateProject(ProjectCreateDto);
+
+                //Logger
+                AppUser user = User.Identity.IsAuthenticated ? _userManager.Users.FirstOrDefault(x => x.UserName == User.Identity.Name && x.IsAdmin) : null;
+                if (user == null)
+                    throw new UserNotFoundException("Error bas verdi!");
+                await _loggerServices.LoggerCreate("Project", "Create", user.FullName, user.UserName, ProjectCreateDto.TitleAz);
             }
             catch (ItemNullException ex)
             {
@@ -80,6 +89,11 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
                 return View(ProjectDto);
             }
             catch (ValueFormatExpception ex)
+            {
+                ModelState.AddModelError("", ex.Message);
+                return View(ProjectDto);
+            }
+            catch (UserNotFoundException ex)
             {
                 ModelState.AddModelError("", ex.Message);
                 return View(ProjectDto);
@@ -153,8 +167,14 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
                     Project = await _adminProjectEditServices.GetProject(Project.Id),
                 };
 
-
                 await _adminProjectEditServices.EditProject(Project);
+
+                //Logger
+                var product = await _adminProjectEditServices.GetProject(Project.Id);
+                AppUser user = User.Identity.IsAuthenticated ? _userManager.Users.FirstOrDefault(x => x.UserName == User.Identity.Name && x.IsAdmin) : null;
+                if (user == null)
+                    throw new UserNotFoundException("Error bas verdi!");
+                await _loggerServices.LoggerCreate("Project", "Edit", user.FullName, user.UserName, product.TitleAz);
             }
 
             catch (NotFoundException)
@@ -163,6 +183,11 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
                 return RedirectToAction("Index", "notfound");
             }
             catch (ItemNullException ex)
+            {
+                ModelState.AddModelError("", ex.Message);
+                return View("Edit", ProjectEditVM);
+            }
+            catch (UserNotFoundException ex)
             {
                 ModelState.AddModelError("", ex.Message);
                 return View("Edit", ProjectEditVM);
@@ -215,8 +240,20 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
             try
             {
                 await _adminProjectDeleteServices.DeleteProject(id);
+
+                //Logger
+                var product = await _adminProjectEditServices.GetProject(id);
+                AppUser user = User.Identity.IsAuthenticated ? _userManager.Users.FirstOrDefault(x => x.UserName == User.Identity.Name && x.IsAdmin) : null;
+                if (user == null)
+                    throw new UserNotFoundException("Error bas verdi!");
+                await _loggerServices.LoggerCreate("Project", "Delete", user.FullName, user.UserName, product.TitleAz);
             }
             catch (ItemNotFoundException ex)
+            {
+                TempData["Error"] = (ex.Message);
+                return Ok();
+            }
+            catch (UserNotFoundException ex)
             {
                 TempData["Error"] = (ex.Message);
                 return Ok();

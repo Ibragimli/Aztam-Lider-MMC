@@ -6,26 +6,29 @@ using Aztamlider.Services.Helper;
 using Aztamlider.Services.HelperService.Interfaces;
 using Aztamlider.Services.Services.Interfaces.Area.Services;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Data;
 
 namespace Aztamlider.Mvc.Areas.manage.Controllers
 {
     [Area("manage")]
-    //[Authorize(Roles = "SuperAdmin,Admin,Editor,Viewer")]
+    [Authorize(Roles = "SuperAdmin,Admin,Editor")]
 
     public class ServiceController : Controller
     {
+        private readonly ILoggerServices _loggerServices;
+        private readonly UserManager<AppUser> _userManager;
         private readonly IAdminServiceIndexServices _adminServiceIndexServices;
-        private readonly IManageImageHelper _manageImageHelper;
         private readonly IAdminServiceDeleteServices _adminServiceDeleteServices;
         private readonly IAdminServiceEditServices _adminServiceEditServices;
         private readonly IAdminServiceCreateServices _adminServiceCreateServices;
 
-        public ServiceController(IAdminServiceIndexServices adminServiceIndexServices, IManageImageHelper manageImageHelper, IAdminServiceDeleteServices adminServiceDeleteServices, IAdminServiceEditServices adminServiceEditServices, IAdminServiceCreateServices adminServiceCreateServices)
+        public ServiceController(ILoggerServices loggerServices, UserManager<AppUser> userManager, IAdminServiceIndexServices adminServiceIndexServices, IAdminServiceDeleteServices adminServiceDeleteServices, IAdminServiceEditServices adminServiceEditServices, IAdminServiceCreateServices adminServiceCreateServices)
         {
+            _loggerServices = loggerServices;
+            _userManager = userManager;
             _adminServiceIndexServices = adminServiceIndexServices;
-            _manageImageHelper = manageImageHelper;
             _adminServiceDeleteServices = adminServiceDeleteServices;
             _adminServiceEditServices = adminServiceEditServices;
             _adminServiceCreateServices = adminServiceCreateServices;
@@ -58,6 +61,7 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
             ServiceCreateDto serviceCreateDto = new ServiceCreateDto();
             return View(serviceCreateDto);
         }
+
         [ValidateAntiForgeryToken]
         [HttpPost]
         public async Task<IActionResult> Create(ServiceCreateDto serviceCreateDto)
@@ -66,6 +70,12 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
             {
                 var Service = await _adminServiceCreateServices.CreateProject(serviceCreateDto);
                 await _adminServiceCreateServices.CreateImageFormFile(serviceCreateDto.ImageFiles, Service.Id);
+
+                //Logger
+                AppUser user = User.Identity.IsAuthenticated ? _userManager.Users.FirstOrDefault(x => x.UserName == User.Identity.Name && x.IsAdmin) : null;
+                if (user == null)
+                    throw new UserNotFoundException("Error bas verdi!");
+                await _loggerServices.LoggerCreate("Service", "Create", user.FullName, user.UserName, serviceCreateDto.TitleAz);
             }
             catch (ItemNullException ex)
             {
@@ -78,6 +88,12 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
                 ModelState.AddModelError("", ex.Message);
                 return View();
             }
+            catch (UserNotFoundException ex)
+            {
+                ModelState.AddModelError("", ex.Message);
+                return View();
+            }
+          
             catch (ImageFormatException ex)
             {
                 ModelState.AddModelError("ServiceCreateDto.ImageFiles", ex.Message);
@@ -146,8 +162,14 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
                     ServiceImages = await _adminServiceEditServices.GetImages(Service.Id),
                 };
 
-
                 await _adminServiceEditServices.EditService(Service);
+
+                //Logger
+                var product = await _adminServiceEditServices.GetService(Service.Id);
+                AppUser user = User.Identity.IsAuthenticated ? _userManager.Users.FirstOrDefault(x => x.UserName == User.Identity.Name && x.IsAdmin) : null;
+                if (user == null)
+                    throw new UserNotFoundException("Error bas verdi!");
+                await _loggerServices.LoggerCreate("Service", "Edit", user.FullName, user.UserName, product.TitleAz);
             }
 
             catch (NotFoundException)
@@ -156,6 +178,12 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
                 return RedirectToAction("Index", "notfound");
             }
             catch (ItemNullException ex)
+            {
+                ModelState.AddModelError("", ex.Message);
+                return View("Edit", ServiceEditVM);
+
+            }
+            catch (UserNotFoundException ex)
             {
                 ModelState.AddModelError("", ex.Message);
                 return View("Edit", ServiceEditVM);
@@ -200,8 +228,20 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
             try
             {
                 await _adminServiceDeleteServices.DeleteService(id);
+
+                //Logger
+                var product = await _adminServiceEditServices.GetService(id);
+                AppUser user = User.Identity.IsAuthenticated ? _userManager.Users.FirstOrDefault(x => x.UserName == User.Identity.Name && x.IsAdmin) : null;
+                if (user == null)
+                    throw new UserNotFoundException("Error bas verdi!");
+                await _loggerServices.LoggerCreate("Service", "Delete", user.FullName, user.UserName, product.TitleAz);
             }
             catch (ItemNotFoundException ex)
+            {
+                TempData["Error"] = (ex.Message);
+                return Ok();
+            }
+            catch (UserNotFoundException ex)
             {
                 TempData["Error"] = (ex.Message);
                 return Ok();
