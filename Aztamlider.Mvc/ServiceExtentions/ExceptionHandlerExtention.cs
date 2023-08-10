@@ -47,7 +47,9 @@ namespace Aztamlider.Mvc.ServiceExtentions
                             code = 500;
                         if (contextFeature.Error is ValueFormatExpception)
                             code = 400;
-
+                        if (contextFeature.Error is UserPasswordResetException)
+                            code = 400;
+                        
                     }
 
                     context.Response.StatusCode = code;

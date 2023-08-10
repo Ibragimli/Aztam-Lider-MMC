@@ -173,20 +173,18 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
             catch (ItemAlreadyException ex)
             {
                 ModelState.AddModelError("", ex.Message);
-                return View("Index", roleManagerEditDto);
+                return View("Edit", roleManagerEditDto);
             }
             catch (ItemUseException ex)
             {
                 ModelState.AddModelError("", ex.Message);
-                return View("Index", roleManagerEditDto);
+                return View("Edit", roleManagerEditDto);
             }
-
 
             catch (ValueAlreadyExpception ex)
             {
                 ModelState.AddModelError("", ex.Message);
                 return View("Edit", roleManagerEditDto);
-
             }
             catch (Exception)
             {

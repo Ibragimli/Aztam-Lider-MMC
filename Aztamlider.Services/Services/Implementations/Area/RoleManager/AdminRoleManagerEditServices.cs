@@ -37,6 +37,7 @@ namespace Aztamlider.Services.Services.Implementations.Area.RoleManagers
             if (oldRoleManager.Name != roleManagerEditDto.RoleName)
             {
                 oldRoleManager.Name = roleManagerEditDto.RoleName;
+                oldRoleManager.NormalizedName = roleManagerEditDto.RoleName.ToUpper();
                 checkBool = true;
             }
 

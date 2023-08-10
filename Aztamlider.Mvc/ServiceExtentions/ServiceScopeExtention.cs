@@ -22,6 +22,7 @@ using Aztamlider.Services.Services.Implementations.Area.ServiceNames;
 using Aztamlider.Services.Services.Implementations.Area.Services;
 using Aztamlider.Services.Services.Implementations.Area.ServiceTypes;
 using Aztamlider.Services.Services.Implementations.Area.Settings;
+using Aztamlider.Services.Services.Implementations.Area.UserManagers;
 using Aztamlider.Services.Services.Implementations.User;
 using Aztamlider.Services.Services.Interfaces;
 using Aztamlider.Services.Services.Interfaces.Area.ContactUs;
@@ -40,6 +41,7 @@ using Aztamlider.Services.Services.Interfaces.Area.ServiceNames;
 using Aztamlider.Services.Services.Interfaces.Area.Services;
 using Aztamlider.Services.Services.Interfaces.Area.ServiceTypes;
 using Aztamlider.Services.Services.Interfaces.Area.Settings;
+using Aztamlider.Services.Services.Interfaces.Area.UserManagers;
 using Aztamlider.Services.Services.Interfaces.User;
 using MailKit;
 
@@ -139,6 +141,12 @@ namespace Aztamlider.Mvc.ServiceExtentions
             services.AddScoped<IAdminRoleManagerDeleteServices, AdminRoleManagerDeleteServices>();
             services.AddScoped<IAdminRoleManagerEditServices, AdminRoleManagerEditServices>();
             services.AddScoped<IAdminRoleManagerIndexServices, AdminRoleManagerIndexServices>();
+
+
+            services.AddScoped<IAdminUserManagerCreateServices, AdminUserManagerCreateServices>();
+            services.AddScoped<IAdminUserManagerDeleteServices, AdminUserManagerDeleteServices>();
+            services.AddScoped<IAdminUserManagerEditServices, AdminUserManagerEditServices>();
+            services.AddScoped<IAdminUserManagerIndexServices, AdminUserManagerIndexServices>();
 
             services.AddScoped<IAdminLoggerIndexServices, AdminLoggerIndexServices>();
             services.AddScoped<ILoggerServices, LoggerServices>();
