@@ -82,6 +82,9 @@ namespace Aztamlider.Data.Migrations
                     b.Property<bool>("IsDelete")
                         .HasColumnType("bit");
 
+                    b.Property<bool?>("License")
+                        .HasColumnType("bit");
+
                     b.Property<DateTime>("ModifiedDate")
                         .HasColumnType("datetime2");
 

@@ -33,7 +33,7 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
             _adminProjectEditServices = adminProjectEditServices;
             _adminProjectCreateServices = adminProjectCreateServices;
         }
-        public async Task<IActionResult> Index(int page = 1, string name = null)
+        public IActionResult Index(int page = 1, string name = null)
         {
             ProjectIndexViewModel ProjectIndexVM = new ProjectIndexViewModel();
             try
@@ -55,7 +55,7 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
             }
             return View(ProjectIndexVM);
         }
-        public async Task<IActionResult> Create()
+        public IActionResult Create()
         {
             ProjectCreateDto ProjectCreateDto = new ProjectCreateDto();
 

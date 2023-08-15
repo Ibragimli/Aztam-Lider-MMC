@@ -11,6 +11,7 @@ namespace Aztamlider.Core.Entites
     public class Document : BaseEntity
     {
         public string Name { get; set; }
+        public bool License { get; set; }
         public string Image { get; set; }
         [NotMapped]
         public IFormFile ImageFile { get; set; }

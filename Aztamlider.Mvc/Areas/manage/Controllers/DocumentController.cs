@@ -37,7 +37,7 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
             _adminDocumentEditServices = adminDocumentEditServices;
             _adminDocumentCreateServices = adminDocumentCreateServices;
         }
-        public async Task<IActionResult> Index(int page = 1, string name = null)
+        public IActionResult Index(int page = 1, string name = null)
         {
             DocumentIndexViewModel DocumentIndexVM = new DocumentIndexViewModel();
             try
@@ -59,7 +59,7 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
             }
             return View(DocumentIndexVM);
         }
-        public async Task<IActionResult> Create()
+        public IActionResult Create()
         {
             DocumentCreateDto DocumentCreateDto = new DocumentCreateDto();
 

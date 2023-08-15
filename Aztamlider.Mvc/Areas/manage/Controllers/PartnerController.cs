@@ -33,7 +33,7 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
             _adminPartnerEditServices = adminPartnerEditServices;
             _adminPartnerCreateServices = adminPartnerCreateServices;
         }
-        public async Task<IActionResult> Index(int page = 1, string name = null)
+        public IActionResult Index(int page = 1, string name = null)
         {
             PartnerIndexViewModel PartnerIndexVM = new PartnerIndexViewModel();
             try
@@ -55,7 +55,7 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
             }
             return View(PartnerIndexVM);
         }
-        public async Task<IActionResult> Create()
+        public IActionResult Create()
         {
             PartnerCreateDto PartnerCreateDto = new PartnerCreateDto();
 

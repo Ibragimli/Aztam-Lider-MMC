@@ -34,7 +34,7 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
             _adminReferenceEditServices = adminReferenceEditServices;
             _adminReferenceCreateServices = adminReferenceCreateServices;
         }
-        public async Task<IActionResult> Index(int page = 1, string name = null)
+        public IActionResult Index(int page = 1, string name = null)
         {
             ReferenceIndexViewModel ReferenceIndexVM = new ReferenceIndexViewModel();
             try

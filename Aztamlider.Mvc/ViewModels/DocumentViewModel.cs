@@ -6,6 +6,7 @@ namespace Aztamlider.Mvc.ViewModels
     {
         public IEnumerable<LanguageBase> LanguageBases { get; set; }
         public IEnumerable<Setting> Settings { get; set; }
-        public IEnumerable<Document> Documents { get; set; }
+        public IEnumerable<Document> Licenses { get; set; }
+        public IEnumerable<Document> Certificates { get; set; }
     }
 }

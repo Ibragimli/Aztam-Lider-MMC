@@ -45,6 +45,11 @@ namespace Aztamlider.Services.Services.Implementations.Area.Documents
                 checkBool = true;
             }
 
+            if (oldDocument.License != Document.License)
+            {
+                oldDocument.License = Document.License;
+                checkBool = true;
+            }
             oldDocument.ModifiedDate = DateTime.UtcNow.AddHours(4);
 
             if (checkBool)
@@ -63,8 +68,6 @@ namespace Aztamlider.Services.Services.Implementations.Area.Documents
             {
                 var posterImageFile = Document.ImageFile;
 
-
-
                 if (projectExist.Image == null) throw new ImageNullException("Şəkil tapılmadı!");
 
                 string filename = _manageImageHelper.FileSave(posterImageFile, "documents");
@@ -81,8 +84,6 @@ namespace Aztamlider.Services.Services.Implementations.Area.Documents
             if (Document.PDFFile != null)
             {
                 var pdfFile = Document.PDFFile;
-
-
 
                 if (projectExist.PDF == null) throw new ImageNullException("PDF tapılmadı!");
 

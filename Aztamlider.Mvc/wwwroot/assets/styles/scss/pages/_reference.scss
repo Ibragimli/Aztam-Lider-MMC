@@ -21,8 +21,13 @@
                             }
 
                             h1:hover {
-                                color: rgba(0, 0, 0, 0.623);
+                                color: white(153, 152, 152, 0.623) !important;
+                                background-color: rgba(12, 12, 12, 0.733);
 
+                                span {
+                                    color: white(153, 152, 152, 0.623);
+
+                                }
                             }
 
                             .activeReference {
@@ -52,6 +57,7 @@
                         margin-bottom: 20px;
                         height: 315px;
                         max-height: 310px;
+
                         .referenceImage {
                             overflow: hidden;
 

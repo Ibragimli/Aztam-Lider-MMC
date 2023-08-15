@@ -28,6 +28,13 @@
                                         <span asp-validation-for="Name" class="text-danger"></span>
                                     </div>
                                     <!-- Layihə Name   End -->
+                                    <!-- Layihə DescribeEn  Start -->
+                                    <div class="mb-3 posterName">
+                                        <label asp-for="License" class="form-label">License *</label>
+                                        <input class="form-check-input" asp-for="License" placeholder="...." /> @Html.DisplayNameFor(model => model.License)
+                                        <span asp-validation-for="License" class="text-danger"></span>
+                                    </div>
+                                    <!-- Layihə DescribeEn   End -->
 
                                     <div id="posterimage-box" class="posterimage-box row mb-3">
                                         <label asp-for="ImageFile" class="form-label">Document şəkli*</label>

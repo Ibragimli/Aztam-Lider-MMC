@@ -35,7 +35,6 @@
                         {
                             @Html.Raw(@slider.DescriptionEn)
                         }
-
                     </p>
                 </div>
                 <img src="~/uploads/mainsliders/@slider.Image" alt="">
@@ -86,6 +85,31 @@
             $("header").addClass("headerAddFixed");
         });
     </script>
+    <script>
+        window.addEventListener('load', function () {
+            var genislik = window.innerWidth; // Tarayıcı penceresi genişliğini al
+            var mainSliderDescElements = document.querySelectorAll('.mainSliderDesc'); // Tüm .mainSliderDesc elementlerini seç
+            var mainSliderTitleElements = document.querySelectorAll('.mainSliderTitle'); // Tüm .mainSliderDesc elementlerini seç
+
+            if (genislik < 992) {
+                mainSliderDescElements.forEach(function (mainSliderDescElement) {
+                    var brElements = mainSliderDescElement.querySelectorAll('br'); // mainSliderDesc içindeki tüm <br> etiketlerini seç
+
+                    brElements.forEach(function (brElement) {
+                        brElement.remove(); // <br> etiketlerini kaldır
+                    });
+                });
+                mainSliderTitleElements.forEach(function (mainSliderTitleElements) {
+                    var brElements = mainSliderTitleElements.querySelectorAll('br'); // mainSliderDesc içindeki tüm <br> etiketlerini seç
+
+                    brElements.forEach(function (brElement) {
+                        brElement.remove(); // <br> etiketlerini kaldır
+                    });
+                });
+            }
+        });
+
+    </script>
     <!-- mainSlider -->
     <script>
         // JavaScript kodu
@@ -111,7 +135,7 @@
                 images[currentImageIndex].classList.add("activeMainSlider");
             }
 
-            setInterval(rotateSlider, 5000);
+            setInterval(rotateSlider, 10000);
         });
 
     </script>

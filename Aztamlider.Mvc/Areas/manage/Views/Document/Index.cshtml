@@ -71,6 +71,7 @@
                                 <th>Şəkil</th>
                                 <th>Sənədin adı</th>
                                 <th>PDF</th>
+                                <th>License</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -86,6 +87,7 @@
                                     </td>
                                     <td class="text-center"><a target="_blank">@Document.Name</a></td>
                                     <td class="text-center"><a target="_blank" href="~/uploads/documents/@Document.PDF"><i style="font-size:25px; color:red;" class="fa-solid fa-file-pdf"></i></a></td>
+                                    <td class="text-center"><a target="_blank"><i class="fa-solid fa-@(Document.License == true ? "check":"xmark")"></i></a></td>
 
                                     <td class="text-center">
                                         <div class="d-flex justify-content-sm-around">

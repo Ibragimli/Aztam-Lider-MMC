@@ -31,11 +31,27 @@ namespace Aztamlider.Services.Services.Implementations.User
             return await _unitOfWork.SettingRepository.GetAllAsync(x => !x.IsDelete);
         }
 
-        public IQueryable<Reference> GetReferences(int serviceId)
+        public IQueryable<Reference> GetReferencesCompleted(int serviceId)
         {
             var name = "";
             var reference = _unitOfWork.ReferenceRepository.asQueryable();
-            reference = reference.Where(x => !x.IsDelete);
+            reference = reference.Where(x => !x.IsDelete && x.Status);
+            if (serviceId != 0)
+                reference = reference.Where(x => x.ServiceNameId == serviceId);
+            else
+            {
+                reference = reference.Where(x => !x.IsDelete);
+            }
+            if (name != null)
+                reference = reference.Where(i => EF.Functions.Like(i.Name, $"%{name}%"));
+            return reference;
+        }
+        public IQueryable<Reference> GetReferencesOthers(int serviceId)
+        {
+            var name = "";
+            var reference = _unitOfWork.ReferenceRepository.asQueryable();
+            reference = reference.Where(x => !x.IsDelete && !x.Status);
+
             if (serviceId != 0)
                 reference = reference.Where(x => x.ServiceNameId == serviceId);
             else
@@ -65,11 +81,11 @@ namespace Aztamlider.Services.Services.Implementations.User
             return await _unitOfWork.ServiceTypeRepository.GetAllAsync(x => !x.IsDelete);
 
         }
-        public async Task<IEnumerable<Reference>> GetReferencesCount()
+        public async Task<IEnumerable<Reference>> GetReferencesCompletedCount()
         {
-            return await _unitOfWork.ReferenceRepository.GetAllAsync(x => !x.IsDelete);
-
+            return await _unitOfWork.ReferenceRepository.GetAllAsync(x => !x.IsDelete && x.Status);
         }
+      
         public async Task<IEnumerable<ServiceName>> GetServiceNames()
         {
             return await _unitOfWork.ServiceNameRepository.GetAllAsync(x => !x.IsDelete);
@@ -79,6 +95,12 @@ namespace Aztamlider.Services.Services.Implementations.User
         public async Task<IEnumerable<Service>> GetServices()
         {
             return await _unitOfWork.ServiceRepository.GetAllAsync(x => !x.IsDelete);
+        }
+
+        public async Task<IEnumerable<Reference>> GetReferencesOtherCount()
+        {
+            return await _unitOfWork.ReferenceRepository.GetAllAsync(x => !x.IsDelete && !x.Status);
+
         }
     }
 }

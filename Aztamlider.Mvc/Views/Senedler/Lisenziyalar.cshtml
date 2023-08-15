@@ -1,0 +1,110 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    var language = _localization.Getkey("Language").Value;
+}
+@model DocumentViewModel
+
+<section id="breadCrumb">
+    <div class="container-web">
+        <div class="row">
+            <div class="col-lg-12 breadCrumbBox">
+                <ul>
+                    <li>
+                        <h1>
+                            @Model.LanguageBases.FirstOrDefault(x=>x.Key == "NavDocument"+language)?.Value
+                        </h1>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="document">
+    <div class="container-web">
+        <div class="row">
+            @foreach (var document in Model.Licenses)
+            {
+                <div class="col-lg-4 col-md-6 col-sm-6 col-6 documentBoxs">
+                    <div class="documentBox">
+                        <div class="imgDocumentBox">
+                            <img src="~/uploads/documents/@document.Image" alt="">
+                        </div>
+                        <div class="titleDocumentBox">
+                            <h1>@document.Name</h1>
+                        </div>
+                        <div class="btnDocumentBox ">
+                            <ul>
+                                <li>
+                                    <a target="_blank" href="~/uploads/documents/@document.PDF">
+                                        <i class="fa-regular fa-file-pdf"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a data-bs-toggle="modal" data-bs-target="#documentImageModal" href="#">
+                                        <i class="fa-solid fa-magnifying-glass-plus"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
+</section>
+<!-- Modal -->
+<div class="modal fade" id="documentImageModal" tabindex="-1" aria-labelledby="documentImageModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close " data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="slider">
+                    <div class="slides">
+                        @foreach (var item in Model.Licenses)
+                        {
+                            <img src="~/uploads/documents/@item.Image" alt="@item.Image">
+                        }
+                    </div>
+                    <button class="prev" onclick="changeSlide(-1)">&#10094;</button>
+                    <button class="next" onclick="changeSlide(1)">&#10095;</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@if (Model.Licenses?.Count() == 0)
+{
+    <script src="~/assets/js/copyRightWeb.js"></script>
+}
+
+<script>
+    let slideIndex = 0;
+
+    function changeSlide(n) {
+        showSlides(slideIndex += n);
+    }
+
+    function showSlides(n) {
+        const slides = document.getElementsByClassName("slides")[0].children;
+        if (n >= slides.length) {
+            slideIndex = 0;
+        } else if (n < 0) {
+            slideIndex = slides.length - 1;
+        }
+        for (let i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        slides[slideIndex].style.display = "block";
+    }
+
+    showSlides(slideIndex);
+
+</script>
+

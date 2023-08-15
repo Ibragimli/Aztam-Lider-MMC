@@ -18,6 +18,7 @@ header {
             color: black;
             font-weight: 500;
             display: inline-block;
+            margin-bottom: 0px;
         }
 
         .container-web {
@@ -78,6 +79,11 @@ header {
                         position: absolute;
                         top: 60px;
                         left: 0;
+                    }
+
+                    img {
+                        height: auto;
+                        width: 65%;
                     }
                 }
 
@@ -221,9 +227,13 @@ header {
 
                         .navbar-toggler {
                             font-size: 15px;
-                            margin-right: 10px;
+                            margin-right: 20px;
 
-                            .navbar-toggler-icon {}
+                            .navbar-toggler-icon {
+                                width: 19px;
+                                height: 31px;
+                            }
+                            
                         }
 
                         .offcanvas {
@@ -284,7 +294,7 @@ header {
 }
 
 .headerFixed {
-    position: fixed !important;
+    // position: fixed !important;
     top: 0;
     left: 0;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;

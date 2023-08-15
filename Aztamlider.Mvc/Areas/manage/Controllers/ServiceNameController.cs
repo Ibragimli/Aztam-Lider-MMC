@@ -33,7 +33,7 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
             _adminServiceNameEditServices = adminServiceNameEditServices;
             _adminServiceNameCreateServices = adminServiceNameCreateServices;
         }
-        public async Task<IActionResult> Index(int page = 1, string name = null)
+        public IActionResult Index(int page = 1, string name = null)
         {
             ServiceNameIndexViewModel ServiceNameIndexVM = new ServiceNameIndexViewModel();
             try
@@ -55,7 +55,7 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
             }
             return View(ServiceNameIndexVM);
         }
-        public async Task<IActionResult> Create()
+        public IActionResult Create()
         {
             ServiceNameCreateDto serviceNameCreateDto = new ServiceNameCreateDto();
 

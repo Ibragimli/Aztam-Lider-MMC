@@ -14,6 +14,7 @@ namespace Aztamlider.Services.Dtos.Area
     public class DocumentCreateDto
     {
         public string Name { get; set; }
+        public bool License { get; set; }
         public IFormFile ImageFile { get; set; }
         public IFormFile PDFFile { get; set; }
 

@@ -34,7 +34,7 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
             _adminServiceTypeEditServices = adminServiceTypeEditServices;
             _adminServiceTypeCreateServices = adminServiceTypeCreateServices;
         }
-        public async Task<IActionResult> Index(int page = 1, string name = null)
+        public IActionResult Index(int page = 1, string name = null)
         {
             ServiceTypeIndexViewModel ServiceTypeIndexVM = new ServiceTypeIndexViewModel();
             try
@@ -57,7 +57,7 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
             return View(ServiceTypeIndexVM);
         }
 
-        public async Task<IActionResult> Create()
+        public IActionResult Create()
         {
             ServiceTypeCreateDto ServiceTypeCreateDto = new ServiceTypeCreateDto();
 

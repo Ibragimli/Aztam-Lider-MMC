@@ -24,16 +24,23 @@ namespace Aztamlider.Services.Services.Implementations.User
 
         }
 
-        public async Task<IEnumerable<Document>> GetDocuments()
-        {
-            return await _unitOfWork.DocumentRepository.GetAllAsync(x => !x.IsDelete);
-
-        }
 
         public async Task<IEnumerable<Setting>> GetSettings()
         {
             return await _unitOfWork.SettingRepository.GetAllAsync(x => !x.IsDelete);
         }
 
+        public async Task<IEnumerable<Document>> GetDocumentLicenses()
+        {
+            return await _unitOfWork.DocumentRepository.GetAllAsync(x => !x.IsDelete && x.License);
+
+        }
+
+        public async Task<IEnumerable<Document>> GetDocumentCertificates()
+        {
+            return await _unitOfWork.DocumentRepository.GetAllAsync(x => !x.IsDelete && !x.License);
+
+
+        }
     }
 }

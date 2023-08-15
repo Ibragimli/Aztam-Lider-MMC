@@ -5,7 +5,8 @@ namespace Aztamlider.Mvc.ViewModels
 {
     public class ReferenceViewModel
     {
-        public PagenetedList<Reference> References { get; set; }
+        public PagenetedList<Reference> ReferencesCompleted { get; set; }
+        public PagenetedList<Reference> ReferencesOthers { get; set; }
         public Reference Reference { get; set; }
         public IEnumerable<ReferenceImage> ReferenceImage { get; set; }
         public IEnumerable<LanguageBase> LanguageBases { get; set; }

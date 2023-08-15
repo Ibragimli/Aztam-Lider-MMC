@@ -35,7 +35,7 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
             _adminUserManagerCreateServices = adminUserManagerCreateServices;
         }
 
-        public async Task<IActionResult> Index(int page = 1, string name = null)
+        public IActionResult Index(int page = 1, string name = null)
         {
             UserManagerIndexViewModel UserManagerIndexVM = new UserManagerIndexViewModel();
             try

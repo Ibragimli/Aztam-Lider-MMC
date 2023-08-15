@@ -11,7 +11,7 @@
                 <ul>
                     <li>
                         <h1>
-                            @Model.LanguageBases.FirstOrDefault(x=>x.Key == "NavAboutUs"+language)?.Value
+                            @Html.Raw(Model.LanguageBases.FirstOrDefault(x=>x.Key == "NavAboutUs"+language)?.Value)
                         </h1>
 
                     </li>
@@ -40,19 +40,31 @@
             </div>
             <div class="col-lg-7 aboutTextBox">
                 <p>
-                    @Model.LanguageBases.FirstOrDefault(x=>x.Key == "AboutDesc1"+language)?.Value
+                    @Html.Raw(Model.LanguageBases.FirstOrDefault(x=>x.Key == "AboutDesc1"+language)?.Value)
 
                 </p>
                 <br>
                 <h1>
-                    @Model.LanguageBases.FirstOrDefault(x=>x.Key == "AboutTitle1"+language)?.Value
+                    @Html.Raw(Model.LanguageBases.FirstOrDefault(x=>x.Key == "AboutTitle1"+language)?.Value)
 
                 </h1>
                 <p>
-                    @Model.LanguageBases.FirstOrDefault(x=>x.Key == "AboutDesc2"+language)?.Value
+                    @Html.Raw(Model.LanguageBases.FirstOrDefault(x=>x.Key == "AboutDesc2"+language)?.Value)
                 </p>
+              
+            </div>
+           
+            
+            <div class="col-lg-5 aboutImageBox-Mobile">
+                <div class="mb-5  aboutImage">
+                    <img style="width:100%" src="~/uploads/setting/@Model.Settings.FirstOrDefault(x=>x.Key=="About3Image")?.Value" alt="@Model.Settings.FirstOrDefault(x=>x.Key=="About1Image")?.Value">
+                </div>
+            </div>
+
+            <div class="col-lg-7 aboutTextBox">
+                @*left*@
                 <h1>
-                    @Model.LanguageBases.FirstOrDefault(x=>x.Key == "AboutTitle2"+language)?.Value
+                    @Html.Raw(Model.LanguageBases.FirstOrDefault(x=>x.Key == "AboutTitle2"+language)?.Value)
                 </h1>
                 <ul>
                     @foreach (var service in Model.Services)
@@ -73,58 +85,69 @@
                 </ul>
 
                 <h1>
-                    @Model.LanguageBases.FirstOrDefault(x=>x.Key == "AboutTitle3"+language)?.Value
+                    @Html.Raw(Model.LanguageBases.FirstOrDefault(x=>x.Key == "AboutTitle3"+language)?.Value)
                 </h1>
                 <ul>
                     @Html.Raw(Model.LanguageBases.FirstOrDefault(x=>x.Key == "AboutDesc3"+language)?.Value)
                 </ul>
                 <h1>
-                    @Model.LanguageBases.FirstOrDefault(x=>x.Key == "AboutTitle4"+language)?.Value
+                    @Html.Raw(Model.LanguageBases.FirstOrDefault(x=>x.Key == "AboutTitle4"+language)?.Value)
                 </h1>
                 <ul>
                     <li>
                         <h1>
-                            @Model.LanguageBases.FirstOrDefault(x=>x.Key == "AboutTitle5"+language)?.Value
+                            @Html.Raw(Model.LanguageBases.FirstOrDefault(x=>x.Key == "AboutTitle5"+language)?.Value)
                         </h1>
                         <p>
-                            @Model.LanguageBases.FirstOrDefault(x=>x.Key == "AboutDesc4"+language)?.Value
+                            @Html.Raw(Model.LanguageBases.FirstOrDefault(x=>x.Key == "AboutDesc4"+language)?.Value)
                         </p>
                     </li>
                     <li>
                         <h1>
-                            @Model.LanguageBases.FirstOrDefault(x=>x.Key == "AboutTitle6"+language)?.Value
+                            @Html.Raw(Model.LanguageBases.FirstOrDefault(x=>x.Key == "AboutTitle6"+language)?.Value)
                         </h1>
                         <p>
-                            @Model.LanguageBases.FirstOrDefault(x=>x.Key == "AboutDesc5"+language)?.Value
+                            @Html.Raw(Model.LanguageBases.FirstOrDefault(x=>x.Key == "AboutDesc5"+language)?.Value)
                         </p>
                     </li>
                     <li>
                         <h1>
-                            @Model.LanguageBases.FirstOrDefault(x=>x.Key == "AboutTitle7"+language)?.Value
+                            @Html.Raw(Model.LanguageBases.FirstOrDefault(x=>x.Key == "AboutTitle7"+language)?.Value)
                         </h1>
                         <p>
-                            @Model.LanguageBases.FirstOrDefault(x=>x.Key == "AboutDesc6"+language)?.Value
+                            @Html.Raw(Model.LanguageBases.FirstOrDefault(x=>x.Key == "AboutDesc6"+language)?.Value)
                         </p>
                     </li>
                     <li>
                         <h1>
-                            @Model.LanguageBases.FirstOrDefault(x=>x.Key == "AboutTitle8"+language)?.Value
+                            @Html.Raw(Model.LanguageBases.FirstOrDefault(x=>x.Key == "AboutTitle8"+language)?.Value)
 
                         </h1>
                         <p>
-                            @Model.LanguageBases.FirstOrDefault(x=>x.Key == "AboutDesc7"+language)?.Value
+                            @Html.Raw(Model.LanguageBases.FirstOrDefault(x=>x.Key == "AboutDesc7"+language)?.Value)
                         </p>
                     </li>
                     <li>
                         <h1>
-                            @Model.LanguageBases.FirstOrDefault(x=>x.Key == "AboutTitle9"+language)?.Value
+                            @Html.Raw(Model.LanguageBases.FirstOrDefault(x=>x.Key == "AboutTitle9"+language)?.Value)
                         </h1>
                         <p>
-                            @Model.LanguageBases.FirstOrDefault(x=>x.Key == "AboutDesc8"+language)?.Value
+                            @Html.Raw(Model.LanguageBases.FirstOrDefault(x=>x.Key == "AboutDesc8"+language)?.Value)
                         </p>
                     </li>
 
                 </ul>
+            </div>
+            <div class="col-lg-5 aboutImageBox aboutImageBox-MobileNone">
+                <div class="mb-5  aboutImage">
+                    <img src="~/uploads/setting/@Model.Settings.FirstOrDefault(x=>x.Key=="About3Image")?.Value" alt="@Model.Settings.FirstOrDefault(x=>x.Key=="About1Image")?.Value">
+                </div>
+                <div class=" mb-5 mobileAboutImage aboutImage">
+                    <img src="~/uploads/setting/@Model.Settings.FirstOrDefault(x=>x.Key=="About4Image")?.Value" style="height: 450px;" alt="@Model.Settings.FirstOrDefault(x=>x.Key=="About1Image")?.Value">
+                </div>
+                <div class=" mb-5 mobileAboutImage aboutImage">
+                    <img src="~/uploads/setting/@Model.Settings.FirstOrDefault(x=>x.Key=="About5Image")?.Value" style="height: 450px;" alt="@Model.Settings.FirstOrDefault(x=>x.Key=="About1Image")?.Value">
+                </div>
             </div>
 
         </div>

@@ -15,8 +15,10 @@ namespace Aztamlider.Services.Services.Interfaces.User
         public Task<IEnumerable<Service>> GetServices();
         public Task<IEnumerable<ServiceName>> GetServiceNames();
         public Task<IEnumerable<LanguageBase>> GetLanguageBase();
-        public IQueryable<Reference> GetReferences(int serviceId);
-        public Task<IEnumerable<Reference>> GetReferencesCount();
+        public IQueryable<Reference> GetReferencesCompleted(int serviceId);
+        public IQueryable<Reference> GetReferencesOthers(int serviceId);
+        public Task<IEnumerable<Reference>> GetReferencesCompletedCount();
+        public Task<IEnumerable<Reference>> GetReferencesOtherCount();
         public Task<Reference> GetReference(int id);
         public Task<IEnumerable<ReferenceImage>> GetReferenceImages();
     }

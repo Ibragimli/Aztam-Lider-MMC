@@ -30,7 +30,7 @@
                 <!-- Title -->
                 <div class=" mb-2 newPageTitleBox">
                     <h3 class="h5 d-block text-center text-dark text-decoration-none mt-4 ">
-                        @Model.LanguageBases.FirstOrDefault(x=>x.Key == "CareerPageDesc"+language)?.Value
+                        @Html.Raw(Model.LanguageBases.FirstOrDefault(x=>x.Key == "CareerPageDesc"+language)?.Value)
                     </h3>
                 </div>
                 <form class="row  mt-5 mb-3" asp-action="CareerSend" asp-controller="karyera" method="post" enctype="multipart/form-data">
@@ -38,7 +38,7 @@
                     <!-- AdSoyad -->
                     <div class="contactUsInputsBox col-lg-6  col-md-8 col-sm-9">
                         <label asp-for="CareerPostDto.Fullname" class="quform-label-text" for="contactNameInput">
-                            @Model.LanguageBases.FirstOrDefault(x=>x.Key == "InputFullname"+language)?.Value
+                            @Html.Raw(  Model.LanguageBases.FirstOrDefault(x=>x.Key == "InputFullname"+language)?.Value)
                             <span class="contactRequired">*</span>
                         </label>
                         <input asp-for="CareerPostDto.Fullname" id="contactNameInput" class="" type="text" aria-label="default input example">
@@ -46,7 +46,7 @@
                     <!-- Nomre -->
                     <div class="contactUsInputsBox col-lg-6 col-md-8 col-sm-9">
                         <label asp-for="CareerPostDto.PhoneNumber" class="quform-label-text" for="contactNumberInput">
-                            @Model.LanguageBases.FirstOrDefault(x=>x.Key == "InputPhoneNumber"+language)?.Value
+                            @Html.Raw(Model.LanguageBases.FirstOrDefault(x=>x.Key == "InputPhoneNumber"+language)?.Value)
                             <span class="contactRequired">*</span>
                         </label>
                         <input asp-for="CareerPostDto.PhoneNumber" id="contactNumberInput" class="" type="tel" aria-label="default input example">
@@ -65,7 +65,7 @@
                     <!-- Desc -->
                     <div class="contactUsInputsBox col-lg-6 col-md-8 col-sm-9">
                         <label asp-for="CareerPostDto.Message" class="quform-label-text" for="contactDescInput">
-                            @Model.LanguageBases.FirstOrDefault(x=>x.Key == "InputMessage"+language)?.Value
+                            @Html.Raw(Model.LanguageBases.FirstOrDefault(x=>x.Key == "InputMessage"+language)?.Value)
 
                         </label>
                         <textarea asp-for="CareerPostDto.Message" maxlength="1000" rows="6"></textarea>
@@ -74,7 +74,7 @@
                     <div class="col-lg-6 col-md-8 col-sm-9 contactButton">
                         <button type="submit" class="btn" value="submit">
                             <span class="spanText quform-button-text quform-button-submit-text">
-                                @Model.LanguageBases.FirstOrDefault(x=>x.Key == "CareerBtn"+language)?.Value
+                                @Html.Raw(Model.LanguageBases.FirstOrDefault(x=>x.Key == "CareerBtn"+language)?.Value)
                             </span>
                             <span class="quform-button-icon quform-button-submit-icon">
                                 <i class="fa fa-chevron-right"></i>

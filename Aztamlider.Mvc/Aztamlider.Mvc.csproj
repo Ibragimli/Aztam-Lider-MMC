@@ -20,7 +20,6 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\assets\fonts\" />
-    <Folder Include="wwwroot\assets\styles\scss\fonts\" />
     <Folder Include="wwwroot\manage\assets\img\elements\" />
     <Folder Include="wwwroot\manage\assets\img\layouts\" />
     <Folder Include="wwwroot\uploads\documents\" />

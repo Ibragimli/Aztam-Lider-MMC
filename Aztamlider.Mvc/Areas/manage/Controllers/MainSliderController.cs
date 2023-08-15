@@ -35,7 +35,7 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
             _adminMainSliderEditServices = adminMainSliderEditServices;
             _adminMainSliderCreateServices = adminMainSliderCreateServices;
         }
-        public async Task<IActionResult> Index(int page = 1, string name = null)
+        public IActionResult Index(int page = 1, string name = null)
         {
             MainSliderIndexViewModel MainSliderIndexVM = new MainSliderIndexViewModel();
             try
@@ -58,7 +58,7 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
             }
             return View(MainSliderIndexVM);
         }
-        public async Task<IActionResult> Create()
+        public IActionResult Create()
         {
             MainSliderCreateDto MainSliderCreateDto = new MainSliderCreateDto();
 

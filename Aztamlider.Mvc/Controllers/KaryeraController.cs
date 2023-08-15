@@ -85,7 +85,7 @@ namespace Aztamlider.Mvc.Controllers
                 ModelState.AddModelError("", ex.Message);
                 return View("index", careerVM);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 //TempData["Error"] = (ex.Message);
                 return RedirectToAction("index", "notfound");

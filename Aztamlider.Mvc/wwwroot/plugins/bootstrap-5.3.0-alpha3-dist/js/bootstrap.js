@@ -3313,7 +3313,7 @@
       // TODO: v6 remove this or make it optional
       this._disposePopper();
       const tip = this._getTipElement();
-      this._element.setAttribute('aria-Descriptiondby', tip.getAttribute('id'));
+      this._element.setAttribute('aria-describedby', tip.getAttribute('id'));
       const {
         container
       } = this._config;
@@ -3372,7 +3372,7 @@
         if (!this._isHovered) {
           this._disposePopper();
         }
-        this._element.removeAttribute('aria-Descriptiondby');
+        this._element.removeAttribute('aria-describedby');
         EventHandler.trigger(this._element, this.constructor.eventName(EVENT_HIDDEN$2));
       };
       this._queueCallback(complete, this.tip, this._isAnimated());

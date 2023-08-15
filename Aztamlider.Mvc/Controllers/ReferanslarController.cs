@@ -16,7 +16,7 @@ namespace Aztamlider.Mvc.Controllers
         {
             _referenceIndexServices = referenceIndexServices;
         }
-        public async Task<IActionResult> Index(int page = 1, int serviceId = 0)
+        public async Task<IActionResult> Tamamlanmislar(int page = 1, int serviceId = 0)
         {
 
             ReferenceViewModel referenceIndexVM = new ReferenceViewModel();
@@ -30,12 +30,51 @@ namespace Aztamlider.Mvc.Controllers
                 {
                     LanguageBases = await _referenceIndexServices.GetLanguageBase(),
                     ReferenceImage = await _referenceIndexServices.GetReferenceImages(),
-                    References = PagenetedList<Reference>.Create(_referenceIndexServices.GetReferences(serviceId), page, 9),
+                    ReferencesCompleted = PagenetedList<Reference>.Create(_referenceIndexServices.GetReferencesCompleted(serviceId), page, 15),
                     Settings = await _referenceIndexServices.GetSettings(),
                     ServiceTypes = await _referenceIndexServices.GetServiceTypes(),
                     Services = await _referenceIndexServices.GetServices(),
                     ServiceNames = await _referenceIndexServices.GetServiceNames(),
-                    ReferencesCount = await _referenceIndexServices.GetReferencesCount()
+                    ReferencesCount = await _referenceIndexServices.GetReferencesCompletedCount()
+                };
+            }
+            catch (ItemNotFoundException ex)
+            {
+                TempData["Error"] = (ex.Message);
+                return View("index", referenceIndexVM);
+
+            }
+            catch (ItemNullException ex)
+            {
+                TempData["Error"] = (ex.Message);
+                return View("index", referenceIndexVM);
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("index", "notfound");
+            }
+            return View(referenceIndexVM);
+        }
+        public async Task<IActionResult> Diger(int page = 1, int serviceId = 0)
+        {
+
+            ReferenceViewModel referenceIndexVM = new ReferenceViewModel();
+            try
+            {
+                ViewBag.Page = page;
+                if (serviceId != 0)
+                    ViewBag.ServiceId = serviceId;
+
+                referenceIndexVM = new ReferenceViewModel
+                {
+                    LanguageBases = await _referenceIndexServices.GetLanguageBase(),
+                    ReferenceImage = await _referenceIndexServices.GetReferenceImages(),
+                    ReferencesOthers = PagenetedList<Reference>.Create(_referenceIndexServices.GetReferencesOthers(serviceId), page, 15),
+                    Settings = await _referenceIndexServices.GetSettings(),
+                    ServiceTypes = await _referenceIndexServices.GetServiceTypes(),
+                    Services = await _referenceIndexServices.GetServices(),
+                    ServiceNames = await _referenceIndexServices.GetServiceNames(),
+                    ReferencesCount = await _referenceIndexServices.GetReferencesOtherCount()
                 };
             }
             catch (ItemNotFoundException ex)

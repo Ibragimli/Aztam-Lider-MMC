@@ -42,7 +42,7 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
                 AppUser user = User.Identity.IsAuthenticated ? _userManager.Users.FirstOrDefault(x => x.UserName == User.Identity.Name && x.IsAdmin) : null;
                 if (user == null)
                     throw new UserNotFoundException("Error bas verdi!");
-                await _loggerServices.LoggerCreate("Logger", "Edit", user.FullName, user.UserName);
+                await _loggerServices.LoggerCreate("Logger", "Index", user.FullName, user.UserName);
             }
             catch (NotFoundException)
             {

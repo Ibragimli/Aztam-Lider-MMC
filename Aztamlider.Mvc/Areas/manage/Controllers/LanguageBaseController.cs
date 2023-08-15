@@ -49,7 +49,7 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
             return View(LanguageBaseIndexVM);
         }
 
-        public async Task<IActionResult> Create()
+        public  IActionResult Create()
         {
             LanguageBaseCreateDto LanguageBaseCreateDto = new LanguageBaseCreateDto();
 

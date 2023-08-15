@@ -1,0 +1,135 @@
+﻿@{
+    ViewData["Title"] = "Diger";
+    var language = _localization.Getkey("Language").Value;
+    int c = 0;
+}
+
+@model ReferenceViewModel
+<section id="breadCrumb">
+    <div class="container-web">
+        <div class="row">
+            <div class="col-lg-12 breadCrumbBox">
+                <ul>
+                    <li>
+                        <h1>
+                            @Model.LanguageBases.FirstOrDefault(x=>x.Key == "NavReference"+language)?.Value
+                        </h1>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="reference">
+    <div class="container-web">
+        <div class="row">
+            <div class="col-lg-3 referenceButtons">
+                <ul class="row ">
+                    <li class="col-lg-11 col-md-6 col-sm-6 col-6">
+                        <a asp-action="diger" asp-controller="referanslar" asp-route-serviceId="0" asp-route-page="1">
+                            <h1 class="@(c == 0 ?"activeReference":"")">
+                                @Model.LanguageBases.FirstOrDefault(x=>x.Key =="ReferenceFilterText"+language)?.Value
+                                <span>(@Model.ReferencesCount.Count())</span>
+                            </h1>
+                        </a>
+                    </li>
+                    @foreach (var serviceName in Model.ServiceNames)
+                    {
+                        <li class="col-lg-11 col-md-6 col-sm-6 col-6">
+
+                            <a asp-action="diger" asp-controller="referanslar" asp-route-serviceId="@serviceName.Id" asp-route-page="@ViewBag.Page">
+                                <h1 class="">
+                                    @if (language == "Az")
+                                    {
+                                        @serviceName.NameAz
+                                    }
+                                    else
+                                    {
+                                        @serviceName.NameEn
+
+                                    }
+                                    <span>(@Model.ReferencesCount.Where(x=>x.ServiceNameId == serviceName.Id ).Count())</span>
+                                </h1>
+                            </a>
+                        </li>
+                        <li style="display:none;">@(c++)</li>
+                    }
+                </ul>
+            </div>
+            <div class="col-lg-9 referenceBoxs">
+                <div class="row">
+                    @foreach (var reference in Model.ReferencesOthers)
+                    {
+                        <div class="col-lg-4 col-md-6 col-sm-6 col-6 colReference">
+                            <div class="referenceBox">
+                                <div class="referenceImage">
+                                    <a asp-action="referans" asp-controller="referanslar" asp-route-id="@reference.Id">
+                                        <img src="~/uploads/references/@reference.ReferenceImages.FirstOrDefault(x=>x.ReferenceId == reference.Id && x.IsPoster)?.Image" alt="">
+                                    </a>
+                                </div>
+                                <div class="referenceName">
+                                    <a asp-action="referans" asp-controller="referanslar" asp-route-id="@reference.Id">
+                                        <h1>@reference.Name</h1>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+                <!--  Pagination  -->
+                <section id="pagenation">
+                    <div class="row">
+                        <div class="d-flex align-items-center col-11 mt-2"
+                             style="display:flex; justify-content:flex-end;">
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination">
+                                    @if (Model.ReferencesOthers.TotalPages > 1)
+                                    {
+                                        @if (Model.ReferencesOthers.HasPrev)
+                                        {
+                                            <li class="page-item">
+                                                <a asp-action="diger" asp-controller="referanslar"
+                                                   asp-route-serviceId="@ViewBag.ServiceId" class="page-link"
+                                                   asp-route-page="@(Model.ReferencesOthers.PageIndex-1)"
+                                                   aria-label="Previous">
+                                                    <span aria-hidden="true">&laquo;</span>
+                                                </a>
+                                            </li>
+                                        }
+                                        @for (int a = 1; a <= Model.ReferencesOthers.TotalPages; a++)
+                                        {
+                                            <li aria-current="page" class="page-item @(Model.ReferencesOthers.PageIndex == a ? "active" : "")")>
+                                                <a asp-action="diger" asp-controller="referanslar" asp-route-serviceId="@ViewBag.ServiceId" asp-route-page="@a" class="page-link">@a</a>
+                                            </li>
+                                        }
+
+                                        @*    <li aria-current="page" class="page-item ">
+                                    <a class="page-link pageActive">1</a>
+                                    </li>*@
+
+                                        @if (Model.ReferencesOthers.HasNext)
+                                        {
+                                            <li class="page-item">
+                                                <a asp-action="diger" asp-controller="referanslar"
+                                                   asp-route-serviceId="@ViewBag.ServiceId"
+                                                   asp-route-page="@(Model.ReferencesOthers.PageIndex+1)"
+                                                   class="page-link"
+                                                   aria-label="Next">
+                                                    <span aria-hidden="true">&raquo;</span>
+                                                </a>
+                                            </li>
+                                        }
+                                    }
+
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </div>
+    </div>
+</section>
+

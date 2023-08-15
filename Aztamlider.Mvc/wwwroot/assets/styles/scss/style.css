@@ -1,7 +1,5 @@
 @charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@200;300;400;500;700&family=Bitter:ital,wght@0,300;0,400;0,500;0,700;1,300&display=swap");
-@import url(https://fonts.googleapis.com/css?family=Merriweather:400,300italic,300,400italic,700,700italic);
-@import url(https://fonts.googleapis.com/css?family=Merriweather:400,300italic,300,400italic,700,700italic);
 body main {
   position: relative;
   font-family: 'Barlow Condensed', sans-serif; }
@@ -25,7 +23,8 @@ header {
       font-size: 20px;
       color: black;
       font-weight: 500;
-      display: inline-block; }
+      display: inline-block;
+      margin-bottom: 0px; }
     header #header .container-web .row .webLogo {
       display: flex;
       align-items: center;
@@ -56,6 +55,9 @@ header {
         position: absolute;
         top: 60px;
         left: 0; }
+      header #header .container-web .row .navMobile img {
+        height: auto;
+        width: 65%; }
     header #header .container-web .row .langSearch {
       display: flex;
       align-items: center;
@@ -147,7 +149,10 @@ header {
         display: none; }
         header #header .container-web .row .langSearch .navbar-mobile .navbar-toggler {
           font-size: 15px;
-          margin-right: 10px; }
+          margin-right: 20px; }
+          header #header .container-web .row .langSearch .navbar-mobile .navbar-toggler .navbar-toggler-icon {
+            width: 19px;
+            height: 31px; }
         header #header .container-web .row .langSearch .navbar-mobile .offcanvas .offcanvas-body .navbar-nav .nav-item .dropdown-menu li .dropdown-item {
           margin-bottom: 5px;
           display: flex;
@@ -162,7 +167,6 @@ header {
           box-shadow: none; }
 
 .headerFixed {
-  position: fixed !important;
   top: 0;
   left: 0;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
@@ -299,27 +303,6 @@ table {
   border-collapse: collapse;
   border-spacing: 0; }
 
-/* url(../fonts/SpartanMB-Medium.ttf) format("truetype"), url(../fonts/SpartanMB-Medium.woff) format("woff"), url(../fonts/SpartanMB-Medium.woff2) format("woff2") */
-@font-face {
-  font-family: SpartanMB;
-  src: url(../fonts/SpartanMB-Medium.eot);
-  src: url(../fonts/SpartanMB-Medium%EF%B9%96.eot#iefix) format("embedded-opentype"), url(../fonts/SpartanMB-Medium.svg#SpartanMB-Medium) format("svg");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap; }
-@font-face {
-  font-family: SpartanMB;
-  src: url(../fonts/SpartanMB-SemiBold.eot);
-  src: url(../fonts/SpartanMB-SemiBold%EF%B9%96.eot#iefix) format("embedded-opentype"), url(../fonts/SpartanMB-SemiBold.svg#SpartanMB-SemiBold) format("svg"), url(../fonts/SpartanMB-SemiBold.ttf) format("truetype"), url(../fonts/SpartanMB-SemiBold.woff) format("woff"), url(../fonts/SpartanMB-SemiBold.woff2) format("woff2");
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap; }
-@font-face {
-  font-family: SpartanMB;
-  src: url(../fonts/SpartanMB-Bold.eot);
-  src: url(../fonts/SpartanMB-Bold%EF%B9%96.eot#iefix) format("embedded-opentype"), url(../fonts/SpartanMB-Bold.svg#SpartanMB-Bold) format("svg"), url(../fonts/SpartanMB-Bold.ttf) format("truetype"), url(../fonts/SpartanMB-Bold.woff) format("woff"), url(../fonts/SpartanMB-Bold.woff2) format("woff2");
-  font-weight: 600;
-  font-style: normal; }
 * {
   box-sizing: border-box; }
   * h1,
@@ -332,8 +315,15 @@ table {
   * p,
   * span,
   * li {
-    font-family: 'Barlow Condensed', sans-serif;
-    color: #111111; }
+    color: #111111;
+    font-family: 'Roboto Condensed', sans-serif; }
+  * h1,
+  * h2,
+  * h3,
+  * h4,
+  * h5,
+  * h6 {
+    font-weight: bold; }
 
 body .xbinsaat-mobile {
   display: none; }
@@ -373,7 +363,8 @@ body a {
     padding: 6px 0px 6px 8px !important; }
     .langSearch .languageBox .headRight .headLanguage .langDropdown .arrow-down {
       width: 8px !important;
-      height: 8px !important; }
+      height: 8px !important;
+      right: 7px !important; }
     .langSearch .languageBox .headRight .headLanguage .langDropdown .dropdown-content {
       width: 50px !important; }
 
@@ -385,7 +376,15 @@ body a {
 @media only screen and (max-width: 1120px) {
   #partnerLogos {
     padding: 80px 25px !important; } }
+@media only screen and (max-width: 1070px) {
+  #header .row .navWeb .webNavbar .mainNavbar li {
+    margin-right: 15px !important; }
+    #header .row .navWeb .webNavbar .mainNavbar li a h1 {
+      font-size: 19px !important; } }
 @media only screen and (max-width: 992px) {
+  .positonAbsoluteMobile {
+    position: absolute !important; }
+
   #services {
     margin: 50px 20px 5px 20px !important; }
     #services .container-web .row ul li .objectCover {
@@ -458,7 +457,7 @@ body a {
   .langSearch {
     justify-content: end !important; }
     .langSearch .languageBox {
-      margin-right: 40px !important; }
+      margin-right: 30px !important; }
       .langSearch .languageBox .headRight .headLanguage .langDropdown {
         width: 45px !important;
         padding: 5px 0px 5px 7px !important; }
@@ -492,6 +491,10 @@ body a {
       padding: 0px 10px 0px 10px !important; }
       #aboutUs .container-web .row .aboutTextBox p {
         font-size: 18px !important; }
+    #aboutUs .container-web .row .aboutImageBox-MobileNone {
+      display: none !important; }
+    #aboutUs .container-web .row .aboutImageBox-Mobile {
+      display: block !important; }
 
   #contactUs {
     margin: 60px 25px !important;
@@ -553,7 +556,8 @@ body a {
         font-size: 18px !important; }
 
   #breadCrumb {
-    height: 170px !important; }
+    height: 170px !important;
+    background-position: right !important; }
     #breadCrumb .container-web .row .breadCrumbBox ul {
       right: calc(100vw - 100vw*0.93) !important;
       bottom: 15px !important; }
@@ -561,8 +565,8 @@ body a {
         font-size: 40px !important; }
 
   #mainSlider .backGroundImages .backGroundImage .mainSliderTextBox {
-    top: 35% !important;
-    left: 10% !important; }
+    top: 24% !important;
+    left: 9% !important; }
     #mainSlider .backGroundImages .backGroundImage .mainSliderTextBox .mainSliderTitle {
       font-size: 27px !important; }
     #mainSlider .backGroundImages .backGroundImage .mainSliderTextBox .mainSliderDesc {
@@ -583,8 +587,8 @@ body a {
       max-height: 140px; } }
 @media only screen and (max-width: 450px) {
   #mainSlider .backGroundImages .backGroundImage .mainSliderTextBox {
-    top: 34% !important;
-    left: 9% !important; }
+    top: 22% !important;
+    left: 7% !important; }
     #mainSlider .backGroundImages .backGroundImage .mainSliderTextBox .mainSliderTitle {
       font-size: 25px !important; }
     #mainSlider .backGroundImages .backGroundImage .mainSliderTextBox .mainSliderDesc {
@@ -612,27 +616,6 @@ body a {
       bottom: 2px !important; }
       #breadCrumb .container-web .row .breadCrumbBox ul li h1 {
         font-size: 37px !important; } }
-/* url(../fonts/SpartanMB-Medium.ttf) format("truetype"), url(../fonts/SpartanMB-Medium.woff) format("woff"), url(../fonts/SpartanMB-Medium.woff2) format("woff2") */
-@font-face {
-  font-family: SpartanMB;
-  src: url(../fonts/SpartanMB-Medium.eot);
-  src: url(../fonts/SpartanMB-Medium%EF%B9%96.eot#iefix) format("embedded-opentype"), url(../fonts/SpartanMB-Medium.svg#SpartanMB-Medium) format("svg");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap; }
-@font-face {
-  font-family: SpartanMB;
-  src: url(../fonts/SpartanMB-SemiBold.eot);
-  src: url(../fonts/SpartanMB-SemiBold%EF%B9%96.eot#iefix) format("embedded-opentype"), url(../fonts/SpartanMB-SemiBold.svg#SpartanMB-SemiBold) format("svg"), url(../fonts/SpartanMB-SemiBold.ttf) format("truetype"), url(../fonts/SpartanMB-SemiBold.woff) format("woff"), url(../fonts/SpartanMB-SemiBold.woff2) format("woff2");
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap; }
-@font-face {
-  font-family: SpartanMB;
-  src: url(../fonts/SpartanMB-Bold.eot);
-  src: url(../fonts/SpartanMB-Bold%EF%B9%96.eot#iefix) format("embedded-opentype"), url(../fonts/SpartanMB-Bold.svg#SpartanMB-Bold) format("svg"), url(../fonts/SpartanMB-Bold.ttf) format("truetype"), url(../fonts/SpartanMB-Bold.woff) format("woff"), url(../fonts/SpartanMB-Bold.woff2) format("woff2");
-  font-weight: 600;
-  font-style: normal; }
 * {
   box-sizing: border-box; }
   * h1,
@@ -645,8 +628,15 @@ body a {
   * p,
   * span,
   * li {
-    font-family: 'Barlow Condensed', sans-serif;
-    color: #111111; }
+    color: #111111;
+    font-family: 'Roboto Condensed', sans-serif; }
+  * h1,
+  * h2,
+  * h3,
+  * h4,
+  * h5,
+  * h6 {
+    font-weight: bold; }
 
 body .xbinsaat-mobile {
   display: none; }
@@ -723,7 +713,7 @@ body a {
 #partnerLogos {
   width: 100%;
   padding: 80px 0px;
-  background-color: #00000021; }
+  background-color: #05040411; }
   #partnerLogos .partnerTitleBox h1 {
     text-align: center;
     margin-bottom: 25px; }
@@ -756,6 +746,9 @@ body a {
       margin-bottom: 0px;
       padding: 10px 0px;
       font-weight: 500; }
+
+.positonAbsolute {
+  position: absolute !important; }
 
 ::-webkit-scrollbar {
   width: 7px;
@@ -794,6 +787,8 @@ body a {
     #aboutUs .container-web .row .aboutImageBox .aboutImage img {
       width: 100%;
       height: auto; }
+#aboutUs .container-web .row .aboutImageBox-Mobile {
+  display: none; }
 #aboutUs .container-web .row .aboutTextBox {
   display: flex;
   flex-direction: column;
@@ -835,7 +830,10 @@ body a {
       border: 1px solid black;
       padding: 4px 4px; }
     #reference .container-web .row .referenceButtons ul li a h1:hover {
-      color: rgba(0, 0, 0, 0.623); }
+      color: white(153, 152, 152, 0.623) !important;
+      background-color: rgba(12, 12, 12, 0.733); }
+      #reference .container-web .row .referenceButtons ul li a h1:hover span {
+        color: white(153, 152, 152, 0.623); }
     #reference .container-web .row .referenceButtons ul li a .activeReference {
       background-color: rgba(0, 0, 0, 0.815);
       color: white;
@@ -874,6 +872,13 @@ body a {
 #pagenation .row nav .pagination .page-item .pageActive {
   background-color: black;
   color: white; }
+#pagenation .row nav .pagination .active {
+  background-color: black;
+  color: white; }
+  #pagenation .row nav .pagination .active .page-link {
+    background-color: black !important;
+    color: white !important;
+    border: none; }
 
 #contactUs {
   margin: 60px 0px;

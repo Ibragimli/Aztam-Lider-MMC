@@ -13,7 +13,7 @@ namespace Aztamlider.Mvc.Controllers
         {
             _documentServices = documentServices;
         }
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Lisenziyalar()
         {
 
             DocumentViewModel documentVM = new DocumentViewModel();
@@ -22,7 +22,36 @@ namespace Aztamlider.Mvc.Controllers
                 documentVM = new DocumentViewModel
                 {
                     LanguageBases = await _documentServices.GetLanguageBase(),
-                    Documents = await _documentServices.GetDocuments(),
+                    Licenses = await _documentServices.GetDocumentLicenses(),
+                    Settings = await _documentServices.GetSettings(),
+                };
+            }
+            catch (ItemNotFoundException ex)
+            {
+                TempData["Error"] = (ex.Message);
+                return RedirectToAction("index", "home", documentVM);
+            }
+            catch (ItemNullException ex)
+            {
+                TempData["Error"] = (ex.Message);
+                return RedirectToAction("index", "home", documentVM);
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("index", "notfound");
+            }
+            return View(documentVM);
+        }
+        public async Task<IActionResult> Sertifikatlar()
+        {
+
+            DocumentViewModel documentVM = new DocumentViewModel();
+            try
+            {
+                documentVM = new DocumentViewModel
+                {
+                    LanguageBases = await _documentServices.GetLanguageBase(),
+                    Certificates = await _documentServices.GetDocumentCertificates(),
                     Settings = await _documentServices.GetSettings(),
                 };
             }

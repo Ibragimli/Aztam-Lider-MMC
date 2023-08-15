@@ -77,6 +77,8 @@
                         .arrow-down {
                             width: 8px !important;
                             height: 8px !important;
+                            right: 7px !important;
+
                         }
 
                         .dropdown-content {
@@ -112,8 +114,33 @@
     }
 }
 
+@media only screen and (max-width: 1070px) {
+    #header {
+        .row {
+           .navWeb{
+            .webNavbar{
+              .mainNavbar{
+                li{
+                    margin-right: 15px !important;
+                    a{
+                        h1{
+                            font-size: 19px !important;
+                        }
+                    }
+                }
+              }  
+            }
+           }
+        }
+    }
+}
+
+
 // 992-den asagi
 @media only screen and (max-width: 992px) {
+    .positonAbsoluteMobile {
+        position: absolute !important;
+    }
     #services {
         margin: 50px 20px 5px 20px !important;
 
@@ -290,7 +317,7 @@
         justify-content: end !important;
 
         .languageBox {
-            margin-right: 40px !important;
+            margin-right: 30px !important;
 
 
             .headRight {
@@ -359,6 +386,13 @@
 
                     padding: 0px 10px 0px 10px !important;
                 }
+                .aboutImageBox-MobileNone{
+                    display: none !important;
+                }
+                .aboutImageBox-Mobile{
+                    display: block !important;
+                }
+    
             }
         }
     }
@@ -510,6 +544,7 @@
 
 
 @media only screen and (max-width: 576px) {
+   
     .navbar-mobile {
         display: block !important;
 
@@ -552,6 +587,7 @@
 
     #breadCrumb {
         height: 170px !important;
+        background-position: right !important;
 
         .container-web {
             .row {
@@ -577,8 +613,8 @@
             .backGroundImage {
 
                 .mainSliderTextBox {
-                    top: 35% !important;
-                    left: 10% !important;
+                    top: 24% !important;
+                    left: 9% !important;
 
                     .mainSliderTitle {
                         font-size: 27px !important;
@@ -654,8 +690,8 @@
             .backGroundImage {
 
                 .mainSliderTextBox {
-                    top: 34% !important;
-                    left: 9% !important;
+                    top: 22% !important;
+                    left: 7% !important;
 
                     .mainSliderTitle {
                         font-size: 25px !important;

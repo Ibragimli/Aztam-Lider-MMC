@@ -14,7 +14,7 @@ $(function () {
                 items: 2
             },
             400: {
-                items: 3
+                items: 2
             },
             550: {
                 items: 3
