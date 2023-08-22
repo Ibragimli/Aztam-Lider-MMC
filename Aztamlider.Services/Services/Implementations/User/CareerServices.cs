@@ -10,6 +10,8 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Aztamlider.Core.IUnitOfWork;
+using AutoMapper;
+using Aztamlider.Core.Entites;
 
 namespace Aztamlider.Services.Services.Implementations.User
 {
@@ -17,11 +19,13 @@ namespace Aztamlider.Services.Services.Implementations.User
     {
         private readonly IEmailServices _emailServices;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IMapper _mapper;
 
-        public CareerServices(IEmailServices emailServices, IUnitOfWork unitOfWork)
+        public CareerServices(IEmailServices emailServices, IUnitOfWork unitOfWork, IMapper mapper)
         {
             _emailServices = emailServices;
             _unitOfWork = unitOfWork;
+            _mapper = mapper;
         }
         public void CheckValue(CareerPostDto careerPostDto)
         {
@@ -83,7 +87,15 @@ namespace Aztamlider.Services.Services.Implementations.User
             }
 
 
-            await _emailServices.Send((await _unitOfWork.SettingRepository.GetAsync(x => x.Key == "CareerToEmail")).Value, "XBInsaat MMC Career", bodyBuilder);
+            await _emailServices.Send((await _unitOfWork.SettingRepository.GetAsync(x => x.Key == "CareerToEmail")).Value, "AztamLider MMC Career", bodyBuilder);
+            await CreateCareer(careerPostDto);
+        }
+        private async Task CreateCareer(CareerPostDto careerPostDto)
+        {
+            var career = _mapper.Map<Career>(careerPostDto);
+            career.IsCV = true;
+            await _unitOfWork.CareerRepository.InsertAsync(career);
+            await _unitOfWork.CommitAsync();
         }
         private void PhoneNumberPrefixValidation(string phoneNumber)
         {

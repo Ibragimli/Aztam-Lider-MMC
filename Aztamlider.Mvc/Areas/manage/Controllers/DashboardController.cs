@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Aztamlider.Mvc.Areas.manage.ViewModels;
+using Aztamlider.Services.Services.Interfaces.Area.Dashboard;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Data;
 
@@ -9,9 +11,24 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
 
     public class DashboardController : Controller
     {
-        public IActionResult Index()
+        private readonly IDashboardServices _dashboardServices;
+
+        public DashboardController(IDashboardServices dashboardServices)
         {
-            return View();
+            _dashboardServices = dashboardServices;
+        }
+        public async Task<IActionResult> Index()
+        {
+            DashboardViewModel dashboardVM = new DashboardViewModel();
+            try
+            {
+                dashboardVM = new DashboardViewModel { ContactUsCount = await _dashboardServices.GetContactCount(), CareerCount = await _dashboardServices.GetCareerCount(), };
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("index", "notfound");
+            }
+            return View(dashboardVM);
         }
     }
 }

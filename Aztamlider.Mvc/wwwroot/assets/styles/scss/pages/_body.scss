@@ -11,6 +11,16 @@
         font-size: 1rem;
     }
 
+    .field-validation-error {
+        color: red;
+        margin: 0;
+        background-color: #f2dede;
+        color: #b94a48;
+        border-left: 5px solid #c73412;
+        max-width: 100%;
+        font-size: 1rem;
+    }
+
     h1,
     h2,
     h3,

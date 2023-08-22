@@ -4,7 +4,11 @@
 }
 @model DocumentViewModel
 
-
+@section Links{
+    <link href="https://aztamlider.az/referanslar/senedler/lisenziyalar/" rel="canonical">
+    <meta property="og:url" content="https://aztamlider.az/senedler/lisenziyalar/">
+    <meta property="og:title" content="LISENZIYALAR | aztamLIDER MMC">
+}
 <section style="background-image: url('/uploads/setting/@Model.Settings.FirstOrDefault(x=>x.Key =="breadCrumbImage")?.Value');" id="breadCrumb">
     <div class="container-web">
         <div class="row">

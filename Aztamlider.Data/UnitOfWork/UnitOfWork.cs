@@ -19,6 +19,7 @@ namespace Aztamlider.Data.UnitOfWork
         private IAppUserRepository _userRepository;
         private IContactUsRepository _contactUsRepository;
         private IDocumentRepository documentRepository;
+        private ICareerRepository _careerRepository;
         private ITeamRepository _teamRepository;
         private IServiceImageRepository serviceImageRepository;
         private IServiceRepository serviceRepository;
@@ -71,6 +72,7 @@ namespace Aztamlider.Data.UnitOfWork
 
         public ITeamRepository TeamRepository => _teamRepository = _teamRepository ?? new TeamRepository(_context);
 
+        public ICareerRepository CareerRepository => _careerRepository = _careerRepository ?? new CareerRepository(_context);
 
         public async Task<int> CommitAsync()
         {

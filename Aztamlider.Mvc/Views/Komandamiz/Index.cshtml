@@ -4,7 +4,11 @@
 }
 @model TeamViewModel
 
-
+@section Links{
+    <link href="https://aztamlider.az/komandamiz/" rel="canonical">
+    <meta property="og:url" content="https://aztamlider.az/komandamiz/">
+    <meta property="og:title" content="KOMANDAMIZ | aztamLIDER MMC">
+}
 <section style="background-image: url('/uploads/setting/@Model.Settings.FirstOrDefault(x=>x.Key =="breadCrumbImage")?.Value');" id="breadCrumb">
     <div class="container-web">
         <div class="row">
@@ -21,7 +25,7 @@
     </div>
 </section>
 
-<section id="team">
+<section id="team" class="mt-5">
     <div class="container-web">
         <div class="row teamTitleRow ">
             <div class="teamTitleBox">
@@ -62,16 +66,90 @@
                         </div>
                     </div>
                 </div>
-
             }
         </div>
     </div>
 </section>
 
-@if (Model.Teams?.Count() == 0)
-{
-    <script src="~/assets/js/copyRightWeb.js"></script>
+<!-- Older posts -->
+<section id="career" style="margin-top:5rem;">
+    <div class="container">
+        <div class="row  justify-content-center  ">
+            <hr />
+            <!-- Post -->
+            <!-- Featured image -->
+            <div class="col-md-9 col-sm-12 careerInputBox">
+                <!-- Title -->
+                <div class=" mb-2 newPageTitleBox">
+                    <h1 class="h5 d-block text-center text-dark text-decoration-none mt-4 ">
+                        @Html.Raw(Model.LanguageBases.FirstOrDefault(x=>x.Key == "NavCareer"+language)?.Value)
+                    </h1>
+                </div>
+                <!-- Title -->
+                <div class=" mb-2 newPageTitleBox">
+                    <h3 class="h5 d-block text-center text-dark text-decoration-none mt-4 ">
+                        @Html.Raw(Model.LanguageBases.FirstOrDefault(x=>x.Key == "CareerPageDesc"+language)?.Value)
+                    </h3>
+                </div>
+                <form class="row  mt-5 mb-3" asp-action="CareerSend" asp-controller="komandamiz" method="post" enctype="multipart/form-data">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <!-- AdSoyad -->
+                    <div class="contactUsInputsBox col-lg-6  col-md-8 col-sm-9">
+                        <label asp-for="CareerPostDto.Fullname" class="quform-label-text" for="contactNameInput">
+                            @Html.Raw(  Model.LanguageBases.FirstOrDefault(x=>x.Key == "InputFullname"+language)?.Value)
+                            <span class="contactRequired">*</span>
+                        </label>
+                        <input asp-for="CareerPostDto.Fullname" id="contactNameInput" class="" type="text" aria-label="default input example">
+                    </div>
+                    <!-- Nomre -->
+                    <div class="contactUsInputsBox col-lg-6 col-md-8 col-sm-9">
+                        <label asp-for="CareerPostDto.PhoneNumber" class="quform-label-text" for="contactNumberInput">
+                            @Html.Raw(Model.LanguageBases.FirstOrDefault(x=>x.Key == "InputPhoneNumber"+language)?.Value)
+                            <span class="contactRequired">*</span>
+                        </label>
+                        <input asp-for="CareerPostDto.PhoneNumber" id="contactNumberInput" class="" type="tel" aria-label="default input example">
+                        <span asp-validation-for="CareerPostDto.PhoneNumber"></span>
+                        <div id="numberError" class="error-message"></div>
+                    </div>
+                    <!-- AdSoyad -->
+                    <div class="contactUsInputsBox col-lg-6  col-md-8 col-sm-9">
+                        <label asp-for="CareerPostDto.CV" class="quform-label-text" for="contactNameInput">
+                            CV<span class="contactRequired">*</span>
+                        </label>
+
+                        <input asp-for="CareerPostDto.CV" class="" type="file" accept="application/pdf,application/msword,"
+                               aria-label="default input example">
+                    </div>
+                    <!-- Desc -->
+                    <div class="contactUsInputsBox col-lg-6 col-md-8 col-sm-9">
+                        <label asp-for="CareerPostDto.Message" class="quform-label-text" for="contactDescInput">
+                            @Html.Raw(Model.LanguageBases.FirstOrDefault(x=>x.Key == "InputMessage"+language)?.Value)
+
+                        </label>
+                        <textarea asp-for="CareerPostDto.Message" maxlength="1000" rows="6"></textarea>
+                    </div>
+                    <!-- btn -->
+                    <div class="col-lg-6 col-md-8 col-sm-9 contactButton">
+                        <button type="submit" class="btn" value="submit">
+                            <span class="spanText quform-button-text quform-button-submit-text">
+                                @Html.Raw(Model.LanguageBases.FirstOrDefault(x=>x.Key == "CareerBtn"+language)?.Value)
+                            </span>
+                            <span class="quform-button-icon quform-button-submit-icon">
+                                <i class="fa fa-chevron-right"></i>
+                            </span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+@section Scripts{
+    <script src="~/assets/js/phoneNumberRegex.js"></script>
+    @if (Model.Teams?.Count() == 0)
+    {
+        <script src="~/assets/js/copyRightWeb.js"></script>
+    }
 }
-
-
-
