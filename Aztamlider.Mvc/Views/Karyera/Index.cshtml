@@ -3,7 +3,7 @@
     var language = _localization.Getkey("Language").Value;
 }
 @model CareerViewModel
-<section id="breadCrumb">
+<section style="background-image: url('/uploads/setting/@Model.Settings.FirstOrDefault(x=>x.Key =="breadCrumbImage")?.Value');" id="breadCrumb">
     <div class="container-web">
         <div class="row">
             <div class="col-lg-12 breadCrumbBox">
@@ -34,7 +34,7 @@
                     </h3>
                 </div>
                 <form class="row  mt-5 mb-3" asp-action="CareerSend" asp-controller="karyera" method="post" enctype="multipart/form-data">
-
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <!-- AdSoyad -->
                     <div class="contactUsInputsBox col-lg-6  col-md-8 col-sm-9">
                         <label asp-for="CareerPostDto.Fullname" class="quform-label-text" for="contactNameInput">
@@ -50,6 +50,7 @@
                             <span class="contactRequired">*</span>
                         </label>
                         <input asp-for="CareerPostDto.PhoneNumber" id="contactNumberInput" class="" type="tel" aria-label="default input example">
+                        <span asp-validation-for="CareerPostDto.PhoneNumber"></span>
                         <div id="numberError" class="error-message"></div>
                     </div>
 
@@ -88,3 +89,8 @@
         </div>
     </div>
 </section>
+
+
+@section Scripts{
+    <script src="~/assets/js/phoneNumberRegex.js"></script>
+}

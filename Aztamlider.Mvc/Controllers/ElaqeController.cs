@@ -67,43 +67,31 @@ namespace Aztamlider.Mvc.Controllers
 
                 await _contactUsCreateServices.ValuesCheck(contactUsCreateDto);
 
-                //Email
-                string body = string.Empty;
 
-                using (StreamReader reader = new StreamReader("wwwroot/templates/contactEmail.html"))
-                {
-                    body = reader.ReadToEnd();
-                }
 
                 await _contactUsCreateServices.PhoneNumberCheck(contactUsCreateDto.PhoneNumber);
                 await _contactUsCreateServices.EmailCheck(contactUsCreateDto.Email);
                 await _contactUsCreateServices.ContactUsCreate(contactUsCreateDto);
 
-                body = body.Replace("{{phonenumber}}", contactUsCreateDto.PhoneNumber);
-                body = body.Replace("{{fullname}}", contactUsCreateDto.Fullname);
-                body = body.Replace("{{email}}", contactUsCreateDto.Email);
-                body = body.Replace("{{message}}", contactUsCreateDto.Message);
-                await _emailServices.Send("tu201903193@code.edu.az", "Aztamlider elaqe mesaji", body);
+
                 //await _emailServices.Send("info@aztamlider.az", "Aztamlider elaqe mesaji", body);
             }
             catch (ItemNotFoundException ex)
             {
                 TempData["Error"] = (ex.Message);
                 return View("index", contactUsVM);
-
             }
             catch (ItemFormatException ex)
             {
                 TempData["Error"] = (ex.Message);
                 return View("index", contactUsVM);
-
             }
             catch (Exception)
             {
                 return RedirectToAction("index", "notfound");
             }
-            TempData["Success"] = ("Məktub göndərildi");
-            return RedirectToAction("index","elaqe");
+            TempData["Success"] = ("Müraciətiniz göndərildi");
+            return RedirectToAction("index", "elaqe");
         }
 
     }

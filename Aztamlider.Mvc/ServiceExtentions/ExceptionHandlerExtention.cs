@@ -42,14 +42,15 @@ namespace Aztamlider.Mvc.ServiceExtentions
                             code = 400;
                         if (contextFeature.Error is UserNotFoundException)
                             code = 404;
-
                         if (contextFeature.Error is ItemUseException)
                             code = 500;
                         if (contextFeature.Error is ValueFormatExpception)
                             code = 400;
                         if (contextFeature.Error is UserPasswordResetException)
                             code = 400;
-                        
+                        if (contextFeature.Error is UserLoginAttempCountException)
+                            code = 400;
+
                     }
 
                     context.Response.StatusCode = code;

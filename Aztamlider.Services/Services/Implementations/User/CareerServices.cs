@@ -9,16 +9,19 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using Aztamlider.Core.IUnitOfWork;
 
 namespace Aztamlider.Services.Services.Implementations.User
 {
     public class CareerServices : ICareerServices
     {
         private readonly IEmailServices _emailServices;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public CareerServices(IEmailServices emailServices)
+        public CareerServices(IEmailServices emailServices, IUnitOfWork unitOfWork)
         {
             _emailServices = emailServices;
+            _unitOfWork = unitOfWork;
         }
         public void CheckValue(CareerPostDto careerPostDto)
         {
@@ -80,7 +83,7 @@ namespace Aztamlider.Services.Services.Implementations.User
             }
 
 
-            await _emailServices.Send("elnur204@gmail.com", "XBInsaat MMC Career", bodyBuilder);
+            await _emailServices.Send((await _unitOfWork.SettingRepository.GetAsync(x => x.Key == "CareerToEmail")).Value, "XBInsaat MMC Career", bodyBuilder);
         }
         private void PhoneNumberPrefixValidation(string phoneNumber)
         {

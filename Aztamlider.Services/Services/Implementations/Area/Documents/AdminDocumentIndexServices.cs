@@ -24,7 +24,7 @@ namespace Aztamlider.Services.Services.Implementations.Area.Documents
             poster = poster.Where(x => !x.IsDelete);
 
             if (name != null)
-                poster = poster.Where(i => EF.Functions.Like(i.Name, $"%{name}%"));
+                poster = poster.Where(i => EF.Functions.Like(i.NameAz, $"%{name}%"));
 
             return poster;
         }

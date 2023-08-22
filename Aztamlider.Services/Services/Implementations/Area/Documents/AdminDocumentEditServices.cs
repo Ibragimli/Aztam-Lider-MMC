@@ -39,11 +39,17 @@ namespace Aztamlider.Services.Services.Implementations.Area.Documents
             if (PDFChange(Document, oldDocument) == 1)
                 checkBool = true;
 
-            if (oldDocument.Name != Document.Name)
+            if (oldDocument.NameAz != Document.NameAz)
             {
-                oldDocument.Name = Document.Name;
+                oldDocument.NameAz = Document.NameAz;
                 checkBool = true;
             }
+            if (oldDocument.NameEn != Document.NameEn)
+            {
+                oldDocument.NameEn = Document.NameEn;
+                checkBool = true;
+            }
+
 
             if (oldDocument.License != Document.License)
             {
@@ -98,20 +104,20 @@ namespace Aztamlider.Services.Services.Implementations.Area.Documents
         private async Task Check(Document Document)
         {
 
-            if (Document.Name == null)
+            if (Document.NameAz == null && Document.NameEn == null)
             {
                 throw new ItemNullException("Sənəd adını qeyd edin!");
             }
-            if (Document.Name?.Length < 3)
+            if (Document.NameAz?.Length < 3 && Document.NameEn?.Length < 3)
             {
                 throw new ValueFormatExpception("Layihə adının uzunluğu minimum 3 ola bilər");
             }
-            if (Document.Name?.Length > 100)
+            if (Document.NameAz?.Length > 250 && Document.NameEn?.Length > 250)
             {
-                throw new ValueFormatExpception("Layihə adının uzunluğu maksimum 100 ola bilər");
+                throw new ValueFormatExpception("Layihə adının uzunluğu maksimum 250 ola bilər");
             }
-          
-            
+
+
             if (Document.PDFFile != null)
             {
                 if (Document.PDFFile.Length > 3 * 1048576)

@@ -27,12 +27,13 @@
                                             }
                                           
                                         </label>
+
                                         @if (@Model.Value != null && Model.Key.EndsWith("Image"))
                                         {
                                             <div id="posterimage-box" class="posterimage-box row mb-3">
                                                 <label asp-for="KeyImageFile" class="form-label"> @Model.Key şəkli*</label>
                                                 <!-- Şəkil əlavə et -->
-                                                <input asp-for="KeyImageFile" id="imagePosterInput" type="file" accept="image/png,  image/jpeg"
+                                                <input asp-for="KeyImageFile" id="imagePosterInput" type="file" accept="image/png,  image/jpeg, image/webp"
                                                        class="form-control">
                                                 <input type="hidden" asp-for="Value" value="@Model.Value" />
 

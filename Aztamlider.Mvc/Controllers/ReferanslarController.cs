@@ -18,14 +18,13 @@ namespace Aztamlider.Mvc.Controllers
         }
         public async Task<IActionResult> Tamamlanmislar(int page = 1, int serviceId = 0)
         {
-
             ReferenceViewModel referenceIndexVM = new ReferenceViewModel();
             try
             {
                 ViewBag.Page = page;
                 if (serviceId != 0)
                     ViewBag.ServiceId = serviceId;
-                
+                ViewBag.ServiceActiveId = serviceId;
                 referenceIndexVM = new ReferenceViewModel
                 {
                     LanguageBases = await _referenceIndexServices.GetLanguageBase(),
@@ -42,7 +41,6 @@ namespace Aztamlider.Mvc.Controllers
             {
                 TempData["Error"] = (ex.Message);
                 return View("index", referenceIndexVM);
-
             }
             catch (ItemNullException ex)
             {

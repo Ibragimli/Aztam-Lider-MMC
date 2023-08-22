@@ -4,7 +4,7 @@
     int count = 1;
 }
 @model ServicesIndexViewModel
-<section id="breadCrumb">
+<section style="background-image: url('/uploads/setting/@Model.Settings.FirstOrDefault(x=>x.Key =="breadCrumbImage")?.Value');" id="breadCrumb">
     <div class="container-web">
         <div class="row">
             <div class="col-lg-12 breadCrumbBox">

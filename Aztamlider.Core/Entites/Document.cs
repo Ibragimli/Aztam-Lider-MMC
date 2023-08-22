@@ -10,7 +10,8 @@ namespace Aztamlider.Core.Entites
 {
     public class Document : BaseEntity
     {
-        public string Name { get; set; }
+        public string NameAz { get; set; }
+        public string NameEn { get; set; }
         public bool License { get; set; }
         public string Image { get; set; }
         [NotMapped]

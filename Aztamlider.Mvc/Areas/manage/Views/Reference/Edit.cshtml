@@ -27,6 +27,7 @@
                                         <input asp-for="Reference.Name" maxlength="150" type="text" class="form-control">
                                         <span asp-validation-for="Reference.Name" class="text-danger"></span>
                                     </div>
+
                                     <!-- Layihə Name   End -->
                                     <!-- Project Name  Start -->
                                     <div class="mb-3 posterName">
@@ -115,7 +116,7 @@
                                     <div id="posterimage-box" class="posterimage-box row mb-3">
                                         <label asp-for="Reference.ReferenceImageFile" class="form-label">Referans şəkli*</label>
                                         <!-- Şəkil əlavə et -->
-                                        <input asp-for="Reference.ReferenceImageFile" id="imagePosterInput" type="file" accept="image/png,  image/jpeg, video/mp4"
+                                        <input asp-for="Reference.ReferenceImageFile" id="imagePosterInput" type="file" accept="image/png,  image/jpeg, video/mp4, image/webp"
                                                class="form-control">
                                         @foreach (var image in Model.ReferenceImages.Where(x => !x.IsDelete && x.IsPoster))
                                         {
@@ -137,7 +138,7 @@
                                     <div class="mb-3 posterImages">
                                         <label asp-for="Reference.ImageFiles" class="form-label">Layihənin Şəkilləri*</label>
                                         <!-- Şəkil əlavə et -->
-                                        <input asp-for="Reference.ImageFiles" id="imageInput" type="file" accept="image/png,  image/jpeg, video/mp4"
+                                        <input asp-for="Reference.ImageFiles" id="imageInput" type="file" accept="image/png,  image/jpeg, video/mp4, image/webp"
                                                class="form-control" multiple="">
                                         <div>
                                             <p id="imageErrorMessage" class="fw-bold "></p>

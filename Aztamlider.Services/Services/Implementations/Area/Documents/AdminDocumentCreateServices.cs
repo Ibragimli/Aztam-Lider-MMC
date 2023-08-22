@@ -42,13 +42,13 @@ namespace Aztamlider.Services.Services.Implementations.Area.Documents
 
         private async Task DtoCheck(DocumentCreateDto documentCreateDto)
         {
-            if (documentCreateDto.Name?.Length < 3)
+            if (documentCreateDto.NameAz?.Length < 3 && documentCreateDto.NameEn?.Length < 3)
             {
                 throw new ValueFormatExpception("Layihə adının uzunluğu minimum 3 ola bilər");
             }
-            if (documentCreateDto.Name?.Length > 100)
+            if (documentCreateDto.NameAz?.Length > 250 && documentCreateDto.NameEn?.Length > 250)
             {
-                throw new ValueFormatExpception("Layihə adının uzunluğu maksimum 100 ola bilər");
+                throw new ValueFormatExpception("Layihə adının uzunluğu maksimum 250 ola bilər");
             }
             if (documentCreateDto.ImageFile == null)
             {

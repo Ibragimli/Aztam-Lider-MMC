@@ -46,6 +46,9 @@ namespace Aztamlider.Data.Repositories
             return await query.FirstOrDefaultAsync(exp);
         }
 
+
+
+
         public async Task<int> GetTotalCountAsync(Expression<Func<TEntity, bool>> exp, params string[] includes)
         {
             var query = _query(_context, includes);

@@ -4,7 +4,7 @@
 }
 @model DocumentViewModel
 
-<section id="breadCrumb">
+<section style="background-image: url('/uploads/setting/@Model.Settings.FirstOrDefault(x=>x.Key =="breadCrumbImage")?.Value');" id="breadCrumb">
     <div class="container-web">
         <div class="row">
             <div class="col-lg-12 breadCrumbBox">
@@ -19,6 +19,35 @@
         </div>
     </div>
 </section>
+<section id="documentList">
+    <div class="container-web">
+        <div class="row">
+            <h1 style="margin-bottom:10px;font-size:35px;">
+                @Html.Raw(Model.LanguageBases.FirstOrDefault(x => x.Key == "NavDocument-2" + language)?.Value)
+            </h1>
+            @foreach (var licenseName in Model.Licenses)
+            {
+                <div class="col-lg-4 col-md-6 col-sm-12 col-12 documentListBox">
+                    <a class="documentListName" data-bs-toggle="modal" data-bs-target="#documentImageModal" href="#">
+                        <ul><li></li></ul>
+                        <h1>
+                            @if (language == "Az")
+                            {
+                                @licenseName.NameAz
+                            }
+                            else
+                            {
+                                @licenseName.NameEn
+                            }
+                        </h1>
+                    </a>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+<hr />
+
 
 <section id="document">
     <div class="container-web">
@@ -31,7 +60,7 @@
                             <img src="~/uploads/documents/@document.Image" alt="">
                         </div>
                         <div class="titleDocumentBox">
-                            <h1>@document.Name</h1>
+                            <h1>@document.NameAz</h1>
                         </div>
                         <div class="btnDocumentBox ">
                             <ul>
@@ -41,7 +70,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a data-bs-toggle="modal" data-bs-target="#documentImageModal" href="#">
+                                    <a class="documentName" data-bs-toggle="modal" data-bs-target="#documentImageModal" href="#">
                                         <i class="fa-solid fa-magnifying-glass-plus"></i>
                                     </a>
                                 </li>
@@ -67,7 +96,7 @@
                     <div class="slides">
                         @foreach (var item in Model.Certificates)
                         {
-                            <img src="~/uploads/documents/@item.Image" alt="@item.Image">
+                            <img class="documentImage" src="~/uploads/documents/@item.Image" alt="@item.Image">
                         }
                     </div>
                     <button class="prev" onclick="changeSlide(-1)">&#10094;</button>
@@ -83,28 +112,4 @@
     <script src="~/assets/js/copyRightWeb.js"></script>
 }
 
-
-<script>
-    let slideIndex = 0;
-
-    function changeSlide(n) {
-        showSlides(slideIndex += n);
-    }
-
-    function showSlides(n) {
-        const slides = document.getElementsByClassName("slides")[0].children;
-        if (n >= slides.length) {
-            slideIndex = 0;
-        } else if (n < 0) {
-            slideIndex = slides.length - 1;
-        }
-        for (let i = 0; i < slides.length; i++) {
-            slides[i].style.display = "none";
-        }
-        slides[slideIndex].style.display = "block";
-    }
-
-    showSlides(slideIndex);
-
-</script>
-
+<script src="~/assets/js/document.js"></script>

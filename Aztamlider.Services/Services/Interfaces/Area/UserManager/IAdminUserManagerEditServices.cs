@@ -14,6 +14,7 @@ namespace Aztamlider.Services.Services.Interfaces.Area.UserManagers
         public Task<AppUser> GetUserManager(string Id);
         public Task EditUserManager(UserManagerEditDto UserManagerEditDto);
         public Task<string> RoleName(string id);
+        public Task RestartLoginAttempCount(string id);
 
     }
 }

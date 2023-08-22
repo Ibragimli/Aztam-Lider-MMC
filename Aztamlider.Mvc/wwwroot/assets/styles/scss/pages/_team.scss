@@ -1,0 +1,107 @@
+#team {
+    margin: 40px 0px;
+    padding: 0px 15px;
+
+    .container-web {
+        .teamTitleRow {
+
+            .teamTitleBox {
+                text-align: center;
+                margin: 0px 0px 40px 0px;
+
+                h1 {
+                    margin-bottom: 20px;
+                }
+            }
+        }
+
+        .row {
+
+
+            .teamBoxs {
+                .teamBox {
+                    position: relative;
+                    margin-bottom: 20px;
+                    height: 400px;
+                    max-height: 400px;
+
+                    .teamImage {
+                        padding: 0px 10px;
+                        max-height: 400px;
+
+                        img {
+                            width: 100%;
+                            max-width: 100%;
+                            height: 400px;
+                            max-height: 400px;
+                            border-radius: 10px;
+                        }
+                    }
+
+                    .backColor {
+
+                        border-radius: 10px;
+                        opacity: 0;
+                        position: absolute;
+                        top: 0;
+                        bottom: 0;
+                        left: 0;
+                        right: 0;
+                        transition: all 0.3s;
+                        margin: 0px 10px;
+
+                    }
+
+                    .teamNamePositionBox {
+                        position: absolute;
+                        bottom: 15px;
+                        left: 25px;
+
+                        transition: transform 0.4s, left 0.4s, top 0.4s;
+                        transform: translate(50px, -60px);
+                        opacity: 0;
+
+                        h1 {
+                            color: white;
+                            opacity: 0;
+                            transition: all 0.3s;
+                        }
+
+                        .teamName {
+                            h1 {
+                                font-size: 24px;
+                                margin-bottom: 5px;
+                            }
+                        }
+
+                        .teamPosition {
+                            h1 {
+                                font-size: 18px;
+
+                            }
+                        }
+                    }
+                }
+
+                .teamBox:hover {
+                    .backColor {
+                        opacity: 1;
+
+                        background-color: rgba(0, 0, 0, .33);
+                    }
+
+                    .teamNamePositionBox {
+
+                        transform: translate(0px);
+                        opacity: 1;
+
+                        h1 {
+
+                            opacity: 1;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

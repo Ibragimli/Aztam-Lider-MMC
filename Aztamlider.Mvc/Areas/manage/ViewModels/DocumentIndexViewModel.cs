@@ -5,8 +5,8 @@ using Document = Aztamlider.Core.Entites.Document;
 
 namespace Aztamlider.Mvc.Areas.manage.ViewModels
 {
-    public class MainSliderIndexViewModel
+    public class DocumentIndexViewModel
     {
-        public PagenetedList<MainSlider> MainSliders { get; set; }
+        public PagenetedList<Document> Documents { get; set; }
     }
 }

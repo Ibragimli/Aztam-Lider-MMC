@@ -5,7 +5,7 @@
 }
 
 @model ReferenceViewModel
-<section id="breadCrumb">
+<section style="background-image: url('/uploads/setting/@Model.Settings.FirstOrDefault(x=>x.Key =="breadCrumbImage")?.Value');" id="breadCrumb">
     <div class="container-web">
         <div class="row">
             <div class="col-lg-12 breadCrumbBox">
@@ -28,7 +28,7 @@
                 <ul class="row ">
                     <li class="col-lg-11 col-md-6 col-sm-6 col-6">
                         <a asp-action="tamamlanmislar" asp-controller="referanslar" asp-route-serviceId="0" asp-route-page="1">
-                            <h1 class="@(c == 0 ?"activeReference":"")">
+                            <h1 class="@(ViewBag.ServiceActiveId     == 0?"activeReference":" ")">
                                 @Model.LanguageBases.FirstOrDefault(x=>x.Key =="ReferenceFilterText"+language)?.Value
                                 <span>(@Model.ReferencesCount.Count())</span>
                             </h1>
@@ -39,7 +39,7 @@
                         <li class="col-lg-11 col-md-6 col-sm-6 col-6">
 
                             <a asp-action="tamamlanmislar" asp-controller="referanslar" asp-route-serviceId="@serviceName.Id" asp-route-page="@ViewBag.Page">
-                                <h1 class="">
+                                <h1 class="@(ViewBag.ServiceActiveId == serviceName.Id?"activeReference": "")">
                                     @if (language == "Az")
                                     {
                                         @serviceName.NameAz
@@ -47,7 +47,6 @@
                                     else
                                     {
                                         @serviceName.NameEn
-
                                     }
                                     <span>(@Model.ReferencesCount.Where(x=>x.ServiceNameId == serviceName.Id ).Count())</span>
                                 </h1>

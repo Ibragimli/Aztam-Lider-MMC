@@ -4,7 +4,7 @@
 
 }
 @model ContactUsViewModel
-<section id="breadCrumb">
+<section style="background-image: url('/uploads/setting/@Model.Settings.FirstOrDefault(x=>x.Key =="breadCrumbImage")?.Value');" id="breadCrumb">
     <div class="container-web">
         <div class="row">
             <div class="col-lg-12 breadCrumbBox">
@@ -24,8 +24,8 @@
     <div class="container-web">
         <div class="row">
 
-          @*  <div class="imgBox-2">
-                <img src="~/assets/Images/1690297956553.png" alt="">
+            @*  <div class="imgBox-2">
+            <img src="~/assets/Images/1690297956553.png" alt="">
             </div>*@
             <div class="col-lg-5 contactInfo">
                 <h1>
@@ -63,20 +63,23 @@
                         <label for="exampleFormControlInput1" class="form-label">
                             @Model.LanguageBases.FirstOrDefault(x=>x.Key == "InputEmail"+language)?.Value:
                         </label>
-                        <input asp-for="ContactUsCreateDto.Email" type="email" class="form-control" id="exampleFormControlInput1"
+                        <input asp-for="ContactUsCreateDto.Email" type="email" class="form-control" id="contactEmailInput"
                                placeholder="@Model.LanguageBases.FirstOrDefault(x=>x.Key == "InputEmail"+language)?.Value">
+                        <div id="emailError" class="error-message"></div>
                     </div>
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">
                             @Model.LanguageBases.FirstOrDefault(x=>x.Key == "InputFullname"+language)?.Value:
 
                         </label>
-                        <input asp-for="ContactUsCreateDto.Fullname" type="text" class="form-control" id="exampleFormControlInput1"
+                        <input asp-for="ContactUsCreateDto.Fullname" type="text" class="form-control" id="contactFullnameInput"
                                placeholder="@Model.LanguageBases.FirstOrDefault(x=>x.Key == "InputFullname"+language)?.Value">
                     </div>
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">@Model.LanguageBases.FirstOrDefault(x=>x.Key == "InputPhoneNumber"+language)?.Value:</label>
-                        <input asp-for="ContactUsCreateDto.PhoneNumber" type="tel" class="form-control" id="exampleFormControlInput1">
+                        <input asp-for="ContactUsCreateDto.PhoneNumber" type="tel" class="form-control" id="contactNumberInput">
+                        <div id="numberError" class="error-message"></div>
+
                     </div>
                     <div class="mb-3">
                         <label for="exampleFormControlTextarea1" class="form-label">@Model.LanguageBases.FirstOrDefault(x=>x.Key == "InputMessage"+language)?.Value:</label>
@@ -94,3 +97,9 @@
         </div>
     </div>
 </section>
+
+
+@section Scripts{
+    <script src="~/assets/js/PhoneNumberRegex.js"></script>
+    <script src="~/assets/js/ContactEmailRegex.js"></script>
+}

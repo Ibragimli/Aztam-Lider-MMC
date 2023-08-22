@@ -6,17 +6,21 @@ using Aztamlider.Services.CustomExceptions;
 using System.Data;
 using Aztamlider.Services.Dtos.Area;
 using Aztamlider.Services.Services.Interfaces.Area.Login;
+using Microsoft.EntityFrameworkCore;
+using Aztamlider.Services.HelperService.Interfaces;
 
 namespace Aztamlider.Mvc.Areas.manage.Controllers
 {
     [Area("manage")]
     public class AccountController : Controller
     {
+        private readonly ILoggerServices _loggerServices;
         private readonly UserManager<AppUser> _userManager;
         private readonly IAdminLoginServices _adminLoginServices;
 
-        public AccountController(UserManager<AppUser> userManager, IAdminLoginServices adminLoginServices)
+        public AccountController(ILoggerServices loggerServices, UserManager<AppUser> userManager, IAdminLoginServices adminLoginServices)
         {
+            _loggerServices = loggerServices;
             _userManager = userManager;
             _adminLoginServices = adminLoginServices;
         }
@@ -35,14 +39,21 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(AdminLoginPostDto adminLoginPostDto)
         {
-            if (!ModelState.IsValid)
-            {
-                return View();
-            }
 
             try
             {
                 await _adminLoginServices.Login(adminLoginPostDto);
+
+                //Logger
+                AppUser user = await _userManager.FindByNameAsync(adminLoginPostDto.Username);
+
+                await _loggerServices.LoggerCreate("Account", "Login", adminLoginPostDto.Username, user.RoleName, adminLoginPostDto.Username);
+            }
+            catch (UserLoginAttempCountException ex)
+            {
+                TempData["Error"] = (ex.Message);
+
+                return View();
             }
             catch (UserNotFoundException ex)
             {

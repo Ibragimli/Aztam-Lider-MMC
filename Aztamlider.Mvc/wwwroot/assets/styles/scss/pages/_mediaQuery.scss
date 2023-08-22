@@ -62,6 +62,21 @@
 // asagi
 @media only screen and (max-width: 1346px) {}
 
+// 1280-den asagi
+@media only screen and (max-width: 1280px) {
+
+    #documentList {
+        .container-web {
+            .row {
+
+                .documentListBox {
+                    margin-left: 34px !important;
+                }
+            }
+        }
+    }
+}
+
 // 1200-den asagi
 @media only screen and (max-width: 1200px) {
     .langSearch {
@@ -87,6 +102,17 @@
                     }
                 }
 
+            }
+        }
+    }
+
+    #documentList {
+        .container-web {
+            .row {
+
+                .documentListBox {
+                    margin-left: 28px !important;
+                }
             }
         }
     }
@@ -117,20 +143,21 @@
 @media only screen and (max-width: 1070px) {
     #header {
         .row {
-           .navWeb{
-            .webNavbar{
-              .mainNavbar{
-                li{
-                    margin-right: 15px !important;
-                    a{
-                        h1{
-                            font-size: 19px !important;
+            .navWeb {
+                .webNavbar {
+                    .mainNavbar {
+                        li {
+                            margin-right: 15px !important;
+
+                            a {
+                                h1 {
+                                    font-size: 19px !important;
+                                }
+                            }
                         }
                     }
                 }
-              }  
             }
-           }
         }
     }
 }
@@ -141,6 +168,69 @@
     .positonAbsoluteMobile {
         position: absolute !important;
     }
+
+    #team {
+        padding: 0px 0px !important;
+
+        .container-web {
+
+            .row {
+                .teamBoxs {
+                    .teamBox {
+                        height: 370px !important;
+
+                        .teamImage {
+                            height: 370px !important;
+
+                            img {
+                                height: 370px !important;
+
+                            }
+                        }
+
+                        .teamNamePositionBox {
+
+                            .teamName {
+                                h1 {
+                                    font-size: 20px;
+                                }
+                            }
+
+                            .teamPosition {
+                                h1 {
+                                    font-size: 14px !important;
+
+                                }
+                            }
+                        }
+                    }
+
+
+                }
+            }
+        }
+    }
+
+    #documentList {
+        padding: 0px 21px;
+
+        .container-web {
+            .row {
+                justify-content: center;
+
+                .documentListBox {
+                    margin-left: 20px !important;
+
+                    a {
+                        h1 {
+                            font-size: 22px !important;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     #services {
         margin: 50px 20px 5px 20px !important;
 
@@ -283,7 +373,7 @@
                 .mainSliderTextBox {
                     position: absolute;
                     top: 40%;
-                    left: 15%;
+                    left: 10%;
 
                     .mainSliderTitle {
                         font-size: 35px !important;
@@ -386,13 +476,15 @@
 
                     padding: 0px 10px 0px 10px !important;
                 }
-                .aboutImageBox-MobileNone{
+
+                .aboutImageBox-MobileNone {
                     display: none !important;
                 }
-                .aboutImageBox-Mobile{
+
+                .aboutImageBox-Mobile {
                     display: block !important;
                 }
-    
+
             }
         }
     }
@@ -493,7 +585,7 @@
 
                 .mainSliderTextBox {
                     top: 40% !important;
-                    left: 12% !important;
+                    left: 8% !important;
 
                     .mainSliderTitle {
                         font-size: 28px !important;
@@ -510,6 +602,29 @@
 }
 
 @media only screen and (max-width: 767px) {
+    #team {
+        .container-web {
+            .row {
+                .teamBoxs {
+                    .teamBox {
+                        height: 330px !important;
+
+                        .teamImage {
+                            height: 330px !important;
+
+                            img {
+                                height: 330px !important;
+
+                            }
+                        }
+                    }
+
+
+                }
+            }
+        }
+    }
+
     #reference {
         .container-web {
             .row {
@@ -544,7 +659,52 @@
 
 
 @media only screen and (max-width: 576px) {
-   
+
+    #team {
+        padding: 0px 15px !important;
+
+        .container-web {
+
+            .row {
+                .teamBoxs {
+                    .teamBox {
+                        height: 270px !important;
+
+
+                        .teamImage {
+                            padding: 0px 10px !important;
+                            height: 270px !important;
+
+                            img {
+                                height: 270px !important;
+
+                            }
+                        }
+
+                        .teamNamePositionBox {
+                            bottom: 5px !important;
+
+                            .teamName {
+                                h1 {
+                                    font-size: 16px !important;
+                                }
+                            }
+
+                            .teamPosition {
+                                h1 {
+                                    font-size: 13px !important;
+
+                                }
+                            }
+                        }
+                    }
+
+
+                }
+            }
+        }
+    }
+
     .navbar-mobile {
         display: block !important;
 
@@ -614,7 +774,7 @@
 
                 .mainSliderTextBox {
                     top: 24% !important;
-                    left: 9% !important;
+                    left: 5% !important;
 
                     .mainSliderTitle {
                         font-size: 27px !important;
@@ -664,34 +824,69 @@
             }
         }
     }
+
     #partnerLogos {
 
         .partnerOwlCarouselBox {
-          .mobile-owl {
-            .item {
-              height: 140px;
-              a {
-                img {
-                  object-fit: scale-down;
-                  width: 160px !important;
-                  max-height: 140px;
+            .mobile-owl {
+                .item {
+                    height: 140px;
+
+                    a {
+                        img {
+                            object-fit: scale-down;
+                            width: 160px !important;
+                            max-height: 140px;
+                        }
+                    }
                 }
-              }
             }
-          }
         }
-      }
+    }
 
 }
 
 @media only screen and (max-width: 450px) {
+    #team {
+        .container-web {
+            .row {
+                .teamBoxs {
+                    .teamBox {
+                        height: 200px !important;
+
+                        .teamImage {
+                            height: 200px !important;
+
+                            img {
+                                height: 200px !important;
+                            }
+                        }
+
+                        .teamNamePositionBox {
+
+                            .teamName {
+                                h1 {}
+                            }
+
+                            .teamPosition {
+                                h1 {}
+                            }
+                        }
+                    }
+
+
+                }
+            }
+        }
+    }
+
     #mainSlider {
         .backGroundImages {
             .backGroundImage {
 
                 .mainSliderTextBox {
                     top: 22% !important;
-                    left: 7% !important;
+                    left: 3% !important;
 
                     .mainSliderTitle {
                         font-size: 25px !important;

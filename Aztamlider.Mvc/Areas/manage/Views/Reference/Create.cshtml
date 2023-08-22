@@ -27,6 +27,7 @@
                                         <input asp-for="ReferenceCreateDto.Name" maxlength="150" type="text" class="form-control">
                                         <span asp-validation-for="ReferenceCreateDto.Name" class="text-danger"></span>
                                     </div>
+
                                     <!-- Layihə Name   End -->
                                     <!-- Project Name  Start -->
                                     <div class="mb-3 posterName">
@@ -115,7 +116,7 @@
                                     <div class="mb-3 posterImages">
                                         <label asp-for="ReferenceCreateDto.ImageFiles" class="form-label">Referans Şəkilləri*</label>
                                         <!-- Şəkil əlavə et -->
-                                        <input asp-for="ReferenceCreateDto.ImageFiles" id="imageInput" type="file" accept="image/png,  image/jpeg, video/mp4"
+                                        <input asp-for="ReferenceCreateDto.ImageFiles" id="imageInput" type="file" accept="image/png,  image/jpeg, video/mp4, image/webp"
                                                class="form-control" multiple="">
                                         <div>
                                             <p id="imageErrorMessage" class="fw-bold "></p>

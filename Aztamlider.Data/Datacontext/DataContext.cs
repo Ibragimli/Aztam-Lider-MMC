@@ -30,6 +30,7 @@ namespace Aztamlider.Data.Datacontext
         public DbSet<ServiceType> ServiceTypes { get; set; }
         public DbSet<LanguageBase> LanguageBases { get; set; }
         public DbSet<Logger> Loggers { get; set; }
+        public DbSet<Team> Teams { get; set; }
 
 
 

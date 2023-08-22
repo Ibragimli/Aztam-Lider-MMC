@@ -60,7 +60,7 @@ namespace Aztamlider.Services.Services.Implementations.Area.UserManagers
             {
                 userExits.RoleName = newRole.Name;
                 checkBool = true;
-            }   
+            }
             if (userExits.UserName != userManagerEditDto.Username)
             {
                 userExits.UserName = userManagerEditDto.Username;
@@ -85,6 +85,15 @@ namespace Aztamlider.Services.Services.Implementations.Area.UserManagers
             var UserExist = await _userManager.Users.FirstOrDefaultAsync(x => x.Id == Id);
 
             return UserExist;
+        }
+
+        public async Task RestartLoginAttempCount(string id)
+        {
+            var user = await GetUserManager(id);
+            if (user == null)
+                throw new UserNotFoundException("User tapılmadı");
+
+            user.LoginAttemptCount = 5;
         }
 
         public async Task<string> RoleName(string id)

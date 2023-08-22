@@ -33,7 +33,8 @@ namespace Aztamlider.Mvc.Controllers
             }
             catch (ItemNotFoundException ex)
             {
-                ModelState.AddModelError("", ex.Message);
+                TempData["Error"] = (ex.Message);
+
                 return View("index", careerVM);
             }
             catch (ItemFormatException ex)
@@ -43,12 +44,13 @@ namespace Aztamlider.Mvc.Controllers
             }
             catch (ItemNullException ex)
             {
-                ModelState.AddModelError("", ex.Message);
+                TempData["Error"] = (ex.Message);
+
                 return View("index", careerVM);
             }
-            catch (Exception ex)
+            catch (Exception )
             {
-                TempData["Error"] = (ex.Message);
+                //TempData["Error"] = (ex.Message);
                 return RedirectToAction("index", "notfound");
             }
             return View(careerVM);
@@ -72,17 +74,20 @@ namespace Aztamlider.Mvc.Controllers
             }
             catch (ItemNotFoundException ex)
             {
-                ModelState.AddModelError("", ex.Message);
+                TempData["Error"] = (ex.Message);
+
                 return View("index", careerVM);
             }
             catch (ItemFormatException ex)
             {
                 ModelState.AddModelError("", ex.Message);
+                TempData["Error"] = (ex.Message);
                 return View("index", careerVM);
             }
             catch (ItemNullException ex)
             {
-                ModelState.AddModelError("", ex.Message);
+                TempData["Error"] = (ex.Message);
+
                 return View("index", careerVM);
             }
             catch (Exception)

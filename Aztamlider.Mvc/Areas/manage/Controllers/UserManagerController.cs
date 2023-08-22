@@ -8,7 +8,9 @@ using Aztamlider.Services.Services.Interfaces.Area.UserManagers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using System.Xml.Linq;
 
 namespace Aztamlider.Mvc.Areas.manage.Controllers
 {
@@ -258,6 +260,39 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
             }
             TempData["Success"] = ("Proses uğurlu oldu");
             return RedirectToAction("Index", "UserManager");
+        }
+
+        public async Task<IActionResult> RestartLimitCount(string id, string? name, int page = 1)
+        {
+            UserManagerIndexViewModel UserManagerIndexVM = new UserManagerIndexViewModel();
+            try
+            {
+                var UserManager = _adminUserManagerIndexServices.GetUserManager(name);
+                UserManagerIndexVM = new UserManagerIndexViewModel
+                {
+                    AppUsers = PagenetedList<AppUser>.Create(UserManager, page, 5),
+                };
+                await _adminUserManagerEditServices.RestartLoginAttempCount(id);
+
+                //Logger
+                AppUser appUser = await _userManager.Users.FirstOrDefaultAsync(x => x.UserName == User.Identity.Name && x.IsAdmin);
+                await _loggerServices.LoggerCreate("UserManager", "RestartLimitCount", appUser.FullName, appUser.UserName, appUser.UserName);
+            }
+            catch (NotFoundException)
+            {
+                return RedirectToAction("Index", "notfound");
+            }
+            catch (UserNotFoundException ex)
+            {
+                TempData["Error"] = (ex.Message);
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("Index", "notfound");
+            }
+            TempData["Success"] = ("Limit yeniləndi");
+            return Ok();
         }
 
         public async Task<IActionResult> Delete(string id)

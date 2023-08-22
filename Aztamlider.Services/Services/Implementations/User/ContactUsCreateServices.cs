@@ -3,7 +3,9 @@ using Aztamlider.Core.Entites;
 using Aztamlider.Core.IUnitOfWork;
 using Aztamlider.Services.CustomExceptions;
 using Aztamlider.Services.Dtos.User;
+using Aztamlider.Services.Services.Interfaces;
 using Aztamlider.Services.Services.Interfaces.User;
+using MimeKit;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,11 +17,13 @@ namespace Aztamlider.Services.Services.Implementations.User
 {
     public class ContactUsCreateServices : IContactUsCreateServices
     {
+        private readonly IEmailServices _emailServices;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public ContactUsCreateServices(IUnitOfWork unitOfWork, IMapper mapper)
+        public ContactUsCreateServices(IEmailServices emailServices, IUnitOfWork unitOfWork, IMapper mapper)
         {
+            _emailServices = emailServices;
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
@@ -29,6 +33,19 @@ namespace Aztamlider.Services.Services.Implementations.User
             var contactus = _mapper.Map<ContactUs>(contactUsCreateDto);
             await _unitOfWork.ContactUsRepository.InsertAsync(contactus);
             await _unitOfWork.CommitAsync();
+
+            //Email
+            string body = string.Empty;
+
+            using (StreamReader reader = new StreamReader("wwwroot/templates/contactEmail.html"))
+            {
+                body = reader.ReadToEnd();
+            }
+            body = body.Replace("{{phonenumber}}", contactUsCreateDto.PhoneNumber);
+            body = body.Replace("{{fullname}}", contactUsCreateDto.Fullname);
+            body = body.Replace("{{email}}", contactUsCreateDto.Email);
+            body = body.Replace("{{message}}", contactUsCreateDto.Message);
+            await _emailServices.Send((await _unitOfWork.SettingRepository.GetAsync(x => x.Key == "ContactToEmail")).Value, "Aztamlider elaqe mesaji", body);
         }
 
         public Task EmailCheck(string email)

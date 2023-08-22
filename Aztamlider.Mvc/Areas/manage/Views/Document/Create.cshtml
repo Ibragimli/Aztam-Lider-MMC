@@ -23,9 +23,15 @@
                                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                                     <!-- Layihə  Name  Start -->
                                     <div class="mb-3 posterName">
-                                        <label asp-for="Name" class="form-label">Sənəd adı*</label>
-                                        <input asp-for="Name" maxlength="150" type="text" class="form-control">
-                                        <span asp-validation-for="Name" class="text-danger"></span>
+                                        <label asp-for="NameAz" class="form-label">Sənəd adı (Az)*</label>
+                                        <input asp-for="NameAz" maxlength="250" type="text" class="form-control">
+                                        <span asp-validation-for="NameAz" class="text-danger"></span>
+                                    </div>
+                                    <!-- Layihə  Name  Start -->
+                                    <div class="mb-3 posterName">
+                                        <label asp-for="NameEn" class="form-label">Sənəd adı (Em)*</label>
+                                        <input asp-for="NameEn" maxlength="250" type="text" class="form-control">
+                                        <span asp-validation-for="NameEn" class="text-danger"></span>
                                     </div>
                                     <!-- Layihə Name   End -->
                                     <!-- Layihə DescribeEn  Start -->
@@ -39,7 +45,7 @@
                                     <div id="posterimage-box" class="posterimage-box row mb-3">
                                         <label asp-for="ImageFile" class="form-label">Document şəkli*</label>
                                         <!-- Şəkil əlavə et -->
-                                        <input asp-for="ImageFile" id="imagePosterInput" type="file" accept="image/png,  image/jpeg"
+                                        <input asp-for="ImageFile" id="imagePosterInput" type="file" accept="image/png,  image/jpeg, image/webp"
                                                class="form-control">
                                         <div class="col-3 mt-1 mb-1">
                                             <div style="position:relative;" class="image-box">
