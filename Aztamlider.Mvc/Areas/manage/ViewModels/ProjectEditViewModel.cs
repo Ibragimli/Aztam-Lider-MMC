@@ -8,5 +8,6 @@ namespace Aztamlider.Mvc.Areas.manage.ViewModels
     public class ProjectEditViewModel
     {
         public Project Project { get; set; }
+        public IEnumerable<ProjectType> ProjectTypes { get; set; }
     }
 }

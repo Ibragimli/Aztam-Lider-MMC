@@ -11,7 +11,10 @@ namespace Aztamlider.Services.Services.Interfaces.User
     {
          public Task<IEnumerable<Setting>> GetSettings();
          public Task<IEnumerable<LanguageBase>> GetLanguageBase();
-         public Task<IEnumerable<Project>> GetProjects();
-      
+        public Task<IEnumerable<Project>> GetConstructionProjects();
+        public Task<IEnumerable<Project>> GetMepDesignProjects();
+
+
+
     }
 }

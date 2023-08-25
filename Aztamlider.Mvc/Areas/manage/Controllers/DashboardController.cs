@@ -22,7 +22,13 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
             DashboardViewModel dashboardVM = new DashboardViewModel();
             try
             {
-                dashboardVM = new DashboardViewModel { ContactUsCount = await _dashboardServices.GetContactCount(), CareerCount = await _dashboardServices.GetCareerCount(), };
+                dashboardVM = new DashboardViewModel
+                {
+                    ContactUsCount = await _dashboardServices.GetContactCount(),
+                    CareerCount = await _dashboardServices.GetCareerCount(),
+                    CareerMonthCount = await _dashboardServices.GetMonthCareerCount(),
+                    ContactMonthCount = await _dashboardServices.GetMonthContactCount(),
+                };
             }
             catch (Exception)
             {

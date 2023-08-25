@@ -28,6 +28,9 @@ namespace Aztamlider.Services.Profiles
             CreateMap<LoggerPostDto, Logger>();
             CreateMap<TeamCreateDto, Team>();
             CreateMap<CareerPostDto, Career>();
+            CreateMap<ProjectTypeCreateDto, ProjectType>();
+
+
 
         }
     }

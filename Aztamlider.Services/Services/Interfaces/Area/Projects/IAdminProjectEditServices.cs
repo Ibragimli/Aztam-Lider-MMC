@@ -11,6 +11,8 @@ namespace Aztamlider.Services.Services.Interfaces.Area.Projects
     {
         public Task<Project> GetProject(int id);
         public Task EditProject(Project Project);
+        public Task<IEnumerable<ProjectType>> GetAllProjectTypes();
+
 
     }
 }

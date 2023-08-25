@@ -24,10 +24,16 @@ namespace Aztamlider.Services.Services.Implementations.User
 
         }
 
-        public async Task<IEnumerable<Project>> GetProjects()
+        public async Task<IEnumerable<Project>> GetConstructionProjects()
         {
-            return await _unitOfWork.ProjectRepository.GetAllAsync(x => !x.IsDelete);
+            return await _unitOfWork.ProjectRepository.GetAllAsync(x => !x.IsDelete && x.ProjectTypeId == 2);
         }
+        public async Task<IEnumerable<Project>> GetMepDesignProjects()
+        {
+            return await _unitOfWork.ProjectRepository.GetAllAsync(x => !x.IsDelete && x.ProjectTypeId == 1);
+        }
+
+
 
         public async Task<IEnumerable<Setting>> GetSettings()
         {

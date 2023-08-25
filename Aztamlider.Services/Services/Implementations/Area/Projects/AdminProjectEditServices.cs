@@ -37,7 +37,11 @@ namespace Aztamlider.Services.Services.Implementations.Area.Projects
             if (ImageChange(Project, oldProject) == 1)
                 checkBool = true;
 
-
+            if (oldProject.ProjectTypeId != Project.ProjectTypeId)
+            {
+                oldProject.ProjectTypeId = Project.ProjectTypeId;
+                checkBool = true;
+            }
             if (oldProject.TitleAz != Project.TitleAz)
             {
                 oldProject.TitleAz = Project.TitleAz;
@@ -73,6 +77,12 @@ namespace Aztamlider.Services.Services.Implementations.Area.Projects
             var Project = await _unitOfWork.ProjectRepository.GetAsync(x => x.Id == id);
             return Project;
         }
+        public async Task<IEnumerable<ProjectType>> GetAllProjectTypes()
+        {
+            var Projects = await _unitOfWork.ProjectTypeRepository.GetAllAsync(x => !x.IsDelete);
+            return Projects;
+        }
+
 
         private int ImageChange(Project Project, Project projectExist)
         {
@@ -114,8 +124,6 @@ namespace Aztamlider.Services.Services.Implementations.Area.Projects
             {
                 throw new ValueFormatExpception("Layihə təsvir uzunluğu maksimum 3000 ola bilər");
             }
-           
-
             if (Project.ImageFile != null)
                 _manageImageHelper.PosterCheck(Project.ImageFile);
 

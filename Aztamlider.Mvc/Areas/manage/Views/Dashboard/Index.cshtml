@@ -44,7 +44,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6 col-md-5 col-sm-6  col-6 mb-4">
+         @*   <div class="col-lg-6 col-md-5 col-sm-6  col-6 mb-4">
                 <div class="card">
                     <div class="card-body">
                         <div class="card-title d-flex align-items-start justify-content-between">
@@ -71,11 +71,11 @@
                         <h3 style="color: forestgreen;" class="card-title mb-2">0 ₼</h3>
                     </div>
                 </div>
-            </div>
+            </div>*@
         </div>
 
     </div>
-    <div class="row">
+   @* <div class="row">
         <div class="col-lg-4 col-md-6 col-6  mb-4">
             <div class="card">
                 <div class="card-body">
@@ -119,41 +119,7 @@
             </div>
         </div>
     </div>
-    <div class="row">
-        <!-- Transactions -->
-        @*    <div class="col-md-6 col-lg-4 order-2 mb-4">
-        <div class="card h-100">
-        <div class="card-header d-flex align-items-center justify-content-between">
-        <h5 class="card-title m-0 me-2">Ödənişlər</h5>
-
-        </div>
-        <div class="card-body">
-        <ul class="p-0 m-0">
-
-        @foreach (var payment in Model.Payments)
-        {
-        <li class="d-flex mb-4 pb-1">
-        <div class="avatar flex-shrink-0 me-3">
-        <i style="font-size:30px; color:forestgreen;" class="  @(payment.Service == PaymentService.PosterPayment ?"fa-regular fa-credit-card" :"fa-solid fa-sack-dollar" ) "></i>
-        </div>
-        <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-        <div class="me-2">
-        <small class="text-muted d-block mb-1">Wallet</small>
-        <h6 class="mb-0">@(payment.Service == PaymentService.PosterPayment ? "Elan ödənişi" : "Balans artımı")</h6>
-        </div>
-        <div class="user-progress d-flex align-items-center gap-1">
-        <h6 class="mb-0">+@payment.Amount</h6>
-        <span class="text-muted">AZN</span>
-        </div>
-        </div>
-        </li>
-        }
-        </ul>
-        </div>
-        </div>
-        </div>*@
-        <!--/ Transactions -->
-    </div>
+  *@
 </div>
 <!-- / Content -->
 @section Scripts{
@@ -167,13 +133,13 @@
                 labels: ['Yanvar', 'Fevral', 'Mart', 'Aprel', 'May', 'İyun', 'İyul', 'Avqust', 'Sentyabr', 'Oktyabr', 'Noyabr', 'Dekabr'],
                 datasets: [{
                     label: '# Əlaqə',
-                    data: [12, 12, 3, 5, 2, 3, 4, 6, 7, 8, 2, 2],
+                    data: [@foreach (var item in Model.ContactMonthCount) { @(item + ",")}],
                     borderWidth: 2,
                     fill: false,
 
                 }, {
                     label: '# Karyera',
-                    data: [4, 2, 5, 6, 7, 8, 9, 1, 2, 6, 4, 10],
+                    data: [@foreach (var item in Model.CareerMonthCount) { @(item + ",")}],
                     borderWidth: 2,
                     fill: false,
                 }

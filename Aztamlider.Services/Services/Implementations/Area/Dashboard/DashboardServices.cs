@@ -29,5 +29,30 @@ namespace Aztamlider.Services.Services.Implementations.Area.Dashboard
         {
             return await _unitOfWork.ContactUsRepository.GetTotalCountAsync(x => x.CreatedDate.Year == DateTime.UtcNow.Year);
         }
+
+
+        public async Task<List<int>> GetMonthCareerCount()
+        {
+            var careers = await _unitOfWork.CareerRepository.GetAllAsync(x => x.CreatedDate.Year == DateTime.UtcNow.Year);
+            List<int> monthCounts = new List<int>();
+            for (int i = 1; i < 13; i++)
+            {
+                var count = careers.Where(x => x.CreatedDate.Month == i).Count();
+                monthCounts.Add(count);
+            }
+            return monthCounts;
+        }
+
+        public async Task<List<int>> GetMonthContactCount()
+        {
+            var careers = await _unitOfWork.ContactUsRepository.GetAllAsync(x => x.CreatedDate.Year == DateTime.UtcNow.Year);
+            List<int> monthCounts = new List<int>();
+            for (int i = 1; i < 13; i++)
+            {
+                var count = careers.Where(x => x.CreatedDate.Month == i).Count();
+                monthCounts.Add(count);
+            }
+            return monthCounts;
+        }
     }
 }

@@ -32,6 +32,7 @@ namespace Aztamlider.Data.UnitOfWork
         private ILoggerRepository _loggerRepository;
         private ILanguageBaseRepository _languageBaseRepository;
         private IServiceNameRepository _serviceNameRepository;
+        private IProjectTypeRepository _projectTypeRepository;
 
 
         public UnitOfWork(DataContext context)
@@ -73,6 +74,8 @@ namespace Aztamlider.Data.UnitOfWork
         public ITeamRepository TeamRepository => _teamRepository = _teamRepository ?? new TeamRepository(_context);
 
         public ICareerRepository CareerRepository => _careerRepository = _careerRepository ?? new CareerRepository(_context);
+
+        public IProjectTypeRepository ProjectTypeRepository => _projectTypeRepository = _projectTypeRepository ?? new ProjectTypeRepository(_context);
 
         public async Task<int> CommitAsync()
         {

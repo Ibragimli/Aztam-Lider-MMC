@@ -1,7 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Create";
 }
-@model ProjectCreateDto
+@model ProjectCreateViewModel
 
 @{
     DateTime now = DateTime.UtcNow;
@@ -23,50 +23,60 @@
                                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                                     <!-- Layihə  Name  Start -->
                                     <div class="mb-3 posterName">
-                                        <label asp-for="TitleAz" class="form-label">Slider adı (Az)*</label>
-                                        <input asp-for="TitleAz" maxlength="120" type="text" class="form-control">
-                                        <span asp-validation-for="TitleAz" class="text-danger"></span>
+                                        <label asp-for="ProjectCreateDto.TitleAz" class="form-label">Slider adı (Az)*</label>
+                                        <input asp-for="ProjectCreateDto.TitleAz" maxlength="120" type="text" class="form-control">
+                                        <span asp-validation-for="ProjectCreateDto.TitleAz" class="text-danger"></span>
                                     </div>
                                     <!-- Layihə Name   End -->
-                                           <!-- Layihə  Name  Start -->
-                                    <div class="mb-3 posterName">
-                                        <label asp-for="TitleEn" class="form-label">Slider adı (En)*</label>
-                                        <input asp-for="TitleEn" maxlength="120" type="text" class="form-control">
-                                        <span asp-validation-for="TitleEn" class="text-danger"></span>
-                                    </div>
-                                    <!-- Layihə Name   End -->
-                                
                                     <!-- Layihə  Name  Start -->
                                     <div class="mb-3 posterName">
-                                        <label asp-for="DescriptionAz" class="form-label">Slider təsvir (Az)*</label>
-                                        <textarea asp-for="DescriptionAz" maxlength="3000" style="max-height:300px" rows="8" type="text" class="form-control"></textarea>
-                                        <span asp-validation-for="DescriptionAz" class="text-danger"></span>
+                                        <label asp-for="ProjectCreateDto.TitleEn" class="form-label">Slider adı (En)*</label>
+                                        <input asp-for="ProjectCreateDto.TitleEn" maxlength="120" type="text" class="form-control">
+                                        <span asp-validation-for="ProjectCreateDto.TitleEn" class="text-danger"></span>
                                     </div>
                                     <!-- Layihə Name   End -->
-                                
+                                    <!-- Layihələr  Start -->
+                                    <div class="mb-3 highProjects">
+                                        <label class="form-label">Servis növü</label>
+                                        <span asp-validation-for="ProjectCreateDto.ProjectTypeId" class="text-danger"></span>
+                                        <select asp-for="ProjectCreateDto.ProjectTypeId" class="form-select">
+                                            <option selected="selected" disabled>Servis seçin...</option>
+
+                                            @foreach (var highProject in Model.ProjectTypes)
+                                            {
+                                                <option value="@highProject.Id">@highProject.NameAz</option>
+                                            }
+                                        </select>
+                                    </div>
                                     <!-- Layihə  Name  Start -->
                                     <div class="mb-3 posterName">
-                                        <label asp-for="DescriptionEn" class="form-label">Slider təsvir (En)*</label>
-                                        <textarea asp-for="DescriptionEn" maxlength="3000" style="max-height:300px" rows="8" type="text" class="form-control"></textarea>
-                                        <span asp-validation-for="DescriptionEn" class="text-danger"></span>
+                                        <label asp-for="ProjectCreateDto.DescriptionAz" class="form-label">Slider təsvir (Az)*</label>
+                                        <textarea asp-for="ProjectCreateDto.DescriptionAz" maxlength="3000" style="max-height:300px" rows="8" type="text" class="form-control"></textarea>
+                                        <span asp-validation-for="ProjectCreateDto.DescriptionAz" class="text-danger"></span>
                                     </div>
                                     <!-- Layihə Name   End -->
-                                
-                                
-                                     <div id="posterimage-box" class="posterimage-box row mb-3">
-                                        <label asp-for="ImageFile" class="form-label">Layihənin  şəkli*</label>
+                                    <!-- Layihə  Name  Start -->
+                                    <div class="mb-3 posterName">
+                                        <label asp-for="ProjectCreateDto.DescriptionEn" class="form-label">Slider təsvir (En)*</label>
+                                        <textarea asp-for="ProjectCreateDto.DescriptionEn" maxlength="3000" style="max-height:300px" rows="8" type="text" class="form-control"></textarea>
+                                        <span asp-validation-for="ProjectCreateDto.DescriptionEn" class="text-danger"></span>
+                                    </div>
+                                    <!-- Layihə Name   End -->
+
+
+                                    <div id="posterimage-box" class="posterimage-box row mb-3">
+                                        <label asp-for="ProjectCreateDto.ImageFile" class="form-label">Layihənin  şəkli*</label>
                                         <!-- Şəkil əlavə et -->
-                                        <input asp-for="ImageFile" id="imagePosterInput" type="file" accept="image/png,  image/jpeg, image/webp"
-                                               class="form-control" >
-                                                    <div class="col-3 mt-1 mb-1">
-                                                        <div style="position:relative;" class="image-box">
-                                                            <img class="mt-3" style="width:200px; height:160px;"  />
-                                                        </div>
-                                                    </div>
-                                      </div>
-                                 
+                                        <input asp-for="ProjectCreateDto.ImageFile" id="imagePosterInput" type="file" accept="image/png,  image/jpeg, image/webp"
+                                               class="form-control">
+                                        <div class="col-3 mt-1 mb-1">
+                                            <div style="position:relative;" class="image-box">
+                                                <img class="mt-3" style="width:200px; height:160px;" />
+                                            </div>
+                                        </div>
+                                    </div>
+
                                     <!--  Image End -->
-                             
                                     <!-- Button  Start -->
                                     <div class="row d-flex justify-content-end mb-3">
                                         <div class="col mb-1">

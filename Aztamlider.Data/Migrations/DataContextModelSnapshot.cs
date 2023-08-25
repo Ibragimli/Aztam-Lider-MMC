@@ -379,6 +379,9 @@ namespace Aztamlider.Data.Migrations
                     b.Property<DateTime>("ModifiedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("ProjectTypeId")
+                        .HasColumnType("int");
+
                     b.Property<string>("TitleAz")
                         .IsRequired()
                         .HasMaxLength(120)
@@ -391,7 +394,41 @@ namespace Aztamlider.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ProjectTypeId");
+
                     b.ToTable("Projects");
+                });
+
+            modelBuilder.Entity("Aztamlider.Core.Entites.ProjectType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("NameAz")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.Property<string>("NameEn")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ProjectTypes");
                 });
 
             modelBuilder.Entity("Aztamlider.Core.Entites.Reference", b =>
@@ -939,6 +976,15 @@ namespace Aztamlider.Data.Migrations
                     b.HasDiscriminator().HasValue("AppUser");
                 });
 
+            modelBuilder.Entity("Aztamlider.Core.Entites.Project", b =>
+                {
+                    b.HasOne("Aztamlider.Core.Entites.ProjectType", "ProjectType")
+                        .WithMany("Projects")
+                        .HasForeignKey("ProjectTypeId");
+
+                    b.Navigation("ProjectType");
+                });
+
             modelBuilder.Entity("Aztamlider.Core.Entites.Reference", b =>
                 {
                     b.HasOne("Aztamlider.Core.Entites.ServiceName", "ServiceName")
@@ -1029,6 +1075,11 @@ namespace Aztamlider.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Aztamlider.Core.Entites.ProjectType", b =>
+                {
+                    b.Navigation("Projects");
                 });
 
             modelBuilder.Entity("Aztamlider.Core.Entites.Reference", b =>

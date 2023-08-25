@@ -13,12 +13,10 @@ namespace Aztamlider.Services.Services.Implementations.Area.ServiceNames
     public class AdminServiceNameDeleteServices : IAdminServiceNameDeleteServices
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IManageImageHelper _manageImageHelper;
 
-        public AdminServiceNameDeleteServices(IUnitOfWork unitOfWork, IManageImageHelper manageImageHelper)
+        public AdminServiceNameDeleteServices(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
-            _manageImageHelper = manageImageHelper;
         }
 
         public async Task DeleteServiceName(int id)

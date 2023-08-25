@@ -12,6 +12,9 @@ namespace Aztamlider.Services.Services.Interfaces.Area.Projects
     public interface IAdminProjectCreateServices
     {
         Task<Project> CreateProject(ProjectCreateDto ProjectCreateDto);
+        public Task<IEnumerable<ProjectType>> GetAllProjectTypes();
+
+
 
     }
 }

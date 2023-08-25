@@ -104,7 +104,11 @@
                                             <a class="dropdown-item" asp-action="mepdesign" asp-controller="layihelendirme">
                                                 <h1>
                                                     @Html.Raw(languageBases.FirstOrDefault(x => x.Key == "NavProject1" + language)?.Value)
-
+                                                </h1>
+                                            </a>
+                                            <a class="dropdown-item" asp-action="tikinti" asp-controller="layihelendirme">
+                                                <h1>
+                                                    @Html.Raw(languageBases.FirstOrDefault(x => x.Key == "NavProject2" + language)?.Value)
                                                 </h1>
                                             </a>
                                         </li>

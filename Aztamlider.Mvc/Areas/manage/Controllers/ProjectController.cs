@@ -55,21 +55,28 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
             }
             return View(ProjectIndexVM);
         }
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            ProjectCreateDto ProjectCreateDto = new ProjectCreateDto();
+            ProjectCreateViewModel projectCreateVM = new ProjectCreateViewModel()
+            {
+                ProjectCreateDto = new ProjectCreateDto(),
+                ProjectTypes = await _adminProjectCreateServices.GetAllProjectTypes(),
+            };
 
-            return View(ProjectCreateDto);
+            return View(projectCreateVM);
         }
         [ValidateAntiForgeryToken]
         [HttpPost]
         public async Task<IActionResult> Create(ProjectCreateDto ProjectCreateDto)
         {
-            ProjectCreateDto ProjectDto = new ProjectCreateDto();
-
-
+            ProjectCreateViewModel projectCreateVM = new ProjectCreateViewModel();
             try
             {
+                projectCreateVM = new ProjectCreateViewModel()
+                {
+                    ProjectCreateDto = new ProjectCreateDto(),
+                    ProjectTypes = await _adminProjectCreateServices.GetAllProjectTypes(),
+                };
                 var Project = await _adminProjectCreateServices.CreateProject(ProjectCreateDto);
 
                 //Logger
@@ -81,39 +88,39 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
             catch (ItemNullException ex)
             {
                 ModelState.AddModelError("", ex.Message);
-                return View(ProjectDto);
+                return View(projectCreateVM);
             }
             catch (ItemNotFoundException ex)
             {
                 ModelState.AddModelError("", ex.Message);
-                return View(ProjectDto);
+                return View(projectCreateVM);
             }
             catch (ValueFormatExpception ex)
             {
                 ModelState.AddModelError("", ex.Message);
-                return View(ProjectDto);
+                return View(projectCreateVM);
             }
             catch (UserNotFoundException ex)
             {
                 ModelState.AddModelError("", ex.Message);
-                return View(ProjectDto);
+                return View(projectCreateVM);
             }
             catch (ImageFormatException ex)
             {
                 ModelState.AddModelError("ProjectCreateDto.ImageFiles", ex.Message);
-                return View(ProjectDto);
+                return View(projectCreateVM);
             }
             catch (ImageNullException ex)
             {
                 ModelState.AddModelError("ProjectCreateDto.ImageFiles", ex.Message);
-                return View(ProjectDto);
+                return View(projectCreateVM);
             }
 
             catch (Exception ex)
             {
                 ModelState.AddModelError("", ex.Message);
                 //TempData["Error"] = ("Proses uğursuz oldu!");
-                return View(ProjectDto);
+                return View(projectCreateVM);
             }
 
             return RedirectToAction("index", "Project");
@@ -130,6 +137,7 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
                 ProjectEditVM = new ProjectEditViewModel()
                 {
                     Project = await _adminProjectEditServices.GetProject(id),
+                    ProjectTypes = await _adminProjectCreateServices.GetAllProjectTypes(),
                 };
 
             }
@@ -165,6 +173,8 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
                 ProjectEditVM = new ProjectEditViewModel()
                 {
                     Project = await _adminProjectEditServices.GetProject(Project.Id),
+                    ProjectTypes = await _adminProjectCreateServices.GetAllProjectTypes(),
+
                 };
 
                 await _adminProjectEditServices.EditProject(Project);

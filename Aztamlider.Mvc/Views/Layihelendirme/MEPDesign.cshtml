@@ -42,7 +42,7 @@
                 @Model.LanguageBases.FirstOrDefault(x=>x.Key == "NavProjectDesc2"+language)?.Value
             </p>
             <ul>
-                @foreach (var project in Model.Projects)
+                @foreach (var project in Model.MepDesignProjects)
                 {
                     <li>
                         <h1>

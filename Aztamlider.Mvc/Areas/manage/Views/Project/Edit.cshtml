@@ -22,31 +22,42 @@
                                 <form class="form-control" asp-action="edit" asp-controller="Project" method="post" enctype="multipart/form-data">
                                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                                     <input type="hidden" value="@Model.Project.Id" asp-for="Project.Id" />
-                                 
-                                <!-- Layihə  Name  Start -->
+                                    <!-- Layihələr  Start -->
+                                    <div class="mb-3 highProjects">
+                                        <label class="form-label">Servis növü</label>
+                                        <span asp-validation-for="Project.ProjectTypeId" class="text-danger"></span>
+                                        <select asp-for="Project.ProjectTypeId" class="form-select">
+                                            <option hidden value="@Model.Project.ProjectTypeId" selected disabled>@Model.Project.ProjectType.NameAz</option>
+
+                                            @foreach (var highProject in Model.ProjectTypes)
+                                            {
+                                                <option value="@highProject.Id">@highProject.NameAz</option>
+                                            }
+                                        </select>
+                                    </div>
+                                    <!-- Layihə  Name  Start -->
                                     <div class="mb-3 posterName">
                                         <label asp-for="Project.TitleAz" class="form-label">Slider adı (Az)*</label>
                                         <input asp-for="Project.TitleAz" maxlength="120" type="text" class="form-control">
                                         <span asp-validation-for="Project.TitleAz" class="text-danger"></span>
                                     </div>
                                     <!-- Layihə Name   End -->
-                                           <!-- Layihə  Name  Start -->
+                                    <!-- Layihə  Name  Start -->
                                     <div class="mb-3 posterName">
                                         <label asp-for="Project.TitleEn" class="form-label">Slider adı (En)*</label>
                                         <input asp-for="Project.TitleEn" maxlength="120" type="text" class="form-control">
                                         <span asp-validation-for="Project.TitleEn" class="text-danger"></span>
                                     </div>
                                     <!-- Layihə Name   End -->
-                                
-                                           <!-- Layihə  Name  Start -->
+                               
+                                    <!-- Layihə  Name  Start -->
                                     <div class="mb-3 posterName">
                                         <label asp-for="Project.DescriptionAz" class="form-label">Slider təsvir (Az)*</label>
                                         <textarea asp-for="Project.DescriptionAz" maxlength="3000" style="max-height:300px" rows="8" type="text" class="form-control"></textarea>
                                         <span asp-validation-for="Project.DescriptionAz" class="text-danger"></span>
                                     </div>
                                     <!-- Layihə Name   End -->
-                                
-                                           <!-- Layihə  Name  Start -->
+                                    <!-- Layihə  Name  Start -->
                                     <div class="mb-3 posterName">
                                         <label asp-for="Project.DescriptionEn" class="form-label">Slider təsvir (En)*</label>
                                         <textarea asp-for="Project.DescriptionEn" maxlength="3000" style="max-height:300px" rows="8" type="text" class="form-control"></textarea>
@@ -54,21 +65,21 @@
                                     </div>
                                     <!-- Layihə Name   End -->
 
-                                     <div id="posterimage-box" class="posterimage-box row mb-3">
+                                    <div id="posterimage-box" class="posterimage-box row mb-3">
                                         <label asp-for="Project.ImageFile" class="form-label">Layihənin  şəkli*</label>
                                         <!-- Şəkil əlavə et -->
                                         <input asp-for="Project.ImageFile" id="imagePosterInput" type="file" accept="image/png,  image/jpeg, image/webp"
-                                               class="form-control" >
-                                                    <div class="col-3 mt-1 mb-1">
-                                                        <div style="position:relative;" class="image-box">
-                                                            <input type="hidden" value="@Model.Project.Id" />
-                                                            <img class="mt-3" style="width:200px; height:160px;" src="~/uploads/Projects/@Model.Project.Image" />
-                                                        </div>
-                                                    </div>
-                                      </div>
-                                 
-                                      
-                                
+                                               class="form-control">
+                                        <div class="col-3 mt-1 mb-1">
+                                            <div style="position:relative;" class="image-box">
+                                                <input type="hidden" value="@Model.Project.Id" />
+                                                <img class="mt-3" style="width:200px; height:160px;" src="~/uploads/Projects/@Model.Project.Image" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
                                     <!-- Button  Start -->
                                     <div class="row d-flex justify-content-end mb-3">
                                         <div class="col mb-1">

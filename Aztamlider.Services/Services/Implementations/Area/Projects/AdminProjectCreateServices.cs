@@ -38,9 +38,16 @@ namespace Aztamlider.Services.Services.Implementations.Area.Projects
 
             return Project;
         }
+        public async Task<IEnumerable<ProjectType>> GetAllProjectTypes()
+        {
+            var Projects = await _unitOfWork.ProjectTypeRepository.GetAllAsync(x => !x.IsDelete);
+            return Projects;
+        }
+
 
         private async Task DtoCheck(ProjectCreateDto ProjectCreateDto)
         {
+
             if (ProjectCreateDto.TitleAz?.Length < 3 || ProjectCreateDto.TitleEn?.Length < 3)
             {
                 throw new ValueFormatExpception("Layihə adının uzunluğu minimum 3 ola bilər");
@@ -56,6 +63,10 @@ namespace Aztamlider.Services.Services.Implementations.Area.Projects
             if (ProjectCreateDto.ImageFile == null)
             {
                 throw new ItemNullException("Şəkil əlavə edin!");
+            }
+            if (ProjectCreateDto.ProjectTypeId == 0)
+            {
+                throw new ItemNullException("Layihə növünü qeyd edin!");
             }
             if (ProjectCreateDto.ImageFile != null)
                 _manageImageHelper.PosterCheck(ProjectCreateDto.ImageFile);

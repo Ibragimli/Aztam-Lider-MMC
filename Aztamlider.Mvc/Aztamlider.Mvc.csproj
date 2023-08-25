@@ -32,4 +32,11 @@
     <Folder Include="wwwroot\uploads\setting\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="Views\Layihelendirme\Tikinti.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>

@@ -20,7 +20,7 @@ namespace Aztamlider.Services.Services.Implementations.Area.Projects
         }
         public IQueryable<Project> GetProject(string name)
         {
-            var poster = _unitOfWork.ProjectRepository.asQueryable();
+            var poster = _unitOfWork.ProjectRepository.asQueryable("ProjectType");
             poster = poster.Where(x => !x.IsDelete);
 
             if (name != null)

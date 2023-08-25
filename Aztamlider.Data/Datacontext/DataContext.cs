@@ -32,6 +32,7 @@ namespace Aztamlider.Data.Datacontext
         public DbSet<Logger> Loggers { get; set; }
         public DbSet<Team> Teams { get; set; }
         public DbSet<Career> Careers { get; set; }
+        public DbSet<ProjectType> ProjectTypes { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder builder)

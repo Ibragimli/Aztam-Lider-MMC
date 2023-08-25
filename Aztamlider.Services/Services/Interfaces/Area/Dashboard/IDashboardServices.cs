@@ -11,5 +11,7 @@ namespace Aztamlider.Services.Services.Interfaces.Area.Dashboard
     {
         public Task<int> GetContactCount();
         public Task<int> GetCareerCount();
+        public Task<List<int>> GetMonthCareerCount();
+        public Task<List<int>> GetMonthContactCount();
     }
 }

@@ -18,6 +18,7 @@ using Aztamlider.Services.Services.Implementations.Area.Login;
 using Aztamlider.Services.Services.Implementations.Area.MainSliders;
 using Aztamlider.Services.Services.Implementations.Area.Partners;
 using Aztamlider.Services.Services.Implementations.Area.Projects;
+using Aztamlider.Services.Services.Implementations.Area.ProjectTypes;
 using Aztamlider.Services.Services.Implementations.Area.References;
 using Aztamlider.Services.Services.Implementations.Area.RoleManagers;
 using Aztamlider.Services.Services.Implementations.Area.ServiceNames;
@@ -40,6 +41,7 @@ using Aztamlider.Services.Services.Interfaces.Area.Login;
 using Aztamlider.Services.Services.Interfaces.Area.MainSliders;
 using Aztamlider.Services.Services.Interfaces.Area.Partners;
 using Aztamlider.Services.Services.Interfaces.Area.Projects;
+using Aztamlider.Services.Services.Interfaces.Area.ProjectTypes;
 using Aztamlider.Services.Services.Interfaces.Area.References;
 using Aztamlider.Services.Services.Interfaces.Area.RoleManagers;
 using Aztamlider.Services.Services.Interfaces.Area.ServiceNames;
@@ -167,6 +169,10 @@ namespace Aztamlider.Mvc.ServiceExtentions
             services.AddScoped<IAdminLoggerIndexServices, AdminLoggerIndexServices>();
             services.AddScoped<ILoggerServices, LoggerServices>();
 
+            services.AddScoped<IAdminProjectTypeCreateServices, AdminProjectTypeCreateServices>();
+            services.AddScoped<IAdminProjectTypeDeleteServices, AdminProjectTypeDeleteServices>();
+            services.AddScoped<IAdminProjectTypeEditServices, AdminProjectTypeEditServices>();
+            services.AddScoped<IAdminProjectTypeIndexServices, AdminProjectTypeIndexServices>();
 
             services.AddScoped<ILayoutServices, LayoutServices>();
             services.AddScoped<ICareerServices, CareerServices>();

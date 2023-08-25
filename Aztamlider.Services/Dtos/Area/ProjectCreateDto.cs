@@ -17,6 +17,7 @@ namespace Aztamlider.Services.Dtos.Area
         public string TitleEn { get; set; }
         public string DescriptionAz { get; set; }
         public string DescriptionEn { get; set; }
+        public int ProjectTypeId { get; set; }
         public IFormFile ImageFile { get; set; }
 
     }
@@ -29,6 +30,7 @@ namespace Aztamlider.Services.Dtos.Area
             RuleFor(x => x.DescriptionAz).NotEmpty().WithMessage("Təsvir hissəsi boş olmamalıdır.").MinimumLength(3).WithMessage("Təsvir hissəsinin uzunluğu 3-dən az ola bilməz!").MaximumLength(3000).WithMessage("Təsvir hissəsinin uzunluğu 3000-dən böyük ola bilməz!");
             RuleFor(x => x.DescriptionEn).NotEmpty().WithMessage("Təsvir hissəsi boş olmamalıdır.").MinimumLength(3).WithMessage("Təsvir hissəsinin uzunluğu 3-dən az ola bilməz!").MaximumLength(3000).WithMessage("Təsvir hissəsinin uzunluğu 3000-dən böyük ola bilməz!");
             RuleFor(x => x.ImageFile).NotEmpty().WithMessage("Şəkil hissəsi boş olmamalıdır.");
+            RuleFor(x => x.ProjectTypeId).NotEmpty().WithMessage("Layihə növünü qeyd edin!");
         }
     }
 }

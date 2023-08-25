@@ -15,6 +15,8 @@ namespace Aztamlider.Core.Entites
         public string DescriptionAz { get; set; }
         public string DescriptionEn { get; set; }
         public string Image { get; set; }
+        public int ProjectTypeId { get; set; }
+        public ProjectType ProjectType { get; set; }
         [NotMapped]
         public IFormFile ImageFile { get; set; }
     }
