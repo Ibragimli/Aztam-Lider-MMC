@@ -29,6 +29,7 @@ namespace Aztamlider.Services.Profiles
             CreateMap<TeamCreateDto, Team>();
             CreateMap<CareerPostDto, Career>();
             CreateMap<ProjectTypeCreateDto, ProjectType>();
+            CreateMap<SettingCreateDto, Setting>();
 
 
 

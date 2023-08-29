@@ -169,6 +169,9 @@ namespace Aztamlider.Mvc.ServiceExtentions
             services.AddScoped<IAdminLoggerIndexServices, AdminLoggerIndexServices>();
             services.AddScoped<ILoggerServices, LoggerServices>();
 
+            services.AddScoped<ISettingCreateServices, SettingCreateServices>();
+
+
             services.AddScoped<IAdminProjectTypeCreateServices, AdminProjectTypeCreateServices>();
             services.AddScoped<IAdminProjectTypeDeleteServices, AdminProjectTypeDeleteServices>();
             services.AddScoped<IAdminProjectTypeEditServices, AdminProjectTypeEditServices>();

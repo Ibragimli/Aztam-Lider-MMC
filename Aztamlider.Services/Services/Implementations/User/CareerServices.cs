@@ -38,7 +38,7 @@ namespace Aztamlider.Services.Services.Implementations.User
                 throw new ItemNullException("CV-nizi əlavə edin!");
 
             }
-            if (careerPostDto.CV.ContentType == "application/pdf" || careerPostDto.CV.ContentType == "application/msword" || careerPostDto.CV.ContentType == "application/vnd.openxmlformats-officedocument.wordprocessingml.document")
+            if (careerPostDto.CV.ContentType == "application/pdf")
             {
                 if (careerPostDto.Fullname == null)
                 {
