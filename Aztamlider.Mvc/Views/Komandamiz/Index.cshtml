@@ -39,33 +39,52 @@
             </div>
         </div>
         <div class="row">
+
             @foreach (var team in Model.Teams)
             {
-                <div class="col-lg-4 col-md-6 col-sm-6 col-6 teamBoxs">
+                <div class="col-lg-4 col-md-6 col-sm-10  teamBoxs">
                     <div class="teamBox">
                         <div class="teamImage">
-                            <img src="~/uploads/teams/@team.Image" alt="">
+                            <img src="~/uploads/teams/@team.Image" alt="@team.Image">
+
+                            <div class="teamNamePositionBox">
+                                <div class="teamName">
+                                    <h1>@team.Name</h1>
+                                </div>
+                                <div class="teamPosition">
+                                    <h1>
+                                        @if (language == "Az")
+                                        {
+                                            @team.PositionAz
+                                        }
+                                        else
+                                        {
+                                            @team.PositionEn
+                                        }
+                                    </h1>
+                                </div>
+                            </div>
                         </div>
                         <div class="backColor"></div>
-                        <div class="teamNamePositionBox">
-                            <div class="teamName">
-                                <h1>@team.Name</h1>
-                            </div>
-                            <div class="teamPosition">
-                                <h1>
+
+                        <div class="teamDescBox">
+                            <div class="teamDesc">
+                                <p>
                                     @if (language == "Az")
                                     {
-                                        @team.PositionAz
+                                        @team.DescriptionAz
                                     }
                                     else
                                     {
-                                        @team.PositionEn
+                                        @team.DescriptionEn
                                     }
-                                </h1>
+                                </p>
                             </div>
                         </div>
                     </div>
                 </div>
+
+              
             }
         </div>
     </div>
@@ -147,8 +166,4 @@
 
 @section Scripts{
     <script src="~/assets/js/phoneNumberRegex.js"></script>
-    @if (Model.Teams?.Count() == 0)
-    {
-        <script src="~/assets/js/copyRightWeb.js"></script>
-    }
 }

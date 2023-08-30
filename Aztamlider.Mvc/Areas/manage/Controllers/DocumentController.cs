@@ -79,7 +79,7 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
                 AppUser user = User.Identity.IsAuthenticated ? _userManager.Users.FirstOrDefault(x => x.UserName == User.Identity.Name && x.IsAdmin) : null;
                 if (user == null)
                     throw new UserNotFoundException("Error bas verdi!");
-                await _loggerServices.LoggerCreate("Document", "Create", user.FullName, user.UserName, Document.NameAz);
+                await _loggerServices.LoggerCreate("Document", "Create", user.FullName, user.RoleName, Document.NameAz);
             }
             catch (ItemNullException ex)
             {
@@ -178,7 +178,7 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
                 AppUser user = User.Identity.IsAuthenticated ? _userManager.Users.FirstOrDefault(x => x.UserName == User.Identity.Name && x.IsAdmin) : null;
                 if (user == null)
                     throw new UserNotFoundException("Error bas verdi!");
-                await _loggerServices.LoggerCreate("Document", "Edit", user.FullName, user.UserName, DocumentEditVM.Document.NameAz);
+                await _loggerServices.LoggerCreate("Document", "Edit", user.FullName, user.RoleName, DocumentEditVM.Document.NameAz);
                 //Logger
             }
 
@@ -251,7 +251,7 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
                 AppUser user = User.Identity.IsAuthenticated ? _userManager.Users.FirstOrDefault(x => x.UserName == User.Identity.Name && x.IsAdmin) : null;
                 if (user == null)
                     throw new UserNotFoundException("Error bas verdi!");
-                await _loggerServices.LoggerCreate("Document", "Edit", user.FullName, user.UserName, product.NameAz);
+                await _loggerServices.LoggerCreate("Document", "Edit", user.FullName, user.RoleName, product.NameAz);
             }
             catch (ItemNotFoundException ex)
             {

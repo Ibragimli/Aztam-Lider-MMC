@@ -412,16 +412,18 @@ body a {
 
   #team {
     padding: 0px 0px !important; }
-    #team .container-web .row .teamBoxs .teamBox {
-      height: 370px !important; }
-      #team .container-web .row .teamBoxs .teamBox .teamImage {
-        height: 370px !important; }
-        #team .container-web .row .teamBoxs .teamBox .teamImage img {
-          height: 370px !important; }
+    #team .container-web .row .teamBoxs {
+      margin-bottom: 20px !important; }
       #team .container-web .row .teamBoxs .teamBox .teamNamePositionBox .teamName h1 {
         font-size: 20px; }
       #team .container-web .row .teamBoxs .teamBox .teamNamePositionBox .teamPosition h1 {
         font-size: 14px !important; }
+      #team .container-web .row .teamBoxs .teamBox .teamImage {
+        height: 370px !important; }
+        #team .container-web .row .teamBoxs .teamBox .teamImage img {
+          height: 370px !important; }
+      #team .container-web .row .teamBoxs .teamBox .backColor {
+        height: 370px !important; }
 
   #documentList {
     padding: 0px 21px; }
@@ -580,12 +582,14 @@ body a {
     #mainSlider .backGroundImages .backGroundImage .mainSliderTextBox .mainSliderDesc {
       font-size: 18px !important; } }
 @media only screen and (max-width: 767px) {
-  #team .container-web .row .teamBoxs .teamBox {
+  #team .container-web .row .teamBoxs .teamBox .teamImage {
     height: 330px !important; }
-    #team .container-web .row .teamBoxs .teamBox .teamImage {
+    #team .container-web .row .teamBoxs .teamBox .teamImage img {
       height: 330px !important; }
-      #team .container-web .row .teamBoxs .teamBox .teamImage img {
-        height: 330px !important; }
+  #team .container-web .row .teamBoxs .teamBox .backColor {
+    height: 330px !important; }
+  #team .container-web .row .teamBoxs .teamBox .teamDescBox .teamDesc p {
+    font-size: 17px !important; }
 
   #reference .container-web .row {
     margin-top: 20px; }
@@ -600,19 +604,17 @@ body a {
 @media only screen and (max-width: 576px) {
   #team {
     padding: 0px 15px !important; }
-    #team .container-web .row .teamBoxs .teamBox {
+    #team .container-web .row .teamBoxs .teamBox .teamImage {
+      padding: 0px 10px !important;
       height: 270px !important; }
-      #team .container-web .row .teamBoxs .teamBox .teamImage {
-        padding: 0px 10px !important;
+      #team .container-web .row .teamBoxs .teamBox .teamImage .teamNamePositionBox .teamName h1 {
+        font-size: 24px !important; }
+      #team .container-web .row .teamBoxs .teamBox .teamImage .teamNamePositionBox .teamPosition h1 {
+        font-size: 19px !important; }
+      #team .container-web .row .teamBoxs .teamBox .teamImage img {
         height: 270px !important; }
-        #team .container-web .row .teamBoxs .teamBox .teamImage img {
-          height: 270px !important; }
-      #team .container-web .row .teamBoxs .teamBox .teamNamePositionBox {
-        bottom: 5px !important; }
-        #team .container-web .row .teamBoxs .teamBox .teamNamePositionBox .teamName h1 {
-          font-size: 16px !important; }
-        #team .container-web .row .teamBoxs .teamBox .teamNamePositionBox .teamPosition h1 {
-          font-size: 13px !important; }
+    #team .container-web .row .teamBoxs .teamBox .backColor {
+      height: 270px !important; }
 
   .navbar-mobile {
     display: block !important; }
@@ -656,12 +658,16 @@ body a {
       width: 160px !important;
       max-height: 140px; } }
 @media only screen and (max-width: 450px) {
-  #team .container-web .row .teamBoxs .teamBox {
+  #team .container-web .row .teamBoxs .teamBox .teamImage {
     height: 200px !important; }
-    #team .container-web .row .teamBoxs .teamBox .teamImage {
+    #team .container-web .row .teamBoxs .teamBox .teamImage img {
       height: 200px !important; }
-      #team .container-web .row .teamBoxs .teamBox .teamImage img {
-        height: 200px !important; }
+    #team .container-web .row .teamBoxs .teamBox .teamImage .teamNamePositionBox .teamName h1 {
+      font-size: 21px !important; }
+    #team .container-web .row .teamBoxs .teamBox .teamImage .teamNamePositionBox .teamPosition h1 {
+      font-size: 17px !important; }
+  #team .container-web .row .teamBoxs .teamBox .backColor {
+    height: 200px !important; }
 
   #mainSlider .backGroundImages .backGroundImage .mainSliderTextBox {
     top: 22% !important;
@@ -692,7 +698,12 @@ body a {
       right: calc(100vw - 100vw*0.95) !important;
       bottom: 2px !important; }
       #breadCrumb .container-web .row .breadCrumbBox ul li h1 {
-        font-size: 37px !important; } }
+        font-size: 37px !important; }
+
+  .teamNamePositionBox .teamName h1 {
+    font-size: 19px !important; }
+  .teamNamePositionBox .teamPosition h1 {
+    font-size: 15px !important; } }
 * {
   box-sizing: border-box; }
   * .error-message {
@@ -1313,7 +1324,7 @@ body a {
         cursor: pointer; }
 
 #team {
-  margin: 40px 0px;
+  margin: 60px 0px;
   padding: 0px 15px; }
   #team .container-web .teamTitleRow .teamTitleBox {
     text-align: center;
@@ -1323,18 +1334,37 @@ body a {
   #team .container-web .row .teamBoxs .teamBox {
     position: relative;
     margin-bottom: 20px;
-    height: 400px;
-    max-height: 400px; }
+    max-height: 640px; }
     #team .container-web .row .teamBoxs .teamBox .teamImage {
       padding: 0px 10px;
-      max-height: 400px; }
+      height: 400px;
+      max-height: 400px;
+      position: relative; }
       #team .container-web .row .teamBoxs .teamBox .teamImage img {
         width: 100%;
         max-width: 100%;
         height: 400px;
         max-height: 400px;
         border-radius: 10px; }
+      #team .container-web .row .teamBoxs .teamBox .teamImage .teamNamePositionBox {
+        position: absolute;
+        bottom: 5%;
+        left: 35px;
+        max-height: 400px;
+        transition: transform 0.4s, left 0.4s, top 0.4s;
+        transform: translate(50px, -60px);
+        opacity: 0; }
+        #team .container-web .row .teamBoxs .teamBox .teamImage .teamNamePositionBox h1 {
+          color: white;
+          transition: all 0.3s; }
+        #team .container-web .row .teamBoxs .teamBox .teamImage .teamNamePositionBox .teamName h1 {
+          font-size: 24px;
+          margin-bottom: 5px; }
+        #team .container-web .row .teamBoxs .teamBox .teamImage .teamNamePositionBox .teamPosition h1 {
+          font-size: 18px; }
     #team .container-web .row .teamBoxs .teamBox .backColor {
+      height: 400px;
+      max-height: 400px;
       border-radius: 10px;
       opacity: 0;
       position: absolute;
@@ -1344,22 +1374,17 @@ body a {
       right: 0;
       transition: all 0.3s;
       margin: 0px 10px; }
-    #team .container-web .row .teamBoxs .teamBox .teamNamePositionBox {
-      position: absolute;
-      bottom: 15px;
-      left: 25px;
-      transition: transform 0.4s, left 0.4s, top 0.4s;
-      transform: translate(50px, -60px);
-      opacity: 0; }
-      #team .container-web .row .teamBoxs .teamBox .teamNamePositionBox h1 {
-        color: white;
-        opacity: 0;
-        transition: all 0.3s; }
-      #team .container-web .row .teamBoxs .teamBox .teamNamePositionBox .teamName h1 {
-        font-size: 24px;
-        margin-bottom: 5px; }
-      #team .container-web .row .teamBoxs .teamBox .teamNamePositionBox .teamPosition h1 {
-        font-size: 18px; }
+    #team .container-web .row .teamBoxs .teamBox .teamDescBox {
+      margin-top: 10px;
+      padding: 0px 10px;
+      width: 100%;
+      max-width: 100%; }
+      #team .container-web .row .teamBoxs .teamBox .teamDescBox .teamDesc {
+        border-bottom: 2px outset;
+        border-radius: 10%; }
+        #team .container-web .row .teamBoxs .teamBox .teamDescBox .teamDesc p {
+          font-size: 18px;
+          text-align: center; }
   #team .container-web .row .teamBoxs .teamBox:hover .backColor {
     opacity: 1;
     background-color: rgba(0, 0, 0, 0.33); }

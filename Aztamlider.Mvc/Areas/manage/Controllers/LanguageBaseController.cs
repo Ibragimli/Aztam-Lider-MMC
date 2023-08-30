@@ -71,7 +71,7 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
                 AppUser user = User.Identity.IsAuthenticated ? _userManager.Users.FirstOrDefault(x => x.UserName == User.Identity.Name && x.IsAdmin) : null;
                 if (user == null)
                     throw new UserNotFoundException("Error bas verdi!");
-                await _loggerServices.LoggerCreate("LanguageBase", "Create", user.FullName, user.UserName, LanguageBaseCreateDto.Key);
+                await _loggerServices.LoggerCreate("LanguageBase", "Create", user.FullName, user.RoleName, LanguageBaseCreateDto.Key);
             }
             catch (ItemNullException ex)
             {
@@ -136,7 +136,7 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
                 AppUser user = User.Identity.IsAuthenticated ? _userManager.Users.FirstOrDefault(x => x.UserName == User.Identity.Name && x.IsAdmin) : null;
                 if (user == null)
                     throw new UserNotFoundException("Error bas verdi!");
-                await _loggerServices.LoggerCreate("LanguageBase", "Edit", user.FullName, user.UserName, product.Key);
+                await _loggerServices.LoggerCreate("LanguageBase", "Edit", user.FullName, user.RoleName, product.Key);
             }
             catch (ValueFormatExpception ex)
             {

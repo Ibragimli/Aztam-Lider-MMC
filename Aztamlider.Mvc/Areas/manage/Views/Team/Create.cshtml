@@ -29,18 +29,33 @@
                                     </div>
                                     <!-- Layihə  Name  Start -->
                                     <div class="mb-3 posterName">
-                                        <label asp-for="PositionAz" class="form-label">Əməkdaşın adı (Az)*</label>
+                                        <label asp-for="PositionAz" class="form-label">Əməkdaşın vəzifəsi (Az)*</label>
                                         <input asp-for="PositionAz" maxlength="150" type="text" class="form-control">
                                         <span asp-validation-for="PositionAz" class="text-danger"></span>
                                     </div>
                                     <!-- Layihə  Name  Start -->
                                     <div class="mb-3 posterName">
-                                        <label asp-for="PositionEn" class="form-label">Əməkdaşın adı (Em)*</label>
+                                        <label asp-for="PositionEn" class="form-label">Əməkdaşın vəzifəsi (En)*</label>
                                         <input asp-for="PositionEn" maxlength="150" type="text" class="form-control">
                                         <span asp-validation-for="PositionEn" class="text-danger"></span>
                                     </div>
                                     <!-- Layihə Name   End -->
-                                 
+
+                                    <!-- Layihə  Name  Start -->
+                                    <div class="mb-3 posterName">
+                                        <label asp-for="DescriptionAz" class="form-label">Əməkdaş haqqında məlumat (Az)*</label>
+                                        <input asp-for="DescriptionAz" maxlength="300" type="text" class="form-control">
+                                        <span asp-validation-for="DescriptionAz" class="text-danger"></span>
+                                    </div>
+                                    <!-- Layihə  Name  Start -->
+                                    <div class="mb-3 posterName">
+                                        <label asp-for="DescriptionEn" class="form-label">Əməkdaş haqqında məlumat(En)*</label>
+                                        <input asp-for="DescriptionEn" maxlength="300" type="text" class="form-control">
+                                        <span asp-validation-for="DescriptionEn" class="text-danger"></span>
+                                    </div>
+                                    <!-- Layihə Name   End -->
+
+
                                     <div id="posterimage-box" class="posterimage-box row mb-3">
                                         <label asp-for="ImageFile" class="form-label">Team şəkli*</label>
                                         <!-- Şəkil əlavə et -->

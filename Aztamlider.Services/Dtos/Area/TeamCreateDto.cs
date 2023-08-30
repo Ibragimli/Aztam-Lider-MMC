@@ -15,6 +15,8 @@ namespace Aztamlider.Services.Dtos.Area
     {
         public string PositionAz { get; set; }
         public string PositionEn { get; set; }
+        public string DescriptionEn { get; set; }
+        public string DescriptionAz { get; set; }
         public string Name { get; set; }
         public IFormFile ImageFile { get; set; }
 
@@ -24,8 +26,12 @@ namespace Aztamlider.Services.Dtos.Area
     {
         public TeamCreateDtoValidator()
         {
-            RuleFor(x => x.PositionAz).NotEmpty().WithMessage("Kamanda vəzifəsi  boş olmamalıdır.").MinimumLength(3).WithMessage("Kamanda vəzifəsinin uzunluğu 3-dən az ola bilməz!").MaximumLength(150).WithMessage("Kamanda vəzifəsinin uzunluğu 150-dən böyük ola bilməz!");
-            RuleFor(x => x.PositionEn).NotEmpty().WithMessage("Kamanda vəzifəsi  boş olmamalıdır.").MinimumLength(3).WithMessage("Kamanda vəzifəsinin uzunluğu 3-dən az ola bilməz!").MaximumLength(150).WithMessage("Kamanda vəzifəsinin uzunluğu 150-dən böyük ola bilməz!");
+            RuleFor(x => x.DescriptionEn).NotEmpty().WithMessage("Komanda təsviri  boş olmamalıdır.").MinimumLength(3).WithMessage("Komanda təsvirinin uzunluğu 3-dən az ola bilməz!").MaximumLength(150).WithMessage("Komanda təsvirinin  uzunluğu 150-dən böyük ola bilməz!");
+
+            RuleFor(x => x.DescriptionAz).NotEmpty().WithMessage("Komanda təsviri  boş olmamalıdır.").MinimumLength(3).WithMessage("Komanda təsvirinin uzunluğu 3-dən az ola bilməz!").MaximumLength(150).WithMessage("Komanda təsvirinin  uzunluğu 150-dən böyük ola bilməz!");
+
+            RuleFor(x => x.PositionAz).NotEmpty().WithMessage("Komanda vəzifəsi  boş olmamalıdır.").MinimumLength(3).WithMessage("Komanda vəzifəsinin uzunluğu 3-dən az ola bilməz!").MaximumLength(150).WithMessage("Komanda vəzifəsinin uzunluğu 150-dən böyük ola bilməz!");
+            RuleFor(x => x.PositionEn).NotEmpty().WithMessage("Komanda vəzifəsi  boş olmamalıdır.").MinimumLength(3).WithMessage("Komanda vəzifəsinin uzunluğu 3-dən az ola bilməz!").MaximumLength(150).WithMessage("Komanda vəzifəsinin uzunluğu 150-dən böyük ola bilməz!");
             RuleFor(x => x.ImageFile).NotEmpty().WithMessage("Şəkil hissəsi boş olmamalıdır.");
             RuleFor(x => x.Name).NotEmpty().WithMessage("Ad hissəsi boş olmamalıdır.");
             RuleFor(x => x.PositionAz).NotEmpty().WithMessage("Ad hissəsi  boş olmamalıdır.").MinimumLength(3).WithMessage("Ad hissəsinin uzunluğu 3-dən az ola bilməz!").MaximumLength(100).WithMessage("Ad hissəsinin uzunluğu 100-dən böyük ola bilməz!");

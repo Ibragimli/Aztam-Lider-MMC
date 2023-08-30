@@ -74,7 +74,7 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
                 AppUser user = User.Identity.IsAuthenticated ? _userManager.Users.FirstOrDefault(x => x.UserName == User.Identity.Name && x.IsAdmin) : null;
                 if (user == null)
                     throw new UserNotFoundException("Error bas verdi!");
-                await _loggerServices.LoggerCreate("RoleManager", "Create", user.FullName, user.UserName, roleManagerCreateDto.Role);
+                await _loggerServices.LoggerCreate("RoleManager", "Create", user.FullName, user.RoleName, roleManagerCreateDto.Role);
             }
             catch (ItemNullException ex)
             {
@@ -174,7 +174,7 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
                 AppUser user = User.Identity.IsAuthenticated ? _userManager.Users.FirstOrDefault(x => x.UserName == User.Identity.Name && x.IsAdmin) : null;
                 if (user == null)
                     throw new UserNotFoundException("Error bas verdi!");
-                await _loggerServices.LoggerCreate("RoleManager", "Edit", user.FullName, user.UserName, product.Name);
+                await _loggerServices.LoggerCreate("RoleManager", "Edit", user.FullName, user.RoleName, product.Name);
             }
 
             catch (NotFoundException)
@@ -238,7 +238,7 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
                 AppUser user = User.Identity.IsAuthenticated ? _userManager.Users.FirstOrDefault(x => x.UserName == User.Identity.Name && x.IsAdmin) : null;
                 if (user == null)
                     throw new UserNotFoundException("Error bas verdi!");
-                await _loggerServices.LoggerCreate("RoleManager", "Delete", user.FullName, user.UserName, product.Name);
+                await _loggerServices.LoggerCreate("RoleManager", "Delete", user.FullName, user.RoleName, product.Name);
 
             }
             catch (ItemNotFoundException ex)

@@ -33,6 +33,7 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
             _adminProjectEditServices = adminProjectEditServices;
             _adminProjectCreateServices = adminProjectCreateServices;
         }
+
         public IActionResult Index(int page = 1, string name = null)
         {
             ProjectIndexViewModel ProjectIndexVM = new ProjectIndexViewModel();
@@ -83,7 +84,7 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
                 AppUser user = User.Identity.IsAuthenticated ? _userManager.Users.FirstOrDefault(x => x.UserName == User.Identity.Name && x.IsAdmin) : null;
                 if (user == null)
                     throw new UserNotFoundException("Error bas verdi!");
-                await _loggerServices.LoggerCreate("Project", "Create", user.FullName, user.UserName, ProjectCreateDto.TitleAz);
+                await _loggerServices.LoggerCreate("Project", "Create", user.FullName, user.RoleName, ProjectCreateDto.TitleAz);
             }
             catch (ItemNullException ex)
             {
@@ -184,7 +185,7 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
                 AppUser user = User.Identity.IsAuthenticated ? _userManager.Users.FirstOrDefault(x => x.UserName == User.Identity.Name && x.IsAdmin) : null;
                 if (user == null)
                     throw new UserNotFoundException("Error bas verdi!");
-                await _loggerServices.LoggerCreate("Project", "Edit", user.FullName, user.UserName, product.TitleAz);
+                await _loggerServices.LoggerCreate("Project", "Edit", user.FullName, user.RoleName, product.TitleAz);
             }
 
             catch (NotFoundException)
@@ -256,7 +257,7 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
                 AppUser user = User.Identity.IsAuthenticated ? _userManager.Users.FirstOrDefault(x => x.UserName == User.Identity.Name && x.IsAdmin) : null;
                 if (user == null)
                     throw new UserNotFoundException("Error bas verdi!");
-                await _loggerServices.LoggerCreate("Project", "Delete", user.FullName, user.UserName, product.TitleAz);
+                await _loggerServices.LoggerCreate("Project", "Delete", user.FullName, user.RoleName, product.TitleAz);
             }
             catch (ItemNotFoundException ex)
             {

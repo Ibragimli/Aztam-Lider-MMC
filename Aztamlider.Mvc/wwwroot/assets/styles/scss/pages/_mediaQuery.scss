@@ -176,18 +176,11 @@
 
             .row {
                 .teamBoxs {
+                    margin-bottom: 20px !important;
+
                     .teamBox {
-                        height: 370px !important;
 
-                        .teamImage {
-                            height: 370px !important;
-
-                            img {
-                                height: 370px !important;
-
-                            }
-                        }
-
+                        // height: 370px !important;
                         .teamNamePositionBox {
 
                             .teamName {
@@ -203,9 +196,21 @@
                                 }
                             }
                         }
+
+                        .teamImage {
+                            height: 370px !important;
+
+                            img {
+                                height: 370px !important;
+
+                            }
+                        }
+
+                        .backColor {
+                            height: 370px !important;
+
+                        }
                     }
-
-
                 }
             }
         }
@@ -607,7 +612,7 @@
             .row {
                 .teamBoxs {
                     .teamBox {
-                        height: 330px !important;
+                        // height: 330px !important;
 
                         .teamImage {
                             height: 330px !important;
@@ -615,6 +620,19 @@
                             img {
                                 height: 330px !important;
 
+                            }
+                        }
+
+                        .backColor {
+                            height: 330px !important;
+
+                        }
+
+                        .teamDescBox {
+                            .teamDesc {
+                                p {
+                                    font-size: 17px !important;
+                                }
                             }
                         }
                     }
@@ -668,12 +686,27 @@
             .row {
                 .teamBoxs {
                     .teamBox {
-                        height: 270px !important;
+                        // height: 270px !important;
 
 
                         .teamImage {
                             padding: 0px 10px !important;
                             height: 270px !important;
+
+                            .teamNamePositionBox {
+                                .teamName {
+                                    h1 {
+                                        font-size: 24px !important;
+                                    }
+                                }
+
+                                .teamPosition {
+                                    h1 {
+                                        font-size: 19px !important;
+
+                                    }
+                                }
+                            }
 
                             img {
                                 height: 270px !important;
@@ -681,22 +714,12 @@
                             }
                         }
 
-                        .teamNamePositionBox {
-                            bottom: 5px !important;
+                        .backColor {
+                            height: 270px !important;
 
-                            .teamName {
-                                h1 {
-                                    font-size: 16px !important;
-                                }
-                            }
-
-                            .teamPosition {
-                                h1 {
-                                    font-size: 13px !important;
-
-                                }
-                            }
                         }
+
+
                     }
 
 
@@ -852,7 +875,7 @@
             .row {
                 .teamBoxs {
                     .teamBox {
-                        height: 200px !important;
+                        // height: 200px !important;
 
                         .teamImage {
                             height: 200px !important;
@@ -860,18 +883,30 @@
                             img {
                                 height: 200px !important;
                             }
-                        }
 
-                        .teamNamePositionBox {
+                            .teamNamePositionBox {
+                                .teamName {
+                                    h1 {
+                                        font-size: 21px !important;
+                                    }
+                                }
 
-                            .teamName {
-                                h1 {}
+                                .teamPosition {
+                                    h1 {
+                                        font-size: 17px !important;
+
+                                    }
+                                }
                             }
 
-                            .teamPosition {
-                                h1 {}
-                            }
                         }
+
+                        .backColor {
+                            height: 200px !important;
+
+                        }
+
+
                     }
 
 
@@ -988,6 +1023,21 @@
                         }
                     }
                 }
+            }
+        }
+    }
+
+    .teamNamePositionBox {
+        .teamName {
+            h1 {
+                font-size: 19px !important;
+            }
+        }
+
+        .teamPosition {
+            h1 {
+                font-size: 15px !important;
+
             }
         }
     }

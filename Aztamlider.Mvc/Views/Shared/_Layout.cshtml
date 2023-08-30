@@ -137,11 +137,11 @@
                                                     @Html.Raw(languageBases.FirstOrDefault(x => x.Key == "NavProject1" + language)?.Value)
                                                 </h1>
                                             </a>
-                                            <a class="dropdown-item" asp-action="tikinti" asp-controller="layihelendirme">
-                                                <h1>
-                                                    @Html.Raw(languageBases.FirstOrDefault(x => x.Key == "NavProject2" + language)?.Value)
-                                                </h1>
-                                            </a>
+                                            @*   <a class="dropdown-item" asp-action="tikinti" asp-controller="layihelendirme">
+                                            <h1>
+                                            @Html.Raw(languageBases.FirstOrDefault(x => x.Key == "NavProject2" + language)?.Value)
+                                            </h1>
+                                            </a>*@
                                         </li>
                                     </ul>
                                 </li>
@@ -224,6 +224,7 @@
                         </nav>
                     </div>
 
+                    <!-- mobile navbar -->
                     <div class=" col-lg-1 col-6  langSearch">
                         <!-- language -->
                         <div class="languageBox">

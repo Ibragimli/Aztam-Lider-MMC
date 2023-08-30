@@ -87,7 +87,7 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
 
                 //Logger
                 AppUser user = await _userManager.Users.FirstOrDefaultAsync(x => x.UserName == User.Identity.Name && x.IsAdmin);
-                await _loggerServices.LoggerCreate("UserManager", "Create", user.FullName, user.UserName, userManagerCreateDto.Username);
+                await _loggerServices.LoggerCreate("UserManager", "Create", user.FullName, user.RoleName, userManagerCreateDto.Username);
             }
             catch (ItemNullException ex)
             {
@@ -209,7 +209,7 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
 
                 //Logger
                 AppUser appUser = await _userManager.Users.FirstOrDefaultAsync(x => x.UserName == User.Identity.Name && x.IsAdmin);
-                await _loggerServices.LoggerCreate("UserManager", "Edit", appUser.FullName, appUser.UserName, UserManagerEditDto.Username);
+                await _loggerServices.LoggerCreate("UserManager", "Edit", appUser.FullName, appUser.RoleName, UserManagerEditDto.Username);
             }
 
             catch (NotFoundException)
@@ -276,7 +276,7 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
 
                 //Logger
                 AppUser appUser = await _userManager.Users.FirstOrDefaultAsync(x => x.UserName == User.Identity.Name && x.IsAdmin);
-                await _loggerServices.LoggerCreate("UserManager", "RestartLimitCount", appUser.FullName, appUser.UserName, appUser.UserName);
+                await _loggerServices.LoggerCreate("UserManager", "RestartLimitCount", appUser.FullName, appUser.RoleName, appUser.UserName);
             }
             catch (NotFoundException)
             {
@@ -304,7 +304,7 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
                 //Logger
                 var product = await _adminUserManagerEditServices.GetUserManager(id);
                 AppUser user = await _userManager.Users.FirstOrDefaultAsync(x => x.UserName == User.Identity.Name && x.IsAdmin);
-                await _loggerServices.LoggerCreate("UserManager", "Delete", user.FullName, user.UserName, product.UserName);
+                await _loggerServices.LoggerCreate("UserManager", "Delete", user.FullName, user.RoleName, product.UserName);
             }
             catch (ItemNotFoundException ex)
             {

@@ -15,6 +15,8 @@ namespace Aztamlider.Data.Configuration
         {
             builder.Property(x => x.PositionAz).HasMaxLength(150).IsRequired();
             builder.Property(x => x.PositionEn).HasMaxLength(150).IsRequired();
+            builder.Property(x => x.DescriptionAz).HasMaxLength(300).IsRequired();
+            builder.Property(x => x.DescriptionEn).HasMaxLength(300).IsRequired();
             builder.Property(x => x.Image).IsRequired();
             builder.Property(x => x.Name).HasMaxLength(100).IsRequired();
 

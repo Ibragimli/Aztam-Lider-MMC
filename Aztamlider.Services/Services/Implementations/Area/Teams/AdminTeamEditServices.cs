@@ -47,6 +47,16 @@ namespace Aztamlider.Services.Services.Implementations.Area.Teams
                 oldTeam.PositionAz = Team.PositionAz;
                 checkBool = true;
             }
+            if (oldTeam.DescriptionAz != Team.DescriptionAz)
+            {
+                oldTeam.DescriptionAz = Team.DescriptionAz;
+                checkBool = true;
+            }
+            if (oldTeam.DescriptionEn != Team.DescriptionEn)
+            {
+                oldTeam.DescriptionEn = Team.DescriptionEn;
+                checkBool = true;
+            }
 
             if (oldTeam.Name != Team.Name)
             {
@@ -89,6 +99,11 @@ namespace Aztamlider.Services.Services.Implementations.Area.Teams
             if (Team.PositionAz == null && Team.PositionEn == null)
             {
                 throw new ItemNullException("Vəzifəni qeyd edin!");
+            }
+
+            if (Team.DescriptionEn == null && Team.DescriptionAz == null)
+            {
+                throw new ItemNullException("Təsviri qeyd edin!");
             }
             if (Team.Name == null)
             {

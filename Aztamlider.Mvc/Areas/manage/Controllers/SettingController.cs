@@ -63,7 +63,7 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
                 AppUser user = User.Identity.IsAuthenticated ? _userManager.Users.FirstOrDefault(x => x.UserName == User.Identity.Name && x.IsAdmin) : null;
                 if (user == null)
                     throw new UserNotFoundException("Error bas verdi!");
-                await _loggerServices.LoggerCreate("Setting", "Edit", user.FullName, user.UserName, settingCreateDto.Key);
+                await _loggerServices.LoggerCreate("Setting", "Edit", user.FullName, user.RoleName, settingCreateDto.Key);
             }
             catch (ValueFormatExpception ex)
             {
@@ -119,7 +119,7 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
                 AppUser user = User.Identity.IsAuthenticated ? _userManager.Users.FirstOrDefault(x => x.UserName == User.Identity.Name && x.IsAdmin) : null;
                 if (user == null)
                     throw new UserNotFoundException("Error bas verdi!");
-                await _loggerServices.LoggerCreate("Setting", "Edit", user.FullName, user.UserName, product.Key);
+                await _loggerServices.LoggerCreate("Setting", "Edit", user.FullName, user.RoleName, product.Key);
             }
             catch (ValueFormatExpception ex)
             {

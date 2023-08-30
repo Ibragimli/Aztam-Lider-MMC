@@ -44,35 +44,35 @@ namespace Aztamlider.Mvc.Controllers
             return View(projectVM);
         }
 
-        public async Task<IActionResult> Tikinti()
-        {
-            ProjectViewModel projectVM = new ProjectViewModel();
-            try
-            {
-                projectVM = new ProjectViewModel
-                {
-                    LanguageBases = await _projectIndexServices.GetLanguageBase(),
-                    Settings = await _projectIndexServices.GetSettings(),
-                    ConstructionProjects = await _projectIndexServices.GetConstructionProjects(),
+        //public async Task<IActionResult> Tikinti()
+        //{
+        //    ProjectViewModel projectVM = new ProjectViewModel();
+        //    try
+        //    {
+        //        projectVM = new ProjectViewModel
+        //        {
+        //            LanguageBases = await _projectIndexServices.GetLanguageBase(),
+        //            Settings = await _projectIndexServices.GetSettings(),
+        //            ConstructionProjects = await _projectIndexServices.GetConstructionProjects(),
 
-                };
-            }
-            catch (ItemNotFoundException ex)
-            {
-                TempData["Error"] = (ex.Message);
-                return View("Tikinti", projectVM);
-            }
-            catch (ItemNullException ex)
-            {
-                TempData["Error"] = (ex.Message);
-                return View("Tikinti", projectVM);
-            }
-            catch (Exception)
-            {
-                return RedirectToAction("index", "notfound");
-            }
-            return View(projectVM);
-        }
+        //        };
+        //    }
+        //    catch (ItemNotFoundException ex)
+        //    {
+        //        TempData["Error"] = (ex.Message);
+        //        return View("Tikinti", projectVM);
+        //    }
+        //    catch (ItemNullException ex)
+        //    {
+        //        TempData["Error"] = (ex.Message);
+        //        return View("Tikinti", projectVM);
+        //    }
+        //    catch (Exception)
+        //    {
+        //        return RedirectToAction("index", "notfound");
+        //    }
+        //    return View(projectVM);
+        //}
 
     }
 }

@@ -24,6 +24,7 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
         private readonly IAdminReferenceDeleteServices _adminReferenceDeleteServices;
         private readonly IAdminReferenceEditServices _adminReferenceEditServices;
         private readonly IAdminReferenceCreateServices _adminReferenceCreateServices;
+
         public ReferenceController(ILoggerServices loggerServices, UserManager<AppUser> userManager, IAdminReferenceIndexServices adminReferenceIndexServices, IManageImageHelper manageImageHelper, IAdminReferenceDeleteServices adminReferenceDeleteServices, IAdminReferenceEditServices adminReferenceEditServices, IAdminReferenceCreateServices adminReferenceCreateServices)
         {
             _loggerServices = loggerServices;
@@ -112,7 +113,7 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
                 AppUser user = User.Identity.IsAuthenticated ? _userManager.Users.FirstOrDefault(x => x.UserName == User.Identity.Name && x.IsAdmin) : null;
                 if (user == null)
                     throw new UserNotFoundException("Error bas verdi!");
-                await _loggerServices.LoggerCreate("Reference", "Create", user.FullName, user.UserName, ReferenceCreateDto.Name);
+                await _loggerServices.LoggerCreate("Reference", "Create", user.FullName, user.RoleName, ReferenceCreateDto.Name);
             }
             catch (ItemNullException ex)
             {
@@ -207,7 +208,7 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
                 AppUser user = User.Identity.IsAuthenticated ? _userManager.Users.FirstOrDefault(x => x.UserName == User.Identity.Name && x.IsAdmin) : null;
                 if (user == null)
                     throw new UserNotFoundException("Error bas verdi!");
-                await _loggerServices.LoggerCreate("Reference", "Edit", user.FullName, user.UserName, product.Name);
+                await _loggerServices.LoggerCreate("Reference", "Edit", user.FullName, user.RoleName, product.Name);
             }
 
             catch (NotFoundException)
@@ -264,7 +265,7 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
                 AppUser user = User.Identity.IsAuthenticated ? _userManager.Users.FirstOrDefault(x => x.UserName == User.Identity.Name && x.IsAdmin) : null;
                 if (user == null)
                     throw new UserNotFoundException("Error bas verdi!");
-                await _loggerServices.LoggerCreate("Reference", "Delete", user.FullName, user.UserName, product.Name);
+                await _loggerServices.LoggerCreate("Reference", "Delete", user.FullName, user.RoleName, product.Name);
             }
             catch (ItemNotFoundException ex)
             {
