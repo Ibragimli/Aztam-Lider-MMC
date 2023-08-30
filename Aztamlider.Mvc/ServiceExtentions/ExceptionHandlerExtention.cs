@@ -18,38 +18,52 @@ namespace Aztamlider.Mvc.ServiceExtentions
 
                     if (contextFeature != null)
                     {
+                        //Exception codes
+                        //null - 1,
+                        //Format - 2,
+                        //Already - 3,
+                        //Notfound - 404,
+                        //Use - 5,
+                        //Count - 6,
+                        //PasswordReset - 7,
+                        //Count - 6,
+
+
                         message = contextFeature.Error.Message;
-
-                        if (contextFeature.Error is ItemNotFoundException)
-                            code = 404;
-                        if (contextFeature.Error is ImageFormatException)
-                            code = 400;
-                        if (contextFeature.Error is ImageNullException)
-                            code = 404;
-
-                        if (contextFeature.Error is ItemNullException)
-                            code = 404;
-                        if (contextFeature.Error is ItemFormatException)
-                            code = 400;
-
                         if (contextFeature.Error is NotFoundException)
                             code = 404;
+
+                        //Item
+                        if (contextFeature.Error is ItemNotFoundException)
+                            code = 404;
+                        if (contextFeature.Error is ItemNullException)
+                            code = 1001;
+                        if (contextFeature.Error is ItemFormatException)
+                            code = 1002;
                         if (contextFeature.Error is ItemAlreadyException)
-                            code = 404;
+                            code = 1003;
                         if (contextFeature.Error is ValueAlreadyExpception)
-                            code = 404;
-                        if (contextFeature.Error is ImageCountException)
-                            code = 400;
+                            code = 1004;
                         if (contextFeature.Error is UserNotFoundException)
-                            code = 404;
+                            code = 1004;
                         if (contextFeature.Error is ItemUseException)
-                            code = 500;
+                            code = 1005;
+
                         if (contextFeature.Error is ValueFormatExpception)
-                            code = 400;
+                            code = 1042;
                         if (contextFeature.Error is UserPasswordResetException)
-                            code = 400;
+                            code = 1007;
                         if (contextFeature.Error is UserLoginAttempCountException)
-                            code = 400;
+                            code = 1015;
+
+                        //Image
+                        if (contextFeature.Error is ImageNullException)
+                            code = 1041;
+                        if (contextFeature.Error is ImageFormatException)
+                            code = 1042;
+                        if (contextFeature.Error is ImageCountException)
+                            code = 1045;
+
 
                     }
 

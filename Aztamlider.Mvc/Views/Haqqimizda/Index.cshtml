@@ -7,6 +7,10 @@
     <link href="https://aztamlider.az/haqqimizda/" rel="canonical">
     <meta property="og:url" content="https://aztamlider.az/haqqimizda/">
     <meta property="og:title" content="HAQQIMIZDA | aztamLIDER MMC">
+
+    <meta name="keywords" content="haqqimizda, aboutus,AZTAM LİDER MMC, aztamlider haqqinda, mmc, @foreach (var serviceKey in Model.Services){@serviceKey.TitleAz}">
+    <meta name="description" content="@Html.Raw(Model.LanguageBases.FirstOrDefault(x=>x.Key == "AboutDesc1"+language)?.Value)">
+                       
 }
 @model AboutUsViewModel
 <section style="background-image: url('/uploads/setting/@Model.Settings.FirstOrDefault(x=>x.Key =="breadCrumbImage")?.Value');" id="breadCrumb">
@@ -56,10 +60,10 @@
                 <p>
                     @Html.Raw(Model.LanguageBases.FirstOrDefault(x=>x.Key == "AboutDesc2"+language)?.Value)
                 </p>
-              
+
             </div>
-           
-            
+
+
             <div class="col-lg-5 aboutImageBox-Mobile">
                 <div class="mb-5  aboutImage">
                     <img style="width:100%" src="~/uploads/setting/@Model.Settings.FirstOrDefault(x=>x.Key=="About3Image")?.Value" alt="@Model.Settings.FirstOrDefault(x=>x.Key=="About1Image")?.Value">

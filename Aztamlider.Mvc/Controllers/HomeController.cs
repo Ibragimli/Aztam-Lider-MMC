@@ -40,6 +40,7 @@ namespace Aztamlider.Mvc.Controllers
                     LanguageBases = await _homeIndexServices.GetLanguageBase(),
                     MainSliders = await _homeIndexServices.MainSliders(),
                     Partners = await _homeIndexServices.Partners(),
+                    Settings = await _homeIndexServices.GetSettings(),
 
                 };
             }

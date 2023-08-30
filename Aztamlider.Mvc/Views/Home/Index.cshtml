@@ -7,6 +7,8 @@
     <link href="https://aztamlider.az/" rel="canonical">
     <meta property="og:url" content="https://aztamlider.az/">
     <meta property="og:title" content="aztamLIDER MMC">
+    <meta name="keywords" content="@Model.Settings.FirstOrDefault(x => x.Key == "SeoKeywords")?.Value">
+    <meta name="description" content="@Model.Settings.FirstOrDefault(x => x.Key == "SeoDescription")?.Value">
 }
 @model HomeViewModel
 <!-- Main Slider -->
