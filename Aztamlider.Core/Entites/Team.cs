@@ -18,5 +18,6 @@ namespace Aztamlider.Core.Entites
         public string PositionEn { get; set; }
         public string DescriptionAz { get; set; }
         public string DescriptionEn { get; set; }
+        public int Row { get; set; }
     }
 }

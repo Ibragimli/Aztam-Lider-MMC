@@ -28,6 +28,12 @@
                                         <input asp-for="Team.Name" maxlength="100" type="text" class="form-control">
                                         <span asp-validation-for="Team.Name" class="text-danger"></span>
                                     </div>
+                                    <!-- Layihə  Name  Start -->
+                                    <div class="mb-3 posterName">
+                                        <label asp-for="Team.Row" class="form-label">Sıra nömrəsi*</label>
+                                        <input asp-for="Team.Row"  type="number" max="200" min="0" class="form-control">
+                                        <span asp-validation-for="Team.Row" class="text-danger"></span>
+                                    </div>
                                     <!-- Project Name  Start -->
                                     <div class="mb-3 posterName">
                                         <label asp-for="Team.PositionAz" class="form-label">Əməkdaşın vəzifəsi (Az)*</label>
@@ -41,7 +47,6 @@
                                         <span asp-validation-for="Team.PositionEn" class="text-danger"></span>
                                     </div>
                                     <!-- Layihə Name   End -->
-
                                     <!-- Project Name  Start -->
                                     <div class="mb-3 posterName">
                                         <label asp-for="Team.DescriptionAz" class="form-label">Əməkdaş haqqında məlumat (Az)*</label>

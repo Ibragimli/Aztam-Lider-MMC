@@ -47,7 +47,13 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
                 //Logger
                 AppUser user = await _userManager.FindByNameAsync(adminLoginPostDto.Username);
 
-                await _loggerServices.LoggerCreate("Account", "Login", adminLoginPostDto.Username, user.RoleName, adminLoginPostDto.Username);
+                await _loggerServices.LoggerCreate("Account-Login", "Hesaba giriş edildi", adminLoginPostDto.Username, user.RoleName, adminLoginPostDto.Username);
+            }
+            catch (ItemNullException ex)
+            {
+                ModelState.AddModelError("", ex.Message);
+                TempData["Error"] = (ex.Message);
+                return View();
             }
             catch (UserLoginAttempCountException ex)
             {

@@ -4,9 +4,21 @@
     int count = 1;
 }
 @section Links{
+
     <link href="https://aztamlider.az/layihelendirme/mepdesign/" rel="canonical">
     <meta property="og:url" content="https://aztamlider.az/layihelendirme/mepdesign/">
-    <meta property="og:title" content="MEP DESIGN | aztamLIDER MMC">
+    <meta property="og:title" content="MEP DIZAYN | Aztamlider MMC">
+
+    <meta itemprop="name" content="MEP DIZAYN | Aztamlider MMC">
+    <meta name="keywords" content="Layihələndirmə,Layihelendirme,MEP Dizayn,MEP Design, Aztamlider Layihelendirme,Aztamlider Layihələndirmə
+    @foreach (var item in Model.MepDesignProjects)
+                            {
+@(item.TitleAz +","+ item.TitleEn+"," )
+                            }
+">
+    <meta name="description" content="@Model.LanguageBases.FirstOrDefault(x=>x.Key == "NavProjectDesc1"+language)?.Value">
+    <meta property="og:description" content="@Model.LanguageBases.FirstOrDefault(x=>x.Key == "NavProjectDesc1"+language)?.Value">
+
 }
 @model ProjectViewModel
 <section style="background-image: url('/uploads/setting/@Model.Settings.FirstOrDefault(x=>x.Key =="breadCrumbImage")?.Value');" id="breadCrumb">

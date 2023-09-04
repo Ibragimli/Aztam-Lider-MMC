@@ -28,5 +28,13 @@ namespace Aztamlider.Services.Services.Implementations.Area.Teams
 
             return poster;
         }
+        public async Task<int> LastRow()
+        {
+            int lastRow = 0;
+            var teams = await _unitOfWork.TeamRepository.GetAllAsync(x => !x.IsDelete);
+            if (teams.Count() > 0)
+                lastRow = teams.OrderByDescending(x => x.Row).Max(x => x.Row);
+            return lastRow;
+        }
     }
 }

@@ -156,6 +156,8 @@ header {
           header #header .container-web .row .langSearch .navbar-mobile .navbar-toggler .navbar-toggler-icon {
             width: 19px;
             height: 31px; }
+        header #header .container-web .row .langSearch .navbar-mobile .offcanvas .offcanvas-header .offcanvas-title img {
+          width: 70%; }
         header #header .container-web .row .langSearch .navbar-mobile .offcanvas .offcanvas-body .navbar-nav .nav-item .dropdown-menu li .dropdown-item {
           margin-bottom: 5px;
           display: flex;
@@ -1355,13 +1357,15 @@ body a {
         transform: translate(50px, -60px);
         opacity: 0; }
         #team .container-web .row .teamBoxs .teamBox .teamImage .teamNamePositionBox h1 {
+          opacity: 0;
           color: white;
-          transition: all 0.3s; }
+          transition: all 0.3s;
+          font-weight: 700; }
         #team .container-web .row .teamBoxs .teamBox .teamImage .teamNamePositionBox .teamName h1 {
-          font-size: 24px;
+          font-size: 26px;
           margin-bottom: 5px; }
         #team .container-web .row .teamBoxs .teamBox .teamImage .teamNamePositionBox .teamPosition h1 {
-          font-size: 18px; }
+          font-size: 20px; }
     #team .container-web .row .teamBoxs .teamBox .backColor {
       height: 400px;
       max-height: 400px;

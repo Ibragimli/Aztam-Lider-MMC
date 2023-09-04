@@ -32,7 +32,9 @@ namespace Aztamlider.Services.Services.Implementations.User
 
         public async Task<IEnumerable<Team>> GetTeams()
         {
-            return await _unitOfWork.TeamRepository.GetAllAsync(x => !x.IsDelete);
+           var teams = await _unitOfWork.TeamRepository.GetAllAsync(x => !x.IsDelete);
+            teams = teams.OrderBy(x => x.Row);
+            return teams;
 
         }
 

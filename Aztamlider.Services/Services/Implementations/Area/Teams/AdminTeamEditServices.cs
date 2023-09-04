@@ -36,7 +36,14 @@ namespace Aztamlider.Services.Services.Implementations.Area.Teams
             if (ImageChange(Team, oldTeam) == 1)
                 checkBool = true;
 
-
+            if (oldTeam.Row != Team.Row)
+            {
+                var teamExist = await _unitOfWork.TeamRepository.GetAsync(x => x.Row == Team.Row);
+                if (teamExist != null)
+                    teamExist.Row = oldTeam.Row;
+                oldTeam.Row = Team.Row;
+                checkBool = true;
+            }
             if (oldTeam.PositionEn != Team.PositionEn)
             {
                 oldTeam.PositionEn = Team.PositionEn;

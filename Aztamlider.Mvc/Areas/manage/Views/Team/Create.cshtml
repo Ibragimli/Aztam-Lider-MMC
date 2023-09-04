@@ -1,7 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Create";
 }
-@model TeamCreateDto
+@model TeamCreateViewModel
 
 @{
     DateTime now = DateTime.UtcNow;
@@ -23,43 +23,48 @@
                                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                                     <!-- Layihə  Name  Start -->
                                     <div class="mb-3 posterName">
-                                        <label asp-for="Name" class="form-label">Əməkdaşın adı*</label>
-                                        <input asp-for="Name" maxlength="100" type="text" class="form-control">
-                                        <span asp-validation-for="Name" class="text-danger"></span>
+                                        <label asp-for="TeamCreateDto.Name" class="form-label">Əməkdaşın adı*</label>
+                                        <input asp-for="TeamCreateDto.Name" maxlength="100" type="text" class="form-control">
+                                        <span asp-validation-for="TeamCreateDto.Name" class="text-danger"></span>
                                     </div>
                                     <!-- Layihə  Name  Start -->
                                     <div class="mb-3 posterName">
-                                        <label asp-for="PositionAz" class="form-label">Əməkdaşın vəzifəsi (Az)*</label>
-                                        <input asp-for="PositionAz" maxlength="150" type="text" class="form-control">
-                                        <span asp-validation-for="PositionAz" class="text-danger"></span>
+                                        <label asp-for="TeamCreateDto.Row" class="form-label">Sıra nömrəsi*</label>
+                                        <input asp-for="TeamCreateDto.Row"  value="@Model.LastRow" type="number" max="200" min="0" class="form-control">
+                                        <span asp-validation-for="TeamCreateDto.Row" class="text-danger"></span>
                                     </div>
                                     <!-- Layihə  Name  Start -->
                                     <div class="mb-3 posterName">
-                                        <label asp-for="PositionEn" class="form-label">Əməkdaşın vəzifəsi (En)*</label>
-                                        <input asp-for="PositionEn" maxlength="150" type="text" class="form-control">
-                                        <span asp-validation-for="PositionEn" class="text-danger"></span>
+                                        <label asp-for="TeamCreateDto.PositionAz" class="form-label">Əməkdaşın vəzifəsi (Az)*</label>
+                                        <input asp-for="TeamCreateDto.PositionAz" maxlength="150" type="text" class="form-control">
+                                        <span asp-validation-for="TeamCreateDto.PositionAz" class="text-danger"></span>
+                                    </div>
+                                    <!-- Layihə  Name  Start -->
+                                    <div class="mb-3 posterName">
+                                        <label asp-for="TeamCreateDto.PositionEn" class="form-label">Əməkdaşın vəzifəsi (En)*</label>
+                                        <input asp-for="TeamCreateDto.PositionEn" maxlength="150" type="text" class="form-control">
+                                        <span asp-validation-for="TeamCreateDto.PositionEn" class="text-danger"></span>
                                     </div>
                                     <!-- Layihə Name   End -->
-
                                     <!-- Layihə  Name  Start -->
                                     <div class="mb-3 posterName">
-                                        <label asp-for="DescriptionAz" class="form-label">Əməkdaş haqqında məlumat (Az)*</label>
-                                        <input asp-for="DescriptionAz" maxlength="300" type="text" class="form-control">
-                                        <span asp-validation-for="DescriptionAz" class="text-danger"></span>
+                                        <label asp-for="TeamCreateDto.DescriptionAz" class="form-label">Əməkdaş haqqında məlumat (Az)*</label>
+                                        <input asp-for="TeamCreateDto.DescriptionAz" maxlength="300" type="text" class="form-control">
+                                        <span asp-validation-for="TeamCreateDto.DescriptionAz" class="text-danger"></span>
                                     </div>
                                     <!-- Layihə  Name  Start -->
                                     <div class="mb-3 posterName">
-                                        <label asp-for="DescriptionEn" class="form-label">Əməkdaş haqqında məlumat(En)*</label>
-                                        <input asp-for="DescriptionEn" maxlength="300" type="text" class="form-control">
-                                        <span asp-validation-for="DescriptionEn" class="text-danger"></span>
+                                        <label asp-for="TeamCreateDto.DescriptionEn" class="form-label">Əməkdaş haqqında məlumat(En)*</label>
+                                        <input asp-for="TeamCreateDto.DescriptionEn" maxlength="300" type="text" class="form-control">
+                                        <span asp-validation-for="TeamCreateDto.DescriptionEn" class="text-danger"></span>
                                     </div>
                                     <!-- Layihə Name   End -->
 
 
                                     <div id="posterimage-box" class="posterimage-box row mb-3">
-                                        <label asp-for="ImageFile" class="form-label">Team şəkli*</label>
+                                        <label asp-for="TeamCreateDto.ImageFile" class="form-label">Team şəkli*</label>
                                         <!-- Şəkil əlavə et -->
-                                        <input asp-for="ImageFile" id="imagePosterInput" type="file" accept="image/png,  image/jpeg, image/webp"
+                                        <input asp-for="TeamCreateDto.ImageFile" id="imagePosterInput" type="file" accept="image/png,  image/jpeg, image/webp"
                                                class="form-control">
                                         <div class="col-3 mt-1 mb-1">
                                             <div style="position:relative;" class="image-box">
@@ -69,7 +74,6 @@
                                     </div>
 
                                     <!--  Image End -->
-                                  
                                     <!-- Button  Start -->
                                     <div class="row d-flex justify-content-end mb-3">
                                         <div class="col mb-1">

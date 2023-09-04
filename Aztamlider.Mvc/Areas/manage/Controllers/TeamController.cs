@@ -57,20 +57,28 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
             }
             return View(TeamIndexVM);
         }
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            TeamCreateDto TeamCreateDto = new TeamCreateDto();
+            TeamCreateViewModel teamCreateViewModel = new TeamCreateViewModel()
+            {
+                TeamCreateDto = new TeamCreateDto(),
+                LastRow = await _adminTeamIndexServices.LastRow()+1,
+            };
 
-            return View(TeamCreateDto);
+            return View(teamCreateViewModel);
         }
         [ValidateAntiForgeryToken]
         [HttpPost]
         public async Task<IActionResult> Create(TeamCreateDto TeamCreateDto)
         {
-            TeamCreateDto TeamDto = new TeamCreateDto();
-
+            TeamCreateViewModel teamCreateVM = new TeamCreateViewModel();
             try
             {
+                teamCreateVM = new TeamCreateViewModel()
+                {
+                    LastRow = await _adminTeamIndexServices.LastRow() + 1,
+                    TeamCreateDto = new TeamCreateDto(),
+                };
                 var Team = await _adminTeamCreateServices.CreateTeam(TeamCreateDto);
 
                 //Logger
@@ -82,39 +90,39 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
             catch (ItemNullException ex)
             {
                 ModelState.AddModelError("", ex.Message);
-                return View(TeamDto);
+                return View(teamCreateVM);
             }
             catch (ItemNotFoundException ex)
             {
                 ModelState.AddModelError("", ex.Message);
-                return View(TeamDto);
+                return View(teamCreateVM);
             }
             catch (UserNotFoundException ex)
             {
                 ModelState.AddModelError("", ex.Message);
-                return View(TeamDto);
+                return View(teamCreateVM);
             }
             catch (ValueFormatExpception ex)
             {
                 ModelState.AddModelError("", ex.Message);
-                return View(TeamDto);
+                return View(teamCreateVM);
             }
             catch (ImageFormatException ex)
             {
                 ModelState.AddModelError("TeamCreateDto.ImageFiles", ex.Message);
-                return View(TeamDto);
+                return View(teamCreateVM);
             }
             catch (ImageNullException ex)
             {
                 ModelState.AddModelError("TeamCreateDto.ImageFiles", ex.Message);
-                return View(TeamDto);
+                return View(teamCreateVM);
             }
 
             catch (Exception ex)
             {
                 ModelState.AddModelError("", ex.Message);
                 //TempData["Error"] = ("Proses uğursuz oldu!");
-                return View(TeamDto);
+                return View(teamCreateVM);
             }
 
             return RedirectToAction("index", "Team");
@@ -131,6 +139,7 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
                 TeamEditVM = new TeamEditViewModel()
                 {
                     Team = await _adminTeamEditServices.GetTeam(id),
+                    LastRow = await _adminTeamIndexServices.LastRow(),
                 };
 
 
@@ -168,6 +177,7 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
                 TeamEditVM = new TeamEditViewModel()
                 {
                     Team = await _adminTeamEditServices.GetTeam(Team.Id),
+                    LastRow = await _adminTeamIndexServices.LastRow(),
                 };
 
                 await _adminTeamEditServices.EditTeam(Team);
@@ -230,8 +240,9 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
                 return View("Edit", TeamEditVM);
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                TempData["Error"] = (ex.Message);
                 return RedirectToAction("Index", "notfound");
             }
             TempData["Success"] = ("Proses uğurlu oldu");

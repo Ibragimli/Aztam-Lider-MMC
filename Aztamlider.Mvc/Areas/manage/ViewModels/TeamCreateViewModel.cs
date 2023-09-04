@@ -1,12 +1,11 @@
 ﻿using Aztamlider.Core.Entites;
+using Aztamlider.Services.Dtos.Area;
 
 namespace Aztamlider.Mvc.Areas.manage.ViewModels
 {
-    public class TeamEditViewModel
+    public class TeamCreateViewModel
     {
-        public Team Team { get; set; }
+        public TeamCreateDto TeamCreateDto { get; set; }
         public int LastRow { get; set; }
-
-
     }
 }

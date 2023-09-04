@@ -6,7 +6,13 @@
 @section Links{
     <link href="https://aztamlider.az/referanslar/referans/@Model.Reference.Id/" rel="canonical">
     <meta property="og:url" content="https://aztamlider.az/referanslar/referans/@Model.Reference.Id/">
-    <meta property="og:title" content="@Model.Reference.Name | aztamLIDER MMC">
+    <meta property="og:title" content="@Model.Reference.Name | Aztamlider MMC">
+
+    <meta itemprop="name" content="REFERANSLAR | Aztamlider MMC">
+    <meta name="keywords" content="REFERANSLAR,Referans, @Model.Reference.Name, @Model.Reference.LocationAz, @Model.Reference.ServiceType.NameAz, @Model.Reference.ServiceType.NameEn,
+    @Model.Reference.Orderer,@Model.Reference.ServiceName,Tamamalanmis,Completed, Reference, Aztamlider Referans">
+    <meta name="description" content="@Model.Settings.FirstOrDefault(x=>x.Key == "SeoDescription")?.Value">
+    <meta property="og:description" content="@Model.Settings.FirstOrDefault(x => x.Key == "SeoDescription")?.Value">
 }
 @model ReferenceViewModel
 <section style="background-image: url('/uploads/setting/@Model.Settings.FirstOrDefault(x=>x.Key =="breadCrumbImage")?.Value');" id="breadCrumb">

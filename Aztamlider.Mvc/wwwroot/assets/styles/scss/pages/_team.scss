@@ -47,20 +47,23 @@
                             opacity: 0;
 
                             h1 {
+                                opacity: 0;
                                 color: white;
                                 transition: all 0.3s;
+                                font-weight: 700;
+
                             }
 
                             .teamName {
                                 h1 {
-                                    font-size: 24px;
+                                    font-size: 26px;
                                     margin-bottom: 5px;
                                 }
                             }
 
                             .teamPosition {
                                 h1 {
-                                    font-size: 18px;
+                                    font-size: 20px;
 
                                 }
                             }

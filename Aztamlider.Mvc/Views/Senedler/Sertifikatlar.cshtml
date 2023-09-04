@@ -7,6 +7,16 @@
     <link href="https://aztamlider.az/referanslar/senedler/sertifikatlar/" rel="canonical">
     <meta property="og:url" content="https://aztamlider.az/senedler/sertifikatlar/">
     <meta property="og:title" content="SERTIFIKATLAR | aztamLIDER MMC">
+
+
+    <meta itemprop="name" content="Sertifikatlar | Aztamlider MMC">
+    <meta name="keywords" content="Sertifikatlar,Sertifikat, Aztamlider Sertifikatlar
+@foreach (var license in Model.Certificates)
+                        {
+@(license.NameAz+"," + license.NameEn +",")
+}">
+    <meta name="description" content="@Model.Settings.FirstOrDefault(x=>x.Key == "SeoDescription")?.Value">
+    <meta property="og:description" content="@Model.Settings.FirstOrDefault(x => x.Key == "SeoDescription")?.Value">
 }
 <section style="background-image: url('/uploads/setting/@Model.Settings.FirstOrDefault(x=>x.Key =="breadCrumbImage")?.Value');" id="breadCrumb">
     <div class="container-web">

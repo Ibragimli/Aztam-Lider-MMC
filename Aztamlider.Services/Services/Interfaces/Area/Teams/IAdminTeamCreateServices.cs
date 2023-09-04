@@ -11,7 +11,7 @@ namespace Aztamlider.Services.Services.Interfaces.Area.Teams
 {
     public interface IAdminTeamCreateServices
     {
-        Task<Team> CreateTeam(TeamCreateDto TeamCreateDto);
+        Task<Team> CreateTeam(TeamCreateDto teamCreateDto);
 
     }
 }

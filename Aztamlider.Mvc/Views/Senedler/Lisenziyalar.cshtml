@@ -7,7 +7,16 @@
 @section Links{
     <link href="https://aztamlider.az/referanslar/senedler/lisenziyalar/" rel="canonical">
     <meta property="og:url" content="https://aztamlider.az/senedler/lisenziyalar/">
-    <meta property="og:title" content="LISENZIYALAR | aztamLIDER MMC">
+    <meta property="og:title" content="LISENZIYALAR | Aztamlider MMC">
+
+    <meta itemprop="name" content="LISENZIYALAR | Aztamlider MMC">
+    <meta name="keywords" content="LISENZIYALAR,LISENZIYA, Aztamlider Lisenziya
+@foreach (var license in Model.Licenses)
+                        {
+@(license.NameAz+"," + license.NameEn +",")
+}">
+    <meta name="description" content="@Model.Settings.FirstOrDefault(x=>x.Key == "SeoDescription")?.Value">
+    <meta property="og:description" content="@Model.Settings.FirstOrDefault(x => x.Key == "SeoDescription")?.Value">
 }
 <section style="background-image: url('/uploads/setting/@Model.Settings.FirstOrDefault(x=>x.Key =="breadCrumbImage")?.Value');" id="breadCrumb">
     <div class="container-web">
@@ -15,6 +24,7 @@
             <div class="col-lg-12 breadCrumbBox">
                 <ul>
                     <li>
+
                         <h1>
                             @Model.LanguageBases.FirstOrDefault(x=>x.Key == "NavDocument"+language)?.Value
                         </h1>

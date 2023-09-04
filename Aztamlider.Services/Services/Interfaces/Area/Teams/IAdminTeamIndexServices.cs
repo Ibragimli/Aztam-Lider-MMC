@@ -10,5 +10,7 @@ namespace Aztamlider.Services.Services.Interfaces.Area.Teams
     public interface IAdminTeamIndexServices
     {
         public IQueryable<Team> GetTeam(string name);
+        public  Task<int> LastRow();
+
     }
 }

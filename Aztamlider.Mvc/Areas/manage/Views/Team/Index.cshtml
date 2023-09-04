@@ -72,6 +72,7 @@
                                 <th>Əməkdaşın adı</th>
                                 <th>Vəzifəsi (Az)</th>
                                 <th>Vəzifəsi (En)</th>
+                                <th>Sıra</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -88,6 +89,8 @@
                                     <td class="text-center"><a>@Team.Name</a></td>
                                     <td class="text-center"><a>@Team.PositionAz</a></td>
                                     <td class="text-center"><a>@Team.PositionEn</a></td>
+                                    <td class="text-center"><a>@Team.Row</a></td>
+
                                     <td class="text-center">
                                         <div class="d-flex justify-content-sm-around">
                                             <a asp-route-id="@Team.Id" asp-action="edit" asp-controller="Team"><i style="font-size: 26px !important; color:orange" class="fa-regular fa-pen-to-square"></i></a>
