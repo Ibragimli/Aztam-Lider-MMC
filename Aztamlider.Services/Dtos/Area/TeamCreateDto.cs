@@ -27,9 +27,9 @@ namespace Aztamlider.Services.Dtos.Area
     {
         public TeamCreateDtoValidator()
         {
-            RuleFor(x => x.DescriptionEn).NotEmpty().WithMessage("Komanda təsviri  boş olmamalıdır.").MinimumLength(3).WithMessage("Komanda təsvirinin uzunluğu 3-dən az ola bilməz!").MaximumLength(150).WithMessage("Komanda təsvirinin  uzunluğu 150-dən böyük ola bilməz!");
+            RuleFor(x => x.DescriptionEn).NotEmpty().WithMessage("Komanda təsviri  boş olmamalıdır.").MinimumLength(3).WithMessage("Komanda təsvirinin uzunluğu 3-dən az ola bilməz!").MaximumLength(450).WithMessage("Komanda təsvirinin  uzunluğu 450-dən böyük ola bilməz!");
 
-            RuleFor(x => x.DescriptionAz).NotEmpty().WithMessage("Komanda təsviri  boş olmamalıdır.").MinimumLength(3).WithMessage("Komanda təsvirinin uzunluğu 3-dən az ola bilməz!").MaximumLength(150).WithMessage("Komanda təsvirinin  uzunluğu 150-dən böyük ola bilməz!");
+            RuleFor(x => x.DescriptionAz).NotEmpty().WithMessage("Komanda təsviri  boş olmamalıdır.").MinimumLength(3).WithMessage("Komanda təsvirinin uzunluğu 3-dən az ola bilməz!").MaximumLength(450).WithMessage("Komanda təsvirinin  uzunluğu 450-dən böyük ola bilməz!");
 
             RuleFor(x => x.PositionAz).NotEmpty().WithMessage("Komanda vəzifəsi  boş olmamalıdır.").MinimumLength(3).WithMessage("Komanda vəzifəsinin uzunluğu 3-dən az ola bilməz!").MaximumLength(150).WithMessage("Komanda vəzifəsinin uzunluğu 150-dən böyük ola bilməz!");
             RuleFor(x => x.PositionEn).NotEmpty().WithMessage("Komanda vəzifəsi  boş olmamalıdır.").MinimumLength(3).WithMessage("Komanda vəzifəsinin uzunluğu 3-dən az ola bilməz!").MaximumLength(150).WithMessage("Komanda vəzifəsinin uzunluğu 150-dən böyük ola bilməz!");
