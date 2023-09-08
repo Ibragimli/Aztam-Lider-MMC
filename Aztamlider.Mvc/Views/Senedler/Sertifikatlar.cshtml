@@ -10,11 +10,7 @@
 
 
     <meta itemprop="name" content="Sertifikatlar | Aztamlider MMC">
-    <meta name="keywords" content="Sertifikatlar,Sertifikat, Aztamlider Sertifikatlar
-@foreach (var license in Model.Certificates)
-                        {
-@(license.NameAz+"," + license.NameEn +",")
-}">
+    <meta name="keywords" content="Sertifikatlar,Sertifikat, @Model.Settings.FirstOrDefault(x => x.Key == "SeoKeywords")?.Value, Aztamlider Sertifikatlar, @foreach (var license in Model.Certificates){@(license.NameAz+"," + license.NameEn +",")}">
     <meta name="description" content="@Model.Settings.FirstOrDefault(x=>x.Key == "SeoDescription")?.Value">
     <meta property="og:description" content="@Model.Settings.FirstOrDefault(x => x.Key == "SeoDescription")?.Value">
 }

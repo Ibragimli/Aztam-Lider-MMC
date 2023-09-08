@@ -9,12 +9,7 @@
     <meta property="og:title" content="XIDMETLER | Aztamlider MMC">
 
     <meta itemprop="name" content="XIDMETLER | Aztamlider MMC">
-    <meta name="keywords" content="Xidmətlər, Xidmetler,Services, Aztamlider Xidmətlər, Aztamlider Xidmetler,
-             @foreach (var item in Model.Services)
-            {
-            @(item.TitleAz + "," +
-            item.TitleEn)
-            }">
+    <meta name="keywords" content="Xidmətlər, Xidmetler, @Model.Settings.FirstOrDefault(x => x.Key == "SeoKeywords")?.Value, Services, Aztamlider Xidmətlər, Aztamlider Xidmetler, @foreach (var item in Model.Services){@(item.TitleAz + "," +item.TitleEn)}">
     <meta name="description" content="@Model.LanguageBases.FirstOrDefault(x=>x.Key == "NavServiceDesc"+language)?.Value">
     <meta property="og:description" content="@Model.LanguageBases.FirstOrDefault(x=>x.Key == "NavServiceDesc"+language)?.Value">
 

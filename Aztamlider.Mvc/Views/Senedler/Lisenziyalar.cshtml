@@ -10,11 +10,7 @@
     <meta property="og:title" content="LISENZIYALAR | Aztamlider MMC">
 
     <meta itemprop="name" content="LISENZIYALAR | Aztamlider MMC">
-    <meta name="keywords" content="LISENZIYALAR,LISENZIYA, Aztamlider Lisenziya
-@foreach (var license in Model.Licenses)
-                        {
-@(license.NameAz+"," + license.NameEn +",")
-}">
+    <meta name="keywords" content="LISENZIYALAR,LISENZIYA, @Model.Settings.FirstOrDefault(x => x.Key == "SeoKeywords")?.Value, Aztamlider Lisenziya, @foreach (var license in Model.Licenses){@(license.NameAz+"," + license.NameEn +",")}">
     <meta name="description" content="@Model.Settings.FirstOrDefault(x=>x.Key == "SeoDescription")?.Value">
     <meta property="og:description" content="@Model.Settings.FirstOrDefault(x => x.Key == "SeoDescription")?.Value">
 }

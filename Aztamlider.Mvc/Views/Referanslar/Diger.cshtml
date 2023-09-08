@@ -9,7 +9,7 @@
     <meta property="og:title" content="REFERANSLAR | Aztamlider MMC">
 
     <meta itemprop="name" content="REFERANSLAR | Aztamlider MMC">
-    <meta name="keywords" content="REFERANSLAR,Referans, Tamamalanmis,Completed, Reference, Aztamlider Referans">
+    <meta name="keywords" content="REFERANSLAR,Referans, Tamamalanmis,Completed, Reference, Aztamlider Referans, @Model.Settings.FirstOrDefault(x => x.Key == "SeoKeywords")?.Value,">
     <meta name="description" content="@Model.Settings.FirstOrDefault(x=>x.Key == "SeoDescription")?.Value">
     <meta property="og:description" content="@Model.Settings.FirstOrDefault(x => x.Key == "SeoDescription")?.Value">
 }

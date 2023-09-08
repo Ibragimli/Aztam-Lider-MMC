@@ -9,10 +9,7 @@
     <meta property="og:title" content="HAQQIMIZDA | Aztamlider MMC">
     <meta itemprop="name" content="HAQQIMIZDA | Aztamlider MMC">
 
-    <meta name="keywords" content="Haqqimizda,Haqqımızda, Aboutus,AZTAM LİDER MMC, Aztamlider haqqinda, MMC, Mexanik, Elektrik, Santexnika,
-                                    MEP,Su və Kanalizasiya sistemləri,@foreach (var serviceKey in Model.Services){
-                @(serviceKey.TitleAz+",")
-}">
+    <meta name="keywords" content="Haqqimizda, Haqqımızda, @Model.Settings.FirstOrDefault(x => x.Key == "SeoKeywords")?.Value, Aboutus,AZTAM LİDER MMC, Aztamlider haqqinda, MMC, Mexanik, Elektrik, Santexnika, MEP,Su və Kanalizasiya sistemləri, @foreach (var serviceKey in Model.Services){@(serviceKey.TitleAz+",")}">
 
     <meta itemprop="image" content="~/uploads/setting/@Model.Settings.FirstOrDefault(x => x.Key == "About1Image")?.Value">
     <meta name="description" content="@Html.Raw(Model.LanguageBases.FirstOrDefault(x=>x.Key == "AboutDesc1"+language)?.Value)">

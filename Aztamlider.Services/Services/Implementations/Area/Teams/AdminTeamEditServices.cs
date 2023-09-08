@@ -124,6 +124,11 @@ namespace Aztamlider.Services.Services.Implementations.Area.Teams
             {
                 throw new ValueFormatExpception("Vəzifənin uzunluğu maksimum 150 ola bilər");
             }
+            if (Team.DescriptionEn?.Length > 450 && Team.DescriptionAz?.Length > 450)
+            {
+                throw new ValueFormatExpception("Məlumat uzunluğu maksimum 450 ola bilər");
+            }
+
 
 
             if (Team.ImageFile != null)

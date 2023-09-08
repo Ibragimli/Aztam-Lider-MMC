@@ -10,12 +10,7 @@
     <meta property="og:title" content="MEP DIZAYN | Aztamlider MMC">
 
     <meta itemprop="name" content="MEP DIZAYN | Aztamlider MMC">
-    <meta name="keywords" content="Layihələndirmə,Layihelendirme,MEP Dizayn,MEP Design, Aztamlider Layihelendirme,Aztamlider Layihələndirmə
-    @foreach (var item in Model.MepDesignProjects)
-                            {
-@(item.TitleAz +","+ item.TitleEn+"," )
-                            }
-">
+    <meta name="keywords" content="Layihələndirmə, Layihelendirme, MEP Dizayn, MEP Design, @Model.Settings.FirstOrDefault(x => x.Key == "SeoKeywords")?.Value, Aztamlider Layihelendirme,Aztamlider Layihələndirmə, @foreach (var item in Model.MepDesignProjects){@(item.TitleAz +","+ item.TitleEn+"," )}">
     <meta name="description" content="@Model.LanguageBases.FirstOrDefault(x=>x.Key == "NavProjectDesc1"+language)?.Value">
     <meta property="og:description" content="@Model.LanguageBases.FirstOrDefault(x=>x.Key == "NavProjectDesc1"+language)?.Value">
 

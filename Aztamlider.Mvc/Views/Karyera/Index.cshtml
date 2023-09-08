@@ -2,7 +2,7 @@
     ViewData["Title"] = "Index";
     var language = _localization.Getkey("Language").Value;
     <meta itemprop="name" content="XIDMETLER | Aztamlider MMC">
-    <meta name="keywords" content="Karyera ətlər, Xidmetler,Services, Aztamlider Xidmətlər, Aztamlider Xidmetler,">
+    <meta name="keywords" content="Karyera, @Model.Settings.FirstOrDefault(x => x.Key == "SeoKeywords")?.Value, Xidmetler,Services, Aztamlider Xidmətlər, Aztamlider Xidmetler,">
     <meta name="description" content="@Model.LanguageBases.FirstOrDefault(x=>x.Key == "NavServiceDesc"+language)?.Value">
 }
 @model CareerViewModel
