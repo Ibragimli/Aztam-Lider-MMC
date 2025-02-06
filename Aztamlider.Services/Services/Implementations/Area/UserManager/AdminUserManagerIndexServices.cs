@@ -25,9 +25,11 @@ namespace Aztamlider.Services.Services.Implementations.Area.UserManagers
 
 
             if (Users != null)
+
                 Users = Users.Where(i => EF.Functions.Like(i.FullName, $"%{name}%"));
 
             return Users;
         }
+       
     }
 }

@@ -70,7 +70,7 @@ namespace Aztamlider.Mvc.Areas.manage.Controllers
             return RedirectToAction("index", "dashboard");
         }
 
-        [Authorize(Roles = "SuperAdmin,Admin")]
+        [Authorize(Roles = "SuperAdmin,Admin,Editor,Viewer")]
         public IActionResult Logout()
         {
             _adminLoginServices.Logout();
